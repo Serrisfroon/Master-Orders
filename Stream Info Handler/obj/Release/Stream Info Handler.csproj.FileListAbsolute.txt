@@ -1,0 +1,82 @@
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\green.gif
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\red.gif
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\right.png
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\left.png
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\yellow.gif
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\KeepCalm-Medium.ttf
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\Stream Info Handler.exe.config
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\Stream Info Handler.exe.manifest
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\Stream Info Handler.application
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\Stream Info Handler.exe
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\Stream Info Handler.pdb
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.Auth.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.Auth.PlatformServices.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.Core.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.PlatformServices.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.YouTube.v3.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\Newtonsoft.Json.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\System.Net.Http.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\System.Security.Cryptography.Algorithms.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\System.Security.Cryptography.Encoding.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\System.Security.Cryptography.Primitives.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.xml
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.Auth.xml
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.Core.xml
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.YouTube.v3.xml
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Release\Newtonsoft.Json.xml
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Release\Stream_Info_Handler.frm_main.resources
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Release\Stream_Info_Handler.Form2.resources
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Release\Stream_Info_Handler.Form3.resources
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Release\Stream_Info_Handler.Form4.resources
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Release\Stream_Info_Handler.Form5.resources
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Release\Stream_Info_Handler.Properties.Resources.resources
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Release\Stream Info Handler.csproj.GenerateResource.cache
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Release\Stream Info Handler.csproj.CoreCompileInputs.cache
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Release\Stream Info Handler.exe.manifest
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Release\Stream Info Handler.application
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Release\Stream Info Handler.csproj.CopyComplete
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Release\Stream Info Handler.exe
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Release\Stream Info Handler.pdb
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\green.gif
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\red.gif
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\right.png
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\left.png
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\yellow.gif
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\KeepCalm-Medium.ttf
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\Stream Info Handler.exe.config
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\Stream Info Handler.exe.manifest
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\Stream Info Handler.application
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\Stream Info Handler.exe
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\Stream Info Handler.pdb
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.Auth.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.Auth.PlatformServices.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.Core.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.PlatformServices.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.YouTube.v3.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\Newtonsoft.Json.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\System.Net.Http.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\System.Security.Cryptography.Algorithms.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\System.Security.Cryptography.Encoding.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\System.Security.Cryptography.Primitives.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.xml
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.Auth.xml
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.Core.xml
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\Google.Apis.YouTube.v3.xml
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Release\Newtonsoft.Json.xml
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Release\Stream_Info_Handler.frm_main.resources
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Release\Stream_Info_Handler.Form2.resources
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Release\Stream_Info_Handler.Form3.resources
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Release\Stream_Info_Handler.Form4.resources
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Release\Stream_Info_Handler.Form5.resources
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Release\Stream_Info_Handler.Properties.Resources.resources
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Release\Stream Info Handler.csproj.GenerateResource.cache
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Release\Stream Info Handler.csproj.CoreCompileInputs.cache
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Release\Stream Info Handler.exe.manifest
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Release\Stream Info Handler.application
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Release\Stream Info Handler.csproj.CopyComplete
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Release\Stream Info Handler.exe
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Release\Stream Info Handler.pdb

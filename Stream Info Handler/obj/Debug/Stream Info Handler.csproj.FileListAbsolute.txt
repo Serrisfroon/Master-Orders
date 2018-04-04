@@ -1,0 +1,85 @@
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\Stream Info Handler.exe.config
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\Stream Info Handler.exe
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\Stream Info Handler.pdb
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Debug\Stream Info Handler.csprojResolveAssemblyReference.cache
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_main.resources
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Debug\Stream_Info_Handler.Properties.Resources.resources
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.GenerateResource.cache
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CoreCompileInputs.cache
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Debug\Stream Info Handler.exe
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Debug\Stream Info Handler.pdb
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Debug\Stream_Info_Handler.Form2.resources
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Debug\Stream_Info_Handler.Form3.resources
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\KeepCalm-Medium.ttf
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Debug\Stream_Info_Handler.Form4.resources
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\right.png
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\left.png
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.Auth.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.Core.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.PlatformServices.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.YouTube.v3.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\System.Net.Http.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\System.Security.Cryptography.Algorithms.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\System.Security.Cryptography.Encoding.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\System.Security.Cryptography.Primitives.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.xml
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.Auth.xml
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.Core.xml
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.YouTube.v3.xml
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CopyComplete
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\yellow.gif
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\green.gif
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\red.gif
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Debug\Stream_Info_Handler.Form5.resources
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\Stream Info Handler.exe.manifest
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\bin\Debug\Stream Info Handler.application
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Debug\Stream Info Handler.exe.manifest
+C:\Users\Surface\source\repos\Stream Info Handler\Stream Info Handler\obj\Debug\Stream Info Handler.application
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Stream Info Handler.csprojResolveAssemblyReference.cache
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_main.resources
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Stream_Info_Handler.Form2.resources
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Stream_Info_Handler.Form3.resources
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Stream_Info_Handler.Form4.resources
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Stream_Info_Handler.Form5.resources
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Stream_Info_Handler.Properties.Resources.resources
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.GenerateResource.cache
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CoreCompileInputs.cache
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\green.gif
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\red.gif
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\right.png
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\left.png
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\yellow.gif
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\KeepCalm-Medium.ttf
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\Master Orders.exe.config
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\Master Orders.exe.manifest
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\Master Orders.application
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\Master Orders.exe
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\Master Orders.pdb
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.Auth.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.Core.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.PlatformServices.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.YouTube.v3.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\System.Net.Http.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\System.Security.Cryptography.Algorithms.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\System.Security.Cryptography.Encoding.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\System.Security.Cryptography.Primitives.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.xml
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.Auth.xml
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.Core.xml
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\Google.Apis.YouTube.v3.xml
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Master Orders.exe.manifest
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Master Orders.application
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CopyComplete
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Master Orders.exe
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Master Orders.pdb
+C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Stream_Info_Handler.Main_Menu.resources
