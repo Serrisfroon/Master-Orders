@@ -16,7 +16,7 @@ namespace Stream_Info_Handler
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main_Menu());
+            Application.Run(new frm_main());
         }
     }
 }

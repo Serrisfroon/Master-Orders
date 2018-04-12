@@ -108,6 +108,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.ttp_tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.btn_top8 = new System.Windows.Forms.Button();
             this.tab_main.SuspendLayout();
             this.tab_ingame_display.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_score2)).BeginInit();
@@ -147,6 +148,7 @@
             this.tab_main.Controls.Add(this.tab_ingame_display);
             this.tab_main.Controls.Add(this.tab_commentators);
             this.tab_main.Controls.Add(this.tab_options);
+            this.tab_main.HotTrack = true;
             this.tab_main.Location = new System.Drawing.Point(3, 4);
             this.tab_main.Name = "tab_main";
             this.tab_main.SelectedIndex = 0;
@@ -641,6 +643,7 @@
             // 
             // tab_options
             // 
+            this.tab_options.Controls.Add(this.btn_top8);
             this.tab_options.Controls.Add(this.btn_scoreboard);
             this.tab_options.Controls.Add(this.ckb_scoreboad);
             this.tab_options.Controls.Add(this.cbx_bestof5);
@@ -660,7 +663,7 @@
             // 
             this.btn_scoreboard.BackColor = System.Drawing.Color.Transparent;
             this.btn_scoreboard.Enabled = false;
-            this.btn_scoreboard.Location = new System.Drawing.Point(880, 17);
+            this.btn_scoreboard.Location = new System.Drawing.Point(880, 69);
             this.btn_scoreboard.Name = "btn_scoreboard";
             this.btn_scoreboard.Size = new System.Drawing.Size(95, 44);
             this.btn_scoreboard.TabIndex = 13;
@@ -671,7 +674,7 @@
             // ckb_scoreboad
             // 
             this.ckb_scoreboad.AutoSize = true;
-            this.ckb_scoreboad.Location = new System.Drawing.Point(725, 32);
+            this.ckb_scoreboad.Location = new System.Drawing.Point(725, 84);
             this.ckb_scoreboad.Name = "ckb_scoreboad";
             this.ckb_scoreboad.Size = new System.Drawing.Size(149, 17);
             this.ckb_scoreboad.TabIndex = 12;
@@ -688,7 +691,7 @@
             "Top 4",
             "Top 6",
             "Top 8"});
-            this.cbx_bestof5.Location = new System.Drawing.Point(845, 88);
+            this.cbx_bestof5.Location = new System.Drawing.Point(845, 119);
             this.cbx_bestof5.Name = "cbx_bestof5";
             this.cbx_bestof5.Size = new System.Drawing.Size(96, 21);
             this.cbx_bestof5.TabIndex = 11;
@@ -697,7 +700,7 @@
             // lbl_bestof5
             // 
             this.lbl_bestof5.AutoSize = true;
-            this.lbl_bestof5.Location = new System.Drawing.Point(775, 91);
+            this.lbl_bestof5.Location = new System.Drawing.Point(775, 122);
             this.lbl_bestof5.Name = "lbl_bestof5";
             this.lbl_bestof5.Size = new System.Drawing.Size(64, 13);
             this.lbl_bestof5.TabIndex = 10;
@@ -706,7 +709,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(775, 136);
+            this.label3.Location = new System.Drawing.Point(775, 151);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(30, 13);
             this.label3.TabIndex = 7;
@@ -716,7 +719,7 @@
             // txt_date
             // 
             this.txt_date.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_date.Location = new System.Drawing.Point(811, 131);
+            this.txt_date.Location = new System.Drawing.Point(811, 146);
             this.txt_date.Name = "txt_date";
             this.txt_date.Size = new System.Drawing.Size(130, 22);
             this.txt_date.TabIndex = 5;
@@ -797,7 +800,7 @@
             this.txt_youtube_username.Cursor = System.Windows.Forms.Cursors.Default;
             this.txt_youtube_username.Location = new System.Drawing.Point(114, 137);
             this.txt_youtube_username.Name = "txt_youtube_username";
-            this.txt_youtube_username.Size = new System.Drawing.Size(163, 20);
+            this.txt_youtube_username.Size = new System.Drawing.Size(233, 20);
             this.txt_youtube_username.TabIndex = 0;
             this.txt_youtube_username.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -946,6 +949,16 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = ".json Files|*.json";
             // 
+            // btn_top8
+            // 
+            this.btn_top8.Location = new System.Drawing.Point(864, 9);
+            this.btn_top8.Name = "btn_top8";
+            this.btn_top8.Size = new System.Drawing.Size(111, 41);
+            this.btn_top8.TabIndex = 14;
+            this.btn_top8.Text = "Top 8 Graphic";
+            this.btn_top8.UseVisualStyleBackColor = true;
+            this.btn_top8.Click += new System.EventHandler(this.button1_Click_2);
+            // 
             // frm_main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1059,6 +1072,7 @@
         private System.Windows.Forms.Button btn_scoreboard;
         private System.Windows.Forms.CheckBox ckb_scoreboad;
         private System.Windows.Forms.ToolTip ttp_tooltip;
+        private System.Windows.Forms.Button btn_top8;
     }
 }
 

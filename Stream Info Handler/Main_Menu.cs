@@ -22,5 +22,11 @@ namespace Stream_Info_Handler
             var streamer = new frm_main();
             streamer.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var top8 = new Results();
+            top8.Show();
+        }
     }
 }

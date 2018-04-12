@@ -1237,6 +1237,12 @@ namespace Stream_Info_Handler
            
                 
         }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            var top8 = new Results();
+            top8.Show();
+        }
     }
 
     public static class global_values
