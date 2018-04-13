@@ -66,10 +66,10 @@ namespace Stream_Info_Handler
                         drawing.DrawImage(stock_icon, 908, 640, stock_width, stock_height);
                         break;
                     case 2:
-                        drawing.DrawImage(stock_icon, , 640, stock_width, stock_height);
+                        drawing.DrawImage(stock_icon, 851+(104*(i-1)), 640, stock_width, stock_height);
                         break;
                     case 3:
-
+                        drawing.DrawImage(stock_icon, 804 +LinkedList  (104 * (i - 1)), 640, stock_width, stock_height);
                         break;
                 }
                 
