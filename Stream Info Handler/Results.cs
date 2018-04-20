@@ -150,6 +150,7 @@ namespace Stream_Info_Handler
                         drawing.DrawImage(stock_icon, 1238, 1059);
                         break;
                     case 2:
+<<<<<<< HEAD
                         drawing.DrawImage(stock_icon, 1191 + (94 * (i - 1)), 1059);
                         break;
                     case 3:
@@ -180,6 +181,12 @@ namespace Stream_Info_Handler
                         break;
                     case 4:
                         drawing.DrawImage(stock_icon, 1050 + (94 * (i - 1)), 1185);
+=======
+                        drawing.DrawImage(stock_icon, 851+(104*(i-1)), 640, stock_width, stock_height);
+                        break;
+                    case 3:
+                        drawing.DrawImage(stock_icon, 804 +LinkedList  (104 * (i - 1)), 640, stock_width, stock_height);
+>>>>>>> 22c73c14dad4e7765d12ddd0fcd057d4048219c5
                         break;
                 }
             }
