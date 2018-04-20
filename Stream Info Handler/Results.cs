@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.Linq;
 using System.Text;
@@ -16,16 +17,48 @@ namespace Stream_Info_Handler
     {
         public string[,] character_path = new string[9, 5];
         public string[] team_path = new string[9];
+        public string first_place_image;
 
         public Results()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Resize the image to the specified width and height.
+        /// </summary>
+        /// <param name="image">The image to resize.</param>
+        /// <param name="width">The width to resize to.</param>
+        /// <param name="height">The height to resize to.</param>
+        /// <returns>The resized image.</returns>
+        public static Bitmap ResizeImage(Image image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            //destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
+        }
         public string make_top8()
         {
-            Image thumbnail_bmp = new Bitmap(1667, 2000);
-            Graphics drawing = Graphics.FromImage(thumbnail_bmp);
+            Image top8_bmp = new Bitmap(1667, 2000);
+            Graphics drawing = Graphics.FromImage(top8_bmp);
             drawing.InterpolationMode = InterpolationMode.High;
             drawing.SmoothingMode = SmoothingMode.HighQuality;
             drawing.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
@@ -36,149 +69,331 @@ namespace Stream_Info_Handler
             drawing.Clear(Color.White);
 
             drawing.DrawImage(background, 0, 0, 1667, 2000);
+            Image first_place_render = Image.FromFile(first_place_image);
+            drawing.DrawImage(first_place_render, 1020 + Int32.Parse(txt_first_addx.Text), 490 + Int32.Parse(txt_first_addy.Text), first_place_render.Width, first_place_render.Height);
 
             //Draw 1st Characters
-            for(int i = 1; i <= nud_characters_1.Value; i++)
+            for (int i = 1; i <= nud_characters_1.Value; i++)
             {
                 Image stock_icon = Image.FromFile(character_path[1, i]);
-
-                int stock_width = 94;
-                int stock_height = stock_width;
-
-                decimal width_ratio = 94 / stock_icon.Width;
-                decimal height_ratio = 94 / stock_icon.Height;
-
-                if(width_ratio < height_ratio)
-                {
-                    height_ratio = width_ratio;
-                }
-                else
-                {
-                    width_ratio = height_ratio;
-                }
-
-                stock_width = Convert.ToInt32(stock_icon.Width * width_ratio);
-                stock_height = Convert.ToInt32(stock_icon.Height * height_ratio);
+                stock_icon = ResizeImage(stock_icon, 94, 94);
 
                 switch (nud_characters_1.Value)
                 {
                     case 1:
-                        drawing.DrawImage(stock_icon, 908, 640, stock_width, stock_height);
+                        drawing.DrawImage(stock_icon, 1144, 680);
                         break;
                     case 2:
-                        drawing.DrawImage(stock_icon, , 640, stock_width, stock_height);
+                        drawing.DrawImage(stock_icon, 1097 + (94 * (i - 1)), 680);
                         break;
                     case 3:
-
+                        drawing.DrawImage(stock_icon, 1050 + (94 * (i - 1)), 680);
                         break;
                 }
-                
-                
             }
 
-
-            drawing.DrawImage(left_character, 0, 0, 1920, 1080);
-            drawing.DrawImage(right_character, 0, 0, 1920, 1080);
-
-            drawing.DrawImage(foreground, 0, 0, 1920, 1080);
-
-            string player_name1 = cbx_name1.Text.ToUpper();
-            string player_name2 = cbx_name2.Text.ToUpper();
-            string round_text = cbx_round.Text.ToUpper();
-
-            GraphicsPath draw_date = new GraphicsPath();
-            GraphicsPath draw_name1 = new GraphicsPath();
-            GraphicsPath draw_name2 = new GraphicsPath();
-            GraphicsPath draw_round = new GraphicsPath();
-            Brush white_text = new SolidBrush(Color.White);
-            Brush black_text = new SolidBrush(Color.Black);
-            Pen black_stroke = new Pen(black_text, 14);
-            Pen light_stroke = new Pen(black_text, 10);
-            StringFormat text_center = new StringFormat();
-            FontFamily keepcalm = new FontFamily("Keep Calm Med");
-            int font_size = 115;
-            Font calmfont = new Font("Keep Calm Med", 110, FontStyle.Regular);
-            Size namesize = TextRenderer.MeasureText(player_name1, calmfont);
-
-            text_center.Alignment = StringAlignment.Center;
-            text_center.LineAlignment = StringAlignment.Center;
-
-            draw_date.AddString(
-                txt_date.Text,                     // text to draw
-                keepcalm,                           // or any other font family
-                (int)FontStyle.Regular,             // font style (bold, italic, etc.)
-                110,                                // em size drawing.DpiY * 120 / 72
-                new Point(300, 980),                 // location where to draw text
-                text_center);                       // set options here (e.g. center alignment)
-
-            drawing.DrawPath(black_stroke, draw_date);
-            drawing.FillPath(white_text, draw_date);
-
-            do
+            //Draw 2nd Characters
+            for (int i = 1; i <= nud_characters_2.Value; i++)
             {
-                font_size -= 5;
-                calmfont = new Font("Keep Calm Med", font_size, FontStyle.Regular);
-                namesize = TextRenderer.MeasureText(player_name1, calmfont);
-            } while (namesize.Width >= 1100);
+                Image stock_icon = Image.FromFile(character_path[2, i]);
+                stock_icon = ResizeImage(stock_icon, 94, 94);
 
-            black_stroke = new Pen(black_text, font_size / 11 + 4);
+                switch (nud_characters_2.Value)
+                {
+                    case 1:
+                        drawing.DrawImage(stock_icon, 1238, 807);
+                        break;
+                    case 2:
+                        drawing.DrawImage(stock_icon, 1191 + (94 * (i - 1)), 807);
+                        break;
+                    case 3:
+                        drawing.DrawImage(stock_icon, 1144 + (94 * (i - 1)), 807);
+                        break;
+                    case 4:
+                        drawing.DrawImage(stock_icon, 1050 + (94 * (i - 1)), 807);
+                        break;
+                }
+            }
 
-            draw_name1.AddString(
-                player_name1,                     // text to draw
-                keepcalm,                           // or any other font family
-                (int)FontStyle.Regular,             // font style (bold, italic, etc.)
-                font_size,                                // em size drawing.DpiY * 120 / 72
-                new Point(480, 110),                 // location where to draw text
-                text_center);                       // set options here (e.g. center alignment)
-
-            drawing.DrawPath(black_stroke, draw_name1);
-            drawing.FillPath(white_text, draw_name1);
-
-            font_size = 115;
-            do
+            //Draw 3rd Characters
+            for (int i = 1; i <= nud_characters_3.Value; i++)
             {
-                font_size -= 5;
-                calmfont = new Font("Keep Calm Med", font_size, FontStyle.Regular);
-                namesize = TextRenderer.MeasureText(player_name2, calmfont);
-            } while (namesize.Width >= 1100);
+                Image stock_icon = Image.FromFile(character_path[3, i]);
+                stock_icon = ResizeImage(stock_icon, 94, 94);
 
-            black_stroke = new Pen(black_text, font_size / 11 + 4);
+                switch (nud_characters_3.Value)
+                {
+                    case 1:
+                        drawing.DrawImage(stock_icon, 1238, 933);
+                        break;
+                    case 2:
+                        drawing.DrawImage(stock_icon, 1191 + (94 * (i - 1)), 933);
+                        break;
+                    case 3:
+                        drawing.DrawImage(stock_icon, 1144 + (94 * (i - 1)), 933);
+                        break;
+                    case 4:
+                        drawing.DrawImage(stock_icon, 1050 + (94 * (i - 1)), 933);
+                        break;
+                }
+            }
 
-            draw_name2.AddString(
-               player_name2,                     // text to draw
-               keepcalm,                           // or any other font family
-               (int)FontStyle.Regular,             // font style (bold, italic, etc.)
-               font_size,                                // em size drawing.DpiY * 120 / 72
-               new Point(1440, 110),                 // location where to draw text
-               text_center);                       // set options here (e.g. center alignment)
+            //Draw 4th Characters
+            for (int i = 1; i <= nud_characters_4.Value; i++)
+            {
+                Image stock_icon = Image.FromFile(character_path[4, i]);
+                stock_icon = ResizeImage(stock_icon, 94, 94);
 
+                switch (nud_characters_4.Value)
+                {
+                    case 1:
+                        drawing.DrawImage(stock_icon, 1238, 1059);
+                        break;
+                    case 2:
+                        drawing.DrawImage(stock_icon, 1191 + (94 * (i - 1)), 1059);
+                        break;
+                    case 3:
+                        drawing.DrawImage(stock_icon, 1144 + (94 * (i - 1)), 1059);
+                        break;
+                    case 4:
+                        drawing.DrawImage(stock_icon, 1050 + (94 * (i - 1)), 1059);
+                        break;
+                }
+            }
 
+            //Draw 5th Characters
+            for (int i = 1; i <= nud_characters_5.Value; i++)
+            {
+                Image stock_icon = Image.FromFile(character_path[5, i]);
+                stock_icon = ResizeImage(stock_icon, 94, 94);
 
-            drawing.DrawPath(black_stroke, draw_name2);
-            drawing.FillPath(white_text, draw_name2);
+                switch (nud_characters_5.Value)
+                {
+                    case 1:
+                        drawing.DrawImage(stock_icon, 1238, 1185);
+                        break;
+                    case 2:
+                        drawing.DrawImage(stock_icon, 1191 + (94 * (i - 1)), 1185);
+                        break;
+                    case 3:
+                        drawing.DrawImage(stock_icon, 1144 + (94 * (i - 1)), 1185);
+                        break;
+                    case 4:
+                        drawing.DrawImage(stock_icon, 1050 + (94 * (i - 1)), 1185);
+                        break;
+                }
+            }
 
-            draw_round.AddString(
-               round_text,                     // text to draw
-               keepcalm,                           // or any other font family
-               (int)FontStyle.Regular,             // font style (bold, italic, etc.)
-               60,                                // em size drawing.DpiY * 120 / 72
-               new Point(960, 620),                 // location where to draw text
-               text_center);                       // set options here (e.g. center alignment)
+            //Draw 6th Characters
+            for (int i = 1; i <= nud_characters_6.Value; i++)
+            {
+                Image stock_icon = Image.FromFile(character_path[6, i]);
+                stock_icon = ResizeImage(stock_icon, 94, 94);
 
-            drawing.DrawPath(light_stroke, draw_round);
-            drawing.FillPath(white_text, draw_round);
+                switch (nud_characters_6.Value)
+                {
+                    case 1:
+                        drawing.DrawImage(stock_icon, 1238, 1311);
+                        break;
+                    case 2:
+                        drawing.DrawImage(stock_icon, 1191 + (94 * (i - 1)), 1311);
+                        break;
+                    case 3:
+                        drawing.DrawImage(stock_icon, 1144 + (94 * (i - 1)), 1311);
+                        break;
+                    case 4:
+                        drawing.DrawImage(stock_icon, 1050 + (94 * (i - 1)), 1311);
+                        break;
+                }
+            }
 
+            //Draw 7th Characters
+            for (int i = 1; i <= nud_characters_7.Value; i++)
+            {
+                Image stock_icon = Image.FromFile(character_path[7, i]);
+                stock_icon = ResizeImage(stock_icon, 94, 94);
 
-            drawing.Save();
+                switch (nud_characters_7.Value)
+                {
+                    case 1:
+                        drawing.DrawImage(stock_icon, 1238, 1437);
+                        break;
+                    case 2:
+                        drawing.DrawImage(stock_icon, 1191 + (94 * (i - 1)), 1437);
+                        break;
+                    case 3:
+                        drawing.DrawImage(stock_icon, 1144 + (94 * (i - 1)), 1437);
+                        break;
+                    case 4:
+                        drawing.DrawImage(stock_icon, 1050 + (94 * (i - 1)), 1437);
+                        break;
+                }
+            }
 
-            drawing.Dispose();
+            //Draw 8th Characters
+            for (int i = 1; i <= nud_characters_8.Value; i++)
+            {
+                Image stock_icon = Image.FromFile(character_path[8, i]);
+                stock_icon = ResizeImage(stock_icon, 94, 94);
+
+                switch (nud_characters_8.Value)
+                {
+                    case 1:
+                        drawing.DrawImage(stock_icon, 1238, 1563);
+                        break;
+                    case 2:
+                        drawing.DrawImage(stock_icon, 1191 + (94 * (i - 1)), 1563);
+                        break;
+                    case 3:
+                        drawing.DrawImage(stock_icon, 1144 + (94 * (i - 1)), 1563);
+                        break;
+                    case 4:
+                        drawing.DrawImage(stock_icon, 1050 + (94 * (i - 1)), 1563);
+                        break;
+                }
+            }
+
+            int[] image_xscaled = new int[9];
+            //Draw 1st Logo
+            if (ckb_team_image_1.Checked == true)
+            {
+                Image team_logo = Image.FromFile(team_path[1]);
+                image_xscaled[1] = decimal.ToInt32(decimal.Round((team_logo.Width * 132) / team_logo.Height));
+                team_logo = ResizeImage(team_logo, image_xscaled[1], 132);
+                drawing.DrawImage(team_logo, 400, 622);
+                image_xscaled[1] += 10;
+            }
+
+            //Draw 2nd logo
+            if (ckb_team_image_2.Checked == true)
+            {
+                Image team_logo = Image.FromFile(team_path[2]);
+                image_xscaled[2] = decimal.ToInt32(decimal.Round((team_logo.Width * 93) / team_logo.Height));
+                team_logo = ResizeImage(team_logo, image_xscaled[2], 93);
+                drawing.DrawImage(team_logo, 400, 807);
+                image_xscaled[2] += 10;
+            }
+
+            //Draw 3rd Logo
+            if (ckb_team_image_3.Checked == true)
+            {
+                Image team_logo = Image.FromFile(team_path[3]);
+                image_xscaled[3] = decimal.ToInt32(decimal.Round((team_logo.Width * 93) / team_logo.Height));
+                team_logo = ResizeImage(team_logo, image_xscaled[3], 93);
+                drawing.DrawImage(team_logo, 400, 933);
+                image_xscaled[3] += 10;
+            }
+
+            //Draw 4th Logo
+            if (ckb_team_image_4.Checked == true)
+            {
+                Image team_logo = Image.FromFile(team_path[4]);
+                image_xscaled[4] = decimal.ToInt32(decimal.Round((team_logo.Width * 93) / team_logo.Height));
+                team_logo = ResizeImage(team_logo, image_xscaled[4], 93);
+                drawing.DrawImage(team_logo, 400, 1059);
+                image_xscaled[4] += 10;
+            }
+
+            //Draw 5th Logo
+            if (ckb_team_image_5.Checked == true)
+            {
+                Image team_logo = Image.FromFile(team_path[5]);
+                image_xscaled[5] = decimal.ToInt32(decimal.Round((team_logo.Width * 93) / team_logo.Height));
+                team_logo = ResizeImage(team_logo, image_xscaled[5], 93);
+                drawing.DrawImage(team_logo, 400, 1185);
+                image_xscaled[5] += 10;
+            }
+
+            //Draw 6th Logo
+            if (ckb_team_image_6.Checked == true)
+            {
+                Image team_logo = Image.FromFile(team_path[6]);
+                image_xscaled[6] = decimal.ToInt32(decimal.Round((team_logo.Width * 93) / team_logo.Height));
+                team_logo = ResizeImage(team_logo, image_xscaled[6], 93);
+                drawing.DrawImage(team_logo, 400, 1311);
+                image_xscaled[6] += 10;
+            }
+
+            //Draw 7th Logo
+            if (ckb_team_image_7.Checked == true)
+            {
+                Image team_logo = Image.FromFile(team_path[7]);
+                image_xscaled[7] = decimal.ToInt32(decimal.Round((team_logo.Width * 93) / team_logo.Height));
+                team_logo = ResizeImage(team_logo, image_xscaled[7], 93);
+                drawing.DrawImage(team_logo, 400, 1437);
+                image_xscaled[7] += 10;
+            }
+
+            //Draw 8th Logo
+            if (ckb_team_image_8.Checked == true)
+            {
+                Image team_logo = Image.FromFile(team_path[8]);
+                image_xscaled[8] = decimal.ToInt32(decimal.Round((team_logo.Width * 93) / team_logo.Height));
+                team_logo = ResizeImage(team_logo, image_xscaled[8], 93);
+                drawing.DrawImage(team_logo, 400, 1563);
+                image_xscaled[8] += 10;
+            }
+
+            string player_name1 = txt_tag_1.Text.ToUpper();
+            string player_name2 = txt_tag_2.Text.ToUpper();
+            string player_name3 = txt_tag_3.Text.ToUpper();
+            string player_name4 = txt_tag_4.Text.ToUpper();
+            string player_name5 = txt_tag_5.Text.ToUpper();
+            string player_name6 = txt_tag_6.Text.ToUpper();
+            string player_name7 = txt_tag_7.Text.ToUpper();
+            string player_name8 = txt_tag_8.Text.ToUpper();
+
+            string bracket_site = txt_bracket_url.Text.ToUpper();
+            string stream_site = txt_stream_url .Text.ToUpper();
+
+            Font keepcalm = new Font("Keep Calm Med", 45);
+            Font first_place_font = new Font("Built Titling Sb", 110);
+            Font player_font = new Font("Built Titling Sb", 70);
+            Font entrants_font = new Font("Built Titling Sb", 34);
+            Font urls_font = new Font("Built Titling Sb", 40);
+            SolidBrush blackBrush = new SolidBrush(Color.Black);
+            SolidBrush whiteBrush = new SolidBrush(Color.White);
+
+            StringFormat drawFormat = new StringFormat();
+            StringFormat text_right = new StringFormat();
+            text_right.Alignment = StringAlignment.Far;
+            text_right.LineAlignment = StringAlignment.Far;
+            drawFormat.LineAlignment = StringAlignment.Far;
+
+            drawing.DrawString(player_name1, first_place_font, blackBrush, 370 + image_xscaled[1], 797, drawFormat);
+            drawing.DrawString(player_name2, player_font, blackBrush, 380 + image_xscaled[2], 923, drawFormat);
+            drawing.DrawString(player_name3, player_font, blackBrush, 380 + image_xscaled[3], 1053, drawFormat);
+            drawing.DrawString(player_name4, player_font, blackBrush, 380 + image_xscaled[4], 1175, drawFormat);
+            drawing.DrawString(player_name5, player_font, blackBrush, 380 + image_xscaled[5], 1301, drawFormat);
+            drawing.DrawString(player_name6, player_font, blackBrush, 380 + image_xscaled[6], 1427, drawFormat);
+            drawing.DrawString(player_name7, player_font, blackBrush, 380 + image_xscaled[7], 1553, drawFormat);
+            drawing.DrawString(player_name8, player_font, blackBrush, 380 + image_xscaled[8], 1679, drawFormat);
+
+            drawing.DrawString(bracket_site, urls_font, whiteBrush, 11, 89, drawFormat);
+            drawing.DrawString(stream_site, urls_font, whiteBrush, 1657, 1990, text_right);
+
+            drawing.DrawString(txt_event_number.Text, keepcalm, whiteBrush, 1065, 491, drawFormat);
+
+            drawFormat.Alignment = StringAlignment.Center;
+
+            drawing.DrawString(txt_entrants_number.Text + @" ENTRANTS", entrants_font, whiteBrush, 833, 1774, drawFormat);
+
 
             DateTime date = DateTime.Now;
-            string thumbnail_time = date.ToString("MMddyyyyHHmmss");
-            string thumbnail_image_name = txt_tournament.Text + @" " + cbx_round.Text + @" " + lbl_character1.Text + @" Vs " + lbl_character2.Text + @" " + thumbnail_time + @".jpg";
-            thumbnail_bmp.Save(global_values.thumbnail_directory + @"\" + thumbnail_image_name, System.Drawing.Imaging.ImageFormat.Jpeg);
+            string top8_time = date.ToString("MMddyyyyHHmmss");
+            string top8_image_name = @"Top 8 Results " + top8_time + @".jpg";
+            top8_bmp.Save(global_values.thumbnail_directory + @"\" + top8_image_name, System.Drawing.Imaging.ImageFormat.Jpeg);
 
-            return thumbnail_image_name;
+            keepcalm.Dispose();
+            first_place_font.Dispose();
+            player_font.Dispose();
+            entrants_font.Dispose();
+            urls_font.Dispose();
+            blackBrush.Dispose();
+            whiteBrush.Dispose();
+            top8_bmp.Dispose();
+
+            return top8_image_name;
         }
 
         private void nud_characters_1_ValueChanged(object sender, EventArgs e)
@@ -1298,6 +1513,107 @@ namespace Stream_Info_Handler
             if (openFileDialog2.ShowDialog() == DialogResult.OK)
             {
                 txt_template.Text = openFileDialog2.FileName;
+            }
+        }
+
+        private void btn_preview_Click(object sender, EventArgs e)
+        {
+            string derp = make_top8();
+        }
+
+        private void txt_first_addx_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '-'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '-') && ((sender as TextBox).Text.IndexOf('-') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txt_first_addy_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '-'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '-') && ((sender as TextBox).Text.IndexOf('-') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void btn_firstplace_browse_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                first_place_image = openFileDialog1.FileName;
+
+                if (txt_first_addx.Text != "" && txt_first_addy.Text != "" && txt_first_addx.Text != "-" && txt_first_addy.Text != "-")
+                {
+                    Image firstplace_image = new Bitmap(485, 310);
+                    Graphics drawing = Graphics.FromImage(firstplace_image);
+                    drawing.InterpolationMode = InterpolationMode.High;
+                    drawing.SmoothingMode = SmoothingMode.HighQuality;
+                    drawing.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                    drawing.CompositingQuality = CompositingQuality.HighQuality;
+
+                    Image background = Image.FromFile(txt_template.Text);
+                    Image character_render = Image.FromFile(first_place_image);
+                    drawing.Clear(Color.White);
+                    drawing.DrawImage(background, new Rectangle(0, 0, 485, 310), new Rectangle(1020, 490, 485, 310), GraphicsUnit.Pixel);
+
+                    drawing.DrawImage(character_render, 0 + Int32.Parse(txt_first_addx.Text), 0 + Int32.Parse(txt_first_addy.Text), character_render.Width, character_render.Height);
+                    pic_firstplace.Image = firstplace_image;
+                }
+            }
+        }
+
+        private void txt_first_addx_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_first_addx.Text != "" && txt_first_addy.Text != "" && txt_first_addx.Text != "-" && txt_first_addy.Text != "-")
+            {
+                Image firstplace_image = new Bitmap(485, 310);
+                Graphics drawing = Graphics.FromImage(firstplace_image);
+                drawing.InterpolationMode = InterpolationMode.High;
+                drawing.SmoothingMode = SmoothingMode.HighQuality;
+                drawing.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                drawing.CompositingQuality = CompositingQuality.HighQuality;
+
+                Image background = Image.FromFile(txt_template.Text);
+                Image character_render = Image.FromFile(first_place_image);
+                drawing.Clear(Color.White);
+                drawing.DrawImage(background, new Rectangle(0, 0, 485, 310), new Rectangle(1020, 490, 485, 310), GraphicsUnit.Pixel);
+                drawing.DrawImage(character_render, 0 + Int32.Parse(txt_first_addx.Text), 0 + Int32.Parse(txt_first_addy.Text), character_render.Width, character_render.Height);
+                pic_firstplace.Image = firstplace_image;
+            }
+        }
+
+        private void txt_first_addy_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_first_addx.Text != "" && txt_first_addy.Text != "" && txt_first_addx.Text != "-" && txt_first_addy.Text != "-")
+            {
+                Image firstplace_image = new Bitmap(485, 310);
+                Graphics drawing = Graphics.FromImage(firstplace_image);
+                drawing.InterpolationMode = InterpolationMode.High;
+                drawing.SmoothingMode = SmoothingMode.HighQuality;
+                drawing.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                drawing.CompositingQuality = CompositingQuality.HighQuality;
+
+                Image background = Image.FromFile(txt_template.Text);
+                Image character_render = Image.FromFile(first_place_image);
+                drawing.Clear(Color.White);
+                drawing.DrawImage(background, new Rectangle(0, 0, 485, 310), new Rectangle(1020, 490, 485, 310), GraphicsUnit.Pixel);
+                drawing.DrawImage(character_render, 0 + Int32.Parse(txt_first_addx.Text), 0 + Int32.Parse(txt_first_addy.Text), character_render.Width, character_render.Height);
+                pic_firstplace.Image = firstplace_image;
             }
         }
     }

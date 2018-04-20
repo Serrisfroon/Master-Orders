@@ -172,6 +172,13 @@
             this.btn_preview = new System.Windows.Forms.Button();
             this.btn_save_file = new System.Windows.Forms.Button();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
+            this.pic_firstplace = new System.Windows.Forms.PictureBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txt_first_addx = new System.Windows.Forms.TextBox();
+            this.txt_first_addy = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.btn_firstplace_browse = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_characters_1)).BeginInit();
@@ -228,6 +235,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pic_character_8_3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_character_8_4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_character_8_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_firstplace)).BeginInit();
             this.SuspendLayout();
             // 
             // label9
@@ -334,7 +342,7 @@
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage8);
-            this.tabControl1.Location = new System.Drawing.Point(12, 126);
+            this.tabControl1.Location = new System.Drawing.Point(12, 232);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(392, 150);
@@ -1953,16 +1961,17 @@
             // 
             // btn_preview
             // 
-            this.btn_preview.Location = new System.Drawing.Point(116, 282);
+            this.btn_preview.Location = new System.Drawing.Point(327, 402);
             this.btn_preview.Name = "btn_preview";
             this.btn_preview.Size = new System.Drawing.Size(88, 40);
             this.btn_preview.TabIndex = 34;
             this.btn_preview.Text = "Preview";
             this.btn_preview.UseVisualStyleBackColor = true;
+            this.btn_preview.Click += new System.EventHandler(this.btn_preview_Click);
             // 
             // btn_save_file
             // 
-            this.btn_save_file.Location = new System.Drawing.Point(210, 282);
+            this.btn_save_file.Location = new System.Drawing.Point(174, 388);
             this.btn_save_file.Name = "btn_save_file";
             this.btn_save_file.Size = new System.Drawing.Size(88, 40);
             this.btn_save_file.TabIndex = 35;
@@ -1973,11 +1982,92 @@
             // 
             this.openFileDialog2.Filter = "Image Files (.jpg, *.png, *.bmp)|*.jpg;*.png;*.bmp";
             // 
+            // pic_firstplace
+            // 
+            this.pic_firstplace.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pic_firstplace.Location = new System.Drawing.Point(87, 126);
+            this.pic_firstplace.Name = "pic_firstplace";
+            this.pic_firstplace.Size = new System.Drawing.Size(154, 100);
+            this.pic_firstplace.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_firstplace.TabIndex = 36;
+            this.pic_firstplace.TabStop = false;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(257, 133);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(96, 13);
+            this.label22.TabIndex = 37;
+            this.label22.Text = "First Place Graphic";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(267, 152);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(14, 13);
+            this.label23.TabIndex = 38;
+            this.label23.Text = "X";
+            // 
+            // txt_first_addx
+            // 
+            this.txt_first_addx.Enabled = false;
+            this.txt_first_addx.Location = new System.Drawing.Point(287, 149);
+            this.txt_first_addx.MaxLength = 4;
+            this.txt_first_addx.Name = "txt_first_addx";
+            this.txt_first_addx.Size = new System.Drawing.Size(40, 20);
+            this.txt_first_addx.TabIndex = 40;
+            this.txt_first_addx.Text = "0";
+            this.txt_first_addx.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_first_addx.TextChanged += new System.EventHandler(this.txt_first_addx_TextChanged);
+            this.txt_first_addx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_first_addx_KeyPress);
+            // 
+            // txt_first_addy
+            // 
+            this.txt_first_addy.Enabled = false;
+            this.txt_first_addy.Location = new System.Drawing.Point(287, 175);
+            this.txt_first_addy.MaxLength = 4;
+            this.txt_first_addy.Name = "txt_first_addy";
+            this.txt_first_addy.Size = new System.Drawing.Size(40, 20);
+            this.txt_first_addy.TabIndex = 42;
+            this.txt_first_addy.Text = "0";
+            this.txt_first_addy.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_first_addy.TextChanged += new System.EventHandler(this.txt_first_addy_TextChanged);
+            this.txt_first_addy.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_first_addy_KeyPress);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(267, 178);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(14, 13);
+            this.label24.TabIndex = 41;
+            this.label24.Text = "Y";
+            // 
+            // btn_firstplace_browse
+            // 
+            this.btn_firstplace_browse.Enabled = false;
+            this.btn_firstplace_browse.Location = new System.Drawing.Point(258, 200);
+            this.btn_firstplace_browse.Name = "btn_firstplace_browse";
+            this.btn_firstplace_browse.Size = new System.Drawing.Size(75, 23);
+            this.btn_firstplace_browse.TabIndex = 43;
+            this.btn_firstplace_browse.Text = "Browse";
+            this.btn_firstplace_browse.UseVisualStyleBackColor = true;
+            this.btn_firstplace_browse.Click += new System.EventHandler(this.btn_firstplace_browse_Click);
+            // 
             // Results
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(417, 329);
+            this.ClientSize = new System.Drawing.Size(417, 440);
+            this.Controls.Add(this.btn_firstplace_browse);
+            this.Controls.Add(this.txt_first_addy);
+            this.Controls.Add(this.label24);
+            this.Controls.Add(this.txt_first_addx);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.pic_firstplace);
             this.Controls.Add(this.btn_save_file);
             this.Controls.Add(this.btn_preview);
             this.Controls.Add(this.tabControl1);
@@ -2059,6 +2149,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pic_character_8_3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_character_8_4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_character_8_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_firstplace)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2208,5 +2299,12 @@
         private System.Windows.Forms.Button btn_character_8_3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.OpenFileDialog openFileDialog2;
+        private System.Windows.Forms.PictureBox pic_firstplace;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox txt_first_addx;
+        private System.Windows.Forms.TextBox txt_first_addy;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Button btn_firstplace_browse;
     }
 }

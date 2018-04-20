@@ -77,6 +77,10 @@
             this.lbl_commentator1 = new System.Windows.Forms.Label();
             this.lbl_tag1 = new System.Windows.Forms.Label();
             this.tab_options = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rdb_manual = new System.Windows.Forms.RadioButton();
+            this.rdb_automatic = new System.Windows.Forms.RadioButton();
+            this.btn_top8 = new System.Windows.Forms.Button();
             this.btn_scoreboard = new System.Windows.Forms.Button();
             this.ckb_scoreboad = new System.Windows.Forms.CheckBox();
             this.cbx_bestof5 = new System.Windows.Forms.ComboBox();
@@ -108,7 +112,6 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.ttp_tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.btn_top8 = new System.Windows.Forms.Button();
             this.tab_main.SuspendLayout();
             this.tab_ingame_display.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_score2)).BeginInit();
@@ -120,6 +123,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pic_character1)).BeginInit();
             this.tab_commentators.SuspendLayout();
             this.tab_options.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbx_entrants.SuspendLayout();
             this.SuspendLayout();
@@ -185,7 +189,6 @@
             this.tab_ingame_display.TabIndex = 0;
             this.tab_ingame_display.Text = "In-Game Display";
             this.tab_ingame_display.UseVisualStyleBackColor = true;
-            this.tab_ingame_display.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // btn_reset
             // 
@@ -193,7 +196,7 @@
             this.btn_reset.Name = "btn_reset";
             this.btn_reset.Size = new System.Drawing.Size(95, 45);
             this.btn_reset.TabIndex = 39;
-            this.btn_reset.Text = "Reset";
+            this.btn_reset.Text = "Next Match";
             this.btn_reset.UseVisualStyleBackColor = true;
             this.btn_reset.Click += new System.EventHandler(this.button2_Click_1);
             // 
@@ -420,7 +423,15 @@
             "Losers Round 1",
             "Losers Round 2",
             "Losers Round 3",
-            "Losers Round 4"});
+            "Losers Round 4",
+            "Winners Top 16",
+            "Winners Top 24",
+            "Winners Top 32",
+            "Winners Top 48",
+            "Losers Top 16",
+            "Losers Top 24",
+            "Losers Top 32",
+            "Losers Top 48"});
             this.cbx_round.Location = new System.Drawing.Point(51, 19);
             this.cbx_round.Name = "cbx_round";
             this.cbx_round.Size = new System.Drawing.Size(170, 21);
@@ -443,7 +454,6 @@
             this.lbl_bracket.Size = new System.Drawing.Size(69, 13);
             this.lbl_bracket.TabIndex = 12;
             this.lbl_bracket.Text = "Bracket URL";
-            this.lbl_bracket.Click += new System.EventHandler(this.label4_Click);
             // 
             // lbl_round
             // 
@@ -465,7 +475,6 @@
             this.gbx_character1.TabIndex = 6;
             this.gbx_character1.TabStop = false;
             this.gbx_character1.Text = "Character";
-            this.gbx_character1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // pic_character1
             // 
@@ -484,7 +493,6 @@
             this.lbl_character1.TabIndex = 5;
             this.lbl_character1.Text = "Character Name";
             this.lbl_character1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_character1.Click += new System.EventHandler(this.label3_Click);
             // 
             // btn_character1
             // 
@@ -643,6 +651,7 @@
             // 
             // tab_options
             // 
+            this.tab_options.Controls.Add(this.groupBox2);
             this.tab_options.Controls.Add(this.btn_top8);
             this.tab_options.Controls.Add(this.btn_scoreboard);
             this.tab_options.Controls.Add(this.ckb_scoreboad);
@@ -659,6 +668,51 @@
             this.tab_options.Text = "Settings";
             this.tab_options.UseVisualStyleBackColor = true;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rdb_manual);
+            this.groupBox2.Controls.Add(this.rdb_automatic);
+            this.groupBox2.Location = new System.Drawing.Point(725, 9);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(129, 69);
+            this.groupBox2.TabIndex = 17;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Scoreboard Updating";
+            // 
+            // rdb_manual
+            // 
+            this.rdb_manual.AutoSize = true;
+            this.rdb_manual.Location = new System.Drawing.Point(6, 42);
+            this.rdb_manual.Name = "rdb_manual";
+            this.rdb_manual.Size = new System.Drawing.Size(103, 17);
+            this.rdb_manual.TabIndex = 16;
+            this.rdb_manual.Text = "Manual Updates";
+            this.rdb_manual.UseVisualStyleBackColor = true;
+            this.rdb_manual.CheckedChanged += new System.EventHandler(this.rdb_manual_CheckedChanged);
+            // 
+            // rdb_automatic
+            // 
+            this.rdb_automatic.AutoSize = true;
+            this.rdb_automatic.Checked = true;
+            this.rdb_automatic.Location = new System.Drawing.Point(6, 19);
+            this.rdb_automatic.Name = "rdb_automatic";
+            this.rdb_automatic.Size = new System.Drawing.Size(115, 17);
+            this.rdb_automatic.TabIndex = 15;
+            this.rdb_automatic.TabStop = true;
+            this.rdb_automatic.Text = "Automatic Updates";
+            this.rdb_automatic.UseVisualStyleBackColor = true;
+            this.rdb_automatic.CheckedChanged += new System.EventHandler(this.rdb_automatic_CheckedChanged);
+            // 
+            // btn_top8
+            // 
+            this.btn_top8.Location = new System.Drawing.Point(880, 9);
+            this.btn_top8.Name = "btn_top8";
+            this.btn_top8.Size = new System.Drawing.Size(95, 43);
+            this.btn_top8.TabIndex = 14;
+            this.btn_top8.Text = "Top 8 Graphic";
+            this.btn_top8.UseVisualStyleBackColor = true;
+            this.btn_top8.Click += new System.EventHandler(this.button1_Click_2);
+            // 
             // btn_scoreboard
             // 
             this.btn_scoreboard.BackColor = System.Drawing.Color.Transparent;
@@ -674,7 +728,7 @@
             // ckb_scoreboad
             // 
             this.ckb_scoreboad.AutoSize = true;
-            this.ckb_scoreboad.Location = new System.Drawing.Point(725, 84);
+            this.ckb_scoreboad.Location = new System.Drawing.Point(725, 86);
             this.ckb_scoreboad.Name = "ckb_scoreboad";
             this.ckb_scoreboad.Size = new System.Drawing.Size(149, 17);
             this.ckb_scoreboad.TabIndex = 12;
@@ -690,7 +744,11 @@
             "Finals Only",
             "Top 4",
             "Top 6",
-            "Top 8"});
+            "Top 8",
+            "Top 16",
+            "Top 24",
+            "Top 32",
+            "Top 48"});
             this.cbx_bestof5.Location = new System.Drawing.Point(845, 119);
             this.cbx_bestof5.Name = "cbx_bestof5";
             this.cbx_bestof5.Size = new System.Drawing.Size(96, 21);
@@ -714,7 +772,6 @@
             this.label3.Size = new System.Drawing.Size(30, 13);
             this.label3.TabIndex = 7;
             this.label3.Text = "Date";
-            this.label3.Click += new System.EventHandler(this.label3_Click_1);
             // 
             // txt_date
             // 
@@ -949,16 +1006,6 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = ".json Files|*.json";
             // 
-            // btn_top8
-            // 
-            this.btn_top8.Location = new System.Drawing.Point(864, 9);
-            this.btn_top8.Name = "btn_top8";
-            this.btn_top8.Size = new System.Drawing.Size(111, 41);
-            this.btn_top8.TabIndex = 14;
-            this.btn_top8.Text = "Top 8 Graphic";
-            this.btn_top8.UseVisualStyleBackColor = true;
-            this.btn_top8.Click += new System.EventHandler(this.button1_Click_2);
-            // 
             // frm_main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -984,6 +1031,8 @@
             this.tab_commentators.PerformLayout();
             this.tab_options.ResumeLayout(false);
             this.tab_options.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.gbx_entrants.ResumeLayout(false);
@@ -1073,6 +1122,9 @@
         private System.Windows.Forms.CheckBox ckb_scoreboad;
         private System.Windows.Forms.ToolTip ttp_tooltip;
         private System.Windows.Forms.Button btn_top8;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton rdb_manual;
+        private System.Windows.Forms.RadioButton rdb_automatic;
     }
 }
 

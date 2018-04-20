@@ -493,21 +493,6 @@ namespace Stream_Info_Handler
             }
         }
 
-        private void lbl_player2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             string hold_alt = cbx_alt1.Text;
@@ -530,21 +515,6 @@ namespace Stream_Info_Handler
             nud_score2.Value = hold_score;
             lbl_character2.Text = hold_character;
             image_directory2 = hold_directory;
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -613,15 +583,18 @@ namespace Stream_Info_Handler
 
                     System.IO.File.WriteAllText(global_values.output_directory + @"\round.txt", cbx_round.Text);
                     System.IO.File.WriteAllText(global_values.output_directory + @"\bracket url.txt", txt_bracket.Text);
+                    System.IO.File.WriteAllText(global_values.output_directory + @"\tournament.txt", txt_tournament.Text);
                     break;
                 case "Update":
                     btn_update.Enabled = false;
 
+                    System.IO.File.WriteAllText(global_values.output_directory + @"\score1.txt", nud_score1.Value.ToString());
                     System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", cbx_name1.Text);
                     System.IO.File.WriteAllText(global_values.output_directory + @"\alt text1.txt", cbx_alt1.Text);
                     System.IO.File.WriteAllText(global_values.output_directory + @"\score1.txt", nud_score1.Value.ToString());
                     System.IO.File.WriteAllText(global_values.output_directory + @"\character name1.txt", lbl_character1.Text);
 
+                    System.IO.File.WriteAllText(global_values.output_directory + @"\score2.txt", nud_score2.Value.ToString());
                     System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", cbx_name2.Text);
                     System.IO.File.WriteAllText(global_values.output_directory + @"\alt text2.txt", cbx_alt2.Text);
                     System.IO.File.WriteAllText(global_values.output_directory + @"\score2.txt", nud_score2.Value.ToString());
@@ -629,6 +602,7 @@ namespace Stream_Info_Handler
 
                     System.IO.File.WriteAllText(global_values.output_directory + @"\round.txt", cbx_round.Text);
                     System.IO.File.WriteAllText(global_values.output_directory + @"\bracket url.txt", txt_bracket.Text);
+                    System.IO.File.WriteAllText(global_values.output_directory + @"\tournament.txt", txt_tournament.Text);
                     break;
                 case "Upload to YouTube":
                     btn_update.Enabled = false;
@@ -705,21 +679,10 @@ namespace Stream_Info_Handler
             }
         }
 
-        private void lbl_thumb_directory_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void nud_score1_ValueChanged(object sender, EventArgs e)
         {
             decimal match_point = 2;
             decimal current_point = nud_score1.Value;
-            System.IO.File.WriteAllText(global_values.output_directory + @"\score1.txt", nud_score1.Value.ToString());
             switch (cbx_round.Text)
             {
                 case "Grand Finals":
@@ -746,42 +709,82 @@ namespace Stream_Info_Handler
                         match_point = 3;
                     }
                     break;
-
+                case "Winners Top 16":
+                case "Losers Top 16":
+                    if (cbx_bestof5.SelectedIndex > 3)
+                    {
+                        match_point = 3;
+                    }
+                    break;
+                case "Winners Top 24":
+                case "Losers Top 24":
+                    if (cbx_bestof5.SelectedIndex > 4)
+                    {
+                        match_point = 3;
+                    }
+                    break;
+                case "Winners Top 32":
+                case "Losers Top 32":
+                    if (cbx_bestof5.SelectedIndex > 5)
+                    {
+                        match_point = 3;
+                    }
+                    break;
+                case "Winners Top 48":
+                case "Losers Top 48":
+                    if (cbx_bestof5.SelectedIndex > 6)
+                    {
+                        match_point = 3;
+                    }
+                    break;
                 default:
                     match_point = 2;
                     break;
             }
-            if(ckb_scoreboad.Checked == true)
-            {
-                string score_file = global_values.output_directory + @"\score1.png";
-
-                if (File.Exists(score_file))
-                {
-                    File.Delete(score_file);
-                }
-
-                switch (nud_score1.Value)
-                {
-                    case 0:
-                        File.Copy(@"left.png", score_file);
-                        break;
-                    case 1:
-                        File.Copy(global_values.score1_image1, score_file);
-                        break;
-                    case 2:
-                        File.Copy(global_values.score1_image2, score_file);
-                        break;
-                    case 3:
-                        File.Copy(global_values.score1_image3, score_file);
-                        break;
-                }
-            }
             if (current_point >= match_point)
             {
-                btn_update.Enabled = true;
                 nud_score1.Value = match_point;
-                btn_update.Text = @"Upload to YouTube";
-                btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\red.gif");
+            }
+            if (global_values.auto_update == true)
+            {
+                System.IO.File.WriteAllText(global_values.output_directory + @"\score1.txt", nud_score1.Value.ToString());
+                if (ckb_scoreboad.Checked == true)
+                {
+                    string score_file = global_values.output_directory + @"\score1.png";
+
+                    if (File.Exists(score_file))
+                    {
+                        File.Delete(score_file);
+                    }
+
+                    switch (nud_score1.Value)
+                    {
+                        case 0:
+                            File.Copy(@"left.png", score_file);
+                            break;
+                        case 1:
+                            File.Copy(global_values.score1_image1, score_file);
+                            break;
+                        case 2:
+                            File.Copy(global_values.score1_image2, score_file);
+                            break;
+                        case 3:
+                            File.Copy(global_values.score1_image3, score_file);
+                            break;
+                    }
+                }
+                if (current_point >= match_point)
+                {
+                    btn_update.Enabled = true;
+                    nud_score1.Value = match_point;
+                    btn_update.Text = @"Upload to YouTube";
+                    btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\red.gif");
+                }
+            }
+            else
+            {
+                btn_update.Enabled = true;
+                btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\yellow.gif");
             }
         }
 
@@ -789,7 +792,6 @@ namespace Stream_Info_Handler
         {
             decimal match_point = 2;
             decimal current_point = nud_score2.Value;
-            System.IO.File.WriteAllText(global_values.output_directory + @"\score2.txt", nud_score2.Value.ToString());
             switch (cbx_round.Text)
             {
                 case "Grand Finals":
@@ -816,42 +818,82 @@ namespace Stream_Info_Handler
                         match_point = 3;
                     }
                     break;
-
+                case "Winners Top 16":
+                case "Losers Top 16":
+                    if (cbx_bestof5.SelectedIndex > 3)
+                    {
+                        match_point = 3;
+                    }
+                    break;
+                case "Winners Top 24":
+                case "Losers Top 24":
+                    if (cbx_bestof5.SelectedIndex > 4)
+                    {
+                        match_point = 3;
+                    }
+                    break;
+                case "Winners Top 32":
+                case "Losers Top 32":
+                    if (cbx_bestof5.SelectedIndex > 5)
+                    {
+                        match_point = 3;
+                    }
+                    break;
+                case "Winners Top 48":
+                case "Losers Top 48":
+                    if (cbx_bestof5.SelectedIndex > 6)
+                    {
+                        match_point = 3;
+                    }
+                    break;
                 default:
                     match_point = 2;
                     break;
             }
-            if (ckb_scoreboad.Checked == true)
-            {
-                string score_file = global_values.output_directory + @"\score2.png";
-
-                if (File.Exists(score_file))
-                {
-                    File.Delete(score_file);
-                }
-
-                switch (nud_score2.Value)
-                {
-                    case 0:
-                        File.Copy(@"left.png", score_file);
-                        break;
-                    case 1:
-                        File.Copy(global_values.score2_image1, score_file);
-                        break;
-                    case 2:
-                        File.Copy(global_values.score2_image2, score_file);
-                        break;
-                    case 3:
-                        File.Copy(global_values.score2_image3, score_file);
-                        break;
-                }
-            }
             if (current_point >= match_point)
             {
-                btn_update.Enabled = true;
                 nud_score2.Value = match_point;
-                btn_update.Text = @"Upload to YouTube";
-                btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\red.gif");
+            }
+            if (global_values.auto_update == true)
+            {
+                System.IO.File.WriteAllText(global_values.output_directory + @"\score2.txt", nud_score2.Value.ToString());
+                if (ckb_scoreboad.Checked == true)
+                {
+                    string score_file = global_values.output_directory + @"\score2.png";
+
+                    if (File.Exists(score_file))
+                    {
+                        File.Delete(score_file);
+                    }
+
+                    switch (nud_score2.Value)
+                    {
+                        case 0:
+                            File.Copy(@"left.png", score_file);
+                            break;
+                        case 1:
+                            File.Copy(global_values.score2_image1, score_file);
+                            break;
+                        case 2:
+                            File.Copy(global_values.score2_image2, score_file);
+                            break;
+                        case 3:
+                            File.Copy(global_values.score2_image3, score_file);
+                            break;
+                    }
+                }
+                if (current_point >= match_point)
+                {
+                    btn_update.Enabled = true;
+                    nud_score2.Value = match_point;
+                    btn_update.Text = @"Upload to YouTube";
+                    btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\red.gif");
+                }
+            }
+            else
+            {
+                btn_update.Enabled = true;
+                btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\yellow.gif");
             }
         }
 
@@ -866,7 +908,15 @@ namespace Stream_Info_Handler
                         btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
                         break;
                     case "Update":
-                        btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\yellow.gif");
+                        if (global_values.auto_update == false)
+                        {
+                            btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\yellow.gif");
+                        }
+                        else
+                        {
+                            btn_update.Enabled = false;
+                            System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", cbx_name2.Text);
+                        }
                         break;
                 }
             }
@@ -887,7 +937,15 @@ namespace Stream_Info_Handler
                         btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
                         break;
                     case "Update":
-                        btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\yellow.gif");
+                        if (global_values.auto_update == false)
+                        {
+                            btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\yellow.gif");
+                        }
+                        else
+                        {
+                            btn_update.Enabled = false;
+                            System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", cbx_name1.Text);
+                        }
                         break;
                 }
             }
@@ -908,7 +966,15 @@ namespace Stream_Info_Handler
                         btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
                         break;
                     case "Update":
-                        btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\yellow.gif");
+                        if (global_values.auto_update == false)
+                        {
+                            btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\yellow.gif");
+                        }
+                        else
+                        {
+                            btn_update.Enabled = false;
+                            System.IO.File.WriteAllText(global_values.output_directory + @"\round.txt", cbx_round.Text);
+                        }
                         break;
                 }
             }
@@ -929,7 +995,15 @@ namespace Stream_Info_Handler
                         btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
                         break;
                     case "Update":
-                        btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\yellow.gif");
+                        if (global_values.auto_update == false)
+                        {
+                            btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\yellow.gif");
+                        }
+                        else
+                        {
+                            btn_update.Enabled = false;
+                            System.IO.File.WriteAllText(global_values.output_directory + @"\tournament.txt", txt_tournament.Text);
+                        }
                         break;
                 }
             }
@@ -950,7 +1024,15 @@ namespace Stream_Info_Handler
                         btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
                         break;
                     case "Update":
-                        btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\yellow.gif");
+                        if (global_values.auto_update == false)
+                        {
+                            btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\yellow.gif");
+                        }
+                        else
+                        {
+                            btn_update.Enabled = false;
+                            System.IO.File.WriteAllText(global_values.output_directory + @"\bracket url.txt", txt_bracket.Text);
+                        }
                         break;
                 }
             }
@@ -967,10 +1049,6 @@ namespace Stream_Info_Handler
 
             cbx_alt1.Text = @"";
             cbx_alt2.Text = @"";
-
-            cbx_round.Text = @"";
-            txt_bracket.Text = @"";
-            txt_tournament.Text = @"";
 
             nud_score1.Value = 0;
             nud_score1.Enabled = false;
@@ -1243,6 +1321,17 @@ namespace Stream_Info_Handler
             var top8 = new Results();
             top8.Show();
         }
+
+        private void rdb_automatic_CheckedChanged(object sender, EventArgs e)
+        {
+            global_values.auto_update = true;
+        }
+
+        private void rdb_manual_CheckedChanged(object sender, EventArgs e)
+        {
+            global_values.auto_update = false;
+        }
+
     }
 
     public static class global_values
@@ -1260,6 +1349,7 @@ namespace Stream_Info_Handler
         public static string thumbnail_directory;
         public static string json_file;
         public static string youtube_username;
+        public static bool auto_update = true;
         public static int player_number;
         public static int[] player_image;
     }
