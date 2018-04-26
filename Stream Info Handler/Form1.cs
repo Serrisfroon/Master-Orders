@@ -1332,6 +1332,10 @@ namespace Stream_Info_Handler
             global_values.auto_update = false;
         }
 
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public static class global_values

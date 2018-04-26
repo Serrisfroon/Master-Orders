@@ -6,7 +6,9 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -55,7 +57,7 @@ namespace Stream_Info_Handler
 
             return destImage;
         }
-        public string make_top8()
+        public void make_top8(string filename)
         {
             Image top8_bmp = new Bitmap(1667, 2000);
             Graphics drawing = Graphics.FromImage(top8_bmp);
@@ -150,7 +152,6 @@ namespace Stream_Info_Handler
                         drawing.DrawImage(stock_icon, 1238, 1059);
                         break;
                     case 2:
-<<<<<<< HEAD
                         drawing.DrawImage(stock_icon, 1191 + (94 * (i - 1)), 1059);
                         break;
                     case 3:
@@ -181,12 +182,6 @@ namespace Stream_Info_Handler
                         break;
                     case 4:
                         drawing.DrawImage(stock_icon, 1050 + (94 * (i - 1)), 1185);
-=======
-                        drawing.DrawImage(stock_icon, 851+(104*(i-1)), 640, stock_width, stock_height);
-                        break;
-                    case 3:
-                        drawing.DrawImage(stock_icon, 804 +LinkedList  (104 * (i - 1)), 640, stock_width, stock_height);
->>>>>>> 22c73c14dad4e7765d12ddd0fcd057d4048219c5
                         break;
                 }
             }
@@ -386,10 +381,8 @@ namespace Stream_Info_Handler
             drawing.DrawString(txt_entrants_number.Text + @" ENTRANTS", entrants_font, whiteBrush, 833, 1774, drawFormat);
 
 
-            DateTime date = DateTime.Now;
-            string top8_time = date.ToString("MMddyyyyHHmmss");
-            string top8_image_name = @"Top 8 Results " + top8_time + @".jpg";
-            top8_bmp.Save(global_values.thumbnail_directory + @"\" + top8_image_name, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+            top8_bmp.Save(filename);
 
             keepcalm.Dispose();
             first_place_font.Dispose();
@@ -400,7 +393,6 @@ namespace Stream_Info_Handler
             whiteBrush.Dispose();
             top8_bmp.Dispose();
 
-            return top8_image_name;
         }
 
         private void nud_characters_1_ValueChanged(object sender, EventArgs e)
@@ -472,6 +464,7 @@ namespace Stream_Info_Handler
 
         private void ckb_team_image_1_CheckedChanged(object sender, EventArgs e)
         {
+            btn_team_browse_1.BackColor = default(Color);
             if (ckb_team_image_1.Checked == true)
             {
                 pic_team_image_1.Enabled = true;
@@ -488,6 +481,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_1_1.BackColor = default(Color);
                 character_path[1, 1] = openFileDialog1.FileName;
                 pic_character_1_1.Image = Image.FromFile(character_path[1, 1]);
             }
@@ -497,6 +491,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_1_2.BackColor = default(Color);
                 character_path[1, 2] = openFileDialog1.FileName;
                 pic_character_1_2.Image = Image.FromFile(character_path[1, 2]);
             }
@@ -506,6 +501,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_1_3.BackColor = default(Color);
                 character_path[1, 3] = openFileDialog1.FileName;
                 pic_character_1_3.Image = Image.FromFile(character_path[1, 3]);
             }
@@ -515,6 +511,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_team_browse_1.BackColor = default(Color);
                 team_path[1] = openFileDialog1.FileName;
                 pic_team_image_1.Image = Image.FromFile(team_path[1]);
             }
@@ -606,6 +603,7 @@ namespace Stream_Info_Handler
 
         private void ckb_team_image_2_CheckedChanged(object sender, EventArgs e)
         {
+            btn_team_browse_2.BackColor = default(Color);
             if (ckb_team_image_2.Checked == true)
             {
                 pic_team_image_2.Enabled = true;
@@ -622,6 +620,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_2_1.BackColor = default(Color);
                 character_path[2, 1] = openFileDialog1.FileName;
                 pic_character_2_1.Image = Image.FromFile(character_path[2, 1]);
             }
@@ -631,6 +630,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_2_2.BackColor = default(Color);
                 character_path[2, 2] = openFileDialog1.FileName;
                 pic_character_2_2.Image = Image.FromFile(character_path[2, 2]);
             }
@@ -640,6 +640,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_2_3.BackColor = default(Color);
                 character_path[2, 3] = openFileDialog1.FileName;
                 pic_character_2_3.Image = Image.FromFile(character_path[2, 3]);
             }
@@ -649,6 +650,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_2_4.BackColor = default(Color);
                 character_path[2, 4] = openFileDialog1.FileName;
                 pic_character_2_4.Image = Image.FromFile(character_path[2, 4]);
             }
@@ -658,6 +660,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_team_browse_2.BackColor = default(Color);
                 team_path[2] = openFileDialog1.FileName;
                 pic_team_image_2.Image = Image.FromFile(team_path[2]);
             }
@@ -750,6 +753,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_3_1.BackColor = default(Color);
                 character_path[3, 1] = openFileDialog1.FileName;
                 pic_character_3_1.Image = Image.FromFile(character_path[3, 1]);
             }
@@ -759,6 +763,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_3_2.BackColor = default(Color);
                 character_path[3, 2] = openFileDialog1.FileName;
                 pic_character_3_2.Image = Image.FromFile(character_path[3, 2]);
             }
@@ -768,6 +773,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_3_3.BackColor = default(Color);
                 character_path[3, 3] = openFileDialog1.FileName;
                 pic_character_3_3.Image = Image.FromFile(character_path[3, 3]);
             }
@@ -777,6 +783,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_3_4.BackColor = default(Color);
                 character_path[3, 4] = openFileDialog1.FileName;
                 pic_character_3_4.Image = Image.FromFile(character_path[3, 4]);
             }
@@ -784,6 +791,7 @@ namespace Stream_Info_Handler
 
         private void ckb_team_image_3_CheckedChanged(object sender, EventArgs e)
         {
+            btn_team_browse_3.BackColor = default(Color);
             if (ckb_team_image_3.Checked == true)
             {
                 pic_team_image_3.Enabled = true;
@@ -800,6 +808,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_team_browse_3.BackColor = default(Color);
                 team_path[3] = openFileDialog1.FileName;
                 pic_team_image_3.Image = Image.FromFile(team_path[3]);
             }
@@ -892,6 +901,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_4_1.BackColor = default(Color);
                 character_path[4, 1] = openFileDialog1.FileName;
                 pic_character_4_1.Image = Image.FromFile(character_path[4, 1]);
             }
@@ -901,6 +911,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_4_2.BackColor = default(Color);
                 character_path[4, 2] = openFileDialog1.FileName;
                 pic_character_4_2.Image = Image.FromFile(character_path[4, 2]);
             }
@@ -910,6 +921,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_4_3.BackColor = default(Color);
                 character_path[4, 3] = openFileDialog1.FileName;
                 pic_character_4_3.Image = Image.FromFile(character_path[4, 3]);
             }
@@ -919,6 +931,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_4_4.BackColor = default(Color);
                 character_path[4, 4] = openFileDialog1.FileName;
                 pic_character_4_4.Image = Image.FromFile(character_path[4, 4]);
             }
@@ -926,6 +939,7 @@ namespace Stream_Info_Handler
 
         private void ckb_team_image_4_CheckedChanged(object sender, EventArgs e)
         {
+            btn_team_browse_4.BackColor = default(Color);
             if (ckb_team_image_4.Checked == true)
             {
                 pic_team_image_4.Enabled = true;
@@ -942,6 +956,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_team_browse_4.BackColor = default(Color);
                 team_path[4] = openFileDialog1.FileName;
                 pic_team_image_4.Image = Image.FromFile(team_path[4]);
             }
@@ -1034,6 +1049,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_5_1.BackColor = default(Color);
                 character_path[5, 1] = openFileDialog1.FileName;
                 pic_character_5_1.Image = Image.FromFile(character_path[5, 1]);
             }
@@ -1043,6 +1059,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_5_2.BackColor = default(Color);
                 character_path[5, 2] = openFileDialog1.FileName;
                 pic_character_5_2.Image = Image.FromFile(character_path[5, 2]);
             }
@@ -1052,6 +1069,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_5_3.BackColor = default(Color);
                 character_path[5, 3] = openFileDialog1.FileName;
                 pic_character_5_3.Image = Image.FromFile(character_path[5, 3]);
             }
@@ -1061,6 +1079,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_5_4.BackColor = default(Color);
                 character_path[5, 4] = openFileDialog1.FileName;
                 pic_character_5_4.Image = Image.FromFile(character_path[5, 4]);
             }
@@ -1070,6 +1089,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_team_browse_5.BackColor = default(Color);
                 team_path[5] = openFileDialog1.FileName;
                 pic_team_image_5.Image = Image.FromFile(team_path[5]);
             }
@@ -1077,6 +1097,7 @@ namespace Stream_Info_Handler
 
         private void ckb_team_image_5_CheckedChanged(object sender, EventArgs e)
         {
+            btn_team_browse_5.BackColor = default(Color);
             if (ckb_team_image_5.Checked == true)
             {
                 pic_team_image_5.Enabled = true;
@@ -1176,6 +1197,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_6_1.BackColor = default(Color);
                 character_path[6, 1] = openFileDialog1.FileName;
                 pic_character_6_1.Image = Image.FromFile(character_path[6, 1]);
             }
@@ -1185,6 +1207,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_6_2.BackColor = default(Color);
                 character_path[6, 2] = openFileDialog1.FileName;
                 pic_character_6_2.Image = Image.FromFile(character_path[6, 2]);
             }
@@ -1194,6 +1217,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_6_3.BackColor = default(Color);
                 character_path[6, 3] = openFileDialog1.FileName;
                 pic_character_6_3.Image = Image.FromFile(character_path[6, 3]);
             }
@@ -1203,6 +1227,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_6_4.BackColor = default(Color);
                 character_path[6, 4] = openFileDialog1.FileName;
                 pic_character_6_4.Image = Image.FromFile(character_path[6, 4]);
             }
@@ -1210,6 +1235,7 @@ namespace Stream_Info_Handler
 
         private void ckb_team_image_6_CheckedChanged(object sender, EventArgs e)
         {
+            btn_team_browse_6.BackColor = default(Color);
             if (ckb_team_image_6.Checked == true)
             {
                 pic_team_image_6.Enabled = true;
@@ -1226,6 +1252,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_team_browse_6.BackColor = default(Color);
                 team_path[6] = openFileDialog1.FileName;
                 pic_team_image_6.Image = Image.FromFile(team_path[6]);
             }
@@ -1318,6 +1345,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_7_1.BackColor = default(Color);
                 character_path[7, 1] = openFileDialog1.FileName;
                 pic_character_7_1.Image = Image.FromFile(character_path[7, 1]);
             }
@@ -1327,6 +1355,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_7_2.BackColor = default(Color);
                 character_path[7, 2] = openFileDialog1.FileName;
                 pic_character_7_2.Image = Image.FromFile(character_path[7, 2]);
             }
@@ -1336,6 +1365,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_7_3.BackColor = default(Color);
                 character_path[7, 3] = openFileDialog1.FileName;
                 pic_character_7_3.Image = Image.FromFile(character_path[7, 3]);
             }
@@ -1345,6 +1375,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_7_4.BackColor = default(Color);
                 character_path[7, 4] = openFileDialog1.FileName;
                 pic_character_7_4.Image = Image.FromFile(character_path[7, 4]);
             }
@@ -1352,6 +1383,7 @@ namespace Stream_Info_Handler
 
         private void ckb_team_image_7_CheckedChanged(object sender, EventArgs e)
         {
+            btn_team_browse_7.BackColor = default(Color);
             if (ckb_team_image_7.Checked == true)
             {
                 pic_team_image_7.Enabled = true;
@@ -1368,6 +1400,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_team_browse_7.BackColor = default(Color);
                 team_path[7] = openFileDialog1.FileName;
                 pic_team_image_7.Image = Image.FromFile(team_path[7]);
             }
@@ -1460,6 +1493,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_8_1.BackColor = default(Color);
                 character_path[8, 1] = openFileDialog1.FileName;
                 pic_character_8_1.Image = Image.FromFile(character_path[8, 1]);
             }
@@ -1469,6 +1503,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_8_2.BackColor = default(Color);
                 character_path[8, 2] = openFileDialog1.FileName;
                 pic_character_8_2.Image = Image.FromFile(character_path[8, 2]);
             }
@@ -1478,6 +1513,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_8_3.BackColor = default(Color);
                 character_path[8, 3] = openFileDialog1.FileName;
                 pic_character_8_3.Image = Image.FromFile(character_path[8, 3]);
             }
@@ -1487,6 +1523,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_character_8_4.BackColor = default(Color);
                 character_path[8, 4] = openFileDialog1.FileName;
                 pic_character_8_4.Image = Image.FromFile(character_path[8, 4]);
             }
@@ -1494,6 +1531,7 @@ namespace Stream_Info_Handler
 
         private void ckb_team_image_8_CheckedChanged(object sender, EventArgs e)
         {
+            btn_team_browse_8.BackColor = default(Color);
             if (ckb_team_image_8.Checked == true)
             {
                 pic_team_image_8.Enabled = true;
@@ -1510,6 +1548,7 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_team_browse_8.BackColor = default(Color);
                 team_path[8] = openFileDialog1.FileName;
                 pic_team_image_8.Image = Image.FromFile(team_path[8]);
             }
@@ -1520,12 +1559,30 @@ namespace Stream_Info_Handler
             if (openFileDialog2.ShowDialog() == DialogResult.OK)
             {
                 txt_template.Text = openFileDialog2.FileName;
+                if (txt_template.Text != @"")
+                {
+                    if (File.Exists(txt_template.Text))
+                    {
+                        txt_template.BackColor = Color.White;
+                        btn_firstplace_browse.Enabled = true;
+                        if (first_place_image != @"")
+                        {
+                            if (File.Exists(first_place_image))
+                            {
+                                txt_first_addx.Enabled = true;
+                                txt_first_addy.Enabled = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        txt_template.BackColor = Color.Red;
+                        btn_firstplace_browse.Enabled = false;
+                        txt_first_addx.Enabled = false;
+                        txt_first_addy.Enabled = false;
+                    }
+                }
             }
-        }
-
-        private void btn_preview_Click(object sender, EventArgs e)
-        {
-            string derp = make_top8();
         }
 
         private void txt_first_addx_KeyPress(object sender, KeyPressEventArgs e)
@@ -1562,24 +1619,37 @@ namespace Stream_Info_Handler
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                btn_firstplace_browse.BackColor = default(Color);
                 first_place_image = openFileDialog1.FileName;
-
-                if (txt_first_addx.Text != "" && txt_first_addy.Text != "" && txt_first_addx.Text != "-" && txt_first_addy.Text != "-")
+                if (first_place_image != @"")
                 {
-                    Image firstplace_image = new Bitmap(485, 310);
-                    Graphics drawing = Graphics.FromImage(firstplace_image);
-                    drawing.InterpolationMode = InterpolationMode.High;
-                    drawing.SmoothingMode = SmoothingMode.HighQuality;
-                    drawing.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-                    drawing.CompositingQuality = CompositingQuality.HighQuality;
+                    if (File.Exists(first_place_image))
+                    {
+                        txt_first_addx.Enabled = true;
+                        txt_first_addy.Enabled = true;
+                        if (txt_first_addx.Text != "" && txt_first_addy.Text != "" && txt_first_addx.Text != "-" && txt_first_addy.Text != "-")
+                        {
+                            Image firstplace_image = new Bitmap(485, 310);
+                            Graphics drawing = Graphics.FromImage(firstplace_image);
+                            drawing.InterpolationMode = InterpolationMode.High;
+                            drawing.SmoothingMode = SmoothingMode.HighQuality;
+                            drawing.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                            drawing.CompositingQuality = CompositingQuality.HighQuality;
 
-                    Image background = Image.FromFile(txt_template.Text);
-                    Image character_render = Image.FromFile(first_place_image);
-                    drawing.Clear(Color.White);
-                    drawing.DrawImage(background, new Rectangle(0, 0, 485, 310), new Rectangle(1020, 490, 485, 310), GraphicsUnit.Pixel);
+                            Image background = Image.FromFile(txt_template.Text);
+                            Image character_render = Image.FromFile(first_place_image);
+                            drawing.Clear(Color.White);
+                            drawing.DrawImage(background, new Rectangle(0, 0, 485, 310), new Rectangle(1020, 490, 485, 310), GraphicsUnit.Pixel);
 
-                    drawing.DrawImage(character_render, 0 + Int32.Parse(txt_first_addx.Text), 0 + Int32.Parse(txt_first_addy.Text), character_render.Width, character_render.Height);
-                    pic_firstplace.Image = firstplace_image;
+                            drawing.DrawImage(character_render, 0 + Int32.Parse(txt_first_addx.Text), 0 + Int32.Parse(txt_first_addy.Text), character_render.Width, character_render.Height);
+                            pic_firstplace.Image = firstplace_image;
+                        }
+                    }
+                    else
+                    {
+                        txt_first_addx.Enabled = false;
+                        txt_first_addy.Enabled = false;
+                    }
                 }
             }
         }
@@ -1623,5 +1693,541 @@ namespace Stream_Info_Handler
                 pic_firstplace.Image = firstplace_image;
             }
         }
+
+        private void txt_template_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_template.Text != @"")
+            {
+                if (File.Exists(txt_template.Text))
+                {
+                    txt_template.BackColor = Color.White;
+                    btn_firstplace_browse.Enabled = true;
+                    if (first_place_image != @"")
+                    {
+                        if (File.Exists(first_place_image))
+                        {
+                            txt_first_addx.Enabled = true;
+                            txt_first_addy.Enabled = true;
+                        }
+                    }
+                }
+                else
+                {
+                    txt_template.BackColor = Color.Red;
+                    btn_firstplace_browse.Enabled = false;
+                    txt_first_addx.Enabled = false;
+                    txt_first_addy.Enabled = false;
+                }
+            }
+        }
+
+        private void btn_save_file_Click(object sender, EventArgs e)
+        {
+            bool save_top8 = true;
+            if (txt_event_number.Text == "")
+            {
+                txt_event_number.BackColor = Color.Red;
+                save_top8 = false;
+            }
+            if (txt_entrants_number.Text == "")
+            {
+                txt_entrants_number.BackColor = Color.Red;
+                save_top8 = false;
+            }
+            if (!File.Exists(txt_template.Text))
+            {
+                txt_template.BackColor = Color.Red;
+                save_top8 = false;
+            }
+
+            if (ckb_team_image_8.Checked == true && !File.Exists(team_path[8]))
+            {
+                btn_team_browse_8.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 7;
+            }
+            if (txt_tag_8.Text == "")
+            {
+                txt_tag_8.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 7;
+            }
+            if (!File.Exists(character_path[8, 1]))
+            {
+                btn_character_8_1.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 7;
+            }
+            if (!File.Exists(character_path[8, 2]) && nud_characters_8.Value > 1)
+            {
+                btn_character_8_2.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 7;
+            }
+            if (!File.Exists(character_path[8, 3]) && nud_characters_8.Value > 2)
+            {
+                btn_character_8_3.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 7;
+            }
+            if (!File.Exists(character_path[8, 4]) && nud_characters_8.Value > 3)
+            {
+                btn_character_8_4.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 7;
+            }
+            if (ckb_team_image_7.Checked == true && !File.Exists(team_path[7]))
+            {
+                btn_team_browse_7.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 6;
+            }
+            if (txt_tag_7.Text == "")
+            {
+                txt_tag_7.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 6;
+            }
+            if (!File.Exists(character_path[7, 1]))
+            {
+                btn_character_7_1.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 6;
+            }
+            if (!File.Exists(character_path[7, 2]) && nud_characters_7.Value > 1)
+            {
+                btn_character_7_2.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 6;
+            }
+            if (!File.Exists(character_path[7, 3]) && nud_characters_7.Value > 2)
+            {
+                btn_character_7_3.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 6;
+            }
+            if (!File.Exists(character_path[7, 4]) && nud_characters_7.Value > 3)
+            {
+                btn_character_7_4.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 6;
+            }
+            if (ckb_team_image_6.Checked == true && !File.Exists(team_path[6]))
+            {
+                btn_team_browse_6.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 5;
+            }
+            if (txt_tag_6.Text == "")
+            {
+                txt_tag_6.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 5;
+            }
+            if (!File.Exists(character_path[6, 1]))
+            {
+                btn_character_6_1.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 5;
+            }
+            if (!File.Exists(character_path[6, 2]) && nud_characters_6.Value > 1)
+            {
+                btn_character_6_2.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 5;
+            }
+            if (!File.Exists(character_path[6, 3]) && nud_characters_6.Value > 2)
+            {
+                btn_character_6_3.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 5;
+            }
+            if (!File.Exists(character_path[6, 4]) && nud_characters_6.Value > 3)
+            {
+                btn_character_6_4.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 5;
+            }
+            if (ckb_team_image_5.Checked == true && !File.Exists(team_path[5]))
+            {
+                btn_team_browse_5.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 4;
+            }
+            if (txt_tag_5.Text == "")
+            {
+                txt_tag_5.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 4;
+            }
+            if (!File.Exists(character_path[5, 1]))
+            {
+                btn_character_5_1.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 4;
+            }
+            if (!File.Exists(character_path[5, 2]) && nud_characters_5.Value > 1)
+            {
+                btn_character_5_2.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 4;
+            }
+            if (!File.Exists(character_path[5, 3]) && nud_characters_5.Value > 2)
+            {
+                btn_character_5_3.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 4;
+            }
+            if (!File.Exists(character_path[5, 4]) && nud_characters_5.Value > 3)
+            {
+                btn_character_5_4.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 4;
+            }
+            if (ckb_team_image_4.Checked == true && !File.Exists(team_path[4]))
+            {
+                btn_team_browse_4.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 3;
+            }
+            if (txt_tag_4.Text == "")
+            {
+                txt_tag_4.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 3;
+            }
+            if (!File.Exists(character_path[4, 1]))
+            {
+                btn_character_4_1.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 3;
+            }
+            if (!File.Exists(character_path[4, 2]) && nud_characters_4.Value > 1)
+            {
+                btn_character_4_2.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 3;
+            }
+            if (!File.Exists(character_path[4, 3]) && nud_characters_4.Value > 2)
+            {
+                btn_character_4_3.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 3;
+            }
+            if (!File.Exists(character_path[4, 4]) && nud_characters_4.Value > 3)
+            {
+                btn_character_4_4.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 3;
+            }
+            if (ckb_team_image_3.Checked == true && !File.Exists(team_path[3]))
+            {
+                btn_team_browse_3.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 2;
+            }
+            if (txt_tag_3.Text == "")
+            {
+                txt_tag_3.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 2;
+            }
+            if (!File.Exists(character_path[3, 1]))
+            {
+                btn_character_3_1.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 2;
+            }
+            if (!File.Exists(character_path[3, 2]) && nud_characters_3.Value > 1)
+            {
+                btn_character_3_2.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 2;
+            }
+            if (!File.Exists(character_path[3, 3]) && nud_characters_3.Value > 2)
+            {
+                btn_character_3_3.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 2;
+            }
+            if (!File.Exists(character_path[3, 4]) && nud_characters_3.Value > 3)
+            {
+                btn_character_3_4.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 2;
+            }
+            if (ckb_team_image_2.Checked == true && !File.Exists(team_path[2]))
+            {
+                btn_team_browse_2.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 1;
+            }
+            if (txt_tag_2.Text == "")
+            {
+                txt_tag_2.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 1;
+            }
+            if (!File.Exists(character_path[2, 1]))
+            {
+                btn_character_2_1.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 1;
+            }
+            if (!File.Exists(character_path[2, 2]) && nud_characters_2.Value > 1)
+            {
+                btn_character_2_2.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 1;
+            }
+            if (!File.Exists(character_path[2, 3]) && nud_characters_2.Value > 2)
+            {
+                btn_character_2_3.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 1;
+            }
+            if (!File.Exists(character_path[2, 4]) && nud_characters_2.Value > 3)
+            {
+                btn_character_2_4.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 1;
+            }
+            if (ckb_team_image_1.Checked == true && !File.Exists(team_path[1]))
+            {
+                btn_team_browse_1.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 0;
+            }
+            if (txt_tag_1.Text == "")
+            {
+                txt_tag_1.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 0;
+            }
+            if (!File.Exists(character_path[1, 1]) && nud_characters_1.Value > 0)
+            {
+                btn_character_1_1.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 0;
+            }
+            if (!File.Exists(character_path[1, 2]) && nud_characters_1.Value > 1)
+            {
+                btn_character_1_2.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 0;
+            }
+            if (!File.Exists(character_path[1, 3]) && nud_characters_1.Value > 2)
+            {
+                btn_character_1_3.BackColor = Color.Red;
+                save_top8 = false;
+                tabControl1.SelectedIndex = 0;
+            }
+
+
+
+            if (!File.Exists(first_place_image))
+            {
+                btn_firstplace_browse.BackColor = Color.Red;
+                save_top8 = false;
+            }
+            if (save_top8 == true)
+            {
+                saveFileDialog1.FileName = @"Tripoint Smash " + txt_event_number.Text + " Top 8";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    make_top8(saveFileDialog1.FileName);
+                }
+            }
+            else
+            {
+                SystemSounds.Asterisk.Play();
+            }
+        }
+
+        private void tabControl1_Click(object sender, EventArgs e)
+        {
+
+            switch(tabControl1.SelectedIndex)
+            {
+                case 0:
+                    txt_tag_1.Select();
+                    txt_tag_1.Focus();
+                    break;
+                case 1:
+                    txt_tag_2.Select();
+                    txt_tag_2.Focus();
+                    break;
+                case 2:
+                    txt_tag_3.Select();
+                    txt_tag_3.Focus();
+                    break;
+                case 3:
+                    txt_tag_4.Select();
+                    txt_tag_4.Focus();
+                    break;
+                case 4:
+                    txt_tag_5.Select();
+                    txt_tag_5.Focus();
+                    break;
+                case 5:
+                    txt_tag_6.Select();
+                    txt_tag_6.Focus();
+                    break;
+                case 6:
+                    txt_tag_7.Select();
+                    txt_tag_7.Focus();
+                    break;
+                case 7:
+                    txt_tag_8.Select();
+                    txt_tag_8.Focus();
+                    break;
+            }
+        }
+
+        private void txt_first_addx_Leave(object sender, EventArgs e)
+        {
+            if (txt_first_addx.Text == @"")
+            {
+                txt_first_addx.Text = "0";
+            }
+            if (txt_first_addx.Text == @"-")
+            {
+                txt_first_addx.Text = "0";
+            }
+        }
+
+        private void txt_first_addy_Leave(object sender, EventArgs e)
+        {
+            if (txt_first_addy.Text == @"")
+            {
+                txt_first_addy.Text = "0";
+            }
+            if (txt_first_addy.Text == @"-")
+            {
+                txt_first_addy.Text = "0";
+            }
+        }
+
+        private void txt_event_number_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_event_number.Text == "")
+            {
+                txt_event_number.BackColor = Color.Red;
+            }
+            else
+            {
+                txt_event_number.BackColor = Color.White;
+            }
+        }
+
+        private void txt_entrants_number_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_entrants_number.Text == "")
+            {
+                txt_entrants_number.BackColor = Color.Red;
+            }
+            else
+            {
+                txt_entrants_number.BackColor = Color.White;
+            }
+        }
+
+        private void txt_tag_1_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_tag_1.Text == "")
+            {
+                txt_tag_1.BackColor = Color.Red;
+            }
+            else
+            {
+                txt_tag_1.BackColor = Color.White;
+            }
+        }
+
+        private void txt_tag_2_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_tag_2.Text == "")
+            {
+                txt_tag_2.BackColor = Color.Red;
+            }
+            else
+            {
+                txt_tag_2.BackColor = Color.White;
+            }
+        }
+
+        private void txt_tag_3_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_tag_3.Text == "")
+            {
+                txt_tag_3.BackColor = Color.Red;
+            }
+            else
+            {
+                txt_tag_3.BackColor = Color.White;
+            }
+        }
+
+        private void txt_tag_4_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_tag_4.Text == "")
+            {
+                txt_tag_4.BackColor = Color.Red;
+            }
+            else
+            {
+                txt_tag_4.BackColor = Color.White;
+            }
+        }
+
+        private void txt_tag_5_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_tag_5.Text == "")
+            {
+                txt_tag_5.BackColor = Color.Red;
+            }
+            else
+            {
+                txt_tag_5.BackColor = Color.White;
+            }
+        }
+
+        private void txt_tag_6_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_tag_6.Text == "")
+            {
+                txt_tag_6.BackColor = Color.Red;
+            }
+            else
+            {
+                txt_tag_6.BackColor = Color.White;
+            }
+        }
+
+        private void txt_tag_7_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_tag_7.Text == "")
+            {
+                txt_tag_7.BackColor = Color.Red;
+            }
+            else
+            {
+                txt_tag_7.BackColor = Color.White;
+            }
+        }
+
+        private void txt_tag_8_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_tag_8.Text == "")
+            {
+                txt_tag_8.BackColor = Color.Red;
+            }
+            else
+            {
+                txt_tag_8.BackColor = Color.White;
+            }
+        }
+
+
     }
 }

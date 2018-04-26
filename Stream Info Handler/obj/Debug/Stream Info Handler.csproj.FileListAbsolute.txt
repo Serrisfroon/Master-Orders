@@ -172,3 +172,4 @@ C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Master
 C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.application
 C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CopyComplete
 C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\built titling sb.ttf
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\built titling sb.ttf

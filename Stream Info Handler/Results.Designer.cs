@@ -169,7 +169,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.btn_preview = new System.Windows.Forms.Button();
             this.btn_save_file = new System.Windows.Forms.Button();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.pic_firstplace = new System.Windows.Forms.PictureBox();
@@ -262,6 +261,8 @@
             this.txt_event_number.Name = "txt_event_number";
             this.txt_event_number.Size = new System.Drawing.Size(57, 20);
             this.txt_event_number.TabIndex = 20;
+            this.txt_event_number.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_event_number.TextChanged += new System.EventHandler(this.txt_event_number_TextChanged);
             // 
             // txt_entrants_number
             // 
@@ -269,6 +270,8 @@
             this.txt_entrants_number.Name = "txt_entrants_number";
             this.txt_entrants_number.Size = new System.Drawing.Size(57, 20);
             this.txt_entrants_number.TabIndex = 21;
+            this.txt_entrants_number.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_entrants_number.TextChanged += new System.EventHandler(this.txt_entrants_number_TextChanged);
             // 
             // label11
             // 
@@ -285,6 +288,7 @@
             this.txt_template.Name = "txt_template";
             this.txt_template.Size = new System.Drawing.Size(238, 20);
             this.txt_template.TabIndex = 23;
+            this.txt_template.TextChanged += new System.EventHandler(this.txt_template_TextChanged);
             // 
             // btn_template
             // 
@@ -347,6 +351,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(392, 150);
             this.tabControl1.TabIndex = 30;
+            this.tabControl1.Click += new System.EventHandler(this.tabControl1_Click);
             // 
             // tabPage1
             // 
@@ -384,11 +389,6 @@
             this.nud_characters_1.Size = new System.Drawing.Size(43, 31);
             this.nud_characters_1.TabIndex = 70;
             this.nud_characters_1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nud_characters_1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nud_characters_1.ValueChanged += new System.EventHandler(this.nud_characters_1_ValueChanged);
             // 
             // txt_tag_1
@@ -397,15 +397,16 @@
             this.txt_tag_1.Name = "txt_tag_1";
             this.txt_tag_1.Size = new System.Drawing.Size(200, 20);
             this.txt_tag_1.TabIndex = 56;
+            this.txt_tag_1.TextChanged += new System.EventHandler(this.txt_tag_1_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 53);
+            this.label3.Location = new System.Drawing.Point(10, 53);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 13);
+            this.label3.Size = new System.Drawing.Size(85, 13);
             this.label3.TabIndex = 69;
-            this.label3.Text = "Characters";
+            this.label3.Text = "Extra Characters";
             // 
             // btn_character_1_2
             // 
@@ -577,6 +578,7 @@
             this.txt_tag_2.Name = "txt_tag_2";
             this.txt_tag_2.Size = new System.Drawing.Size(200, 20);
             this.txt_tag_2.TabIndex = 71;
+            this.txt_tag_2.TextChanged += new System.EventHandler(this.txt_tag_2_TextChanged);
             // 
             // label5
             // 
@@ -781,6 +783,7 @@
             this.txt_tag_3.Name = "txt_tag_3";
             this.txt_tag_3.Size = new System.Drawing.Size(200, 20);
             this.txt_tag_3.TabIndex = 71;
+            this.txt_tag_3.TextChanged += new System.EventHandler(this.txt_tag_3_TextChanged);
             // 
             // label7
             // 
@@ -985,6 +988,7 @@
             this.txt_tag_4.Name = "txt_tag_4";
             this.txt_tag_4.Size = new System.Drawing.Size(200, 20);
             this.txt_tag_4.TabIndex = 71;
+            this.txt_tag_4.TextChanged += new System.EventHandler(this.txt_tag_4_TextChanged);
             // 
             // label14
             // 
@@ -1189,6 +1193,7 @@
             this.txt_tag_5.Name = "txt_tag_5";
             this.txt_tag_5.Size = new System.Drawing.Size(200, 20);
             this.txt_tag_5.TabIndex = 71;
+            this.txt_tag_5.TextChanged += new System.EventHandler(this.txt_tag_5_TextChanged);
             // 
             // label16
             // 
@@ -1393,6 +1398,7 @@
             this.txt_tag_6.Name = "txt_tag_6";
             this.txt_tag_6.Size = new System.Drawing.Size(200, 20);
             this.txt_tag_6.TabIndex = 71;
+            this.txt_tag_6.TextChanged += new System.EventHandler(this.txt_tag_6_TextChanged);
             // 
             // label18
             // 
@@ -1597,6 +1603,7 @@
             this.txt_tag_7.Name = "txt_tag_7";
             this.txt_tag_7.Size = new System.Drawing.Size(200, 20);
             this.txt_tag_7.TabIndex = 71;
+            this.txt_tag_7.TextChanged += new System.EventHandler(this.txt_tag_7_TextChanged);
             // 
             // label20
             // 
@@ -1801,6 +1808,7 @@
             this.txt_tag_8.Name = "txt_tag_8";
             this.txt_tag_8.Size = new System.Drawing.Size(200, 20);
             this.txt_tag_8.TabIndex = 71;
+            this.txt_tag_8.TextChanged += new System.EventHandler(this.txt_tag_8_TextChanged);
             // 
             // label1
             // 
@@ -1959,16 +1967,6 @@
             this.saveFileDialog1.FileName = "Top 8";
             this.saveFileDialog1.Filter = "JPEG Image Files|*.jpg";
             // 
-            // btn_preview
-            // 
-            this.btn_preview.Location = new System.Drawing.Point(327, 402);
-            this.btn_preview.Name = "btn_preview";
-            this.btn_preview.Size = new System.Drawing.Size(88, 40);
-            this.btn_preview.TabIndex = 34;
-            this.btn_preview.Text = "Preview";
-            this.btn_preview.UseVisualStyleBackColor = true;
-            this.btn_preview.Click += new System.EventHandler(this.btn_preview_Click);
-            // 
             // btn_save_file
             // 
             this.btn_save_file.Location = new System.Drawing.Point(174, 388);
@@ -1977,6 +1975,7 @@
             this.btn_save_file.TabIndex = 35;
             this.btn_save_file.Text = "Save File";
             this.btn_save_file.UseVisualStyleBackColor = true;
+            this.btn_save_file.Click += new System.EventHandler(this.btn_save_file_Click);
             // 
             // openFileDialog2
             // 
@@ -2022,6 +2021,7 @@
             this.txt_first_addx.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_first_addx.TextChanged += new System.EventHandler(this.txt_first_addx_TextChanged);
             this.txt_first_addx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_first_addx_KeyPress);
+            this.txt_first_addx.Leave += new System.EventHandler(this.txt_first_addx_Leave);
             // 
             // txt_first_addy
             // 
@@ -2035,6 +2035,7 @@
             this.txt_first_addy.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_first_addy.TextChanged += new System.EventHandler(this.txt_first_addy_TextChanged);
             this.txt_first_addy.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_first_addy_KeyPress);
+            this.txt_first_addy.Leave += new System.EventHandler(this.txt_first_addy_Leave);
             // 
             // label24
             // 
@@ -2069,7 +2070,6 @@
             this.Controls.Add(this.label22);
             this.Controls.Add(this.pic_firstplace);
             this.Controls.Add(this.btn_save_file);
-            this.Controls.Add(this.btn_preview);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.txt_stream_url);
             this.Controls.Add(this.label13);
@@ -2191,7 +2191,6 @@
         private System.Windows.Forms.TabPage tabPage8;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.Button btn_preview;
         private System.Windows.Forms.Button btn_save_file;
         private System.Windows.Forms.NumericUpDown nud_characters_2;
         private System.Windows.Forms.TextBox txt_tag_2;
