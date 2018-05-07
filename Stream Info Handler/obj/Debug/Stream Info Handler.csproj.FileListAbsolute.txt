@@ -113,11 +113,6 @@ C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Goog
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Newtonsoft.Json.xml
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csprojResolveAssemblyReference.cache
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_main.resources
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Form2.resources
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Form3.resources
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Form4.resources
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Form5.resources
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Main_Menu.resources
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Properties.Resources.resources
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.GenerateResource.cache
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CoreCompileInputs.cache
@@ -126,7 +121,6 @@ C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Mast
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CopyComplete
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.exe
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.pdb
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Results.resources
 C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csprojResolveAssemblyReference.cache
 C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_main.resources
 C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Form2.resources
@@ -173,3 +167,14 @@ C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Master
 C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CopyComplete
 C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\built titling sb.ttf
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\built titling sb.ttf
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Sheets.v4.dll
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.pdb
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Auth.pdb
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Core.pdb
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Sheets.v4.pdb
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Sheets.v4.xml
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_characters.resources
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_error.resources
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_uploading.resources
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_score_images.resources
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_results.resources
