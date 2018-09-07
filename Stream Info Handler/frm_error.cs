@@ -2,7 +2,7 @@
 //Master Orders 
 //Stream Information Management Tool
 //Developed by Dan Sanchez
-//For use by UGS Gaming only
+//For use by UGS Gaming only, at the developer's discretion
 //Copyright 2018, Dan Sanchez, All rights reserved.
 //////////////////////////////////////////////////////////////////////////////////////////
 using System;

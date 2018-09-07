@@ -158,7 +158,7 @@
             this.lbl_progress.Size = new System.Drawing.Size(284, 16);
             this.lbl_progress.TabIndex = 11;
             // 
-            // Form4
+            // frm_uploading
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -176,7 +176,7 @@
             this.Controls.Add(this.txt_videotitle);
             this.Controls.Add(this.pic_thumbnail);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form4";
+            this.Name = "frm_uploading";
             this.Text = "Upload to YouTube";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form4_FormClosed);
             this.Load += new System.EventHandler(this.Form4_Load);

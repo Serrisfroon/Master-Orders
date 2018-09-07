@@ -178,6 +178,7 @@
             this.txt_first_addy = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.btn_firstplace_browse = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_characters_1)).BeginInit();
@@ -1973,7 +1974,7 @@
             // 
             // btn_save_file
             // 
-            this.btn_save_file.Location = new System.Drawing.Point(174, 388);
+            this.btn_save_file.Location = new System.Drawing.Point(298, 388);
             this.btn_save_file.Name = "btn_save_file";
             this.btn_save_file.Size = new System.Drawing.Size(88, 40);
             this.btn_save_file.TabIndex = 35;
@@ -2061,11 +2062,22 @@
             this.btn_firstplace_browse.UseVisualStyleBackColor = true;
             this.btn_firstplace_browse.Click += new System.EventHandler(this.btn_firstplace_browse_Click);
             // 
-            // Results
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(47, 388);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(88, 40);
+            this.button1.TabIndex = 44;
+            this.button1.Text = "Reset";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // frm_results
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(417, 440);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_firstplace_browse);
             this.Controls.Add(this.txt_first_addy);
             this.Controls.Add(this.label24);
@@ -2087,7 +2099,7 @@
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Results";
+            this.Name = "frm_results";
             this.Text = "Master Orders - Results Generator";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -2309,5 +2321,6 @@
         private System.Windows.Forms.TextBox txt_first_addy;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Button btn_firstplace_browse;
+        private System.Windows.Forms.Button button1;
     }
 }

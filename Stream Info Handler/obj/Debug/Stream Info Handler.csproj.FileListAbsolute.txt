@@ -83,44 +83,6 @@ C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handl
 C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Master Orders.exe
 C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Master Orders.pdb
 C:\Users\Surface\OneDrive\Smash Bros Stuff\Stream Info Handler\Stream Info Handler\obj\Debug\Stream_Info_Handler.Main_Menu.resources
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\green.gif
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\red.gif
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\right.png
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\left.png
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\yellow.gif
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\KeepCalm-Medium.ttf
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.exe.config
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.exe.manifest
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.application
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.exe
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.pdb
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Auth.dll
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Auth.PlatformServices.dll
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Core.dll
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.dll
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.PlatformServices.dll
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.YouTube.v3.dll
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Newtonsoft.Json.dll
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\System.Net.Http.dll
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Cryptography.Algorithms.dll
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Cryptography.Encoding.dll
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Cryptography.Primitives.dll
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Cryptography.X509Certificates.dll
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.xml
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Auth.xml
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Core.xml
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.YouTube.v3.xml
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Newtonsoft.Json.xml
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csprojResolveAssemblyReference.cache
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_main.resources
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Properties.Resources.resources
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.GenerateResource.cache
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CoreCompileInputs.cache
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.exe.manifest
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.application
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CopyComplete
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.exe
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.pdb
 C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csprojResolveAssemblyReference.cache
 C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_main.resources
 C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Form2.resources
@@ -166,15 +128,55 @@ C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Master
 C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.application
 C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CopyComplete
 C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\built titling sb.ttf
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\green.gif
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\right.png
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\left.png
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\KeepCalm-Medium.ttf
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\built titling sb.ttf
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.exe.config
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.exe.manifest
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.application
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.exe
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.pdb
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Auth.dll
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Core.dll
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.dll
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.PlatformServices.dll
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Sheets.v4.dll
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.YouTube.v3.dll
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Newtonsoft.Json.dll
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\System.Net.Http.dll
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Cryptography.Algorithms.dll
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Cryptography.Encoding.dll
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Cryptography.Primitives.dll
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Cryptography.X509Certificates.dll
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.pdb
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.xml
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Auth.pdb
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Auth.xml
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Core.pdb
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Core.xml
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Sheets.v4.pdb
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Sheets.v4.xml
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.YouTube.v3.xml
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Newtonsoft.Json.xml
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_main.resources
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_characters.resources
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_error.resources
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_settings_start.resources
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_uploading.resources
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_score_images.resources
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Properties.Resources.resources
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_results.resources
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.GenerateResource.cache
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CoreCompileInputs.cache
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.exe.manifest
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.application
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CopyComplete
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.exe
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.pdb
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csprojResolveAssemblyReference.cache
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\blue.gif
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Resources\save_button.png
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_region.resources

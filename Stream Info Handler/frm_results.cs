@@ -2,7 +2,7 @@
 //Master Orders 
 //Stream Information Management Tool
 //Developed by Dan Sanchez
-//For use by UGS Gaming only
+//For use by UGS Gaming only, at the developer's discretion
 //Copyright 2018, Dan Sanchez, All rights reserved.
 //////////////////////////////////////////////////////////////////////////////////////////
 using System;
@@ -2039,7 +2039,7 @@ namespace Stream_Info_Handler
             }
             if (save_top8 == true)
             {
-                saveFileDialog1.FileName = @"Tripoint Smash " + txt_event_number.Text + " Top 8";
+                saveFileDialog1.FileName = @"Tripoint Wii U " + txt_event_number.Text;
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     make_top8(saveFileDialog1.FileName);
@@ -2235,6 +2235,88 @@ namespace Stream_Info_Handler
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Reset all fields?", "Warning", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+            {
+                return;
+            }
+            txt_bracket_url.Text = "";
+            txt_entrants_number.Text = "";
+            txt_event_number.Text = "";
+            txt_first_addx.Text = "";
+            txt_first_addy.Text = "";
+            txt_stream_url.Text = "";
+            txt_tag_1.Text = "";
+            txt_tag_2.Text = "";
+            txt_tag_3.Text = "";
+            txt_tag_4.Text = "";
+            txt_tag_5.Text = "";
+            txt_tag_6.Text = "";
+            txt_tag_7.Text = "";
+            txt_tag_8.Text = "";
+            txt_template.Text = "";
+            pic_character_1_1.Image = null;
+            pic_character_1_2.Image = null;
+            pic_character_1_3.Image = null;
+            pic_character_2_1.Image = null;
+            pic_character_2_1.Image = null;
+            pic_character_2_2.Image = null;
+            pic_character_2_3.Image = null;
+            pic_character_2_4.Image = null;
+            pic_character_3_1.Image = null;
+            pic_character_3_2.Image = null;
+            pic_character_3_3.Image = null;
+            pic_character_3_4.Image = null;
+            pic_character_4_1.Image = null;
+            pic_character_4_2.Image = null;
+            pic_character_4_3.Image = null;
+            pic_character_4_4.Image = null;
+            pic_character_5_1.Image = null;
+            pic_character_5_2.Image = null;
+            pic_character_5_3.Image = null;
+            pic_character_5_4.Image = null;
+            pic_character_6_1.Image = null;
+            pic_character_6_2.Image = null;
+            pic_character_6_3.Image = null;
+            pic_character_6_4.Image = null;
+            pic_character_7_1.Image = null;
+            pic_character_7_2.Image = null;
+            pic_character_7_3.Image = null;
+            pic_character_7_4.Image = null;
+            pic_character_8_1.Image = null;
+            pic_character_8_2.Image = null;
+            pic_character_8_3.Image = null;
+            pic_character_8_4.Image = null;
+            pic_firstplace.Image = null;
+            pic_team_image_1.Image = null;
+            pic_team_image_2.Image = null;
+            pic_team_image_3.Image = null;
+            pic_team_image_4.Image = null;
+            pic_team_image_5.Image = null;
+            pic_team_image_6.Image = null;
+            pic_team_image_7.Image = null;
+            pic_team_image_8.Image = null;
+            ckb_team_image_1.Checked = false;
+            ckb_team_image_2.Checked = false;
+            ckb_team_image_3.Checked = false;
+            ckb_team_image_4.Checked = false;
+            ckb_team_image_5.Checked = false;
+            ckb_team_image_6.Checked = false;
+            ckb_team_image_7.Checked = false;
+            ckb_team_image_8.Checked = false;
+            nud_characters_1.Value = 0;
+            nud_characters_2.Value = 1;
+            nud_characters_3.Value = 1;
+            nud_characters_4.Value = 1;
+            nud_characters_5.Value = 1;
+            nud_characters_6.Value = 1;
+            nud_characters_7.Value = 1;
+            nud_characters_8.Value = 1;
 
+            txt_first_addx.Enabled = false;
+            txt_first_addy.Enabled = false;
+            btn_firstplace_browse.Enabled = false;
+        }
     }
 }

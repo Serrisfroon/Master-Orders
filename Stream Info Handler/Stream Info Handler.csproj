@@ -22,7 +22,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>19</ApplicationRevision>
+    <ApplicationRevision>56</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -133,6 +133,18 @@
     <Compile Include="frm_error.Designer.cs">
       <DependentUpon>frm_error.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_region.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_region.Designer.cs">
+      <DependentUpon>frm_region.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_settings_start.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_settings_start.Designer.cs">
+      <DependentUpon>frm_settings_start.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_uploading.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,7 +159,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="frm_results.cs" />
+    <Compile Include="frm_results.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frm_results.Designer.cs">
       <DependentUpon>frm_results.cs</DependentUpon>
     </Compile>
@@ -159,6 +173,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_error.resx">
       <DependentUpon>frm_error.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_region.resx">
+      <DependentUpon>frm_region.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_settings_start.resx">
+      <DependentUpon>frm_settings_start.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_uploading.resx">
       <DependentUpon>frm_uploading.cs</DependentUpon>
@@ -174,6 +194,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="frm_results.resx">
       <DependentUpon>frm_results.cs</DependentUpon>
@@ -200,20 +221,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="blue.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="green.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="master_hand_aTL_icon.ico" />
-    <Content Include="red.gif">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="Resources\save_button.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="right.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="left.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="yellow.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

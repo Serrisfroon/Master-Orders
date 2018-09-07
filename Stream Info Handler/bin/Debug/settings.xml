@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Master-Orders-Settings>
+  <directories>
+    <game-directory>C:\Users\serri\Google Drive\Smash Bros Stuff\Tripoint\Stream Files\Wii U</game-directory>
+    <stream-directory>C:\Users\serri\Desktop</stream-directory>
+    <thumbnail-directory>C:\Users\serri\Desktop</thumbnail-directory>
+    <vods-directory>C:\Users\serri\Desktop</vods-directory>
+  </directories>
+  <youtube>
+    <username>undergroundstudiosgaming@gmail.com</username>
+    <json-file>C:\Users\serri\Google Drive\Smash Bros Stuff\Tripoint\Stream Files\tripoint_ugs.json</json-file>
+    <use-playlist>false</use-playlist>
+  </youtube>
+  <google-sheets>
+    <enable-sheets>false</enable-sheets>
+    <sheets-id></sheets-id>
+  </google-sheets>
+  <image-scoring>
+    <enable-image-scoring>false</enable-image-scoring>
+    <player1-1></player1-1>
+    <player1-2></player1-2>
+    <player1-3></player1-3>
+    <player2-1></player2-1>
+    <player2-2></player2-2>
+    <player2-3></player2-3>
+  </image-scoring>
+  <etc>
+    <best-of-5>1</best-of-5>
+    <automatic-updates>true</automatic-updates>
+  </etc>
+</Master-Orders-Settings>

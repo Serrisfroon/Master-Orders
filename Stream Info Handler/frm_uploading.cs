@@ -2,7 +2,7 @@
 //Master Orders 
 //Stream Information Management Tool
 //Developed by Dan Sanchez
-//For use by UGS Gaming only
+//For use by UGS Gaming only, at the developer's discretion
 //Copyright 2018, Dan Sanchez, All rights reserved.
 //////////////////////////////////////////////////////////////////////////////////////////
 using System;
@@ -28,31 +28,40 @@ using System.Reflection;
 
 namespace Stream_Info_Handler
 {
-    public delegate void enable_button_event();
+    public delegate void enable_button_event(string check_reenable);
     public partial class frm_uploading : Form
     {
         public event enable_button_event enable_button;
-        public static string video_id;
-        public static string thumbnail_file;
-
+        public string video_id;
+        public string thumbnail_file;
+        public string old_thumbnail;
+        public string youtube_data;
         public long video_size;
         public long video_multiplier = 100;
+        public string reenable_button;
 
-        public frm_uploading(string title, string description, string thumbnail)
+        public frm_uploading(string title, string description, string thumbnail, string vodfile, string reenable)
         {
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
             txt_videotitle.Text = title;
             txt_description.Text = description;
-            thumbnail_file = "upload_thumbnail_" + date.ToString("MMddyyyyHHmmss") + ".jpg";
+            thumbnail_file = "upload_thumbnail_" + DateTime.Now.ToString("MMddyyyyHHmmss") + ".jpg";
             if (File.Exists(thumbnail_file))
             {
                 File.Delete(thumbnail_file);
             }
             File.Copy(thumbnail, thumbnail_file);
 
+            old_thumbnail = thumbnail;
             pic_thumbnail.Image = Image.FromFile(thumbnail);
-            pic_thumbnail.SizeMode = PictureBoxSizeMode.StretchImage;        
+            pic_thumbnail.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            txt_videofile.Text = vodfile;
+
+            youtube_data = global_values.current_youtube_data;
+
+            reenable_button = reenable;
         }
 
         private void Form4_Load(object sender, EventArgs e)
@@ -62,16 +71,31 @@ namespace Stream_Info_Handler
 
         private void Form4_FormClosed(object sender, FormClosedEventArgs e)
         {
-            enable_button();
+            pic_thumbnail.Image.Dispose();
+            File.Delete(old_thumbnail);
+            File.Delete(thumbnail_file);
+            enable_button(reenable_button);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if(btn_upload_cancel.Text == "Finish")
+            {
+                DialogResult dialogResult = MessageBox.Show("Do you want to delete the local upload data?", "Upload Complete", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    if (File.Exists(youtube_data))
+                    {
+                        File.Delete(youtube_data);
+                    }
+                }
+            }
             this.Close();
         }
 
         private void btn_videofile_Click(object sender, EventArgs e)
         {
+            openFileDialog1.InitialDirectory = global_values.vods_directory;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 txt_videofile.Text = openFileDialog1.FileName;
@@ -96,29 +120,43 @@ namespace Stream_Info_Handler
 
         private void btn_upload_video_Click(object sender, EventArgs e)
         {
-            this.ControlBox = false;
-            btn_upload_video.Enabled = false;
-            btn_upload_cancel.Enabled = false;
-            txt_videofile.Enabled = false;
-            txt_videotitle.Enabled = false;
-            txt_description.Enabled = false;
-            btn_videofile.Enabled = false;
-            lbl_progress.Text = @"Starting YouTube upload...";
-            FileInfo videofile = new FileInfo(txt_videofile.Text);
-            video_size = videofile.Length;
-            try
+            if (global_values.allow_upload == true)
             {
-                Thread thead = new Thread(() =>
+                if(global_values.stream_software == "OBS")
                 {
-                    Run().Wait();
-                });
-                thead.IsBackground = true;
-                thead.Start();
+                    if (MessageBox.Show("Please ensure that you have ended the video recording.", "Warning", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+                }
+                this.ControlBox = false;
+                btn_upload_video.Enabled = false;
+                btn_upload_cancel.Enabled = false;
+                txt_videofile.Enabled = false;
+                txt_videotitle.Enabled = false;
+                txt_description.Enabled = false;
+                btn_videofile.Enabled = false;
+                lbl_progress.Text = @"Starting YouTube upload...";
+                FileInfo videofile = new FileInfo(txt_videofile.Text);
+                video_size = videofile.Length;
+                try
+                {
+                    Thread thead = new Thread(() =>
+                    {
+                        Run().Wait();
+                    });
+                    thead.IsBackground = true;
+                    thead.Start();
 
+                }
+                catch (AggregateException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            catch (AggregateException ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                System.Media.SystemSounds.Asterisk.Play();
             }
 
         }
@@ -169,15 +207,6 @@ namespace Stream_Info_Handler
                 await videosInsertRequest.UploadAsync();
             }
 
-            using (var tStream = new FileStream(thumbnail_file, FileMode.Open))
-            {
-                var tInsertRequest = youtubeService.Thumbnails.Set(video_id, tStream, "image/jpeg");
-                tInsertRequest.ProgressChanged += videosInsertRequest_ProgressChanged;
-
-
-                await tInsertRequest.UploadAsync();
-            }
-
             if (global_values.enable_playlists == true)
             {
                 // Add a video to the newly created playlist.
@@ -190,6 +219,15 @@ namespace Stream_Info_Handler
                 newPlaylistItem = await youtubeService.PlaylistItems.Insert(newPlaylistItem, "snippet").ExecuteAsync();
             }
 
+            using (var tStream = new FileStream(thumbnail_file, FileMode.Open))
+            {
+                var tInsertRequest = youtubeService.Thumbnails.Set(video_id, tStream, "image/jpeg");
+                tInsertRequest.ProgressChanged += videosInsertRequest_ProgressChanged;
+                tInsertRequest.ResponseReceived += thumbnailInsertRequest_ResponseReceived;
+                
+
+                await tInsertRequest.UploadAsync();
+            }
         }
 
         void videosInsertRequest_ProgressChanged(Google.Apis.Upload.IUploadProgress progress)
@@ -212,13 +250,18 @@ namespace Stream_Info_Handler
 
         void videosInsertRequest_ResponseReceived(Video video)
         {
-            lbl_progress.Text = string.Format("Youtube Upload Successful!", video.Id);
+            lbl_progress.Text = string.Format("Uploading Thumbnail...", video.Id);
             pgb_upload.Value = 100;
             video_id = video.Id;
+        }
+
+        void thumbnailInsertRequest_ResponseReceived(ThumbnailSetResponse response)
+        {
+            lbl_progress.Text = "Youtube Upload Successful!";
             btn_upload_cancel.Enabled = true;
             btn_upload_cancel.Text = @"Finish";
         }
 
     }
-    
+
 }
