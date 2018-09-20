@@ -64,11 +64,6 @@ namespace Stream_Info_Handler
             reenable_button = reenable;
         }
 
-        private void Form4_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void Form4_FormClosed(object sender, FormClosedEventArgs e)
         {
             pic_thumbnail.Image.Dispose();

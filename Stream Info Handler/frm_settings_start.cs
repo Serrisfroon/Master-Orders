@@ -64,14 +64,6 @@ namespace Stream_Info_Handler
             }
         }
 
-        private void btn_browse_json_Click(object sender, EventArgs e)
-        {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                txt_json.Text = openFileDialog1.FileName;
-            }
-        }
-
         private void txt_thumbnail_directory_TextChanged(object sender, EventArgs e)
         {
             if (txt_thumbnail_directory.Text != @"")
@@ -87,32 +79,6 @@ namespace Stream_Info_Handler
             }
         }
 
-        private void txt_json_TextChanged(object sender, EventArgs e)
-        {
-            if (txt_json.Text != @"")
-            {
-                if (File.Exists(txt_json.Text))
-                {
-                    txt_json.BackColor = Color.White;
-                }
-                else
-                {
-                    txt_json.BackColor = Color.Red;
-                }
-            }
-        }
-
-        private void txt_youtube_username_TextChanged(object sender, EventArgs e)
-        {
-            if (txt_youtube_username.Text != @"")
-            {
-                txt_youtube_username.BackColor = Color.White;
-            }
-            else
-            {
-                txt_youtube_username.BackColor = Color.Red;
-            }
-        }
 
         private void txt_roster_directory_TextChanged(object sender, EventArgs e)
         {
@@ -164,19 +130,6 @@ namespace Stream_Info_Handler
                     complete_update = false;
                 }
             }
-            if (txt_youtube_username.Text == @"")
-            {
-                txt_youtube_username.BackColor = Color.Red;
-                complete_update = false;
-            }
-            if (txt_json.Text != @"")
-            {
-                if (!File.Exists(txt_json.Text))
-                {
-                    txt_json.BackColor = Color.Red;
-                    complete_update = false;
-                }
-            }
             if (txt_thumbnail_directory.Text != @"")
             {
                 if (!Directory.Exists(txt_thumbnail_directory.Text))
@@ -197,13 +150,17 @@ namespace Stream_Info_Handler
                          new XElement("vods-directory", txt_vods.Text)
                          ),
                     new XElement("youtube",
-                         new XElement("username", txt_youtube_username.Text),
-                         new XElement("json-file", txt_json.Text),
+                         new XElement("enable-youtube", "false"),
+                         new XElement("username", ""),
+                         new XElement("json-file", ""),
+                         new XElement("copy-title", "false"),
                          new XElement("use-playlist", "false")
+                         new XElement("default-description", "")
                         ),
                     new XElement("google-sheets",
                          new XElement("enable-sheets", "false"),
                          new XElement("startup-sheets", "false"),
+                         new XElement("sheet-style", "info-and-queue"),
                          new XElement("sheets-id", "")
                         ),
                     new XElement("image-scoring",

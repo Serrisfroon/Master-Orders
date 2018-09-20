@@ -30,11 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_settings_start));
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txt_json = new System.Windows.Forms.TextBox();
-            this.txt_youtube_username = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.btn_browse_json = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.btn_thumb_directory = new System.Windows.Forms.Button();
             this.txt_thumbnail_directory = new System.Windows.Forms.TextBox();
@@ -70,55 +65,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Please configure Master Orders";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label2.Location = new System.Drawing.Point(13, 167);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 13);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "YouTube Username";
-            // 
-            // txt_json
-            // 
-            this.txt_json.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txt_json.Location = new System.Drawing.Point(12, 135);
-            this.txt_json.Name = "txt_json";
-            this.txt_json.Size = new System.Drawing.Size(240, 20);
-            this.txt_json.TabIndex = 3;
-            this.txt_json.TextChanged += new System.EventHandler(this.txt_json_TextChanged);
-            // 
-            // txt_youtube_username
-            // 
-            this.txt_youtube_username.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txt_youtube_username.Location = new System.Drawing.Point(121, 163);
-            this.txt_youtube_username.Name = "txt_youtube_username";
-            this.txt_youtube_username.Size = new System.Drawing.Size(202, 20);
-            this.txt_youtube_username.TabIndex = 5;
-            this.txt_youtube_username.TextChanged += new System.EventHandler(this.txt_youtube_username_TextChanged);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label8.Location = new System.Drawing.Point(12, 119);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(146, 13);
-            this.label8.TabIndex = 20;
-            this.label8.Text = "YouTube Uploading .json File";
-            // 
-            // btn_browse_json
-            // 
-            this.btn_browse_json.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_browse_json.Location = new System.Drawing.Point(258, 135);
-            this.btn_browse_json.Name = "btn_browse_json";
-            this.btn_browse_json.Size = new System.Drawing.Size(65, 22);
-            this.btn_browse_json.TabIndex = 4;
-            this.btn_browse_json.Text = "Browse";
-            this.btn_browse_json.UseVisualStyleBackColor = true;
-            this.btn_browse_json.Click += new System.EventHandler(this.btn_browse_json_Click);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -151,7 +97,7 @@
             // 
             // btn_browse_roster
             // 
-            this.btn_browse_roster.Location = new System.Drawing.Point(258, 224);
+            this.btn_browse_roster.Location = new System.Drawing.Point(258, 135);
             this.btn_browse_roster.Name = "btn_browse_roster";
             this.btn_browse_roster.Size = new System.Drawing.Size(65, 22);
             this.btn_browse_roster.TabIndex = 7;
@@ -161,7 +107,7 @@
             // 
             // txt_roster_directory
             // 
-            this.txt_roster_directory.Location = new System.Drawing.Point(12, 224);
+            this.txt_roster_directory.Location = new System.Drawing.Point(12, 135);
             this.txt_roster_directory.Name = "txt_roster_directory";
             this.txt_roster_directory.Size = new System.Drawing.Size(240, 20);
             this.txt_roster_directory.TabIndex = 6;
@@ -170,7 +116,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 208);
+            this.label5.Location = new System.Drawing.Point(12, 119);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(132, 13);
             this.label5.TabIndex = 23;
@@ -179,7 +125,7 @@
             // txt_stream_directory
             // 
             this.txt_stream_directory.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txt_stream_directory.Location = new System.Drawing.Point(12, 264);
+            this.txt_stream_directory.Location = new System.Drawing.Point(12, 175);
             this.txt_stream_directory.Name = "txt_stream_directory";
             this.txt_stream_directory.Size = new System.Drawing.Size(240, 20);
             this.txt_stream_directory.TabIndex = 8;
@@ -188,7 +134,7 @@
             // btn_output
             // 
             this.btn_output.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_output.Location = new System.Drawing.Point(258, 262);
+            this.btn_output.Location = new System.Drawing.Point(258, 173);
             this.btn_output.Name = "btn_output";
             this.btn_output.Size = new System.Drawing.Size(65, 22);
             this.btn_output.TabIndex = 9;
@@ -200,7 +146,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label7.Location = new System.Drawing.Point(12, 248);
+            this.label7.Location = new System.Drawing.Point(12, 159);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(109, 13);
             this.label7.TabIndex = 26;
@@ -210,7 +156,7 @@
             // 
             this.groupBox2.Controls.Add(this.rdb_manual);
             this.groupBox2.Controls.Add(this.rdb_automatic);
-            this.groupBox2.Location = new System.Drawing.Point(12, 290);
+            this.groupBox2.Location = new System.Drawing.Point(12, 201);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(146, 71);
             this.groupBox2.TabIndex = 30;
@@ -243,7 +189,7 @@
             // 
             // btn_finish
             // 
-            this.btn_finish.Location = new System.Drawing.Point(115, 367);
+            this.btn_finish.Location = new System.Drawing.Point(109, 278);
             this.btn_finish.Name = "btn_finish";
             this.btn_finish.Size = new System.Drawing.Size(114, 39);
             this.btn_finish.TabIndex = 13;
@@ -290,7 +236,7 @@
             // 
             this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Location = new System.Drawing.Point(177, 290);
+            this.groupBox1.Location = new System.Drawing.Point(177, 201);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(146, 71);
             this.groupBox1.TabIndex = 31;
@@ -325,7 +271,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(335, 416);
+            this.ClientSize = new System.Drawing.Size(335, 324);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.btn_vods);
@@ -338,11 +284,6 @@
             this.Controls.Add(this.btn_browse_roster);
             this.Controls.Add(this.txt_roster_directory);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txt_json);
-            this.Controls.Add(this.txt_youtube_username);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.btn_browse_json);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btn_thumb_directory);
             this.Controls.Add(this.txt_thumbnail_directory);
@@ -362,11 +303,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txt_json;
-        private System.Windows.Forms.TextBox txt_youtube_username;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button btn_browse_json;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btn_thumb_directory;
         private System.Windows.Forms.TextBox txt_thumbnail_directory;

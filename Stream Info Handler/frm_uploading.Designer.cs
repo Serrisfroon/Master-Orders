@@ -179,7 +179,6 @@
             this.Name = "frm_uploading";
             this.Text = "Upload to YouTube";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form4_FormClosed);
-            this.Load += new System.EventHandler(this.Form4_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pic_thumbnail)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

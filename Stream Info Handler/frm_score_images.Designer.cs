@@ -128,6 +128,7 @@
             this.pic_score1_image1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pic_score1_image1.TabIndex = 0;
             this.pic_score1_image1.TabStop = false;
+            this.pic_score1_image1.Click += new System.EventHandler(this.pic_score1_image1_Click);
             // 
             // groupBox2
             // 
@@ -209,7 +210,7 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "PNG Image Files|*.png";
             // 
-            // Form5
+            // frm_score_images
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -217,7 +218,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form5";
+            this.Name = "frm_score_images";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Scoreboard Image Control";
             this.groupBox1.ResumeLayout(false);

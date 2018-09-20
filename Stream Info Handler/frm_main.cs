@@ -155,6 +155,19 @@ namespace Stream_Info_Handler
             global_values.vod_monitor.Deleted += FileSystemWatcher_Deleted;             //Associate the file deletion event to the monitor
             global_values.vod_monitor.EnableRaisingEvents = true;                       //Enable to monitor to trigger these events
 
+            //Read the video Title Copying flag from the data
+            string copy_title = (string)xml.Root.Element("youtube").Element("copy-title");
+            //Check if the video title should be added to the clipboard
+            if (copy_title == "true")
+            {
+                ckb_clipboard.Checked = true;                                            //Check the setting box, triggering the related event
+                global_values.copy_video_title = true;                                  //Set the global video title flag to true
+            }
+            else
+            {
+                global_values.copy_video_title = false;                                 //Set the global video title flag to false
+            }
+
             //Read the YouTube username and json file from the data
             txt_youtube_username.Text = (string)xml.Root.Element("youtube").Element("username");
             global_values.youtube_username = txt_youtube_username.Text;
@@ -234,21 +247,80 @@ namespace Stream_Info_Handler
             global_values.score2_image1 = (string)xml.Root.Element("image-scoring").Element("player2-1");
             global_values.score2_image2 = (string)xml.Root.Element("image-scoring").Element("player2-2");
             global_values.score2_image3 = (string)xml.Root.Element("image-scoring").Element("player2-3");
+
+            //Set the image for any existing scoring image
+            if (global_values.score1_image1 != @"")
+            {
+                pic_score1_image1.Image = Image.FromFile(global_values.score1_image1);
+            }
+            if (global_values.score1_image2 != @"")
+            {
+                pic_score1_image2.Image = Image.FromFile(global_values.score1_image2);
+            }
+            if (global_values.score1_image3 != @"")
+            {
+                pic_score1_image3.Image = Image.FromFile(global_values.score1_image3);
+            }
+
+            if (global_values.score2_image1 != @"")
+            {
+                pic_score2_image1.Image = Image.FromFile(global_values.score2_image1);
+            }
+            if (global_values.score2_image2 != @"")
+            {
+                pic_score2_image2.Image = Image.FromFile(global_values.score2_image2);
+            }
+            if (global_values.score2_image3 != @"")
+            {
+                pic_score2_image3.Image = Image.FromFile(global_values.score2_image3);
+            }
+
             //Check if Image Scoreboard use is enabled
             if (use_scoreboard == "true")
             {
                 ckb_scoreboad.Checked = true;                                           //Check the setting box
                 //Verify that all images exist
-                if (!(File.Exists(global_values.score1_image1) &&
-                    File.Exists(global_values.score1_image2) &&
-                    File.Exists(global_values.score1_image3) &&
-                    File.Exists(global_values.score2_image1) &&
-                    File.Exists(global_values.score2_image2) &&
-                    File.Exists(global_values.score2_image3)))
+                if (!File.Exists(global_values.score1_image1))
                 {
                     //Mark the button for an error and switch tabs to show it
-                    btn_scoreboard.BackColor = Color.Red;
+                    btn_score1_image1.BackColor = Color.Red;
                     tab_main.SelectedIndex = 3;
+                    tab_mainsettings.SelectedIndex = 1;
+                }
+                if (!File.Exists(global_values.score1_image2))
+                {
+                    //Mark the button for an error and switch tabs to show it
+                    btn_score1_image2.BackColor = Color.Red;
+                    tab_main.SelectedIndex = 3;
+                    tab_mainsettings.SelectedIndex = 1;
+                }
+                if (!File.Exists(global_values.score1_image3))
+                {
+                    //Mark the button for an error and switch tabs to show it
+                    btn_score1_image3.BackColor = Color.Red;
+                    tab_main.SelectedIndex = 3;
+                    tab_mainsettings.SelectedIndex = 1;
+                }
+                if (!File.Exists(global_values.score2_image1))
+                {
+                    //Mark the button for an error and switch tabs to show it
+                    btn_score2_image1.BackColor = Color.Red;
+                    tab_main.SelectedIndex = 3;
+                    tab_mainsettings.SelectedIndex = 1;
+                }
+                if (!File.Exists(global_values.score2_image2))
+                {
+                    //Mark the button for an error and switch tabs to show it
+                    btn_score2_image2.BackColor = Color.Red;
+                    tab_main.SelectedIndex = 3;
+                    tab_mainsettings.SelectedIndex = 1;
+                }
+                if (!File.Exists(global_values.score2_image3))
+                {
+                    //Mark the button for an error and switch tabs to show it
+                    btn_score2_image3.BackColor = Color.Red;
+                    tab_main.SelectedIndex = 3;
+                    tab_mainsettings.SelectedIndex = 1;
                 }
             }
 
@@ -693,6 +765,13 @@ namespace Stream_Info_Handler
 
         private void btn_thumbnail_Click(object sender, EventArgs e)
         {
+            string video_title = txt_tournament.Text + @" - " + cbx_round.Text + @" - " + cbx_name1.Text + @" (" + cbx_characters1.Text + @") Vs. " + cbx_name2.Text + @" (" + cbx_characters2.Text + @")";
+            if (global_values.copy_video_title == true)
+            {
+                Clipboard.SetText(video_title);
+                MessageBox.Show("Video title copied to clipboard: \n" + video_title);
+            }
+
             //Create a thumbnail image
             string thumbnail_image_name = create_thumbnail(global_values.game_path + @"\" + cbx_characters1.Text + @"\" + (cbx_colors1.SelectedIndex + 1).ToString() + @"\",
                 global_values.game_path + @"\" + cbx_characters2.Text + @"\" + (cbx_colors2.SelectedIndex + 1).ToString() + @"\",
@@ -1247,7 +1326,13 @@ namespace Stream_Info_Handler
         {
             if(ckb_scoreboad.Checked == true)
             {
-                btn_scoreboard.Enabled = true;
+                btn_score1_image1.Enabled = true;
+                btn_score1_image2.Enabled = true;
+                btn_score1_image3.Enabled = true;
+                btn_score2_image1.Enabled = true;
+                btn_score2_image2.Enabled = true;
+                btn_score2_image3.Enabled = true;
+
                 XDocument xml = XDocument.Load(@"C:\Users\Public\Stream Info Handler\settings.xml");
                 xml.Root.Element("image-scoring").Element("enable-image-scoring").ReplaceWith(new XElement("enable-image-scoring", "true"));
                 xml.Save(@"C:\Users\Public\Stream Info Handler\settings.xml");
@@ -1257,8 +1342,19 @@ namespace Stream_Info_Handler
                 XDocument xml = XDocument.Load(@"C:\Users\Public\Stream Info Handler\settings.xml");
                 xml.Root.Element("image-scoring").Element("enable-image-scoring").ReplaceWith(new XElement("enable-image-scoring", "false"));
                 xml.Save(@"C:\Users\Public\Stream Info Handler\settings.xml");
-                btn_scoreboard.Enabled = false;
-                btn_scoreboard.BackColor = Color.Transparent;
+                btn_score1_image1.Enabled = false;
+                btn_score1_image2.Enabled = false;
+                btn_score1_image3.Enabled = false;
+                btn_score2_image1.Enabled = false;
+                btn_score2_image2.Enabled = false;
+                btn_score2_image3.Enabled = false;
+
+                btn_score1_image1.BackColor = Color.Transparent;
+                btn_score1_image2.BackColor = Color.Transparent;
+                btn_score1_image3.BackColor = Color.Transparent;
+                btn_score2_image1.BackColor = Color.Transparent;
+                btn_score2_image2.BackColor = Color.Transparent;
+                btn_score2_image3.BackColor = Color.Transparent;
             }
         }
 
@@ -1489,26 +1585,26 @@ namespace Stream_Info_Handler
 
         private void ckb_sheets_CheckedChanged(object sender, EventArgs e)
         {
-            string sheets_usage;
-            if(ckb_sheets.Checked == true)
-            {
-                txt_sheets.Enabled = true;
-                sheets_usage = "true";
-                global_values.enable_sheets = true;
-            }
-            else
-            {
-                txt_sheets.Enabled = false;
-                sheets_usage = "false";
-                global_values.enable_sheets = false;
-                //Disable the player data save buttons
-                btn_save1.Enabled = false;
-                btn_save1.Visible = false;
-                btn_save2.Visible = false;
-                btn_save2.Enabled = false;
-            }
+            //Get the checked status of this checkbox
+            bool status = ckb_sheets.Checked;
+
+            //Set the enable status of all sheets settings to the checked status
+            txt_sheets.Enabled = status;
+            btn_test_sheet.Enabled = status;
+            rdb_fullsheet.Enabled = status;
+            rdb_infoonly.Enabled = status;
+            ckb_startup_sheets.Enabled = status;
+
+            //Enable/Disable the player save buttons accordingly
+            btn_save1.Enabled = status;
+            btn_save1.Visible = status;
+            btn_save2.Visible = status;
+            btn_save2.Enabled = status;
+
+            //Update the global toggle and settings file
+            global_values.enable_sheets = status;
             XDocument xml = XDocument.Load(@"C:\Users\Public\Stream Info Handler\settings.xml");
-            xml.Root.Element("google-sheets").Element("enable-sheets").ReplaceWith(new XElement("enable-sheets", sheets_usage));
+            xml.Root.Element("google-sheets").Element("enable-sheets").ReplaceWith(new XElement("enable-sheets", status.ToString()));
             xml.Save(@"C:\Users\Public\Stream Info Handler\settings.xml");
         }
 
@@ -2234,9 +2330,16 @@ namespace Stream_Info_Handler
             btn_upload.Enabled = false;             //Disable this button until further action is needed
             global_values.reenable_upload = DateTime.Now.ToString("MMddyyyyHHmmss");   //Set the flag to allow the button to be re-abled on form close
 
+            string video_title = txt_tournament.Text + @" - " + cbx_round.Text + @" - " + cbx_name1.Text + @" (" + cbx_characters1.Text + @") Vs. " + cbx_name2.Text + @" (" + cbx_characters2.Text + @")";
+            if(global_values.copy_video_title == true)
+            {
+                Clipboard.SetText(video_title);
+                MessageBox.Show("Video title copied to clipboard: \n" + video_title);
+            }
+
             //Create a new form and provide it with a Video title based off the provided information,
             //as well as a description and the thumbnail image created
-            var upload_form = new frm_uploading(txt_tournament.Text + @" - " + cbx_round.Text + @" - " + cbx_name1.Text + @" (" + cbx_characters1.Text + @") Vs. " + cbx_name2.Text + @" (" + cbx_characters2.Text + @")",
+            var upload_form = new frm_uploading(video_title,
                 txt_tournament.Text + @" | " + txt_date.Text + "\r\nRomeoville, Illinois \r\nOrganized and streamed by UGS Gaming \r\nWatch live at https://www.twitch.tv/ugsgaming \r\nFollow us and our players on Twitter! \r\n@UGS_GAMlNG \r\n" + cbx_name1.Text + @": " + txt_alt1.Text + " \r\n" + cbx_name2.Text + @": " + txt_alt2.Text,
                 global_values.thumbnail_directory + @"\" + thumbnail_image_name,
                 global_values.vods_directory + @"\" + global_values.new_vod_detected,
@@ -2587,10 +2690,119 @@ namespace Stream_Info_Handler
             }
         }
 
+        private void btn_score1_image1_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog3.ShowDialog() == DialogResult.OK)
+            {
+                global_values.score1_image1 = openFileDialog3.FileName;
+                pic_score1_image1.Image = Image.FromFile(global_values.score1_image1);
+                XDocument xml = XDocument.Load(@"C:\Users\Public\Stream Info Handler\settings.xml");
+                xml.Root.Element("image-scoring").Element("player1-1").ReplaceWith(new XElement("player1-1", global_values.score1_image1));
+                xml.Save(@"C:\Users\Public\Stream Info Handler\settings.xml");
+            }
+        }
+
+        private void btn_score1_image2_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog3.ShowDialog() == DialogResult.OK)
+            {
+                global_values.score1_image2 = openFileDialog3.FileName;
+                pic_score1_image2.Image = Image.FromFile(global_values.score1_image2);
+                XDocument xml = XDocument.Load(@"C:\Users\Public\Stream Info Handler\settings.xml");
+                xml.Root.Element("image-scoring").Element("player1-2").ReplaceWith(new XElement("player1-2", global_values.score1_image2));
+                xml.Save(@"C:\Users\Public\Stream Info Handler\settings.xml");
+            }
+        }
+
+        private void btn_score1_image3_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog3.ShowDialog() == DialogResult.OK)
+            {
+                global_values.score1_image3 = openFileDialog3.FileName;
+                pic_score1_image3.Image = Image.FromFile(global_values.score1_image3);
+                XDocument xml = XDocument.Load(@"C:\Users\Public\Stream Info Handler\settings.xml");
+                xml.Root.Element("image-scoring").Element("player1-3").ReplaceWith(new XElement("player1-3", global_values.score1_image3));
+                xml.Save(@"C:\Users\Public\Stream Info Handler\settings.xml");
+            }
+        }
+
+        private void btn_score2_image1_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog3.ShowDialog() == DialogResult.OK)
+            {
+                global_values.score2_image1 = openFileDialog3.FileName;
+                pic_score2_image1.Image = Image.FromFile(global_values.score2_image1);
+                XDocument xml = XDocument.Load(@"C:\Users\Public\Stream Info Handler\settings.xml");
+                xml.Root.Element("image-scoring").Element("player2-1").ReplaceWith(new XElement("player2-1", global_values.score2_image1));
+                xml.Save(@"C:\Users\Public\Stream Info Handler\settings.xml");
+            }
+        }
+
+        private void btn_score2_image2_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog3.ShowDialog() == DialogResult.OK)
+            {
+                global_values.score2_image2 = openFileDialog3.FileName;
+                pic_score2_image2.Image = Image.FromFile(global_values.score2_image2);
+                XDocument xml = XDocument.Load(@"C:\Users\Public\Stream Info Handler\settings.xml");
+                xml.Root.Element("image-scoring").Element("player2-2").ReplaceWith(new XElement("player2-2", global_values.score2_image2));
+                xml.Save(@"C:\Users\Public\Stream Info Handler\settings.xml");
+            }
+        }
+
+        private void btn_score2_image3_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog3.ShowDialog() == DialogResult.OK)
+            {
+                global_values.score2_image3 = openFileDialog3.FileName;
+                pic_score2_image3.Image = Image.FromFile(global_values.score2_image3);
+                XDocument xml = XDocument.Load(@"C:\Users\Public\Stream Info Handler\settings.xml");
+                xml.Root.Element("image-scoring").Element("player2-3").ReplaceWith(new XElement("player2-3", global_values.score2_image3));
+                xml.Save(@"C:\Users\Public\Stream Info Handler\settings.xml");
+            }
+        }
+
+        private void ckb_clipboard_CheckedChanged(object sender, EventArgs e)
+        {
+            //Set the value of the global value to reflect the checked status of this checkbox
+            global_values.copy_video_title = ckb_clipboard.Checked;
+
+            //Update the settings file
+            XDocument xml = XDocument.Load(@"C:\Users\Public\Stream Info Handler\settings.xml");
+            xml.Root.Element("youtube").Element("copy-title").ReplaceWith(new XElement("copy-title", ckb_clipboard.Checked.ToString()));
+            xml.Save(@"C:\Users\Public\Stream Info Handler\settings.xml");
+        }
+
+        private void ckb_youtube_CheckedChanged(object sender, EventArgs e)
+        {
+            //Set the status of the Youtube enable flag to the status of this checkbox
+            global_values.enable_youtube = ckb_youtube.Checked;
+
+            //Enable/Disable youtube setting control to reflect this
+            txt_playlist.Enabled = global_values.enable_youtube;
+            btn_playlist.Enabled = global_values.enable_youtube;
+            txt_description.Enabled = global_values.enable_youtube;
+            rdb_xsplit.Enabled = global_values.enable_youtube;
+            rdb_obs.Enabled = global_values.enable_youtube;
+
+            //Update the settings file
+            XDocument xml = XDocument.Load(@"C:\Users\Public\Stream Info Handler\settings.xml");
+            xml.Root.Element("youtube").Element("enable-youtube").ReplaceWith(new XElement("enable-youtube", ckb_youtube.Checked.ToString()));
+            xml.Save(@"C:\Users\Public\Stream Info Handler\settings.xml");
+        }
+
+        private void txt_description_TextChanged(object sender, EventArgs e)
+        {
+            XDocument xml = XDocument.Load(@"C:\Users\Public\Stream Info Handler\settings.xml");
+            xml.Root.Element("youtube").Element("default-description").ReplaceWith(new XElement("default-description", txt_description.Text));
+            xml.Save(@"C:\Users\Public\Stream Info Handler\settings.xml");
+        }
     }
 
     public static class global_values
     {
+        public static bool enable_youtube;
+        public static bool copy_video_title;
         public static int roster_size;
         public static player_info[] roster;
         public static bool first_match = true;
@@ -2618,7 +2830,7 @@ namespace Stream_Info_Handler
         public static bool auto_update = true;
         public static int player_number;
         public static int[] player_image;
-        public static bool enable_playlists = false;
+        public static bool enable_playlists;
         public static string playlist_id;
         public static bool enable_sheets;
     }

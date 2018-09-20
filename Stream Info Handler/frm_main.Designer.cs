@@ -38,12 +38,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lbl_bracket = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lbl_playlist_id = new System.Windows.Forms.Label();
-            this.ckb_playlist = new System.Windows.Forms.CheckBox();
-            this.btn_playlist = new System.Windows.Forms.Button();
-            this.txt_playlist = new System.Windows.Forms.TextBox();
-            this.lbx_playlist = new System.Windows.Forms.ListBox();
             this.txt_bracket = new System.Windows.Forms.TextBox();
             this.tab_ingame_display = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -84,50 +78,85 @@
             this.btn_update_commentators = new System.Windows.Forms.Button();
             this.btn_swapcommentators = new System.Windows.Forms.Button();
             this.tab_options = new System.Windows.Forms.TabPage();
-            this.btn_scoreboard = new System.Windows.Forms.Button();
-            this.ckb_scoreboad = new System.Windows.Forms.CheckBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.gbx_entrants = new System.Windows.Forms.GroupBox();
-            this.ckb_startup_sheets = new System.Windows.Forms.CheckBox();
-            this.txt_sheets = new System.Windows.Forms.TextBox();
-            this.btn_browse_roster = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lbl_characters = new System.Windows.Forms.Label();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tab_google = new System.Windows.Forms.TabPage();
+            this.ckb_youtube = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.ckb_clipboard = new System.Windows.Forms.CheckBox();
             this.ckb_sheets = new System.Windows.Forms.CheckBox();
-            this.txt_roster_directory = new System.Windows.Forms.TextBox();
-            this.lbl_gamename = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.txt_json = new System.Windows.Forms.TextBox();
+            this.btn_browse_json = new System.Windows.Forms.Button();
+            this.txt_youtube_username = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tab_youtube = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btn_playlist = new System.Windows.Forms.Button();
+            this.txt_description = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.rdb_obs = new System.Windows.Forms.RadioButton();
             this.rdb_xsplit = new System.Windows.Forms.RadioButton();
+            this.txt_playlist = new System.Windows.Forms.TextBox();
+            this.tab_sheets = new System.Windows.Forms.TabPage();
+            this.btn_test_sheet = new System.Windows.Forms.Button();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.rdb_infoonly = new System.Windows.Forms.RadioButton();
+            this.rdb_fullsheet = new System.Windows.Forms.RadioButton();
+            this.ckb_startup_sheets = new System.Windows.Forms.CheckBox();
+            this.txt_sheets = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tab_mainsettings = new System.Windows.Forms.TabControl();
+            this.tab_directories = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txt_roster_directory = new System.Windows.Forms.TextBox();
+            this.btn_browse_roster = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txt_stream_directory = new System.Windows.Forms.TextBox();
+            this.txt_thumbnail_directory = new System.Windows.Forms.TextBox();
+            this.btn_output = new System.Windows.Forms.Button();
+            this.txt_vods = new System.Windows.Forms.TextBox();
+            this.btn_thumb_directory = new System.Windows.Forms.Button();
             this.btn_vods = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tab_scoreboard = new System.Windows.Forms.TabPage();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.btn_score2_image3 = new System.Windows.Forms.Button();
+            this.pic_score2_image3 = new System.Windows.Forms.PictureBox();
+            this.btn_score2_image2 = new System.Windows.Forms.Button();
+            this.pic_score2_image1 = new System.Windows.Forms.PictureBox();
+            this.btn_score2_image1 = new System.Windows.Forms.Button();
+            this.pic_score2_image2 = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rdb_manual = new System.Windows.Forms.RadioButton();
             this.rdb_automatic = new System.Windows.Forms.RadioButton();
-            this.txt_vods = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txt_stream_directory = new System.Windows.Forms.TextBox();
-            this.txt_json = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.btn_output = new System.Windows.Forms.Button();
-            this.txt_youtube_username = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.btn_browse_json = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btn_thumb_directory = new System.Windows.Forms.Button();
-            this.txt_thumbnail_directory = new System.Windows.Forms.TextBox();
+            this.ckb_scoreboad = new System.Windows.Forms.CheckBox();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.btn_score1_image3 = new System.Windows.Forms.Button();
+            this.btn_score1_image2 = new System.Windows.Forms.Button();
+            this.btn_score1_image1 = new System.Windows.Forms.Button();
+            this.pic_score1_image3 = new System.Windows.Forms.PictureBox();
+            this.pic_score1_image2 = new System.Windows.Forms.PictureBox();
+            this.pic_score1_image1 = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btn_upload_vod = new System.Windows.Forms.Button();
             this.btn_top8 = new System.Windows.Forms.Button();
             this.btn_thumbnail = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbl_playlist_id = new System.Windows.Forms.Label();
+            this.btn_scoreboard = new System.Windows.Forms.Button();
+            this.lbl_characters = new System.Windows.Forms.Label();
+            this.ckb_playlist = new System.Windows.Forms.CheckBox();
+            this.lbx_playlist = new System.Windows.Forms.ListBox();
+            this.lbl_gamename = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.ttp_tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
+            this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
             this.tab_main.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.tab_ingame_display.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_score2)).BeginInit();
@@ -137,10 +166,26 @@
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tab_options.SuspendLayout();
-            this.gbx_entrants.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tab_google.SuspendLayout();
+            this.tab_youtube.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.tab_sheets.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.tab_mainsettings.SuspendLayout();
+            this.tab_directories.SuspendLayout();
+            this.tab_scoreboard.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score2_image3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score2_image1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score2_image2)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image1)).BeginInit();
             this.tabPage2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_name1
@@ -163,7 +208,7 @@
             this.tab_main.Location = new System.Drawing.Point(3, 4);
             this.tab_main.Name = "tab_main";
             this.tab_main.SelectedIndex = 0;
-            this.tab_main.Size = new System.Drawing.Size(890, 240);
+            this.tab_main.Size = new System.Drawing.Size(890, 239);
             this.tab_main.TabIndex = 3;
             this.tab_main.SelectedIndexChanged += new System.EventHandler(this.tab_main_SelectedIndexChanged);
             // 
@@ -174,12 +219,11 @@
             this.tabPage3.Controls.Add(this.label3);
             this.tabPage3.Controls.Add(this.label1);
             this.tabPage3.Controls.Add(this.lbl_bracket);
-            this.tabPage3.Controls.Add(this.groupBox1);
             this.tabPage3.Controls.Add(this.txt_bracket);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(882, 214);
+            this.tabPage3.Size = new System.Drawing.Size(882, 213);
             this.tabPage3.TabIndex = 5;
             this.tabPage3.Text = "Tournament Setup";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -200,7 +244,6 @@
             this.txt_date.Name = "txt_date";
             this.txt_date.Size = new System.Drawing.Size(198, 26);
             this.txt_date.TabIndex = 5;
-            this.txt_date.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label3
             // 
@@ -232,72 +275,6 @@
             this.lbl_bracket.TabIndex = 12;
             this.lbl_bracket.Text = "Bracket URL";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.lbl_playlist_id);
-            this.groupBox1.Controls.Add(this.ckb_playlist);
-            this.groupBox1.Controls.Add(this.btn_playlist);
-            this.groupBox1.Controls.Add(this.txt_playlist);
-            this.groupBox1.Controls.Add(this.lbx_playlist);
-            this.groupBox1.Location = new System.Drawing.Point(499, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(374, 201);
-            this.groupBox1.TabIndex = 14;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "YouTube Playlist Selection";
-            // 
-            // lbl_playlist_id
-            // 
-            this.lbl_playlist_id.AutoSize = true;
-            this.lbl_playlist_id.Location = new System.Drawing.Point(6, 176);
-            this.lbl_playlist_id.Name = "lbl_playlist_id";
-            this.lbl_playlist_id.Size = new System.Drawing.Size(59, 13);
-            this.lbl_playlist_id.TabIndex = 17;
-            this.lbl_playlist_id.Text = "Playlist ID: ";
-            // 
-            // ckb_playlist
-            // 
-            this.ckb_playlist.AutoSize = true;
-            this.ckb_playlist.Location = new System.Drawing.Point(247, 19);
-            this.ckb_playlist.Name = "ckb_playlist";
-            this.ckb_playlist.Size = new System.Drawing.Size(121, 17);
-            this.ckb_playlist.TabIndex = 16;
-            this.ckb_playlist.Text = "Add VoDs to Playlist";
-            this.ckb_playlist.UseVisualStyleBackColor = true;
-            this.ckb_playlist.CheckedChanged += new System.EventHandler(this.ckb_playlist_CheckedChanged);
-            // 
-            // btn_playlist
-            // 
-            this.btn_playlist.Enabled = false;
-            this.btn_playlist.Location = new System.Drawing.Point(247, 146);
-            this.btn_playlist.Name = "btn_playlist";
-            this.btn_playlist.Size = new System.Drawing.Size(121, 22);
-            this.btn_playlist.TabIndex = 2;
-            this.btn_playlist.Text = "Create New Playlist";
-            this.btn_playlist.UseVisualStyleBackColor = true;
-            this.btn_playlist.Click += new System.EventHandler(this.btn_playlist_Click);
-            // 
-            // txt_playlist
-            // 
-            this.txt_playlist.Enabled = false;
-            this.txt_playlist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_playlist.Location = new System.Drawing.Point(6, 146);
-            this.txt_playlist.Name = "txt_playlist";
-            this.txt_playlist.Size = new System.Drawing.Size(235, 22);
-            this.txt_playlist.TabIndex = 1;
-            // 
-            // lbx_playlist
-            // 
-            this.lbx_playlist.Enabled = false;
-            this.lbx_playlist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbx_playlist.FormattingEnabled = true;
-            this.lbx_playlist.ItemHeight = 16;
-            this.lbx_playlist.Location = new System.Drawing.Point(6, 19);
-            this.lbx_playlist.Name = "lbx_playlist";
-            this.lbx_playlist.Size = new System.Drawing.Size(235, 116);
-            this.lbx_playlist.TabIndex = 0;
-            this.lbx_playlist.SelectedIndexChanged += new System.EventHandler(this.lbx_playlist_SelectedIndexChanged);
-            // 
             // txt_bracket
             // 
             this.txt_bracket.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -322,7 +299,7 @@
             this.tab_ingame_display.Location = new System.Drawing.Point(4, 22);
             this.tab_ingame_display.Name = "tab_ingame_display";
             this.tab_ingame_display.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_ingame_display.Size = new System.Drawing.Size(882, 214);
+            this.tab_ingame_display.Size = new System.Drawing.Size(882, 213);
             this.tab_ingame_display.TabIndex = 0;
             this.tab_ingame_display.Text = "In-Game Display";
             this.tab_ingame_display.UseVisualStyleBackColor = true;
@@ -597,7 +574,7 @@
             "Losers Top 48"});
             this.cbx_round.Location = new System.Drawing.Point(162, 176);
             this.cbx_round.Name = "cbx_round";
-            this.cbx_round.Size = new System.Drawing.Size(175, 28);
+            this.cbx_round.Size = new System.Drawing.Size(193, 28);
             this.cbx_round.TabIndex = 31;
             this.cbx_round.TextChanged += new System.EventHandler(this.cbx_round_TextChanged);
             // 
@@ -645,7 +622,7 @@
             this.tab_commentators.Location = new System.Drawing.Point(4, 22);
             this.tab_commentators.Name = "tab_commentators";
             this.tab_commentators.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_commentators.Size = new System.Drawing.Size(882, 214);
+            this.tab_commentators.Size = new System.Drawing.Size(882, 213);
             this.tab_commentators.TabIndex = 1;
             this.tab_commentators.Text = "Commentators";
             this.tab_commentators.UseVisualStyleBackColor = true;
@@ -772,137 +749,79 @@
             // 
             // tab_options
             // 
-            this.tab_options.Controls.Add(this.btn_scoreboard);
-            this.tab_options.Controls.Add(this.ckb_scoreboad);
-            this.tab_options.Controls.Add(this.label9);
-            this.tab_options.Controls.Add(this.gbx_entrants);
-            this.tab_options.Controls.Add(this.groupBox3);
-            this.tab_options.Controls.Add(this.btn_vods);
-            this.tab_options.Controls.Add(this.groupBox2);
-            this.tab_options.Controls.Add(this.txt_vods);
-            this.tab_options.Controls.Add(this.label2);
-            this.tab_options.Controls.Add(this.txt_stream_directory);
-            this.tab_options.Controls.Add(this.txt_json);
-            this.tab_options.Controls.Add(this.label7);
-            this.tab_options.Controls.Add(this.btn_output);
-            this.tab_options.Controls.Add(this.txt_youtube_username);
-            this.tab_options.Controls.Add(this.label8);
-            this.tab_options.Controls.Add(this.btn_browse_json);
-            this.tab_options.Controls.Add(this.label6);
-            this.tab_options.Controls.Add(this.btn_thumb_directory);
-            this.tab_options.Controls.Add(this.txt_thumbnail_directory);
+            this.tab_options.Controls.Add(this.tabControl2);
+            this.tab_options.Controls.Add(this.tab_mainsettings);
             this.tab_options.Location = new System.Drawing.Point(4, 22);
             this.tab_options.Name = "tab_options";
-            this.tab_options.Size = new System.Drawing.Size(882, 214);
+            this.tab_options.Size = new System.Drawing.Size(882, 213);
             this.tab_options.TabIndex = 2;
             this.tab_options.Text = "Misc Settings";
             this.tab_options.UseVisualStyleBackColor = true;
             // 
-            // btn_scoreboard
+            // tabControl2
             // 
-            this.btn_scoreboard.BackColor = System.Drawing.Color.Transparent;
-            this.btn_scoreboard.Enabled = false;
-            this.btn_scoreboard.Location = new System.Drawing.Point(716, 49);
-            this.btn_scoreboard.Name = "btn_scoreboard";
-            this.btn_scoreboard.Size = new System.Drawing.Size(95, 44);
-            this.btn_scoreboard.TabIndex = 13;
-            this.btn_scoreboard.Text = "Choose Images";
-            this.btn_scoreboard.UseVisualStyleBackColor = false;
-            this.btn_scoreboard.Click += new System.EventHandler(this.btn_scoreboard_Click);
+            this.tabControl2.Controls.Add(this.tab_google);
+            this.tabControl2.Controls.Add(this.tab_youtube);
+            this.tabControl2.Controls.Add(this.tab_sheets);
+            this.tabControl2.Location = new System.Drawing.Point(471, 3);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(406, 207);
+            this.tabControl2.TabIndex = 1;
             // 
-            // ckb_scoreboad
+            // tab_google
             // 
-            this.ckb_scoreboad.AutoSize = true;
-            this.ckb_scoreboad.Location = new System.Drawing.Point(688, 29);
-            this.ckb_scoreboad.Name = "ckb_scoreboad";
-            this.ckb_scoreboad.Size = new System.Drawing.Size(149, 17);
-            this.ckb_scoreboad.TabIndex = 12;
-            this.ckb_scoreboad.Text = "Enable Image Scoreboard";
-            this.ckb_scoreboad.UseVisualStyleBackColor = true;
-            this.ckb_scoreboad.CheckedChanged += new System.EventHandler(this.ckb_scoreboad_CheckedChanged);
+            this.tab_google.Controls.Add(this.ckb_youtube);
+            this.tab_google.Controls.Add(this.label8);
+            this.tab_google.Controls.Add(this.ckb_clipboard);
+            this.tab_google.Controls.Add(this.ckb_sheets);
+            this.tab_google.Controls.Add(this.txt_json);
+            this.tab_google.Controls.Add(this.btn_browse_json);
+            this.tab_google.Controls.Add(this.txt_youtube_username);
+            this.tab_google.Controls.Add(this.label2);
+            this.tab_google.Location = new System.Drawing.Point(4, 22);
+            this.tab_google.Name = "tab_google";
+            this.tab_google.Size = new System.Drawing.Size(398, 181);
+            this.tab_google.TabIndex = 3;
+            this.tab_google.Text = "Google Integrations";
+            this.tab_google.UseVisualStyleBackColor = true;
             // 
-            // label9
+            // ckb_youtube
             // 
-            this.label9.AutoSize = true;
-            this.label9.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label9.Location = new System.Drawing.Point(4, 86);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(73, 13);
-            this.label9.TabIndex = 17;
-            this.label9.Text = "VoD Directory";
+            this.ckb_youtube.AutoSize = true;
+            this.ckb_youtube.Location = new System.Drawing.Point(6, 49);
+            this.ckb_youtube.Name = "ckb_youtube";
+            this.ckb_youtube.Size = new System.Drawing.Size(159, 17);
+            this.ckb_youtube.TabIndex = 14;
+            this.ckb_youtube.Text = "Enable YouTube Integration";
+            this.ckb_youtube.UseVisualStyleBackColor = true;
+            this.ckb_youtube.CheckedChanged += new System.EventHandler(this.ckb_youtube_CheckedChanged);
             // 
-            // gbx_entrants
+            // label8
             // 
-            this.gbx_entrants.Controls.Add(this.ckb_startup_sheets);
-            this.gbx_entrants.Controls.Add(this.txt_sheets);
-            this.gbx_entrants.Controls.Add(this.btn_browse_roster);
-            this.gbx_entrants.Controls.Add(this.label4);
-            this.gbx_entrants.Controls.Add(this.lbl_characters);
-            this.gbx_entrants.Controls.Add(this.ckb_sheets);
-            this.gbx_entrants.Controls.Add(this.txt_roster_directory);
-            this.gbx_entrants.Controls.Add(this.lbl_gamename);
-            this.gbx_entrants.Controls.Add(this.label5);
-            this.gbx_entrants.Location = new System.Drawing.Point(321, 7);
-            this.gbx_entrants.Name = "gbx_entrants";
-            this.gbx_entrants.Size = new System.Drawing.Size(311, 200);
-            this.gbx_entrants.TabIndex = 0;
-            this.gbx_entrants.TabStop = false;
-            this.gbx_entrants.Text = "Import Settings";
-            this.gbx_entrants.Enter += new System.EventHandler(this.gbx_entrants_Enter);
+            this.label8.AutoSize = true;
+            this.label8.Cursor = System.Windows.Forms.Cursors.Default;
+            this.label8.Location = new System.Drawing.Point(3, 116);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(85, 13);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Google .json File";
             // 
-            // ckb_startup_sheets
+            // ckb_clipboard
             // 
-            this.ckb_startup_sheets.AutoSize = true;
-            this.ckb_startup_sheets.Location = new System.Drawing.Point(6, 138);
-            this.ckb_startup_sheets.Name = "ckb_startup_sheets";
-            this.ckb_startup_sheets.Size = new System.Drawing.Size(201, 17);
-            this.ckb_startup_sheets.TabIndex = 6;
-            this.ckb_startup_sheets.Text = "Load From Google Sheets on Startup";
-            this.ckb_startup_sheets.UseVisualStyleBackColor = true;
-            this.ckb_startup_sheets.CheckedChanged += new System.EventHandler(this.ckb_startup_sheets_CheckedChanged);
-            // 
-            // txt_sheets
-            // 
-            this.txt_sheets.Enabled = false;
-            this.txt_sheets.Location = new System.Drawing.Point(6, 174);
-            this.txt_sheets.Name = "txt_sheets";
-            this.txt_sheets.Size = new System.Drawing.Size(262, 20);
-            this.txt_sheets.TabIndex = 2;
-            this.txt_sheets.TextChanged += new System.EventHandler(this.txt_sheets_TextChanged);
-            // 
-            // btn_browse_roster
-            // 
-            this.btn_browse_roster.Location = new System.Drawing.Point(236, 32);
-            this.btn_browse_roster.Name = "btn_browse_roster";
-            this.btn_browse_roster.Size = new System.Drawing.Size(65, 22);
-            this.btn_browse_roster.TabIndex = 4;
-            this.btn_browse_roster.Text = "Browse";
-            this.btn_browse_roster.UseVisualStyleBackColor = true;
-            this.btn_browse_roster.Click += new System.EventHandler(this.btn_import_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 158);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(86, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Google Sheet ID";
-            // 
-            // lbl_characters
-            // 
-            this.lbl_characters.AutoSize = true;
-            this.lbl_characters.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_characters.Location = new System.Drawing.Point(6, 83);
-            this.lbl_characters.Name = "lbl_characters";
-            this.lbl_characters.Size = new System.Drawing.Size(83, 16);
-            this.lbl_characters.TabIndex = 1;
-            this.lbl_characters.Text = "0 Characters";
+            this.ckb_clipboard.AutoSize = true;
+            this.ckb_clipboard.Location = new System.Drawing.Point(6, 10);
+            this.ckb_clipboard.Name = "ckb_clipboard";
+            this.ckb_clipboard.Size = new System.Drawing.Size(304, 17);
+            this.ckb_clipboard.TabIndex = 15;
+            this.ckb_clipboard.Text = "Copy Video Title to Clipboard  When Generating Thumbnail";
+            this.ckb_clipboard.UseVisualStyleBackColor = true;
+            this.ckb_clipboard.CheckedChanged += new System.EventHandler(this.ckb_clipboard_CheckedChanged);
             // 
             // ckb_sheets
             // 
             this.ckb_sheets.AutoSize = true;
-            this.ckb_sheets.Location = new System.Drawing.Point(6, 115);
+            this.ckb_sheets.Location = new System.Drawing.Point(6, 72);
             this.ckb_sheets.Name = "ckb_sheets";
             this.ckb_sheets.Size = new System.Drawing.Size(185, 17);
             this.ckb_sheets.TabIndex = 0;
@@ -910,40 +829,108 @@
             this.ckb_sheets.UseVisualStyleBackColor = true;
             this.ckb_sheets.CheckedChanged += new System.EventHandler(this.ckb_sheets_CheckedChanged);
             // 
-            // txt_roster_directory
+            // txt_json
             // 
-            this.txt_roster_directory.Location = new System.Drawing.Point(6, 32);
-            this.txt_roster_directory.Name = "txt_roster_directory";
-            this.txt_roster_directory.Size = new System.Drawing.Size(224, 20);
-            this.txt_roster_directory.TabIndex = 5;
-            this.txt_roster_directory.TextChanged += new System.EventHandler(this.txt_roster_directory_TextChanged);
+            this.txt_json.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txt_json.Location = new System.Drawing.Point(3, 132);
+            this.txt_json.Name = "txt_json";
+            this.txt_json.Size = new System.Drawing.Size(321, 20);
+            this.txt_json.TabIndex = 13;
+            this.txt_json.TextChanged += new System.EventHandler(this.txt_json_TextChanged);
             // 
-            // lbl_gamename
+            // btn_browse_json
             // 
-            this.lbl_gamename.AutoSize = true;
-            this.lbl_gamename.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_gamename.Location = new System.Drawing.Point(6, 60);
-            this.lbl_gamename.Name = "lbl_gamename";
-            this.lbl_gamename.Size = new System.Drawing.Size(94, 16);
-            this.lbl_gamename.TabIndex = 0;
-            this.lbl_gamename.Text = "Game Name";
+            this.btn_browse_json.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_browse_json.Location = new System.Drawing.Point(330, 131);
+            this.btn_browse_json.Name = "btn_browse_json";
+            this.btn_browse_json.Size = new System.Drawing.Size(65, 20);
+            this.btn_browse_json.TabIndex = 11;
+            this.btn_browse_json.Text = "Browse";
+            this.btn_browse_json.UseVisualStyleBackColor = true;
+            this.btn_browse_json.Click += new System.EventHandler(this.btn_browse_json_Click);
             // 
-            // label5
+            // txt_youtube_username
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(132, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Character Roster Directory";
+            this.txt_youtube_username.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txt_youtube_username.Location = new System.Drawing.Point(136, 158);
+            this.txt_youtube_username.Name = "txt_youtube_username";
+            this.txt_youtube_username.Size = new System.Drawing.Size(259, 20);
+            this.txt_youtube_username.TabIndex = 0;
+            this.txt_youtube_username.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.label2.Location = new System.Drawing.Point(3, 161);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(127, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Google Username (Gmail)";
+            // 
+            // tab_youtube
+            // 
+            this.tab_youtube.Controls.Add(this.label11);
+            this.tab_youtube.Controls.Add(this.label10);
+            this.tab_youtube.Controls.Add(this.btn_playlist);
+            this.tab_youtube.Controls.Add(this.txt_description);
+            this.tab_youtube.Controls.Add(this.groupBox3);
+            this.tab_youtube.Controls.Add(this.txt_playlist);
+            this.tab_youtube.Location = new System.Drawing.Point(4, 22);
+            this.tab_youtube.Name = "tab_youtube";
+            this.tab_youtube.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_youtube.Size = new System.Drawing.Size(398, 181);
+            this.tab_youtube.TabIndex = 1;
+            this.tab_youtube.Text = "YouTube";
+            this.tab_youtube.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 3);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(236, 13);
+            this.label11.TabIndex = 21;
+            this.label11.Text = "YouTube Playlist Name (Leave Blank to Disable)";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 48);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(127, 13);
+            this.label10.TabIndex = 20;
+            this.label10.Text = "Default Video Description";
+            // 
+            // btn_playlist
+            // 
+            this.btn_playlist.Enabled = false;
+            this.btn_playlist.Location = new System.Drawing.Point(294, 19);
+            this.btn_playlist.Name = "btn_playlist";
+            this.btn_playlist.Size = new System.Drawing.Size(98, 22);
+            this.btn_playlist.TabIndex = 2;
+            this.btn_playlist.Text = "Check";
+            this.btn_playlist.UseVisualStyleBackColor = true;
+            this.btn_playlist.Click += new System.EventHandler(this.btn_playlist_Click);
+            // 
+            // txt_description
+            // 
+            this.txt_description.Enabled = false;
+            this.txt_description.Location = new System.Drawing.Point(6, 64);
+            this.txt_description.Multiline = true;
+            this.txt_description.Name = "txt_description";
+            this.txt_description.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txt_description.Size = new System.Drawing.Size(386, 70);
+            this.txt_description.TabIndex = 19;
+            this.txt_description.TextChanged += new System.EventHandler(this.txt_description_TextChanged);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.rdb_obs);
             this.groupBox3.Controls.Add(this.rdb_xsplit);
-            this.groupBox3.Location = new System.Drawing.Point(776, 138);
+            this.groupBox3.Location = new System.Drawing.Point(6, 140);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(100, 69);
+            this.groupBox3.Size = new System.Drawing.Size(386, 35);
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Stream Software";
@@ -951,7 +938,8 @@
             // rdb_obs
             // 
             this.rdb_obs.AutoSize = true;
-            this.rdb_obs.Location = new System.Drawing.Point(6, 42);
+            this.rdb_obs.Enabled = false;
+            this.rdb_obs.Location = new System.Drawing.Point(232, 12);
             this.rdb_obs.Name = "rdb_obs";
             this.rdb_obs.Size = new System.Drawing.Size(80, 17);
             this.rdb_obs.TabIndex = 20;
@@ -963,7 +951,8 @@
             // 
             this.rdb_xsplit.AutoSize = true;
             this.rdb_xsplit.Checked = true;
-            this.rdb_xsplit.Location = new System.Drawing.Point(6, 19);
+            this.rdb_xsplit.Enabled = false;
+            this.rdb_xsplit.Location = new System.Drawing.Point(83, 12);
             this.rdb_xsplit.Name = "rdb_xsplit";
             this.rdb_xsplit.Size = new System.Drawing.Size(52, 17);
             this.rdb_xsplit.TabIndex = 19;
@@ -972,24 +961,348 @@
             this.rdb_xsplit.UseVisualStyleBackColor = true;
             this.rdb_xsplit.CheckedChanged += new System.EventHandler(this.rdb_xsplit_CheckedChanged);
             // 
+            // txt_playlist
+            // 
+            this.txt_playlist.Enabled = false;
+            this.txt_playlist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_playlist.Location = new System.Drawing.Point(6, 19);
+            this.txt_playlist.Name = "txt_playlist";
+            this.txt_playlist.Size = new System.Drawing.Size(282, 22);
+            this.txt_playlist.TabIndex = 1;
+            // 
+            // tab_sheets
+            // 
+            this.tab_sheets.Controls.Add(this.btn_test_sheet);
+            this.tab_sheets.Controls.Add(this.groupBox8);
+            this.tab_sheets.Controls.Add(this.ckb_startup_sheets);
+            this.tab_sheets.Controls.Add(this.txt_sheets);
+            this.tab_sheets.Controls.Add(this.label4);
+            this.tab_sheets.Location = new System.Drawing.Point(4, 22);
+            this.tab_sheets.Name = "tab_sheets";
+            this.tab_sheets.Size = new System.Drawing.Size(398, 181);
+            this.tab_sheets.TabIndex = 2;
+            this.tab_sheets.Text = "Google Sheets";
+            this.tab_sheets.UseVisualStyleBackColor = true;
+            // 
+            // btn_test_sheet
+            // 
+            this.btn_test_sheet.Enabled = false;
+            this.btn_test_sheet.Location = new System.Drawing.Point(150, 147);
+            this.btn_test_sheet.Name = "btn_test_sheet";
+            this.btn_test_sheet.Size = new System.Drawing.Size(99, 31);
+            this.btn_test_sheet.TabIndex = 8;
+            this.btn_test_sheet.Text = "Test Connection";
+            this.btn_test_sheet.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.rdb_infoonly);
+            this.groupBox8.Controls.Add(this.rdb_fullsheet);
+            this.groupBox8.Location = new System.Drawing.Point(3, 45);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(392, 46);
+            this.groupBox8.TabIndex = 7;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Sheet Style";
+            // 
+            // rdb_infoonly
+            // 
+            this.rdb_infoonly.AutoSize = true;
+            this.rdb_infoonly.Enabled = false;
+            this.rdb_infoonly.Location = new System.Drawing.Point(235, 19);
+            this.rdb_infoonly.Name = "rdb_infoonly";
+            this.rdb_infoonly.Size = new System.Drawing.Size(99, 17);
+            this.rdb_infoonly.TabIndex = 8;
+            this.rdb_infoonly.Text = "Player Info Only";
+            this.rdb_infoonly.UseVisualStyleBackColor = true;
+            // 
+            // rdb_fullsheet
+            // 
+            this.rdb_fullsheet.AutoSize = true;
+            this.rdb_fullsheet.Checked = true;
+            this.rdb_fullsheet.Enabled = false;
+            this.rdb_fullsheet.Location = new System.Drawing.Point(23, 19);
+            this.rdb_fullsheet.Name = "rdb_fullsheet";
+            this.rdb_fullsheet.Size = new System.Drawing.Size(167, 17);
+            this.rdb_fullsheet.TabIndex = 0;
+            this.rdb_fullsheet.TabStop = true;
+            this.rdb_fullsheet.Text = "Player Info and Stream Queue";
+            this.rdb_fullsheet.UseVisualStyleBackColor = true;
+            // 
+            // ckb_startup_sheets
+            // 
+            this.ckb_startup_sheets.AutoSize = true;
+            this.ckb_startup_sheets.Enabled = false;
+            this.ckb_startup_sheets.Location = new System.Drawing.Point(6, 110);
+            this.ckb_startup_sheets.Name = "ckb_startup_sheets";
+            this.ckb_startup_sheets.Size = new System.Drawing.Size(198, 17);
+            this.ckb_startup_sheets.TabIndex = 6;
+            this.ckb_startup_sheets.Text = "Load from Google Sheets on Startup";
+            this.ckb_startup_sheets.UseVisualStyleBackColor = true;
+            this.ckb_startup_sheets.CheckedChanged += new System.EventHandler(this.ckb_startup_sheets_CheckedChanged);
+            // 
+            // txt_sheets
+            // 
+            this.txt_sheets.Enabled = false;
+            this.txt_sheets.Location = new System.Drawing.Point(95, 19);
+            this.txt_sheets.Name = "txt_sheets";
+            this.txt_sheets.Size = new System.Drawing.Size(300, 20);
+            this.txt_sheets.TabIndex = 2;
+            this.txt_sheets.TextChanged += new System.EventHandler(this.txt_sheets_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 22);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(86, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Google Sheet ID";
+            // 
+            // tab_mainsettings
+            // 
+            this.tab_mainsettings.Controls.Add(this.tab_directories);
+            this.tab_mainsettings.Controls.Add(this.tab_scoreboard);
+            this.tab_mainsettings.Location = new System.Drawing.Point(3, 3);
+            this.tab_mainsettings.Name = "tab_mainsettings";
+            this.tab_mainsettings.SelectedIndex = 0;
+            this.tab_mainsettings.Size = new System.Drawing.Size(462, 207);
+            this.tab_mainsettings.TabIndex = 0;
+            // 
+            // tab_directories
+            // 
+            this.tab_directories.Controls.Add(this.label5);
+            this.tab_directories.Controls.Add(this.txt_roster_directory);
+            this.tab_directories.Controls.Add(this.btn_browse_roster);
+            this.tab_directories.Controls.Add(this.label7);
+            this.tab_directories.Controls.Add(this.label9);
+            this.tab_directories.Controls.Add(this.txt_stream_directory);
+            this.tab_directories.Controls.Add(this.txt_thumbnail_directory);
+            this.tab_directories.Controls.Add(this.btn_output);
+            this.tab_directories.Controls.Add(this.txt_vods);
+            this.tab_directories.Controls.Add(this.btn_thumb_directory);
+            this.tab_directories.Controls.Add(this.btn_vods);
+            this.tab_directories.Controls.Add(this.label6);
+            this.tab_directories.Location = new System.Drawing.Point(4, 22);
+            this.tab_directories.Name = "tab_directories";
+            this.tab_directories.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_directories.Size = new System.Drawing.Size(454, 181);
+            this.tab_directories.TabIndex = 0;
+            this.tab_directories.Text = "Directories";
+            this.tab_directories.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 10);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(132, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Character Roster Directory";
+            // 
+            // txt_roster_directory
+            // 
+            this.txt_roster_directory.Location = new System.Drawing.Point(6, 26);
+            this.txt_roster_directory.Name = "txt_roster_directory";
+            this.txt_roster_directory.Size = new System.Drawing.Size(366, 20);
+            this.txt_roster_directory.TabIndex = 5;
+            this.txt_roster_directory.TextChanged += new System.EventHandler(this.txt_roster_directory_TextChanged);
+            // 
+            // btn_browse_roster
+            // 
+            this.btn_browse_roster.Location = new System.Drawing.Point(378, 26);
+            this.btn_browse_roster.Name = "btn_browse_roster";
+            this.btn_browse_roster.Size = new System.Drawing.Size(65, 20);
+            this.btn_browse_roster.TabIndex = 4;
+            this.btn_browse_roster.Text = "Browse";
+            this.btn_browse_roster.UseVisualStyleBackColor = true;
+            this.btn_browse_roster.Click += new System.EventHandler(this.btn_import_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Cursor = System.Windows.Forms.Cursors.Default;
+            this.label7.Location = new System.Drawing.Point(6, 49);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(109, 13);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Stream Files Directory";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Cursor = System.Windows.Forms.Cursors.Default;
+            this.label9.Location = new System.Drawing.Point(6, 128);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(73, 13);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "VoD Directory";
+            // 
+            // txt_stream_directory
+            // 
+            this.txt_stream_directory.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txt_stream_directory.Location = new System.Drawing.Point(6, 65);
+            this.txt_stream_directory.Name = "txt_stream_directory";
+            this.txt_stream_directory.Size = new System.Drawing.Size(366, 20);
+            this.txt_stream_directory.TabIndex = 10;
+            this.txt_stream_directory.TextChanged += new System.EventHandler(this.txt_stream_directory_TextChanged);
+            // 
+            // txt_thumbnail_directory
+            // 
+            this.txt_thumbnail_directory.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txt_thumbnail_directory.Location = new System.Drawing.Point(6, 104);
+            this.txt_thumbnail_directory.Name = "txt_thumbnail_directory";
+            this.txt_thumbnail_directory.Size = new System.Drawing.Size(366, 20);
+            this.txt_thumbnail_directory.TabIndex = 7;
+            this.txt_thumbnail_directory.TextChanged += new System.EventHandler(this.txt_thumbnail_directory_TextChanged);
+            // 
+            // btn_output
+            // 
+            this.btn_output.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_output.Location = new System.Drawing.Point(378, 64);
+            this.btn_output.Name = "btn_output";
+            this.btn_output.Size = new System.Drawing.Size(65, 21);
+            this.btn_output.TabIndex = 2;
+            this.btn_output.Text = "Browse";
+            this.btn_output.UseVisualStyleBackColor = true;
+            this.btn_output.Click += new System.EventHandler(this.btn_output_Click_1);
+            // 
+            // txt_vods
+            // 
+            this.txt_vods.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txt_vods.Location = new System.Drawing.Point(6, 144);
+            this.txt_vods.Name = "txt_vods";
+            this.txt_vods.Size = new System.Drawing.Size(366, 20);
+            this.txt_vods.TabIndex = 16;
+            this.txt_vods.TextChanged += new System.EventHandler(this.txt_vods_TextChanged);
+            // 
+            // btn_thumb_directory
+            // 
+            this.btn_thumb_directory.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_thumb_directory.Location = new System.Drawing.Point(378, 104);
+            this.btn_thumb_directory.Name = "btn_thumb_directory";
+            this.btn_thumb_directory.Size = new System.Drawing.Size(65, 20);
+            this.btn_thumb_directory.TabIndex = 4;
+            this.btn_thumb_directory.Text = "Browse";
+            this.btn_thumb_directory.UseVisualStyleBackColor = true;
+            this.btn_thumb_directory.Click += new System.EventHandler(this.btn_thumb_directory_Click);
+            // 
             // btn_vods
             // 
             this.btn_vods.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_vods.Location = new System.Drawing.Point(250, 102);
+            this.btn_vods.Location = new System.Drawing.Point(378, 144);
             this.btn_vods.Name = "btn_vods";
-            this.btn_vods.Size = new System.Drawing.Size(65, 22);
+            this.btn_vods.Size = new System.Drawing.Size(65, 20);
             this.btn_vods.TabIndex = 15;
             this.btn_vods.Text = "Browse";
             this.btn_vods.UseVisualStyleBackColor = true;
             this.btn_vods.Click += new System.EventHandler(this.btn_vods_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Cursor = System.Windows.Forms.Cursors.Default;
+            this.label6.Location = new System.Drawing.Point(6, 88);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(101, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Thumbnail Directory";
+            // 
+            // tab_scoreboard
+            // 
+            this.tab_scoreboard.Controls.Add(this.groupBox9);
+            this.tab_scoreboard.Controls.Add(this.groupBox2);
+            this.tab_scoreboard.Controls.Add(this.ckb_scoreboad);
+            this.tab_scoreboard.Controls.Add(this.groupBox10);
+            this.tab_scoreboard.Location = new System.Drawing.Point(4, 22);
+            this.tab_scoreboard.Name = "tab_scoreboard";
+            this.tab_scoreboard.Size = new System.Drawing.Size(454, 181);
+            this.tab_scoreboard.TabIndex = 2;
+            this.tab_scoreboard.Text = "Scoreboard";
+            this.tab_scoreboard.UseVisualStyleBackColor = true;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.btn_score2_image3);
+            this.groupBox9.Controls.Add(this.pic_score2_image3);
+            this.groupBox9.Controls.Add(this.btn_score2_image2);
+            this.groupBox9.Controls.Add(this.pic_score2_image1);
+            this.groupBox9.Controls.Add(this.btn_score2_image1);
+            this.groupBox9.Controls.Add(this.pic_score2_image2);
+            this.groupBox9.Location = new System.Drawing.Point(232, 72);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(219, 109);
+            this.groupBox9.TabIndex = 19;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Player 2 Score Images";
+            // 
+            // btn_score2_image3
+            // 
+            this.btn_score2_image3.Location = new System.Drawing.Point(148, 19);
+            this.btn_score2_image3.Name = "btn_score2_image3";
+            this.btn_score2_image3.Size = new System.Drawing.Size(65, 39);
+            this.btn_score2_image3.TabIndex = 11;
+            this.btn_score2_image3.Text = "Point 3 Image";
+            this.btn_score2_image3.UseVisualStyleBackColor = true;
+            this.btn_score2_image3.Click += new System.EventHandler(this.btn_score2_image3_Click);
+            // 
+            // pic_score2_image3
+            // 
+            this.pic_score2_image3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pic_score2_image3.Location = new System.Drawing.Point(148, 64);
+            this.pic_score2_image3.Name = "pic_score2_image3";
+            this.pic_score2_image3.Size = new System.Drawing.Size(65, 39);
+            this.pic_score2_image3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_score2_image3.TabIndex = 5;
+            this.pic_score2_image3.TabStop = false;
+            // 
+            // btn_score2_image2
+            // 
+            this.btn_score2_image2.Location = new System.Drawing.Point(77, 19);
+            this.btn_score2_image2.Name = "btn_score2_image2";
+            this.btn_score2_image2.Size = new System.Drawing.Size(65, 39);
+            this.btn_score2_image2.TabIndex = 10;
+            this.btn_score2_image2.Text = "Point 2 Image";
+            this.btn_score2_image2.UseVisualStyleBackColor = true;
+            this.btn_score2_image2.Click += new System.EventHandler(this.btn_score2_image2_Click);
+            // 
+            // pic_score2_image1
+            // 
+            this.pic_score2_image1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pic_score2_image1.Location = new System.Drawing.Point(6, 64);
+            this.pic_score2_image1.Name = "pic_score2_image1";
+            this.pic_score2_image1.Size = new System.Drawing.Size(65, 39);
+            this.pic_score2_image1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_score2_image1.TabIndex = 3;
+            this.pic_score2_image1.TabStop = false;
+            // 
+            // btn_score2_image1
+            // 
+            this.btn_score2_image1.Location = new System.Drawing.Point(6, 19);
+            this.btn_score2_image1.Name = "btn_score2_image1";
+            this.btn_score2_image1.Size = new System.Drawing.Size(65, 39);
+            this.btn_score2_image1.TabIndex = 9;
+            this.btn_score2_image1.Text = "Point 1 Image";
+            this.btn_score2_image1.UseVisualStyleBackColor = true;
+            this.btn_score2_image1.Click += new System.EventHandler(this.btn_score2_image1_Click);
+            // 
+            // pic_score2_image2
+            // 
+            this.pic_score2_image2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pic_score2_image2.Location = new System.Drawing.Point(77, 64);
+            this.pic_score2_image2.Name = "pic_score2_image2";
+            this.pic_score2_image2.Size = new System.Drawing.Size(65, 39);
+            this.pic_score2_image2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_score2_image2.TabIndex = 4;
+            this.pic_score2_image2.TabStop = false;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.rdb_manual);
             this.groupBox2.Controls.Add(this.rdb_automatic);
-            this.groupBox2.Location = new System.Drawing.Point(638, 138);
+            this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(132, 69);
+            this.groupBox2.Size = new System.Drawing.Size(448, 44);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Scoreboard Updating";
@@ -997,7 +1310,7 @@
             // rdb_manual
             // 
             this.rdb_manual.AutoSize = true;
-            this.rdb_manual.Location = new System.Drawing.Point(6, 42);
+            this.rdb_manual.Location = new System.Drawing.Point(278, 19);
             this.rdb_manual.Name = "rdb_manual";
             this.rdb_manual.Size = new System.Drawing.Size(103, 17);
             this.rdb_manual.TabIndex = 16;
@@ -1009,7 +1322,7 @@
             // 
             this.rdb_automatic.AutoSize = true;
             this.rdb_automatic.Checked = true;
-            this.rdb_automatic.Location = new System.Drawing.Point(6, 19);
+            this.rdb_automatic.Location = new System.Drawing.Point(55, 19);
             this.rdb_automatic.Name = "rdb_automatic";
             this.rdb_automatic.Size = new System.Drawing.Size(115, 17);
             this.rdb_automatic.TabIndex = 15;
@@ -1018,123 +1331,91 @@
             this.rdb_automatic.UseVisualStyleBackColor = true;
             this.rdb_automatic.CheckedChanged += new System.EventHandler(this.rdb_automatic_CheckedChanged);
             // 
-            // txt_vods
+            // ckb_scoreboad
             // 
-            this.txt_vods.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txt_vods.Location = new System.Drawing.Point(4, 102);
-            this.txt_vods.Name = "txt_vods";
-            this.txt_vods.Size = new System.Drawing.Size(240, 20);
-            this.txt_vods.TabIndex = 16;
-            this.txt_vods.TextChanged += new System.EventHandler(this.txt_vods_TextChanged);
+            this.ckb_scoreboad.AutoSize = true;
+            this.ckb_scoreboad.Location = new System.Drawing.Point(3, 51);
+            this.ckb_scoreboad.Name = "ckb_scoreboad";
+            this.ckb_scoreboad.Size = new System.Drawing.Size(149, 17);
+            this.ckb_scoreboad.TabIndex = 12;
+            this.ckb_scoreboad.Text = "Enable Image Scoreboard";
+            this.ckb_scoreboad.UseVisualStyleBackColor = true;
+            this.ckb_scoreboad.CheckedChanged += new System.EventHandler(this.ckb_scoreboad_CheckedChanged);
             // 
-            // label2
+            // groupBox10
             // 
-            this.label2.AutoSize = true;
-            this.label2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label2.Location = new System.Drawing.Point(5, 191);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "YouTube Username";
+            this.groupBox10.Controls.Add(this.btn_score1_image3);
+            this.groupBox10.Controls.Add(this.btn_score1_image2);
+            this.groupBox10.Controls.Add(this.btn_score1_image1);
+            this.groupBox10.Controls.Add(this.pic_score1_image3);
+            this.groupBox10.Controls.Add(this.pic_score1_image2);
+            this.groupBox10.Controls.Add(this.pic_score1_image1);
+            this.groupBox10.Location = new System.Drawing.Point(3, 72);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(219, 109);
+            this.groupBox10.TabIndex = 18;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Player 1 Score Images";
             // 
-            // txt_stream_directory
+            // btn_score1_image3
             // 
-            this.txt_stream_directory.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txt_stream_directory.Location = new System.Drawing.Point(4, 23);
-            this.txt_stream_directory.Name = "txt_stream_directory";
-            this.txt_stream_directory.Size = new System.Drawing.Size(240, 20);
-            this.txt_stream_directory.TabIndex = 10;
-            this.txt_stream_directory.TextChanged += new System.EventHandler(this.txt_stream_directory_TextChanged);
+            this.btn_score1_image3.Location = new System.Drawing.Point(148, 19);
+            this.btn_score1_image3.Name = "btn_score1_image3";
+            this.btn_score1_image3.Size = new System.Drawing.Size(65, 39);
+            this.btn_score1_image3.TabIndex = 8;
+            this.btn_score1_image3.Text = "Point 3 Image";
+            this.btn_score1_image3.UseVisualStyleBackColor = true;
+            this.btn_score1_image3.Click += new System.EventHandler(this.btn_score1_image3_Click);
             // 
-            // txt_json
+            // btn_score1_image2
             // 
-            this.txt_json.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txt_json.Location = new System.Drawing.Point(4, 141);
-            this.txt_json.Name = "txt_json";
-            this.txt_json.Size = new System.Drawing.Size(240, 20);
-            this.txt_json.TabIndex = 13;
-            this.txt_json.TextChanged += new System.EventHandler(this.txt_json_TextChanged);
+            this.btn_score1_image2.Location = new System.Drawing.Point(77, 19);
+            this.btn_score1_image2.Name = "btn_score1_image2";
+            this.btn_score1_image2.Size = new System.Drawing.Size(65, 39);
+            this.btn_score1_image2.TabIndex = 7;
+            this.btn_score1_image2.Text = "Point 2 Image";
+            this.btn_score1_image2.UseVisualStyleBackColor = true;
+            this.btn_score1_image2.Click += new System.EventHandler(this.btn_score1_image2_Click);
             // 
-            // label7
+            // btn_score1_image1
             // 
-            this.label7.AutoSize = true;
-            this.label7.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label7.Location = new System.Drawing.Point(4, 7);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(109, 13);
-            this.label7.TabIndex = 9;
-            this.label7.Text = "Stream Files Directory";
+            this.btn_score1_image1.Location = new System.Drawing.Point(6, 19);
+            this.btn_score1_image1.Name = "btn_score1_image1";
+            this.btn_score1_image1.Size = new System.Drawing.Size(65, 39);
+            this.btn_score1_image1.TabIndex = 6;
+            this.btn_score1_image1.Text = "Point 1 Image";
+            this.btn_score1_image1.UseVisualStyleBackColor = true;
+            this.btn_score1_image1.Click += new System.EventHandler(this.btn_score1_image1_Click);
             // 
-            // btn_output
+            // pic_score1_image3
             // 
-            this.btn_output.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_output.Location = new System.Drawing.Point(250, 22);
-            this.btn_output.Name = "btn_output";
-            this.btn_output.Size = new System.Drawing.Size(65, 22);
-            this.btn_output.TabIndex = 2;
-            this.btn_output.Text = "Browse";
-            this.btn_output.UseVisualStyleBackColor = true;
-            this.btn_output.Click += new System.EventHandler(this.btn_output_Click_1);
+            this.pic_score1_image3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pic_score1_image3.Location = new System.Drawing.Point(148, 64);
+            this.pic_score1_image3.Name = "pic_score1_image3";
+            this.pic_score1_image3.Size = new System.Drawing.Size(65, 39);
+            this.pic_score1_image3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_score1_image3.TabIndex = 2;
+            this.pic_score1_image3.TabStop = false;
             // 
-            // txt_youtube_username
+            // pic_score1_image2
             // 
-            this.txt_youtube_username.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txt_youtube_username.Location = new System.Drawing.Point(113, 187);
-            this.txt_youtube_username.Name = "txt_youtube_username";
-            this.txt_youtube_username.Size = new System.Drawing.Size(202, 20);
-            this.txt_youtube_username.TabIndex = 0;
-            this.txt_youtube_username.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.pic_score1_image2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pic_score1_image2.Location = new System.Drawing.Point(77, 64);
+            this.pic_score1_image2.Name = "pic_score1_image2";
+            this.pic_score1_image2.Size = new System.Drawing.Size(65, 39);
+            this.pic_score1_image2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_score1_image2.TabIndex = 1;
+            this.pic_score1_image2.TabStop = false;
             // 
-            // label8
+            // pic_score1_image1
             // 
-            this.label8.AutoSize = true;
-            this.label8.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label8.Location = new System.Drawing.Point(4, 125);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(146, 13);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "YouTube Uploading .json File";
-            // 
-            // btn_browse_json
-            // 
-            this.btn_browse_json.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_browse_json.Location = new System.Drawing.Point(250, 141);
-            this.btn_browse_json.Name = "btn_browse_json";
-            this.btn_browse_json.Size = new System.Drawing.Size(65, 22);
-            this.btn_browse_json.TabIndex = 11;
-            this.btn_browse_json.Text = "Browse";
-            this.btn_browse_json.UseVisualStyleBackColor = true;
-            this.btn_browse_json.Click += new System.EventHandler(this.btn_browse_json_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label6.Location = new System.Drawing.Point(4, 46);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(101, 13);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Thumbnail Directory";
-            // 
-            // btn_thumb_directory
-            // 
-            this.btn_thumb_directory.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_thumb_directory.Location = new System.Drawing.Point(250, 62);
-            this.btn_thumb_directory.Name = "btn_thumb_directory";
-            this.btn_thumb_directory.Size = new System.Drawing.Size(65, 22);
-            this.btn_thumb_directory.TabIndex = 4;
-            this.btn_thumb_directory.Text = "Browse";
-            this.btn_thumb_directory.UseVisualStyleBackColor = true;
-            this.btn_thumb_directory.Click += new System.EventHandler(this.btn_thumb_directory_Click);
-            // 
-            // txt_thumbnail_directory
-            // 
-            this.txt_thumbnail_directory.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txt_thumbnail_directory.Location = new System.Drawing.Point(4, 62);
-            this.txt_thumbnail_directory.Name = "txt_thumbnail_directory";
-            this.txt_thumbnail_directory.Size = new System.Drawing.Size(240, 20);
-            this.txt_thumbnail_directory.TabIndex = 7;
-            this.txt_thumbnail_directory.TextChanged += new System.EventHandler(this.txt_thumbnail_directory_TextChanged);
+            this.pic_score1_image1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pic_score1_image1.Location = new System.Drawing.Point(6, 64);
+            this.pic_score1_image1.Name = "pic_score1_image1";
+            this.pic_score1_image1.Size = new System.Drawing.Size(65, 39);
+            this.pic_score1_image1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_score1_image1.TabIndex = 0;
+            this.pic_score1_image1.TabStop = false;
             // 
             // tabPage2
             // 
@@ -1144,7 +1425,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(882, 214);
+            this.tabPage2.Size = new System.Drawing.Size(882, 213);
             this.tabPage2.TabIndex = 4;
             this.tabPage2.Text = "Other Tools";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1182,6 +1463,85 @@
             this.btn_thumbnail.UseVisualStyleBackColor = true;
             this.btn_thumbnail.Click += new System.EventHandler(this.btn_thumbnail_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lbl_playlist_id);
+            this.groupBox1.Controls.Add(this.btn_scoreboard);
+            this.groupBox1.Controls.Add(this.lbl_characters);
+            this.groupBox1.Controls.Add(this.ckb_playlist);
+            this.groupBox1.Controls.Add(this.lbx_playlist);
+            this.groupBox1.Controls.Add(this.lbl_gamename);
+            this.groupBox1.Location = new System.Drawing.Point(24, 279);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(374, 201);
+            this.groupBox1.TabIndex = 14;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "YouTube Playlist Selection";
+            // 
+            // lbl_playlist_id
+            // 
+            this.lbl_playlist_id.AutoSize = true;
+            this.lbl_playlist_id.Location = new System.Drawing.Point(6, 176);
+            this.lbl_playlist_id.Name = "lbl_playlist_id";
+            this.lbl_playlist_id.Size = new System.Drawing.Size(59, 13);
+            this.lbl_playlist_id.TabIndex = 17;
+            this.lbl_playlist_id.Text = "Playlist ID: ";
+            // 
+            // btn_scoreboard
+            // 
+            this.btn_scoreboard.BackColor = System.Drawing.Color.Transparent;
+            this.btn_scoreboard.Enabled = false;
+            this.btn_scoreboard.Location = new System.Drawing.Point(88, 142);
+            this.btn_scoreboard.Name = "btn_scoreboard";
+            this.btn_scoreboard.Size = new System.Drawing.Size(95, 44);
+            this.btn_scoreboard.TabIndex = 13;
+            this.btn_scoreboard.Text = "Choose Images";
+            this.btn_scoreboard.UseVisualStyleBackColor = false;
+            this.btn_scoreboard.Click += new System.EventHandler(this.btn_scoreboard_Click);
+            // 
+            // lbl_characters
+            // 
+            this.lbl_characters.AutoSize = true;
+            this.lbl_characters.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_characters.Location = new System.Drawing.Point(253, 142);
+            this.lbl_characters.Name = "lbl_characters";
+            this.lbl_characters.Size = new System.Drawing.Size(83, 16);
+            this.lbl_characters.TabIndex = 1;
+            this.lbl_characters.Text = "0 Characters";
+            // 
+            // ckb_playlist
+            // 
+            this.ckb_playlist.AutoSize = true;
+            this.ckb_playlist.Location = new System.Drawing.Point(247, 19);
+            this.ckb_playlist.Name = "ckb_playlist";
+            this.ckb_playlist.Size = new System.Drawing.Size(121, 17);
+            this.ckb_playlist.TabIndex = 16;
+            this.ckb_playlist.Text = "Add VoDs to Playlist";
+            this.ckb_playlist.UseVisualStyleBackColor = true;
+            this.ckb_playlist.CheckedChanged += new System.EventHandler(this.ckb_playlist_CheckedChanged);
+            // 
+            // lbx_playlist
+            // 
+            this.lbx_playlist.Enabled = false;
+            this.lbx_playlist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbx_playlist.FormattingEnabled = true;
+            this.lbx_playlist.ItemHeight = 16;
+            this.lbx_playlist.Location = new System.Drawing.Point(6, 19);
+            this.lbx_playlist.Name = "lbx_playlist";
+            this.lbx_playlist.Size = new System.Drawing.Size(235, 116);
+            this.lbx_playlist.TabIndex = 0;
+            this.lbx_playlist.SelectedIndexChanged += new System.EventHandler(this.lbx_playlist_SelectedIndexChanged);
+            // 
+            // lbl_gamename
+            // 
+            this.lbl_gamename.AutoSize = true;
+            this.lbl_gamename.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_gamename.Location = new System.Drawing.Point(253, 119);
+            this.lbl_gamename.Name = "lbl_gamename";
+            this.lbl_gamename.Size = new System.Drawing.Size(94, 16);
+            this.lbl_gamename.TabIndex = 0;
+            this.lbl_gamename.Text = "Game Name";
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -1191,13 +1551,19 @@
             // 
             this.openFileDialog2.Filter = "Upload Data Files|*.uldata";
             // 
+            // openFileDialog3
+            // 
+            this.openFileDialog3.FileName = "openFileDialog3";
+            this.openFileDialog3.Filter = "PNG Image Files|*.png";
+            // 
             // frm_main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(892, 245);
+            this.ClientSize = new System.Drawing.Size(892, 492);
             this.Controls.Add(this.tab_main);
+            this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_main";
             this.Text = "Master Orders";
@@ -1205,8 +1571,6 @@
             this.tab_main.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.tab_ingame_display.ResumeLayout(false);
             this.tab_ingame_display.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -1221,14 +1585,35 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.tab_options.ResumeLayout(false);
-            this.tab_options.PerformLayout();
-            this.gbx_entrants.ResumeLayout(false);
-            this.gbx_entrants.PerformLayout();
+            this.tabControl2.ResumeLayout(false);
+            this.tab_google.ResumeLayout(false);
+            this.tab_google.PerformLayout();
+            this.tab_youtube.ResumeLayout(false);
+            this.tab_youtube.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.tab_sheets.ResumeLayout(false);
+            this.tab_sheets.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.tab_mainsettings.ResumeLayout(false);
+            this.tab_directories.ResumeLayout(false);
+            this.tab_directories.PerformLayout();
+            this.tab_scoreboard.ResumeLayout(false);
+            this.tab_scoreboard.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score2_image3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score2_image1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score2_image2)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image1)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1248,7 +1633,6 @@
         private System.Windows.Forms.Label lbl_commentatoralt1;
         private System.Windows.Forms.Label lbl_tag1;
         private System.Windows.Forms.TabPage tab_options;
-        private System.Windows.Forms.GroupBox gbx_entrants;
         private System.Windows.Forms.TextBox txt_bracket;
         private System.Windows.Forms.ComboBox cbx_round;
         private System.Windows.Forms.NumericUpDown nud_score2;
@@ -1329,6 +1713,37 @@
         private System.Windows.Forms.ComboBox cbx_name2;
         private System.Windows.Forms.Button btn_save1;
         private System.Windows.Forms.Button btn_save2;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tab_google;
+        private System.Windows.Forms.CheckBox ckb_youtube;
+        private System.Windows.Forms.TabPage tab_youtube;
+        private System.Windows.Forms.TabPage tab_sheets;
+        private System.Windows.Forms.TabControl tab_mainsettings;
+        private System.Windows.Forms.TabPage tab_directories;
+        private System.Windows.Forms.TabPage tab_scoreboard;
+        private System.Windows.Forms.Button btn_test_sheet;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.RadioButton rdb_infoonly;
+        private System.Windows.Forms.RadioButton rdb_fullsheet;
+        private System.Windows.Forms.TextBox txt_description;
+        private System.Windows.Forms.CheckBox ckb_clipboard;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Button btn_score2_image3;
+        private System.Windows.Forms.PictureBox pic_score2_image3;
+        private System.Windows.Forms.Button btn_score2_image2;
+        private System.Windows.Forms.PictureBox pic_score2_image1;
+        private System.Windows.Forms.Button btn_score2_image1;
+        private System.Windows.Forms.PictureBox pic_score2_image2;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.Button btn_score1_image3;
+        private System.Windows.Forms.Button btn_score1_image2;
+        private System.Windows.Forms.Button btn_score1_image1;
+        private System.Windows.Forms.PictureBox pic_score1_image3;
+        private System.Windows.Forms.PictureBox pic_score1_image2;
+        private System.Windows.Forms.PictureBox pic_score1_image1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog3;
     }
 }
 

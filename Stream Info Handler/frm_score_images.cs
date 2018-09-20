@@ -122,5 +122,10 @@ namespace Stream_Info_Handler
                 xml.Save(@"C:\Users\Public\Stream Info Handler\settings.xml");
             }
         }
+
+        private void pic_score1_image1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
