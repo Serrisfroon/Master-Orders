@@ -35,7 +35,7 @@ namespace Stream_Info_Handler
         public string image_directory1 = Directory.GetCurrentDirectory();
         public string image_directory2 = Directory.GetCurrentDirectory();
 
-        Color warning_color = Color.FromArgb(234, 153, 153);
+        public static Color warning_color = Color.FromArgb(234, 153, 153);
 
         bool ignore_settings;
 
@@ -49,6 +49,19 @@ namespace Stream_Info_Handler
             set // this makes you to change value in form2
             {
                 _get_character_slot = value;
+            }
+        }
+
+        private static player_info _get_new_player;
+        public static player_info get_new_player
+        {
+            get // this makes you to access value in form2
+            {
+                return _get_new_player;
+            }
+            set // this makes you to change value in form2
+            {
+                _get_new_player = value;
             }
         }
 
@@ -2080,7 +2093,15 @@ namespace Stream_Info_Handler
                     global_values.roster[i].sponsor = new_player.sponsor;
                     global_values.roster[i].twitter = new_player.twitter;
                     global_values.roster[i].character[0] = new_player.character[0];
+                    global_values.roster[i].character[1] = new_player.character[1];
+                    global_values.roster[i].character[2] = new_player.character[2];
+                    global_values.roster[i].character[3] = new_player.character[3];
+                    global_values.roster[i].character[4] = new_player.character[4];
                     global_values.roster[i].color[0] = new_player.color[0];
+                    global_values.roster[i].color[1] = new_player.color[1];
+                    global_values.roster[i].color[2] = new_player.color[2];
+                    global_values.roster[i].color[3] = new_player.color[3];
+                    global_values.roster[i].color[4] = new_player.color[4];
                     break;
                 }
                 if (player_information[i][0].ToString() == "")
@@ -2104,13 +2125,17 @@ namespace Stream_Info_Handler
                                                 global_values.roster[player_index].character[2],
                                                 global_values.roster[player_index].character[3],
                                                 global_values.roster[player_index].character[4],
-                                                global_values.roster[player_index].color[0]};
+                                                global_values.roster[player_index].color[0],
+                                                global_values.roster[player_index].color[1],
+                                                global_values.roster[player_index].color[2],
+                                                global_values.roster[player_index].color[3],
+                                                global_values.roster[player_index].color[4]};
 
             //Create a data set from the array
             Google.Apis.Sheets.v4.Data.ValueRange data = new Google.Apis.Sheets.v4.Data.ValueRange();
             data.Values = new List<IList<object>> { oblist };
             //Set the range's row to the player index"
-            string range2 = "Player Information!A" + (player_index+2).ToString() + ":J" + (player_index + 2).ToString();
+            string range2 = "Player Information!A" + (player_index+2).ToString() + ":N" + (player_index + 2).ToString();
             data.MajorDimension = "ROWS";
 
             //Process the update
@@ -3091,6 +3116,7 @@ namespace Stream_Info_Handler
                 {
                     global_values.player_roster_number[1] = i;
                     cbx_name1.Text = global_values.roster[i].get_display_name();
+                    cbx_name1.DisplayMember = global_values.roster[i].get_display_name();
                     txt_alt1.Text = global_values.roster[i].twitter;
 
                     cbx_characters1.BeginUpdate();                                      //Begin
@@ -3176,8 +3202,8 @@ namespace Stream_Info_Handler
 
                         //Verify that this is a seperator
                         if (MessageBox.Show("Does this player have the sponsor '" + check_team + "'?",
-                            "Sponsor Name Detected", MessageBoxButtons.OKCancel)
-                            == DialogResult.OK)
+                            "Sponsor Name Detected", MessageBoxButtons.YesNo)
+                            == DialogResult.Yes)
                         {
                             //Pass the sponsor and tag onto the actual variables
                             player_team = check_team;
@@ -3252,8 +3278,6 @@ namespace Stream_Info_Handler
             }
             else
             {
-                save_player.character[0] = cbx_characters1.Text;
-                save_player.color[0] = cbx_colors1.SelectedIndex + 1;
                 save_player.region = "";
                 for (int i = 1; i < 5; i ++)
                 {
@@ -3262,51 +3286,17 @@ namespace Stream_Info_Handler
                 }
             }
 
+            if (overwrite_slot != -1)
+            {
+                save_player.character[overwrite_slot] = cbx_characters1.Text;
+                save_player.color[overwrite_slot] = cbx_colors1.SelectedIndex + 1;
+            }
+
             var player_info_box = new frm_save_player(save_player);
-            player_info_box.ShowDialog();
+            if(player_info_box.ShowDialog() == DialogResult.OK)
+            {
+                add_to_sheets(get_new_player);
             
-            /*
-
-            if (player_exists == false)
-            {
-                first_line = "You are about to create a new player record.";
-                var region_box = new frm_replace_character();
-                region_box.ShowDialog();
-                region_line = "\nRegion: " + get_player_region;
-            }
-            else
-            {
-                first_line = "You are about to update a player's record.";
-            }
-
-            if (MessageBox.Show(first_line +
-                                "\nPlayer Tag: " + player_name +
-                                "\nTwitter Handle: " + twitter_handle +
-                                region_line +
-                                "\nSponsor: " + player_team +
-                                "\nMain: " + main_character +
-                                "\nColor: " + main_color.ToString(),
-                                "Save New Player", MessageBoxButtons.OKCancel)
-                                == DialogResult.OK)
-            {
-                player_info new_player = new player_info();
-                new_player.tag = player_name;
-                new_player.twitter = twitter_handle;
-                new_player.sponsor = player_team;
-                new_player.region = get_player_region;
-                new_player.character[0] = main_character;
-                new_player.character[1] = "";
-                new_player.character[2] = "";
-                new_player.character[3] = "";
-                new_player.character[4] = "";
-                new_player.color[0] = main_color;
-                new_player.color[1] = 1;
-                new_player.color[2] = 1;
-                new_player.color[3] = 1;
-                new_player.color[4] = 1;
-
-                add_to_sheets(new_player);
-
                 int hold_index = cbx_name2.SelectedIndex;
 
                 cbx_name1.BeginUpdate();                                            //Begin
@@ -3316,7 +3306,7 @@ namespace Stream_Info_Handler
                     cbx_name1.Items.Add(global_values.roster[i].tag);
                 }
                 cbx_name1.EndUpdate();                                              //End
-                cbx_name1.SelectedIndex = cbx_name1.Items.IndexOf(player_name);     //Set the combobox index to 0
+                cbx_name1.SelectedIndex = cbx_name1.Items.IndexOf(get_new_player.tag);     //Set the combobox index to 0
 
                 cbx_name2.BeginUpdate();                                            //Begin
                 cbx_name2.Items.Clear();                                            //Empty the item list
@@ -3327,94 +3317,88 @@ namespace Stream_Info_Handler
                 cbx_name2.EndUpdate();                                              //End
                 cbx_name2.SelectedIndex = hold_index;   //Set the combobox index to 0
             }
-            */
         }
 
         private void btn_save2_Click(object sender, EventArgs e)
         {
-            /*
-            string player_name = cbx_name2.Text;
-            string twitter_handle = txt_alt2.Text;
-            string main_character = cbx_characters2.Text;
-            int main_color = cbx_colors2.SelectedIndex + 1;
-            string player_team = "";
+            //Create a player profile and set its tag and twitter to the enterred information
+            player_info save_player = new player_info();
+            save_player.tag = cbx_name2.Text;
+            save_player.twitter = txt_alt2.Text;
 
-            if (player_name.Contains(" I "))
+            //This variable controls the slot that the enterred character gets input into.
+            int overwrite_slot = 0;
+
+            //Set the list of possible seperators between sponsor and tag
+            string[] check_seperators = { " I ", " | ", " / ", @" \ " };
+            foreach (string element in check_seperators)
             {
-                string check_team = player_name;
-                string check_name = player_name;
+                //Test to see if each seperator is present in the tag and seperate the tag and sponsor appropriately
+                check_for_sponsor(element, ref save_player.tag, ref save_player.sponsor);
+            }
 
-                for (int i = 0; i < check_team.Length; i++)
+            //Check if a player in the roster has been selected from the combobox. 
+            //Also ensure that the sheets integration is enabled
+            if (global_values.player_roster_number[2] != -1 && global_values.enable_sheets == true &&
+                txt_sheets.Text != "")
+            {
+                //store the roster player's info locally
+                player_info grab_info = global_values.roster[global_values.player_roster_number[2]];
+                //Set the player profile's characters, colors, and region to that of the roster player
+                save_player.character = grab_info.character;
+                save_player.color = grab_info.color;
+                save_player.region = grab_info.region;
+                //Check if the selected character is one of the player profile's characters. If not...
+                if (!save_player.character.Contains(cbx_characters2.Text))
                 {
-                    if (check_team.Substring(i).StartsWith(" I ") == true)
+                    //Loop through each character slot of the player
+                    for (int i = 0; i < 5; i++)
                     {
-                        check_team = player_name.Substring(0, i);
-                        check_name = player_name.Substring(i + 3);
-
-                        if (MessageBox.Show("Does this player have the sponsor '" + check_team + "'?",
-                            "Sponsor Name Detected", MessageBoxButtons.OKCancel)
-                            == DialogResult.OK)
+                        //If there is no character in the slot, set the slot as the overwrite slot and break the loop
+                        if (save_player.character[i] == "")
                         {
-                            player_team = check_team;
-                            player_name = check_name;
+                            overwrite_slot = i;
+                            break;
                         }
-                        break;
+                        else
+                        {
+                            //If no slot is empty...
+                            if (i == 4)
+                            {
+                                //Show the window to select an overwrite slot
+                                var check_character = new frm_replace_character(save_player, cbx_characters2.Text);
+                                check_character.ShowDialog();
+                                overwrite_slot = get_character_slot;
+                            }
+                        }
                     }
                 }
-            }
-
-            bool player_exists = false;
-            for (int i = 0; i < global_values.roster_size; i++)
-            {
-                if (player_name == global_values.roster[i].tag)
+                else
                 {
-                    player_exists = true;
-                    break;
+                    //Set the overwrite slot to the slot that contains it.
+                    overwrite_slot = Array.IndexOf(save_player.character, cbx_characters2.Text);
                 }
-            }
-
-            string first_line = "";
-            string region_line = "";
-
-            if (player_exists == false)
-            {
-                first_line = "You are about to create a new player record.";
-                var region_box = new frm_replace_character();
-                region_box.ShowDialog();
-                region_line = "\nRegion: " + get_player_region;
             }
             else
             {
-                first_line = "You are about to update a player's record.";
+                save_player.region = "";
+                for (int i = 1; i < 5; i++)
+                {
+                    save_player.character[i] = "";
+                    save_player.color[i] = 1;
+                }
             }
 
-            if (MessageBox.Show(first_line +
-                                "\nPlayer Tag: " + player_name +
-                                "\nTwitter Handle: " + twitter_handle +
-                                region_line +
-                                "\nSponsor: " + player_team +
-                                "\nMain: " + main_character +
-                                "\nColor: " + main_color.ToString(),
-                                "Save New Player", MessageBoxButtons.OKCancel)
-                                == DialogResult.OK)
+            if (overwrite_slot != -1)
             {
-                player_info new_player = new player_info();
-                new_player.tag = player_name;
-                new_player.twitter = twitter_handle;
-                new_player.sponsor = player_team;
-                new_player.region = get_player_region;
-                new_player.character[0] = main_character;
-                new_player.character[1] = "";
-                new_player.character[2] = "";
-                new_player.character[3] = "";
-                new_player.character[4] = "";
-                new_player.color[0] = main_color;
-                new_player.color[1] = 1;
-                new_player.color[2] = 1;
-                new_player.color[3] = 1;
-                new_player.color[4] = 1;
+                save_player.character[overwrite_slot] = cbx_characters2.Text;
+                save_player.color[overwrite_slot] = cbx_colors2.SelectedIndex + 1;
+            }
 
-                add_to_sheets(new_player);
+            var player_info_box = new frm_save_player(save_player);
+            if (player_info_box.ShowDialog() == DialogResult.OK)
+            {
+                add_to_sheets(get_new_player);
 
                 int hold_index = cbx_name1.SelectedIndex;
 
@@ -3425,7 +3409,7 @@ namespace Stream_Info_Handler
                     cbx_name1.Items.Add(global_values.roster[i].tag);
                 }
                 cbx_name1.EndUpdate();                                              //End
-                cbx_name1.SelectedIndex = hold_index;                               //Set the combobox index to 0
+                cbx_name1.SelectedIndex = hold_index;   //Set the combobox index to 0
 
                 cbx_name2.BeginUpdate();                                            //Begin
                 cbx_name2.Items.Clear();                                            //Empty the item list
@@ -3434,9 +3418,8 @@ namespace Stream_Info_Handler
                     cbx_name2.Items.Add(global_values.roster[i].tag);
                 }
                 cbx_name2.EndUpdate();                                              //End
-                cbx_name2.SelectedIndex = cbx_name2.Items.IndexOf(player_name);     //Set the combobox index to 0
+                cbx_name2.SelectedIndex = cbx_name2.Items.IndexOf(get_new_player.tag);     //Set the combobox index to 0
             }
-            */
         }
 
         private void btn_score1_image1_Click(object sender, EventArgs e)

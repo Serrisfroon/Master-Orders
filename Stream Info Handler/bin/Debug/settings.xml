@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Master-Orders-Settings>
   <directories>
-    <game-directory>C:\Users\serri\Google Drive\Smash Bros Stuff\Tripoint\Stream Files\Wii U</game-directory>
-    <stream-directory>C:\Users\serri\Desktop\Master Orders Files</stream-directory>
-    <thumbnail-directory>C:\Users\serri\Desktop\Master Orders Files</thumbnail-directory>
-    <vods-directory>C:\Users\serri\Desktop\Master Orders Files\VoDs</vods-directory>
+    <game-directory>C:\Users\Dan\Google Drive\Smash Bros Stuff\Tripoint\Stream Files\Wii U</game-directory>
+    <stream-directory>C:\Users\Dan\Desktop\thumbnail</stream-directory>
+    <thumbnail-directory>C:\Users\Dan\Desktop\thumbnail</thumbnail-directory>
+    <vods-directory>C:\Users\Dan\Desktop\thumbnail\vod</vods-directory>
   </directories>
   <youtube>
-    <enable-youtube>False</enable-youtube>
+    <enable-youtube>false</enable-youtube>
     <username>Master Orders Integration</username>
-    <json-file>C:\Users\serri\Google Drive\Smash Bros Stuff\Tripoint\Stream Files\tripoint_ugs.json</json-file>
+    <json-file>C:\Users\Dan\Google Drive\Smash Bros Stuff\Tripoint\Stream Files\tripoint_ugs.json</json-file>
     <copy-title>false</copy-title>
     <playlist-name></playlist-name>
     <playlist-id></playlist-id>

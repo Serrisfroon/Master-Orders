@@ -50,6 +50,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btn_save = new System.Windows.Forms.Button();
+            this.btn_cancel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,6 +60,7 @@
             this.txt_tag.Name = "txt_tag";
             this.txt_tag.Size = new System.Drawing.Size(155, 20);
             this.txt_tag.TabIndex = 0;
+            this.txt_tag.TextChanged += new System.EventHandler(this.txt_tag_TextChanged);
             // 
             // txt_twitter
             // 
@@ -129,6 +131,7 @@
             this.cbx_main.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cbx_main.Size = new System.Drawing.Size(105, 20);
             this.cbx_main.TabIndex = 8;
+            this.cbx_main.SelectedIndexChanged += new System.EventHandler(this.cbx_main_SelectedIndexChanged);
             // 
             // cbx_colors1
             // 
@@ -152,6 +155,7 @@
             this.cbx_secondary2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cbx_secondary2.Size = new System.Drawing.Size(105, 20);
             this.cbx_secondary2.TabIndex = 10;
+            this.cbx_secondary2.SelectedIndexChanged += new System.EventHandler(this.cbx_secondary2_SelectedIndexChanged);
             // 
             // cbx_colors2
             // 
@@ -175,6 +179,7 @@
             this.cbx_secondary3.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cbx_secondary3.Size = new System.Drawing.Size(105, 20);
             this.cbx_secondary3.TabIndex = 12;
+            this.cbx_secondary3.SelectedIndexChanged += new System.EventHandler(this.cbx_secondary3_SelectedIndexChanged);
             // 
             // cbx_colors3
             // 
@@ -198,6 +203,7 @@
             this.cbx_secondary4.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cbx_secondary4.Size = new System.Drawing.Size(105, 20);
             this.cbx_secondary4.TabIndex = 14;
+            this.cbx_secondary4.SelectedIndexChanged += new System.EventHandler(this.cbx_secondary4_SelectedIndexChanged);
             // 
             // cbx_colors4
             // 
@@ -221,6 +227,7 @@
             this.cbx_secondary5.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cbx_secondary5.Size = new System.Drawing.Size(105, 20);
             this.cbx_secondary5.TabIndex = 16;
+            this.cbx_secondary5.SelectedIndexChanged += new System.EventHandler(this.cbx_secondary5_SelectedIndexChanged);
             // 
             // cbx_colors5
             // 
@@ -260,7 +267,7 @@
             // 
             // btn_save
             // 
-            this.btn_save.Location = new System.Drawing.Point(240, 191);
+            this.btn_save.Location = new System.Drawing.Point(184, 191);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(105, 29);
             this.btn_save.TabIndex = 20;
@@ -268,11 +275,22 @@
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
+            // btn_cancel
+            // 
+            this.btn_cancel.Location = new System.Drawing.Point(295, 191);
+            this.btn_cancel.Name = "btn_cancel";
+            this.btn_cancel.Size = new System.Drawing.Size(105, 29);
+            this.btn_cancel.TabIndex = 21;
+            this.btn_cancel.Text = "Cancel";
+            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            // 
             // frm_save_player
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(576, 225);
+            this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_save);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label5);
@@ -318,5 +336,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.TextBox txt_sponsor;
+        private System.Windows.Forms.Button btn_cancel;
     }
 }

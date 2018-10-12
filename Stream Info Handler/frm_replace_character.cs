@@ -32,31 +32,31 @@ namespace Stream_Info_Handler
 
         private void btn_character1_Click(object sender, EventArgs e)
         {
-            frm_main.get_character_slot = 1;
+            frm_main.get_character_slot = 0;
             this.Close();
         }
 
         private void btn_character2_Click(object sender, EventArgs e)
         {
-            frm_main.get_character_slot = 2;
+            frm_main.get_character_slot = 1;
             this.Close();
         }
 
         private void btn_character3_Click(object sender, EventArgs e)
         {
-            frm_main.get_character_slot = 3;
+            frm_main.get_character_slot = 2;
             this.Close();
         }
 
         private void btn_character4_Click(object sender, EventArgs e)
         {
-            frm_main.get_character_slot = 4;
+            frm_main.get_character_slot = 3;
             this.Close();
         }
 
         private void btn_character5_Click(object sender, EventArgs e)
         {
-            frm_main.get_character_slot = 5;
+            frm_main.get_character_slot = 4;
             this.Close();
         }
     }
