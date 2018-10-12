@@ -261,7 +261,7 @@
             this.txt_event_number.Location = new System.Drawing.Point(139, 12);
             this.txt_event_number.Name = "txt_event_number";
             this.txt_event_number.Size = new System.Drawing.Size(57, 20);
-            this.txt_event_number.TabIndex = 20;
+            this.txt_event_number.TabIndex = 0;
             this.txt_event_number.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_event_number.TextChanged += new System.EventHandler(this.txt_event_number_TextChanged);
             // 
@@ -270,7 +270,7 @@
             this.txt_entrants_number.Location = new System.Drawing.Point(291, 12);
             this.txt_entrants_number.Name = "txt_entrants_number";
             this.txt_entrants_number.Size = new System.Drawing.Size(57, 20);
-            this.txt_entrants_number.TabIndex = 21;
+            this.txt_entrants_number.TabIndex = 1;
             this.txt_entrants_number.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_entrants_number.TextChanged += new System.EventHandler(this.txt_entrants_number_TextChanged);
             // 
@@ -288,7 +288,8 @@
             this.txt_template.Location = new System.Drawing.Point(101, 48);
             this.txt_template.Name = "txt_template";
             this.txt_template.Size = new System.Drawing.Size(238, 20);
-            this.txt_template.TabIndex = 23;
+            this.txt_template.TabIndex = 3;
+            this.txt_template.TabStop = false;
             this.txt_template.TextChanged += new System.EventHandler(this.txt_template_TextChanged);
             // 
             // btn_template
@@ -296,7 +297,7 @@
             this.btn_template.Location = new System.Drawing.Point(345, 48);
             this.btn_template.Name = "btn_template";
             this.btn_template.Size = new System.Drawing.Size(59, 20);
-            this.btn_template.TabIndex = 24;
+            this.btn_template.TabIndex = 2;
             this.btn_template.Text = "Browse";
             this.btn_template.UseVisualStyleBackColor = true;
             this.btn_template.Click += new System.EventHandler(this.btn_template_Click);
@@ -306,7 +307,7 @@
             this.txt_bracket_url.Location = new System.Drawing.Point(101, 74);
             this.txt_bracket_url.Name = "txt_bracket_url";
             this.txt_bracket_url.Size = new System.Drawing.Size(303, 20);
-            this.txt_bracket_url.TabIndex = 26;
+            this.txt_bracket_url.TabIndex = 4;
             this.txt_bracket_url.Text = "smash.gg/tps";
             // 
             // label12
@@ -324,7 +325,7 @@
             this.txt_stream_url.Location = new System.Drawing.Point(101, 100);
             this.txt_stream_url.Name = "txt_stream_url";
             this.txt_stream_url.Size = new System.Drawing.Size(303, 20);
-            this.txt_stream_url.TabIndex = 28;
+            this.txt_stream_url.TabIndex = 5;
             this.txt_stream_url.Text = "twitch.tv/ugsgaming";
             // 
             // label13
@@ -351,7 +352,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(392, 150);
-            this.tabControl1.TabIndex = 30;
+            this.tabControl1.TabIndex = 9;
             this.tabControl1.Click += new System.EventHandler(this.tabControl1_Click);
             // 
             // tabPage1
@@ -388,7 +389,7 @@
             0});
             this.nud_characters_1.Name = "nud_characters_1";
             this.nud_characters_1.Size = new System.Drawing.Size(43, 31);
-            this.nud_characters_1.TabIndex = 70;
+            this.nud_characters_1.TabIndex = 3;
             this.nud_characters_1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nud_characters_1.ValueChanged += new System.EventHandler(this.nud_characters_1_ValueChanged);
             // 
@@ -397,7 +398,7 @@
             this.txt_tag_1.Location = new System.Drawing.Point(46, 14);
             this.txt_tag_1.Name = "txt_tag_1";
             this.txt_tag_1.Size = new System.Drawing.Size(200, 20);
-            this.txt_tag_1.TabIndex = 56;
+            this.txt_tag_1.TabIndex = 0;
             this.txt_tag_1.TextChanged += new System.EventHandler(this.txt_tag_1_TextChanged);
             // 
             // label3
@@ -415,7 +416,7 @@
             this.btn_character_1_2.Location = new System.Drawing.Point(138, 78);
             this.btn_character_1_2.Name = "btn_character_1_2";
             this.btn_character_1_2.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_1_2.TabIndex = 64;
+            this.btn_character_1_2.TabIndex = 5;
             this.btn_character_1_2.Text = "+";
             this.btn_character_1_2.UseVisualStyleBackColor = true;
             this.btn_character_1_2.Visible = false;
@@ -440,7 +441,7 @@
             this.btn_team_browse_1.Location = new System.Drawing.Point(311, 59);
             this.btn_team_browse_1.Name = "btn_team_browse_1";
             this.btn_team_browse_1.Size = new System.Drawing.Size(59, 25);
-            this.btn_team_browse_1.TabIndex = 60;
+            this.btn_team_browse_1.TabIndex = 2;
             this.btn_team_browse_1.Text = "Browse";
             this.btn_team_browse_1.UseVisualStyleBackColor = true;
             this.btn_team_browse_1.Click += new System.EventHandler(this.btn_team_browse_1_Click);
@@ -451,7 +452,7 @@
             this.btn_character_1_1.Location = new System.Drawing.Point(100, 78);
             this.btn_character_1_1.Name = "btn_character_1_1";
             this.btn_character_1_1.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_1_1.TabIndex = 62;
+            this.btn_character_1_1.TabIndex = 4;
             this.btn_character_1_1.Text = "+";
             this.btn_character_1_1.UseVisualStyleBackColor = true;
             this.btn_character_1_1.Visible = false;
@@ -501,7 +502,7 @@
             this.ckb_team_image_1.Location = new System.Drawing.Point(273, 24);
             this.ckb_team_image_1.Name = "ckb_team_image_1";
             this.ckb_team_image_1.Size = new System.Drawing.Size(85, 17);
-            this.ckb_team_image_1.TabIndex = 58;
+            this.ckb_team_image_1.TabIndex = 1;
             this.ckb_team_image_1.Text = "Team Image";
             this.ckb_team_image_1.UseVisualStyleBackColor = true;
             this.ckb_team_image_1.CheckedChanged += new System.EventHandler(this.ckb_team_image_1_CheckedChanged);
@@ -512,7 +513,7 @@
             this.btn_character_1_3.Location = new System.Drawing.Point(176, 78);
             this.btn_character_1_3.Name = "btn_character_1_3";
             this.btn_character_1_3.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_1_3.TabIndex = 66;
+            this.btn_character_1_3.TabIndex = 6;
             this.btn_character_1_3.Text = "+";
             this.btn_character_1_3.UseVisualStyleBackColor = true;
             this.btn_character_1_3.Visible = false;
@@ -568,7 +569,7 @@
             0});
             this.nud_characters_2.Name = "nud_characters_2";
             this.nud_characters_2.Size = new System.Drawing.Size(43, 31);
-            this.nud_characters_2.TabIndex = 85;
+            this.nud_characters_2.TabIndex = 3;
             this.nud_characters_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nud_characters_2.Value = new decimal(new int[] {
             1,
@@ -582,7 +583,7 @@
             this.txt_tag_2.Location = new System.Drawing.Point(46, 14);
             this.txt_tag_2.Name = "txt_tag_2";
             this.txt_tag_2.Size = new System.Drawing.Size(200, 20);
-            this.txt_tag_2.TabIndex = 71;
+            this.txt_tag_2.TabIndex = 0;
             this.txt_tag_2.TextChanged += new System.EventHandler(this.txt_tag_2_TextChanged);
             // 
             // label5
@@ -600,7 +601,7 @@
             this.btn_character_2_2.Location = new System.Drawing.Point(138, 78);
             this.btn_character_2_2.Name = "btn_character_2_2";
             this.btn_character_2_2.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_2_2.TabIndex = 79;
+            this.btn_character_2_2.TabIndex = 5;
             this.btn_character_2_2.Text = "+";
             this.btn_character_2_2.UseVisualStyleBackColor = true;
             this.btn_character_2_2.Visible = false;
@@ -612,7 +613,7 @@
             this.btn_character_2_4.Location = new System.Drawing.Point(214, 78);
             this.btn_character_2_4.Name = "btn_character_2_4";
             this.btn_character_2_4.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_2_4.TabIndex = 83;
+            this.btn_character_2_4.TabIndex = 7;
             this.btn_character_2_4.Text = "+";
             this.btn_character_2_4.UseVisualStyleBackColor = true;
             this.btn_character_2_4.Visible = false;
@@ -637,7 +638,7 @@
             this.btn_team_browse_2.Location = new System.Drawing.Point(311, 59);
             this.btn_team_browse_2.Name = "btn_team_browse_2";
             this.btn_team_browse_2.Size = new System.Drawing.Size(59, 25);
-            this.btn_team_browse_2.TabIndex = 75;
+            this.btn_team_browse_2.TabIndex = 2;
             this.btn_team_browse_2.Text = "Browse";
             this.btn_team_browse_2.UseVisualStyleBackColor = true;
             this.btn_team_browse_2.Click += new System.EventHandler(this.btn_team_browse_2_Click);
@@ -647,7 +648,7 @@
             this.btn_character_2_1.Location = new System.Drawing.Point(100, 78);
             this.btn_character_2_1.Name = "btn_character_2_1";
             this.btn_character_2_1.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_2_1.TabIndex = 77;
+            this.btn_character_2_1.TabIndex = 4;
             this.btn_character_2_1.Text = "+";
             this.btn_character_2_1.UseVisualStyleBackColor = true;
             this.btn_character_2_1.Click += new System.EventHandler(this.btn_character_2_1_Click);
@@ -707,7 +708,7 @@
             this.ckb_team_image_2.Location = new System.Drawing.Point(273, 24);
             this.ckb_team_image_2.Name = "ckb_team_image_2";
             this.ckb_team_image_2.Size = new System.Drawing.Size(85, 17);
-            this.ckb_team_image_2.TabIndex = 73;
+            this.ckb_team_image_2.TabIndex = 1;
             this.ckb_team_image_2.Text = "Team Image";
             this.ckb_team_image_2.UseVisualStyleBackColor = true;
             this.ckb_team_image_2.CheckedChanged += new System.EventHandler(this.ckb_team_image_2_CheckedChanged);
@@ -718,7 +719,7 @@
             this.btn_character_2_3.Location = new System.Drawing.Point(176, 78);
             this.btn_character_2_3.Name = "btn_character_2_3";
             this.btn_character_2_3.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_2_3.TabIndex = 81;
+            this.btn_character_2_3.TabIndex = 6;
             this.btn_character_2_3.Text = "+";
             this.btn_character_2_3.UseVisualStyleBackColor = true;
             this.btn_character_2_3.Visible = false;
@@ -773,7 +774,7 @@
             0});
             this.nud_characters_3.Name = "nud_characters_3";
             this.nud_characters_3.Size = new System.Drawing.Size(43, 31);
-            this.nud_characters_3.TabIndex = 85;
+            this.nud_characters_3.TabIndex = 3;
             this.nud_characters_3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nud_characters_3.Value = new decimal(new int[] {
             1,
@@ -787,7 +788,7 @@
             this.txt_tag_3.Location = new System.Drawing.Point(46, 14);
             this.txt_tag_3.Name = "txt_tag_3";
             this.txt_tag_3.Size = new System.Drawing.Size(200, 20);
-            this.txt_tag_3.TabIndex = 71;
+            this.txt_tag_3.TabIndex = 0;
             this.txt_tag_3.TextChanged += new System.EventHandler(this.txt_tag_3_TextChanged);
             // 
             // label7
@@ -805,7 +806,7 @@
             this.btn_character_3_2.Location = new System.Drawing.Point(138, 78);
             this.btn_character_3_2.Name = "btn_character_3_2";
             this.btn_character_3_2.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_3_2.TabIndex = 79;
+            this.btn_character_3_2.TabIndex = 5;
             this.btn_character_3_2.Text = "+";
             this.btn_character_3_2.UseVisualStyleBackColor = true;
             this.btn_character_3_2.Visible = false;
@@ -817,7 +818,7 @@
             this.btn_character_3_4.Location = new System.Drawing.Point(214, 78);
             this.btn_character_3_4.Name = "btn_character_3_4";
             this.btn_character_3_4.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_3_4.TabIndex = 83;
+            this.btn_character_3_4.TabIndex = 7;
             this.btn_character_3_4.Text = "+";
             this.btn_character_3_4.UseVisualStyleBackColor = true;
             this.btn_character_3_4.Visible = false;
@@ -842,7 +843,7 @@
             this.btn_team_browse_3.Location = new System.Drawing.Point(311, 59);
             this.btn_team_browse_3.Name = "btn_team_browse_3";
             this.btn_team_browse_3.Size = new System.Drawing.Size(59, 25);
-            this.btn_team_browse_3.TabIndex = 75;
+            this.btn_team_browse_3.TabIndex = 2;
             this.btn_team_browse_3.Text = "Browse";
             this.btn_team_browse_3.UseVisualStyleBackColor = true;
             this.btn_team_browse_3.Click += new System.EventHandler(this.btn_team_browse_3_Click);
@@ -852,7 +853,7 @@
             this.btn_character_3_1.Location = new System.Drawing.Point(100, 78);
             this.btn_character_3_1.Name = "btn_character_3_1";
             this.btn_character_3_1.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_3_1.TabIndex = 77;
+            this.btn_character_3_1.TabIndex = 4;
             this.btn_character_3_1.Text = "+";
             this.btn_character_3_1.UseVisualStyleBackColor = true;
             this.btn_character_3_1.Click += new System.EventHandler(this.btn_character_3_1_Click);
@@ -912,7 +913,7 @@
             this.ckb_team_image_3.Location = new System.Drawing.Point(273, 24);
             this.ckb_team_image_3.Name = "ckb_team_image_3";
             this.ckb_team_image_3.Size = new System.Drawing.Size(85, 17);
-            this.ckb_team_image_3.TabIndex = 73;
+            this.ckb_team_image_3.TabIndex = 1;
             this.ckb_team_image_3.Text = "Team Image";
             this.ckb_team_image_3.UseVisualStyleBackColor = true;
             this.ckb_team_image_3.CheckedChanged += new System.EventHandler(this.ckb_team_image_3_CheckedChanged);
@@ -923,7 +924,7 @@
             this.btn_character_3_3.Location = new System.Drawing.Point(176, 78);
             this.btn_character_3_3.Name = "btn_character_3_3";
             this.btn_character_3_3.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_3_3.TabIndex = 81;
+            this.btn_character_3_3.TabIndex = 6;
             this.btn_character_3_3.Text = "+";
             this.btn_character_3_3.UseVisualStyleBackColor = true;
             this.btn_character_3_3.Visible = false;
@@ -978,7 +979,7 @@
             0});
             this.nud_characters_4.Name = "nud_characters_4";
             this.nud_characters_4.Size = new System.Drawing.Size(43, 31);
-            this.nud_characters_4.TabIndex = 85;
+            this.nud_characters_4.TabIndex = 3;
             this.nud_characters_4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nud_characters_4.Value = new decimal(new int[] {
             1,
@@ -992,7 +993,7 @@
             this.txt_tag_4.Location = new System.Drawing.Point(46, 14);
             this.txt_tag_4.Name = "txt_tag_4";
             this.txt_tag_4.Size = new System.Drawing.Size(200, 20);
-            this.txt_tag_4.TabIndex = 71;
+            this.txt_tag_4.TabIndex = 0;
             this.txt_tag_4.TextChanged += new System.EventHandler(this.txt_tag_4_TextChanged);
             // 
             // label14
@@ -1010,7 +1011,7 @@
             this.btn_character_4_2.Location = new System.Drawing.Point(138, 78);
             this.btn_character_4_2.Name = "btn_character_4_2";
             this.btn_character_4_2.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_4_2.TabIndex = 79;
+            this.btn_character_4_2.TabIndex = 5;
             this.btn_character_4_2.Text = "+";
             this.btn_character_4_2.UseVisualStyleBackColor = true;
             this.btn_character_4_2.Visible = false;
@@ -1022,7 +1023,7 @@
             this.btn_character_4_4.Location = new System.Drawing.Point(214, 78);
             this.btn_character_4_4.Name = "btn_character_4_4";
             this.btn_character_4_4.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_4_4.TabIndex = 83;
+            this.btn_character_4_4.TabIndex = 7;
             this.btn_character_4_4.Text = "+";
             this.btn_character_4_4.UseVisualStyleBackColor = true;
             this.btn_character_4_4.Visible = false;
@@ -1047,7 +1048,7 @@
             this.btn_team_browse_4.Location = new System.Drawing.Point(311, 59);
             this.btn_team_browse_4.Name = "btn_team_browse_4";
             this.btn_team_browse_4.Size = new System.Drawing.Size(59, 25);
-            this.btn_team_browse_4.TabIndex = 75;
+            this.btn_team_browse_4.TabIndex = 2;
             this.btn_team_browse_4.Text = "Browse";
             this.btn_team_browse_4.UseVisualStyleBackColor = true;
             this.btn_team_browse_4.Click += new System.EventHandler(this.btn_team_browse_4_Click);
@@ -1057,7 +1058,7 @@
             this.btn_character_4_1.Location = new System.Drawing.Point(100, 78);
             this.btn_character_4_1.Name = "btn_character_4_1";
             this.btn_character_4_1.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_4_1.TabIndex = 77;
+            this.btn_character_4_1.TabIndex = 4;
             this.btn_character_4_1.Text = "+";
             this.btn_character_4_1.UseVisualStyleBackColor = true;
             this.btn_character_4_1.Click += new System.EventHandler(this.btn_character_4_1_Click);
@@ -1117,7 +1118,7 @@
             this.ckb_team_image_4.Location = new System.Drawing.Point(273, 24);
             this.ckb_team_image_4.Name = "ckb_team_image_4";
             this.ckb_team_image_4.Size = new System.Drawing.Size(85, 17);
-            this.ckb_team_image_4.TabIndex = 73;
+            this.ckb_team_image_4.TabIndex = 1;
             this.ckb_team_image_4.Text = "Team Image";
             this.ckb_team_image_4.UseVisualStyleBackColor = true;
             this.ckb_team_image_4.CheckedChanged += new System.EventHandler(this.ckb_team_image_4_CheckedChanged);
@@ -1128,7 +1129,7 @@
             this.btn_character_4_3.Location = new System.Drawing.Point(176, 78);
             this.btn_character_4_3.Name = "btn_character_4_3";
             this.btn_character_4_3.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_4_3.TabIndex = 81;
+            this.btn_character_4_3.TabIndex = 6;
             this.btn_character_4_3.Text = "+";
             this.btn_character_4_3.UseVisualStyleBackColor = true;
             this.btn_character_4_3.Visible = false;
@@ -1183,7 +1184,7 @@
             0});
             this.nud_characters_5.Name = "nud_characters_5";
             this.nud_characters_5.Size = new System.Drawing.Size(43, 31);
-            this.nud_characters_5.TabIndex = 85;
+            this.nud_characters_5.TabIndex = 3;
             this.nud_characters_5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nud_characters_5.Value = new decimal(new int[] {
             1,
@@ -1197,7 +1198,7 @@
             this.txt_tag_5.Location = new System.Drawing.Point(46, 14);
             this.txt_tag_5.Name = "txt_tag_5";
             this.txt_tag_5.Size = new System.Drawing.Size(200, 20);
-            this.txt_tag_5.TabIndex = 71;
+            this.txt_tag_5.TabIndex = 0;
             this.txt_tag_5.TextChanged += new System.EventHandler(this.txt_tag_5_TextChanged);
             // 
             // label16
@@ -1215,7 +1216,7 @@
             this.btn_character_5_2.Location = new System.Drawing.Point(138, 78);
             this.btn_character_5_2.Name = "btn_character_5_2";
             this.btn_character_5_2.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_5_2.TabIndex = 79;
+            this.btn_character_5_2.TabIndex = 5;
             this.btn_character_5_2.Text = "+";
             this.btn_character_5_2.UseVisualStyleBackColor = true;
             this.btn_character_5_2.Visible = false;
@@ -1227,7 +1228,7 @@
             this.btn_character_5_4.Location = new System.Drawing.Point(214, 78);
             this.btn_character_5_4.Name = "btn_character_5_4";
             this.btn_character_5_4.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_5_4.TabIndex = 83;
+            this.btn_character_5_4.TabIndex = 7;
             this.btn_character_5_4.Text = "+";
             this.btn_character_5_4.UseVisualStyleBackColor = true;
             this.btn_character_5_4.Visible = false;
@@ -1252,7 +1253,7 @@
             this.btn_team_browse_5.Location = new System.Drawing.Point(311, 59);
             this.btn_team_browse_5.Name = "btn_team_browse_5";
             this.btn_team_browse_5.Size = new System.Drawing.Size(59, 25);
-            this.btn_team_browse_5.TabIndex = 75;
+            this.btn_team_browse_5.TabIndex = 2;
             this.btn_team_browse_5.Text = "Browse";
             this.btn_team_browse_5.UseVisualStyleBackColor = true;
             this.btn_team_browse_5.Click += new System.EventHandler(this.btn_team_browse_5_Click);
@@ -1262,7 +1263,7 @@
             this.btn_character_5_1.Location = new System.Drawing.Point(100, 78);
             this.btn_character_5_1.Name = "btn_character_5_1";
             this.btn_character_5_1.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_5_1.TabIndex = 77;
+            this.btn_character_5_1.TabIndex = 4;
             this.btn_character_5_1.Text = "+";
             this.btn_character_5_1.UseVisualStyleBackColor = true;
             this.btn_character_5_1.Click += new System.EventHandler(this.btn_character_5_1_Click);
@@ -1322,7 +1323,7 @@
             this.ckb_team_image_5.Location = new System.Drawing.Point(273, 24);
             this.ckb_team_image_5.Name = "ckb_team_image_5";
             this.ckb_team_image_5.Size = new System.Drawing.Size(85, 17);
-            this.ckb_team_image_5.TabIndex = 73;
+            this.ckb_team_image_5.TabIndex = 1;
             this.ckb_team_image_5.Text = "Team Image";
             this.ckb_team_image_5.UseVisualStyleBackColor = true;
             this.ckb_team_image_5.CheckedChanged += new System.EventHandler(this.ckb_team_image_5_CheckedChanged);
@@ -1333,7 +1334,7 @@
             this.btn_character_5_3.Location = new System.Drawing.Point(176, 78);
             this.btn_character_5_3.Name = "btn_character_5_3";
             this.btn_character_5_3.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_5_3.TabIndex = 81;
+            this.btn_character_5_3.TabIndex = 6;
             this.btn_character_5_3.Text = "+";
             this.btn_character_5_3.UseVisualStyleBackColor = true;
             this.btn_character_5_3.Visible = false;
@@ -1388,7 +1389,7 @@
             0});
             this.nud_characters_6.Name = "nud_characters_6";
             this.nud_characters_6.Size = new System.Drawing.Size(43, 31);
-            this.nud_characters_6.TabIndex = 85;
+            this.nud_characters_6.TabIndex = 3;
             this.nud_characters_6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nud_characters_6.Value = new decimal(new int[] {
             1,
@@ -1402,7 +1403,7 @@
             this.txt_tag_6.Location = new System.Drawing.Point(46, 14);
             this.txt_tag_6.Name = "txt_tag_6";
             this.txt_tag_6.Size = new System.Drawing.Size(200, 20);
-            this.txt_tag_6.TabIndex = 71;
+            this.txt_tag_6.TabIndex = 0;
             this.txt_tag_6.TextChanged += new System.EventHandler(this.txt_tag_6_TextChanged);
             // 
             // label18
@@ -1420,7 +1421,7 @@
             this.btn_character_6_2.Location = new System.Drawing.Point(138, 78);
             this.btn_character_6_2.Name = "btn_character_6_2";
             this.btn_character_6_2.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_6_2.TabIndex = 79;
+            this.btn_character_6_2.TabIndex = 5;
             this.btn_character_6_2.Text = "+";
             this.btn_character_6_2.UseVisualStyleBackColor = true;
             this.btn_character_6_2.Visible = false;
@@ -1432,7 +1433,7 @@
             this.btn_character_6_4.Location = new System.Drawing.Point(214, 78);
             this.btn_character_6_4.Name = "btn_character_6_4";
             this.btn_character_6_4.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_6_4.TabIndex = 83;
+            this.btn_character_6_4.TabIndex = 7;
             this.btn_character_6_4.Text = "+";
             this.btn_character_6_4.UseVisualStyleBackColor = true;
             this.btn_character_6_4.Visible = false;
@@ -1457,7 +1458,7 @@
             this.btn_team_browse_6.Location = new System.Drawing.Point(311, 59);
             this.btn_team_browse_6.Name = "btn_team_browse_6";
             this.btn_team_browse_6.Size = new System.Drawing.Size(59, 25);
-            this.btn_team_browse_6.TabIndex = 75;
+            this.btn_team_browse_6.TabIndex = 2;
             this.btn_team_browse_6.Text = "Browse";
             this.btn_team_browse_6.UseVisualStyleBackColor = true;
             this.btn_team_browse_6.Click += new System.EventHandler(this.btn_team_browse_6_Click);
@@ -1467,7 +1468,7 @@
             this.btn_character_6_1.Location = new System.Drawing.Point(100, 78);
             this.btn_character_6_1.Name = "btn_character_6_1";
             this.btn_character_6_1.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_6_1.TabIndex = 77;
+            this.btn_character_6_1.TabIndex = 4;
             this.btn_character_6_1.Text = "+";
             this.btn_character_6_1.UseVisualStyleBackColor = true;
             this.btn_character_6_1.Click += new System.EventHandler(this.btn_character_6_1_Click);
@@ -1527,7 +1528,7 @@
             this.ckb_team_image_6.Location = new System.Drawing.Point(273, 24);
             this.ckb_team_image_6.Name = "ckb_team_image_6";
             this.ckb_team_image_6.Size = new System.Drawing.Size(85, 17);
-            this.ckb_team_image_6.TabIndex = 73;
+            this.ckb_team_image_6.TabIndex = 1;
             this.ckb_team_image_6.Text = "Team Image";
             this.ckb_team_image_6.UseVisualStyleBackColor = true;
             this.ckb_team_image_6.CheckedChanged += new System.EventHandler(this.ckb_team_image_6_CheckedChanged);
@@ -1538,7 +1539,7 @@
             this.btn_character_6_3.Location = new System.Drawing.Point(176, 78);
             this.btn_character_6_3.Name = "btn_character_6_3";
             this.btn_character_6_3.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_6_3.TabIndex = 81;
+            this.btn_character_6_3.TabIndex = 6;
             this.btn_character_6_3.Text = "+";
             this.btn_character_6_3.UseVisualStyleBackColor = true;
             this.btn_character_6_3.Visible = false;
@@ -1593,7 +1594,7 @@
             0});
             this.nud_characters_7.Name = "nud_characters_7";
             this.nud_characters_7.Size = new System.Drawing.Size(43, 31);
-            this.nud_characters_7.TabIndex = 85;
+            this.nud_characters_7.TabIndex = 3;
             this.nud_characters_7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nud_characters_7.Value = new decimal(new int[] {
             1,
@@ -1607,7 +1608,7 @@
             this.txt_tag_7.Location = new System.Drawing.Point(46, 14);
             this.txt_tag_7.Name = "txt_tag_7";
             this.txt_tag_7.Size = new System.Drawing.Size(200, 20);
-            this.txt_tag_7.TabIndex = 71;
+            this.txt_tag_7.TabIndex = 0;
             this.txt_tag_7.TextChanged += new System.EventHandler(this.txt_tag_7_TextChanged);
             // 
             // label20
@@ -1625,7 +1626,7 @@
             this.btn_character_7_2.Location = new System.Drawing.Point(138, 78);
             this.btn_character_7_2.Name = "btn_character_7_2";
             this.btn_character_7_2.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_7_2.TabIndex = 79;
+            this.btn_character_7_2.TabIndex = 5;
             this.btn_character_7_2.Text = "+";
             this.btn_character_7_2.UseVisualStyleBackColor = true;
             this.btn_character_7_2.Visible = false;
@@ -1637,7 +1638,7 @@
             this.btn_character_7_4.Location = new System.Drawing.Point(214, 78);
             this.btn_character_7_4.Name = "btn_character_7_4";
             this.btn_character_7_4.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_7_4.TabIndex = 83;
+            this.btn_character_7_4.TabIndex = 7;
             this.btn_character_7_4.Text = "+";
             this.btn_character_7_4.UseVisualStyleBackColor = true;
             this.btn_character_7_4.Visible = false;
@@ -1662,7 +1663,7 @@
             this.btn_team_browse_7.Location = new System.Drawing.Point(311, 59);
             this.btn_team_browse_7.Name = "btn_team_browse_7";
             this.btn_team_browse_7.Size = new System.Drawing.Size(59, 25);
-            this.btn_team_browse_7.TabIndex = 75;
+            this.btn_team_browse_7.TabIndex = 2;
             this.btn_team_browse_7.Text = "Browse";
             this.btn_team_browse_7.UseVisualStyleBackColor = true;
             this.btn_team_browse_7.Click += new System.EventHandler(this.btn_team_browse_7_Click);
@@ -1672,7 +1673,7 @@
             this.btn_character_7_1.Location = new System.Drawing.Point(100, 78);
             this.btn_character_7_1.Name = "btn_character_7_1";
             this.btn_character_7_1.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_7_1.TabIndex = 77;
+            this.btn_character_7_1.TabIndex = 4;
             this.btn_character_7_1.Text = "+";
             this.btn_character_7_1.UseVisualStyleBackColor = true;
             this.btn_character_7_1.Click += new System.EventHandler(this.btn_character_7_1_Click);
@@ -1732,7 +1733,7 @@
             this.ckb_team_image_7.Location = new System.Drawing.Point(273, 24);
             this.ckb_team_image_7.Name = "ckb_team_image_7";
             this.ckb_team_image_7.Size = new System.Drawing.Size(85, 17);
-            this.ckb_team_image_7.TabIndex = 73;
+            this.ckb_team_image_7.TabIndex = 1;
             this.ckb_team_image_7.Text = "Team Image";
             this.ckb_team_image_7.UseVisualStyleBackColor = true;
             this.ckb_team_image_7.CheckedChanged += new System.EventHandler(this.ckb_team_image_7_CheckedChanged);
@@ -1743,7 +1744,7 @@
             this.btn_character_7_3.Location = new System.Drawing.Point(176, 78);
             this.btn_character_7_3.Name = "btn_character_7_3";
             this.btn_character_7_3.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_7_3.TabIndex = 81;
+            this.btn_character_7_3.TabIndex = 6;
             this.btn_character_7_3.Text = "+";
             this.btn_character_7_3.UseVisualStyleBackColor = true;
             this.btn_character_7_3.Visible = false;
@@ -1798,7 +1799,7 @@
             0});
             this.nud_characters_8.Name = "nud_characters_8";
             this.nud_characters_8.Size = new System.Drawing.Size(43, 31);
-            this.nud_characters_8.TabIndex = 85;
+            this.nud_characters_8.TabIndex = 3;
             this.nud_characters_8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nud_characters_8.Value = new decimal(new int[] {
             1,
@@ -1812,7 +1813,7 @@
             this.txt_tag_8.Location = new System.Drawing.Point(46, 14);
             this.txt_tag_8.Name = "txt_tag_8";
             this.txt_tag_8.Size = new System.Drawing.Size(200, 20);
-            this.txt_tag_8.TabIndex = 71;
+            this.txt_tag_8.TabIndex = 0;
             this.txt_tag_8.TextChanged += new System.EventHandler(this.txt_tag_8_TextChanged);
             // 
             // label1
@@ -1830,7 +1831,7 @@
             this.btn_character_8_2.Location = new System.Drawing.Point(138, 78);
             this.btn_character_8_2.Name = "btn_character_8_2";
             this.btn_character_8_2.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_8_2.TabIndex = 79;
+            this.btn_character_8_2.TabIndex = 5;
             this.btn_character_8_2.Text = "+";
             this.btn_character_8_2.UseVisualStyleBackColor = true;
             this.btn_character_8_2.Visible = false;
@@ -1842,7 +1843,7 @@
             this.btn_character_8_4.Location = new System.Drawing.Point(214, 78);
             this.btn_character_8_4.Name = "btn_character_8_4";
             this.btn_character_8_4.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_8_4.TabIndex = 83;
+            this.btn_character_8_4.TabIndex = 7;
             this.btn_character_8_4.Text = "+";
             this.btn_character_8_4.UseVisualStyleBackColor = true;
             this.btn_character_8_4.Visible = false;
@@ -1867,7 +1868,7 @@
             this.btn_team_browse_8.Location = new System.Drawing.Point(311, 59);
             this.btn_team_browse_8.Name = "btn_team_browse_8";
             this.btn_team_browse_8.Size = new System.Drawing.Size(59, 25);
-            this.btn_team_browse_8.TabIndex = 75;
+            this.btn_team_browse_8.TabIndex = 2;
             this.btn_team_browse_8.Text = "Browse";
             this.btn_team_browse_8.UseVisualStyleBackColor = true;
             this.btn_team_browse_8.Click += new System.EventHandler(this.btn_team_browse_8_Click);
@@ -1877,7 +1878,7 @@
             this.btn_character_8_1.Location = new System.Drawing.Point(100, 78);
             this.btn_character_8_1.Name = "btn_character_8_1";
             this.btn_character_8_1.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_8_1.TabIndex = 77;
+            this.btn_character_8_1.TabIndex = 4;
             this.btn_character_8_1.Text = "+";
             this.btn_character_8_1.UseVisualStyleBackColor = true;
             this.btn_character_8_1.Click += new System.EventHandler(this.btn_character_8_1_Click);
@@ -1937,7 +1938,7 @@
             this.ckb_team_image_8.Location = new System.Drawing.Point(273, 24);
             this.ckb_team_image_8.Name = "ckb_team_image_8";
             this.ckb_team_image_8.Size = new System.Drawing.Size(85, 17);
-            this.ckb_team_image_8.TabIndex = 73;
+            this.ckb_team_image_8.TabIndex = 1;
             this.ckb_team_image_8.Text = "Team Image";
             this.ckb_team_image_8.UseVisualStyleBackColor = true;
             this.ckb_team_image_8.CheckedChanged += new System.EventHandler(this.ckb_team_image_8_CheckedChanged);
@@ -1948,7 +1949,7 @@
             this.btn_character_8_3.Location = new System.Drawing.Point(176, 78);
             this.btn_character_8_3.Name = "btn_character_8_3";
             this.btn_character_8_3.Size = new System.Drawing.Size(32, 32);
-            this.btn_character_8_3.TabIndex = 81;
+            this.btn_character_8_3.TabIndex = 6;
             this.btn_character_8_3.Text = "+";
             this.btn_character_8_3.UseVisualStyleBackColor = true;
             this.btn_character_8_3.Visible = false;
@@ -1977,7 +1978,7 @@
             this.btn_save_file.Location = new System.Drawing.Point(298, 388);
             this.btn_save_file.Name = "btn_save_file";
             this.btn_save_file.Size = new System.Drawing.Size(88, 40);
-            this.btn_save_file.TabIndex = 35;
+            this.btn_save_file.TabIndex = 11;
             this.btn_save_file.Text = "Save File";
             this.btn_save_file.UseVisualStyleBackColor = true;
             this.btn_save_file.Click += new System.EventHandler(this.btn_save_file_Click);
@@ -2021,7 +2022,7 @@
             this.txt_first_addx.MaxLength = 4;
             this.txt_first_addx.Name = "txt_first_addx";
             this.txt_first_addx.Size = new System.Drawing.Size(40, 20);
-            this.txt_first_addx.TabIndex = 40;
+            this.txt_first_addx.TabIndex = 7;
             this.txt_first_addx.Text = "0";
             this.txt_first_addx.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_first_addx.TextChanged += new System.EventHandler(this.txt_first_addx_TextChanged);
@@ -2035,7 +2036,7 @@
             this.txt_first_addy.MaxLength = 4;
             this.txt_first_addy.Name = "txt_first_addy";
             this.txt_first_addy.Size = new System.Drawing.Size(40, 20);
-            this.txt_first_addy.TabIndex = 42;
+            this.txt_first_addy.TabIndex = 8;
             this.txt_first_addy.Text = "0";
             this.txt_first_addy.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_first_addy.TextChanged += new System.EventHandler(this.txt_first_addy_TextChanged);
@@ -2057,7 +2058,7 @@
             this.btn_firstplace_browse.Location = new System.Drawing.Point(258, 200);
             this.btn_firstplace_browse.Name = "btn_firstplace_browse";
             this.btn_firstplace_browse.Size = new System.Drawing.Size(75, 23);
-            this.btn_firstplace_browse.TabIndex = 43;
+            this.btn_firstplace_browse.TabIndex = 6;
             this.btn_firstplace_browse.Text = "Browse";
             this.btn_firstplace_browse.UseVisualStyleBackColor = true;
             this.btn_firstplace_browse.Click += new System.EventHandler(this.btn_firstplace_browse_Click);
@@ -2067,7 +2068,8 @@
             this.button1.Location = new System.Drawing.Point(47, 388);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(88, 40);
-            this.button1.TabIndex = 44;
+            this.button1.TabIndex = 10;
+            this.button1.TabStop = false;
             this.button1.Text = "Reset";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);

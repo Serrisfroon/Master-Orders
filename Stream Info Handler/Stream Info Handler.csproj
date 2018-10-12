@@ -22,7 +22,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>57</ApplicationRevision>
+    <ApplicationRevision>61</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -115,17 +115,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComboBoxTools.cs" />
+    <Compile Include="frm_save_player.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_save_player.Designer.cs">
+      <DependentUpon>frm_save_player.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_main.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm_main.Designer.cs">
       <DependentUpon>frm_main.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frm_characters.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_characters.Designer.cs">
-      <DependentUpon>frm_characters.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_error.cs">
       <SubType>Form</SubType>
@@ -133,11 +133,11 @@
     <Compile Include="frm_error.Designer.cs">
       <DependentUpon>frm_error.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_region.cs">
+    <Compile Include="frm_replace_character.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_region.Designer.cs">
-      <DependentUpon>frm_region.cs</DependentUpon>
+    <Compile Include="frm_replace_character.Designer.cs">
+      <DependentUpon>frm_replace_character.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_settings_start.cs">
       <SubType>Form</SubType>
@@ -151,12 +151,6 @@
     <Compile Include="frm_uploading.Designer.cs">
       <DependentUpon>frm_uploading.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_score_images.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_score_images.Designer.cs">
-      <DependentUpon>frm_score_images.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="frm_results.cs">
@@ -165,26 +159,23 @@
     <Compile Include="frm_results.Designer.cs">
       <DependentUpon>frm_results.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frm_save_player.resx">
+      <DependentUpon>frm_save_player.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_main.resx">
       <DependentUpon>frm_main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_characters.resx">
-      <DependentUpon>frm_characters.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_error.resx">
       <DependentUpon>frm_error.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_region.resx">
-      <DependentUpon>frm_region.cs</DependentUpon>
+    <EmbeddedResource Include="frm_replace_character.resx">
+      <DependentUpon>frm_replace_character.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_settings_start.resx">
       <DependentUpon>frm_settings_start.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_uploading.resx">
       <DependentUpon>frm_uploading.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_score_images.resx">
-      <DependentUpon>frm_score_images.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

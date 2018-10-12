@@ -202,7 +202,7 @@ namespace Stream_Info_Handler
                 await videosInsertRequest.UploadAsync();
             }
 
-            if (global_values.enable_playlists == true)
+            if (global_values.playlist_name != "" && global_values.playlist_name != null)
             {
                 // Add a video to the newly created playlist.
                 var newPlaylistItem = new PlaylistItem();
@@ -256,7 +256,6 @@ namespace Stream_Info_Handler
             btn_upload_cancel.Enabled = true;
             btn_upload_cancel.Text = @"Finish";
         }
-
     }
 
 }

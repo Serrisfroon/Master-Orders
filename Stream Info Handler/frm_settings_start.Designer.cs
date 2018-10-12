@@ -81,7 +81,7 @@
             this.btn_thumb_directory.Location = new System.Drawing.Point(258, 57);
             this.btn_thumb_directory.Name = "btn_thumb_directory";
             this.btn_thumb_directory.Size = new System.Drawing.Size(65, 22);
-            this.btn_thumb_directory.TabIndex = 2;
+            this.btn_thumb_directory.TabIndex = 0;
             this.btn_thumb_directory.Text = "Browse";
             this.btn_thumb_directory.UseVisualStyleBackColor = true;
             this.btn_thumb_directory.Click += new System.EventHandler(this.btn_thumb_directory_Click);
@@ -93,6 +93,7 @@
             this.txt_thumbnail_directory.Name = "txt_thumbnail_directory";
             this.txt_thumbnail_directory.Size = new System.Drawing.Size(240, 20);
             this.txt_thumbnail_directory.TabIndex = 1;
+            this.txt_thumbnail_directory.TabStop = false;
             this.txt_thumbnail_directory.TextChanged += new System.EventHandler(this.txt_thumbnail_directory_TextChanged);
             // 
             // btn_browse_roster
@@ -100,7 +101,7 @@
             this.btn_browse_roster.Location = new System.Drawing.Point(258, 135);
             this.btn_browse_roster.Name = "btn_browse_roster";
             this.btn_browse_roster.Size = new System.Drawing.Size(65, 22);
-            this.btn_browse_roster.TabIndex = 7;
+            this.btn_browse_roster.TabIndex = 4;
             this.btn_browse_roster.Text = "Browse";
             this.btn_browse_roster.UseVisualStyleBackColor = true;
             this.btn_browse_roster.Click += new System.EventHandler(this.btn_browse_roster_Click);
@@ -110,7 +111,8 @@
             this.txt_roster_directory.Location = new System.Drawing.Point(12, 135);
             this.txt_roster_directory.Name = "txt_roster_directory";
             this.txt_roster_directory.Size = new System.Drawing.Size(240, 20);
-            this.txt_roster_directory.TabIndex = 6;
+            this.txt_roster_directory.TabIndex = 5;
+            this.txt_roster_directory.TabStop = false;
             this.txt_roster_directory.TextChanged += new System.EventHandler(this.txt_roster_directory_TextChanged);
             // 
             // label5
@@ -128,7 +130,8 @@
             this.txt_stream_directory.Location = new System.Drawing.Point(12, 175);
             this.txt_stream_directory.Name = "txt_stream_directory";
             this.txt_stream_directory.Size = new System.Drawing.Size(240, 20);
-            this.txt_stream_directory.TabIndex = 8;
+            this.txt_stream_directory.TabIndex = 7;
+            this.txt_stream_directory.TabStop = false;
             this.txt_stream_directory.TextChanged += new System.EventHandler(this.txt_stream_directory_TextChanged);
             // 
             // btn_output
@@ -137,7 +140,7 @@
             this.btn_output.Location = new System.Drawing.Point(258, 173);
             this.btn_output.Name = "btn_output";
             this.btn_output.Size = new System.Drawing.Size(65, 22);
-            this.btn_output.TabIndex = 9;
+            this.btn_output.TabIndex = 6;
             this.btn_output.Text = "Browse";
             this.btn_output.UseVisualStyleBackColor = true;
             this.btn_output.Click += new System.EventHandler(this.btn_output_Click);
@@ -159,7 +162,7 @@
             this.groupBox2.Location = new System.Drawing.Point(12, 201);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(146, 71);
-            this.groupBox2.TabIndex = 30;
+            this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Scoreboard Updating";
             // 
@@ -169,7 +172,7 @@
             this.rdb_manual.Location = new System.Drawing.Point(21, 42);
             this.rdb_manual.Name = "rdb_manual";
             this.rdb_manual.Size = new System.Drawing.Size(103, 17);
-            this.rdb_manual.TabIndex = 12;
+            this.rdb_manual.TabIndex = 1;
             this.rdb_manual.Text = "Manual Updates";
             this.rdb_manual.UseVisualStyleBackColor = true;
             this.rdb_manual.CheckedChanged += new System.EventHandler(this.rdb_manual_CheckedChanged);
@@ -181,7 +184,7 @@
             this.rdb_automatic.Location = new System.Drawing.Point(21, 19);
             this.rdb_automatic.Name = "rdb_automatic";
             this.rdb_automatic.Size = new System.Drawing.Size(115, 17);
-            this.rdb_automatic.TabIndex = 11;
+            this.rdb_automatic.TabIndex = 0;
             this.rdb_automatic.TabStop = true;
             this.rdb_automatic.Text = "Automatic Updates";
             this.rdb_automatic.UseVisualStyleBackColor = true;
@@ -192,7 +195,7 @@
             this.btn_finish.Location = new System.Drawing.Point(109, 278);
             this.btn_finish.Name = "btn_finish";
             this.btn_finish.Size = new System.Drawing.Size(114, 39);
-            this.btn_finish.TabIndex = 13;
+            this.btn_finish.TabIndex = 10;
             this.btn_finish.Text = "Finish";
             this.btn_finish.UseVisualStyleBackColor = true;
             this.btn_finish.Click += new System.EventHandler(this.btn_finish_Click);
@@ -218,7 +221,7 @@
             this.btn_vods.Location = new System.Drawing.Point(258, 96);
             this.btn_vods.Name = "btn_vods";
             this.btn_vods.Size = new System.Drawing.Size(65, 22);
-            this.btn_vods.TabIndex = 31;
+            this.btn_vods.TabIndex = 2;
             this.btn_vods.Text = "Browse";
             this.btn_vods.UseVisualStyleBackColor = true;
             this.btn_vods.Click += new System.EventHandler(this.btn_vods_Click);
@@ -229,7 +232,8 @@
             this.txt_vods.Location = new System.Drawing.Point(12, 96);
             this.txt_vods.Name = "txt_vods";
             this.txt_vods.Size = new System.Drawing.Size(240, 20);
-            this.txt_vods.TabIndex = 32;
+            this.txt_vods.TabIndex = 3;
+            this.txt_vods.TabStop = false;
             this.txt_vods.TextChanged += new System.EventHandler(this.txt_vods_TextChanged);
             // 
             // groupBox1
@@ -239,7 +243,7 @@
             this.groupBox1.Location = new System.Drawing.Point(177, 201);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(146, 71);
-            this.groupBox1.TabIndex = 31;
+            this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Stream Software";
             // 
@@ -249,7 +253,7 @@
             this.radioButton1.Location = new System.Drawing.Point(21, 42);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(80, 17);
-            this.radioButton1.TabIndex = 12;
+            this.radioButton1.TabIndex = 1;
             this.radioButton1.Text = "OBS Studio";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
@@ -261,7 +265,7 @@
             this.radioButton2.Location = new System.Drawing.Point(21, 19);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(52, 17);
-            this.radioButton2.TabIndex = 11;
+            this.radioButton2.TabIndex = 0;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "XSplit";
             this.radioButton2.UseVisualStyleBackColor = true;

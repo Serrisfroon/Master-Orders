@@ -13,6 +13,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -138,9 +139,20 @@ namespace Stream_Info_Handler
                     complete_update = false;
                 }
             }
-
-            if(complete_update == true)
+            if (txt_vods.Text != @"")
             {
+                if (!Directory.Exists(txt_vods.Text))
+                {
+                    txt_vods.BackColor = Color.Red;
+                    complete_update = false;
+                }
+            }
+
+            if (complete_update == true)
+            {
+                string default_youtube_description =
+                    "INFO_TOURNAMENT | INFO_DATE \r\nINFO_BRACKET\r\nRomeoville, Illinois \r\nOrganized and streamed by UGS Gaming \r\nWatch live at https://www.twitch.tv/ugsgaming \r\nFollow us and our players on Twitter! \r\n@UGS_GAMlNG \r\nINFO_PLAYER1: INFO_TWITTER1 \r\nINFO_PLAYER2: INFO_TWITTER2";
+                default_youtube_description = Regex.Replace(default_youtube_description, @"\r\n|\n|\r", Environment.NewLine);
                 XDocument doc = new XDocument(
                     new XElement("Master-Orders-Settings",
                     new XElement("directories",
@@ -151,16 +163,18 @@ namespace Stream_Info_Handler
                          ),
                     new XElement("youtube",
                          new XElement("enable-youtube", "false"),
-                         new XElement("username", ""),
+                         new XElement("username", "Master Orders Integration"),
                          new XElement("json-file", ""),
                          new XElement("copy-title", "false"),
-                         new XElement("use-playlist", "false")
-                         new XElement("default-description", "")
+                         new XElement("playlist-name", ""),
+                         new XElement("playlist-id", ""),
+                         new XElement("default-description", default_youtube_description)
                         ),
                     new XElement("google-sheets",
                          new XElement("enable-sheets", "false"),
                          new XElement("startup-sheets", "false"),
                          new XElement("sheet-style", "info-and-queue"),
+                         new XElement("sheet-info", "info-and-queue"),
                          new XElement("sheets-id", "")
                         ),
                     new XElement("image-scoring",
@@ -177,7 +191,7 @@ namespace Stream_Info_Handler
                          new XElement("stream-software", software)
                         )));
 
-                doc.Save(@"C:\Users\Public\Stream Info Handler\settings.xml");
+                doc.Save(@"settings.xml");
                 this.Close();
             }
         }

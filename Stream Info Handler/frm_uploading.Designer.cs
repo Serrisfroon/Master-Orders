@@ -61,7 +61,7 @@
             this.txt_videotitle.Location = new System.Drawing.Point(11, 25);
             this.txt_videotitle.Name = "txt_videotitle";
             this.txt_videotitle.Size = new System.Drawing.Size(493, 22);
-            this.txt_videotitle.TabIndex = 1;
+            this.txt_videotitle.TabIndex = 0;
             // 
             // lbl_videotitle
             // 
@@ -87,7 +87,7 @@
             this.txt_description.Multiline = true;
             this.txt_description.Name = "txt_description";
             this.txt_description.Size = new System.Drawing.Size(247, 122);
-            this.txt_description.TabIndex = 4;
+            this.txt_description.TabIndex = 3;
             // 
             // btn_upload_cancel
             // 
@@ -105,7 +105,7 @@
             this.btn_upload_video.Location = new System.Drawing.Point(302, 235);
             this.btn_upload_video.Name = "btn_upload_video";
             this.btn_upload_video.Size = new System.Drawing.Size(98, 40);
-            this.btn_upload_video.TabIndex = 6;
+            this.btn_upload_video.TabIndex = 4;
             this.btn_upload_video.Text = "Upload Video";
             this.btn_upload_video.UseVisualStyleBackColor = true;
             this.btn_upload_video.Click += new System.EventHandler(this.btn_upload_video_Click);
@@ -116,7 +116,7 @@
             this.txt_videofile.Location = new System.Drawing.Point(11, 66);
             this.txt_videofile.Name = "txt_videofile";
             this.txt_videofile.Size = new System.Drawing.Size(409, 22);
-            this.txt_videofile.TabIndex = 7;
+            this.txt_videofile.TabIndex = 2;
             this.txt_videofile.TextChanged += new System.EventHandler(this.txt_videofile_TextChanged);
             // 
             // label2
@@ -133,7 +133,7 @@
             this.btn_videofile.Location = new System.Drawing.Point(426, 66);
             this.btn_videofile.Name = "btn_videofile";
             this.btn_videofile.Size = new System.Drawing.Size(79, 22);
-            this.btn_videofile.TabIndex = 9;
+            this.btn_videofile.TabIndex = 1;
             this.btn_videofile.Text = "Browse";
             this.btn_videofile.UseVisualStyleBackColor = true;
             this.btn_videofile.Click += new System.EventHandler(this.btn_videofile_Click);

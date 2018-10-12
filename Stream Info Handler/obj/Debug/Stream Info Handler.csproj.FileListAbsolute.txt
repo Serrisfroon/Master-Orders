@@ -162,11 +162,9 @@ C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Goog
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.YouTube.v3.xml
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Newtonsoft.Json.xml
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_main.resources
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_characters.resources
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_error.resources
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_settings_start.resources
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_uploading.resources
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_score_images.resources
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Properties.Resources.resources
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_results.resources
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.GenerateResource.cache
@@ -179,4 +177,5 @@ C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Mast
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csprojResolveAssemblyReference.cache
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\blue.gif
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Resources\save_button.png
-C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_region.resources
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_save_player.resources
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_replace_character.resources
