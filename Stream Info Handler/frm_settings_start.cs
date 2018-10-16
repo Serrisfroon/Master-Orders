@@ -188,10 +188,11 @@ namespace Stream_Info_Handler
                         ),
                     new XElement("etc",
                          new XElement("automatic-updates", auto_update),
-                         new XElement("stream-software", software)
+                         new XElement("stream-software", software),
+                         new XElement("settings-version", "2")
                         )));
 
-                doc.Save(@"settings.xml");
+                doc.Save(global_values.settings_file);
                 this.Close();
             }
         }

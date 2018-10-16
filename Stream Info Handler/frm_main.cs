@@ -68,7 +68,7 @@ namespace Stream_Info_Handler
         //Initialize the variables containing YouTube Playlist information
         List<string> playlist_items = new List<string>();
         List<string> playlist_names = new List<string>();
-        const int MAX_PLAYERS = 200;
+        public const int MAX_PLAYERS = 200;
 
 
         public frm_main()
@@ -117,7 +117,7 @@ namespace Stream_Info_Handler
                 Directory.CreateDirectory(@"C:\Users\Public\Stream Info Handler");
             }
 
-            if (!File.Exists(@"settings.xml"))
+            if (!File.Exists(global_values.settings_file))
             {
                 //Show the settings initial setup window to create a settings file
                 var settings_box = new frm_settings_start();
@@ -130,7 +130,21 @@ namespace Stream_Info_Handler
 
 
             //Load the settings file data
-            XDocument xml = XDocument.Load(@"settings.xml");
+            XDocument xml = XDocument.Load(global_values.settings_file);
+
+            string version = (string)xml.Root.Element("etc").Element("settings-version");
+            if (version != "2")
+            {
+                MessageBox.Show("The settings file is out of date and must be recreated.");
+                File.Delete(global_values.settings_file);
+                //Show the settings initial setup window to create a settings file
+                var settings_box = new frm_settings_start();
+                Point starting_location = this.Location;
+                starting_location = Point.Add(starting_location, new Size(0, -200));
+                settings_box.Location = starting_location;
+                settings_box.ShowDialog();
+                xml = XDocument.Load(global_values.settings_file);
+            }
 
 
 
@@ -338,7 +352,7 @@ namespace Stream_Info_Handler
                     xml.Root.Element("google-sheets").Element("startup-sheets").ReplaceWith(new XElement("startup-sheets", "False"));
                     xml.Root.Element("google-sheets").Element("sheets-id").ReplaceWith(new XElement("sheets-id", ""));
                     xml.Root.Element("youtube").Element("json-file").ReplaceWith(new XElement("json-file", ""));
-                    xml.Save(@"settings.xml");
+                    xml.Save(global_values.settings_file);
                     ignore_settings = true;
 
                     if (startup_sheets == "True")
@@ -361,7 +375,7 @@ namespace Stream_Info_Handler
                     xml.Root.Element("google-sheets").Element("startup-sheets").ReplaceWith(new XElement("startup-sheets", "True"));
                     xml.Root.Element("google-sheets").Element("sheets-id").ReplaceWith(new XElement("sheets-id", txt_sheets.Text));
                     xml.Root.Element("youtube").Element("json-file").ReplaceWith(new XElement("json-file", global_values.json_file));
-                    xml.Save(@"settings.xml");
+                    xml.Save(global_values.settings_file);
                     //Enable the player data save buttons
                     btn_save1.Enabled = true;
                     btn_save1.Visible = true;
@@ -872,9 +886,9 @@ namespace Stream_Info_Handler
                     global_values.game_path = txt_roster_directory.Text;                    //Save the directory
 
                     //Save the setting to the settings file
-                    XDocument xml = XDocument.Load(@"settings.xml");
+                    XDocument xml = XDocument.Load(global_values.settings_file);
                     xml.Root.Element("directories").Element("game-directory").ReplaceWith(new XElement("game-directory", txt_roster_directory.Text));
-                    xml.Save(@"settings.xml");
+                    xml.Save(global_values.settings_file);
                 }
                 else
                 {
@@ -1042,9 +1056,9 @@ namespace Stream_Info_Handler
                 {
                     global_values.output_directory = txt_stream_directory.Text;         //Save the directory
                                                                                                 //Save the setting to the settings file
-                    XDocument xml = XDocument.Load(@"settings.xml");
+                    XDocument xml = XDocument.Load(global_values.settings_file);
                     xml.Element("stream-directory").ReplaceWith(new XElement("stream-directory", txt_stream_directory.Text));
-                    xml.Save(@"settings.xml");
+                    xml.Save(global_values.settings_file);
                 }
             }
         }
@@ -1110,9 +1124,9 @@ namespace Stream_Info_Handler
                 {
                     global_values.thumbnail_directory = txt_thumbnail_directory.Text;              //Save the directory
                                                                                                    //Save the information to the settings file
-                    XDocument xml = XDocument.Load(@"settings.xml");
+                    XDocument xml = XDocument.Load(global_values.settings_file);
                     xml.Root.Element("directories").Element("thumbnail-directory").ReplaceWith(new XElement("thumbnail-directory", txt_thumbnail_directory.Text));
-                    xml.Save(@"settings.xml");
+                    xml.Save(global_values.settings_file);
                 }
             }
         }
@@ -1122,7 +1136,7 @@ namespace Stream_Info_Handler
             decimal current_point = nud_score1.Value;       //Pull the current game wins for Player 1
 
             //Keep the current point value at or below the match point value
-            if (current_point >= 3)
+            if (current_point >= 3 && ckb_scoreboad.Checked == true)
             {
                 nud_score1.Value = 3;
             }
@@ -1173,7 +1187,7 @@ namespace Stream_Info_Handler
         {
             decimal current_point = nud_score2.Value;
 
-            if (current_point >= 3)
+            if (current_point >= 3 && ckb_scoreboad.Checked == true)
             {
                 nud_score2.Value = 3;
             }
@@ -1488,9 +1502,9 @@ namespace Stream_Info_Handler
             {
                 txt_json.Text = openFileDialog1.FileName;
                 global_values.json_file = txt_json.Text;
-                XDocument xml = XDocument.Load(@"settings.xml");
+                XDocument xml = XDocument.Load(global_values.settings_file);
                 xml.Root.Element("youtube").Element("json-file").ReplaceWith(new XElement("json-file", txt_json.Text));
-                xml.Save(@"settings.xml");
+                xml.Save(global_values.settings_file);
             }
         }
 
@@ -1503,9 +1517,9 @@ namespace Stream_Info_Handler
                 {
                     txt_json.BackColor = Color.White;
                     global_values.json_file = txt_json.Text;
-                    XDocument xml = XDocument.Load(@"settings.xml");
+                    XDocument xml = XDocument.Load(global_values.settings_file);
                     xml.Root.Element("youtube").Element("json-file").ReplaceWith(new XElement("json-file", txt_json.Text));
-                    xml.Save(@"settings.xml");
+                    xml.Save(global_values.settings_file);
                     if (ckb_youtube.Enabled == false)
                     {
                         if (txt_json.BackColor == Color.White &&
@@ -1535,9 +1549,9 @@ namespace Stream_Info_Handler
                 {
                     txt_stream_directory.BackColor = Color.White;
                     global_values.output_directory = txt_stream_directory.Text;
-                    XDocument xml = XDocument.Load(@"settings.xml");
+                    XDocument xml = XDocument.Load(global_values.settings_file);
                     xml.Root.Element("directories").Element("stream-directory").ReplaceWith(new XElement("stream-directory", txt_stream_directory.Text));
-                    xml.Save(@"settings.xml");
+                    xml.Save(global_values.settings_file);
                 }
                 else
                 {
@@ -1555,9 +1569,9 @@ namespace Stream_Info_Handler
                 {
                     txt_thumbnail_directory.BackColor = Color.White;
                     global_values.thumbnail_directory = txt_thumbnail_directory.Text;
-                    XDocument xml = XDocument.Load(@"settings.xml");
+                    XDocument xml = XDocument.Load(global_values.settings_file);
                     xml.Root.Element("directories").Element("thumbnail-directory").ReplaceWith(new XElement("thumbnail-directory", txt_thumbnail_directory.Text));
-                    xml.Save(@"settings.xml");
+                    xml.Save(global_values.settings_file);
                 }
                 else
                 {
@@ -1580,9 +1594,9 @@ namespace Stream_Info_Handler
                     global_values.game_path = txt_roster_directory.Text;                    //Save the directory
 
                     //Save the setting to the settings file
-                    XDocument xml = XDocument.Load(@"settings.xml");
+                    XDocument xml = XDocument.Load(global_values.settings_file);
                     xml.Root.Element("directories").Element("game-directory").ReplaceWith(new XElement("game-directory", txt_roster_directory.Text));
-                    xml.Save(@"settings.xml");
+                    xml.Save(global_values.settings_file);
 
                     //Read the files for the game information and character roster
                     global_values.game_info = System.IO.File.ReadAllLines(txt_roster_directory.Text + @"\game info.txt");
@@ -1736,6 +1750,8 @@ namespace Stream_Info_Handler
         {
             if(ckb_scoreboad.Checked == true)
             {
+                nud_score1.Value = 0;
+                nud_score2.Value = 0;
                 nud_score1.Maximum = 3;
                 nud_score2.Maximum = 3;
                 btn_score1_image1.Enabled = true;
@@ -1782,17 +1798,17 @@ namespace Stream_Info_Handler
                 else pic_score2_image3.Image = Image.FromFile(global_values.score2_image3);
 
 
-                XDocument xml = XDocument.Load(@"settings.xml");
+                XDocument xml = XDocument.Load(global_values.settings_file);
                 xml.Root.Element("image-scoring").Element("enable-image-scoring").ReplaceWith(new XElement("enable-image-scoring", "True"));
-                xml.Save(@"settings.xml");
+                xml.Save(global_values.settings_file);
             }
             else
             {
                 nud_score1.Maximum = 99;
                 nud_score2.Maximum = 99;
-                XDocument xml = XDocument.Load(@"settings.xml");
+                XDocument xml = XDocument.Load(global_values.settings_file);
                 xml.Root.Element("image-scoring").Element("enable-image-scoring").ReplaceWith(new XElement("enable-image-scoring", "False"));
-                xml.Save(@"settings.xml");
+                xml.Save(global_values.settings_file);
                 btn_score1_image1.Enabled = false;
                 btn_score1_image2.Enabled = false;
                 btn_score1_image3.Enabled = false;
@@ -1825,17 +1841,17 @@ namespace Stream_Info_Handler
         private void rdb_automatic_CheckedChanged(object sender, EventArgs e)
         {
             global_values.auto_update = true;
-            XDocument xml = XDocument.Load(@"settings.xml");
+            XDocument xml = XDocument.Load(global_values.settings_file);
             xml.Root.Element("etc").Element("automatic-updates").ReplaceWith(new XElement("automatic-updates", "true"));
-            xml.Save(@"settings.xml");
+            xml.Save(global_values.settings_file);
         }
 
         private void rdb_manual_CheckedChanged(object sender, EventArgs e)
         {
             global_values.auto_update = false;
-            XDocument xml = XDocument.Load(@"settings.xml");
+            XDocument xml = XDocument.Load(global_values.settings_file);
             xml.Root.Element("etc").Element("automatic-updates").ReplaceWith(new XElement("automatic-updates", "false"));
-            xml.Save(@"settings.xml");
+            xml.Save(global_values.settings_file);
         }
 
 
@@ -1965,10 +1981,10 @@ namespace Stream_Info_Handler
                                     "The playlist ID is " + global_values.playlist_id);
                     txt_playlist.Enabled = true;
                     global_values.playlist_name = txt_playlist.Text;
-                    XDocument xml = XDocument.Load(@"settings.xml");
+                    XDocument xml = XDocument.Load(global_values.settings_file);
                     xml.Root.Element("youtube").Element("playlist-name").ReplaceWith(new XElement("playlist-name", global_values.playlist_name));
                     xml.Root.Element("youtube").Element("playlist-id").ReplaceWith(new XElement("playlist-id", global_values.playlist_id));
-                    xml.Save(@"settings.xml");
+                    xml.Save(global_values.settings_file);
                 }
                 else
                 {
@@ -1979,10 +1995,10 @@ namespace Stream_Info_Handler
                         global_values.playlist_name = "";
                         global_values.playlist_id = "";
 
-                        XDocument xml = XDocument.Load(@"settings.xml");
+                        XDocument xml = XDocument.Load(global_values.settings_file);
                         xml.Root.Element("youtube").Element("playlist-name").ReplaceWith(new XElement("playlist-name", global_values.playlist_name));
                         xml.Root.Element("youtube").Element("playlist-id").ReplaceWith(new XElement("playlist-id", global_values.playlist_id));
-                        xml.Save(@"settings.xml");
+                        xml.Save(global_values.settings_file);
                     }
                     else
                     {
@@ -2038,12 +2054,12 @@ namespace Stream_Info_Handler
 
             //Update the global toggle and settings file
             global_values.enable_sheets = status;
-            XDocument xml = XDocument.Load(@"settings.xml");
+            XDocument xml = XDocument.Load(global_values.settings_file);
             xml.Root.Element("google-sheets").Element("enable-sheets").ReplaceWith(new XElement("enable-sheets", status.ToString()));
-            xml.Save(@"settings.xml");
+            xml.Save(global_values.settings_file);
         }
 
-        private void add_to_sheets(player_info new_player)
+        public void add_to_sheets(player_info new_player)
         {
             UserCredential credential;
 
@@ -2182,7 +2198,7 @@ namespace Stream_Info_Handler
             // Define request parameters.
             String spreadsheetId = txt_sheets.Text;
 
-            List<string> ranges = new List<string>(new string[] { "Current Round Info!A1:D18", "Upcoming Matches!A1:E46", "Player Information!A2:O" + (MAX_PLAYERS + 1).ToString() });
+            List<string> ranges = new List<string>(new string[] { "Current Round Info!A1:D18", "Upcoming Matches!A1:E56", "Player Information!A2:O" + (MAX_PLAYERS + 1).ToString() });
             
             SpreadsheetsResource.ValuesResource.BatchGetRequest request = service.Spreadsheets.Values.BatchGet(spreadsheetId);
             request.Ranges = ranges;
@@ -2247,8 +2263,8 @@ namespace Stream_Info_Handler
 
 
             string[] player_name = new string[5];
-            player_name[1] = upcoming_matches[4 + round_number][2].ToString();
-            player_name[2] = upcoming_matches[4 + round_number][3].ToString();
+            player_name[1] = upcoming_matches[3 + round_number][2].ToString();
+            player_name[2] = upcoming_matches[3 + round_number][3].ToString();
             player_name[3] = upcoming_matches[5 + round_number][2].ToString();
             player_name[4] = upcoming_matches[5 + round_number][3].ToString();
 
@@ -2331,7 +2347,7 @@ namespace Stream_Info_Handler
             cbx_name2.Text = player[2].get_display_name();
             tab_main.SelectedIndex = hold_index;
 
-            cbx_round.Text = upcoming_matches[4 + round_number][1].ToString();
+            cbx_round.Text = upcoming_matches[3 + round_number][1].ToString();
             txt_bracket.Text = current_round_info[1][2].ToString();
             txt_tournament.Text = current_round_info[0][2].ToString();
 
@@ -2549,9 +2565,9 @@ namespace Stream_Info_Handler
                                         "Master Orders will use adapt to its information.");
                         btn_previous_match.Enabled = true;
                         btn_previous_match.Visible = true;
-                        XDocument xml = XDocument.Load(@"settings.xml");
+                        XDocument xml = XDocument.Load(global_values.settings_file);
                         xml.Root.Element("google-sheets").Element("sheets-id").ReplaceWith(new XElement("sheets-id", txt_sheets.Text));
-                        xml.Save(@"settings.xml");
+                        xml.Save(global_values.settings_file);
                     }
                     else
                     {
@@ -2568,9 +2584,9 @@ namespace Stream_Info_Handler
                         btn_test_sheet.Enabled = false;
                         MessageBox.Show("The designated Google Sheet contains only player information. " +
                                         "Master Orders will use adapt to its information.");
-                        XDocument xml = XDocument.Load(@"settings.xml");
+                        XDocument xml = XDocument.Load(global_values.settings_file);
                         xml.Root.Element("google-sheets").Element("sheets-id").ReplaceWith(new XElement("sheets-id", txt_sheets.Text));
-                        xml.Save(@"settings.xml");
+                        xml.Save(global_values.settings_file);
                     }
                     else
                     {
@@ -2859,9 +2875,9 @@ namespace Stream_Info_Handler
                     txt_vods.Text != txt_thumbnail_directory.Text)
                 {
                     txt_vods.BackColor = Color.White;
-                    XDocument xml = XDocument.Load(@"settings.xml");
+                    XDocument xml = XDocument.Load(global_values.settings_file);
                     xml.Root.Element("directories").Element("vods-directory").ReplaceWith(new XElement("vods-directory", txt_vods.Text));
-                    xml.Save(@"settings.xml");
+                    xml.Save(global_values.settings_file);
 
                     global_values.vods_directory = txt_vods.Text;
                     global_values.vod_monitor.Path = global_values.vods_directory;
@@ -2930,9 +2946,9 @@ namespace Stream_Info_Handler
                     txt_vods.Text != txt_thumbnail_directory.Text)
                 {
                     global_values.vods_directory = txt_vods.Text;
-                    XDocument xml = XDocument.Load(@"settings.xml");
+                    XDocument xml = XDocument.Load(global_values.settings_file);
                     xml.Root.Element("directories").Element("vods-directory").ReplaceWith(new XElement("vods-directory", txt_vods.Text));
-                    xml.Save(@"settings.xml");
+                    xml.Save(global_values.settings_file);
                 }
                 else
                 {
@@ -2945,6 +2961,12 @@ namespace Stream_Info_Handler
         {
             if (global_values.enable_youtube == false)
             {
+                string thumbnail_image_name = create_thumbnail(global_values.game_path + @"\" + cbx_characters1.Text + @"\" + (cbx_colors1.SelectedIndex + 1).ToString() + @"\",
+                        global_values.game_path + @"\" + cbx_characters2.Text + @"\" + (cbx_colors2.SelectedIndex + 1).ToString() + @"\",
+                        cbx_name1.Text,
+                        cbx_name2.Text,
+                        cbx_round.Text,
+                        txt_date.Text);
                 string video_title = txt_tournament.Text + @" - " + cbx_round.Text + @" - " + cbx_name1.Text + @" (" + cbx_characters1.Text + @") Vs. " + cbx_name2.Text + @" (" + cbx_characters2.Text + @")";
                 if (global_values.copy_video_title == true)
                 {
@@ -3075,9 +3097,9 @@ namespace Stream_Info_Handler
         private void rdb_xsplit_CheckedChanged(object sender, EventArgs e)
         {
             global_values.stream_software = @"XSplit";
-            XDocument xml = XDocument.Load(@"settings.xml");
+            XDocument xml = XDocument.Load(global_values.settings_file);
             xml.Root.Element("etc").Element("stream-software").ReplaceWith(new XElement("stream-software", "XSplit"));
-            xml.Save(@"settings.xml");
+            xml.Save(global_values.settings_file);
         }
 
         private void btn_previous_match_Click(object sender, EventArgs e)
@@ -3095,17 +3117,17 @@ namespace Stream_Info_Handler
 
         private void ckb_startup_sheets_CheckedChanged(object sender, EventArgs e)
         {
-            XDocument xml = XDocument.Load(@"settings.xml");
+            XDocument xml = XDocument.Load(global_values.settings_file);
             xml.Root.Element("google-sheets").Element("startup-sheets").ReplaceWith(new XElement("startup-sheets", ckb_startup_sheets.Checked.ToString()));
-            xml.Save(@"settings.xml");
+            xml.Save(global_values.settings_file);
         }
 
         private void rdb_obs_CheckedChanged(object sender, EventArgs e)
         {
             global_values.stream_software = @"OBS";
-            XDocument xml = XDocument.Load(@"settings.xml");
+            XDocument xml = XDocument.Load(global_values.settings_file);
             xml.Root.Element("etc").Element("stream-software").ReplaceWith(new XElement("stream-software", "OBS"));
-            xml.Save(@"settings.xml");
+            xml.Save(global_values.settings_file);
         }
 
         private void cbx_name1_SelectedIndexChanged(object sender, EventArgs e)
@@ -3115,8 +3137,7 @@ namespace Stream_Info_Handler
                 if(global_values.roster[i].tag == cbx_name1.Text)
                 {
                     global_values.player_roster_number[1] = i;
-                    cbx_name1.Text = global_values.roster[i].get_display_name();
-                    cbx_name1.DisplayMember = global_values.roster[i].get_display_name();
+                    this.BeginInvoke((MethodInvoker)delegate { this.cbx_name1.Text = global_values.roster[i].get_display_name(); });
                     txt_alt1.Text = global_values.roster[i].twitter;
 
                     cbx_characters1.BeginUpdate();                                      //Begin
@@ -3151,7 +3172,7 @@ namespace Stream_Info_Handler
                 if (global_values.roster[i].tag == cbx_name2.Text)
                 {
                     global_values.player_roster_number[2] = i;
-                    cbx_name2.Text = global_values.roster[i].get_display_name();
+                    this.BeginInvoke((MethodInvoker)delegate { this.cbx_name2.Text = global_values.roster[i].get_display_name(); });
                     txt_alt2.Text = global_values.roster[i].twitter;
 
                     cbx_characters2.BeginUpdate();                                      //Begin
@@ -3430,9 +3451,9 @@ namespace Stream_Info_Handler
                 pic_score1_image1.Image = Image.FromFile(global_values.score1_image1);
                 btn_score1_image1.BackColor = Color.Transparent;
 
-                XDocument xml = XDocument.Load(@"settings.xml");
+                XDocument xml = XDocument.Load(global_values.settings_file);
                 xml.Root.Element("image-scoring").Element("player1-1").ReplaceWith(new XElement("player1-1", global_values.score1_image1));
-                xml.Save(@"settings.xml");
+                xml.Save(global_values.settings_file);
             }
         }
 
@@ -3444,9 +3465,9 @@ namespace Stream_Info_Handler
                 pic_score1_image2.Image = Image.FromFile(global_values.score1_image2);
                 btn_score1_image2.BackColor = Color.Transparent;
 
-                XDocument xml = XDocument.Load(@"settings.xml");
+                XDocument xml = XDocument.Load(global_values.settings_file);
                 xml.Root.Element("image-scoring").Element("player1-2").ReplaceWith(new XElement("player1-2", global_values.score1_image2));
-                xml.Save(@"settings.xml");
+                xml.Save(global_values.settings_file);
             }
         }
 
@@ -3458,9 +3479,9 @@ namespace Stream_Info_Handler
                 pic_score1_image3.Image = Image.FromFile(global_values.score1_image3);
                 btn_score1_image3.BackColor = Color.Transparent;
 
-                XDocument xml = XDocument.Load(@"settings.xml");
+                XDocument xml = XDocument.Load(global_values.settings_file);
                 xml.Root.Element("image-scoring").Element("player1-3").ReplaceWith(new XElement("player1-3", global_values.score1_image3));
-                xml.Save(@"settings.xml");
+                xml.Save(global_values.settings_file);
             }
         }
 
@@ -3472,9 +3493,9 @@ namespace Stream_Info_Handler
                 pic_score2_image1.Image = Image.FromFile(global_values.score2_image1);
                 btn_score2_image1.BackColor = Color.Transparent;
 
-                XDocument xml = XDocument.Load(@"settings.xml");
+                XDocument xml = XDocument.Load(global_values.settings_file);
                 xml.Root.Element("image-scoring").Element("player2-1").ReplaceWith(new XElement("player2-1", global_values.score2_image1));
-                xml.Save(@"settings.xml");
+                xml.Save(global_values.settings_file);
             }
         }
 
@@ -3486,9 +3507,9 @@ namespace Stream_Info_Handler
                 pic_score2_image2.Image = Image.FromFile(global_values.score2_image2);
                 btn_score2_image2.BackColor = Color.Transparent;
 
-                XDocument xml = XDocument.Load(@"settings.xml");
+                XDocument xml = XDocument.Load(global_values.settings_file);
                 xml.Root.Element("image-scoring").Element("player2-2").ReplaceWith(new XElement("player2-2", global_values.score2_image2));
-                xml.Save(@"settings.xml");
+                xml.Save(global_values.settings_file);
             }
         }
 
@@ -3500,9 +3521,9 @@ namespace Stream_Info_Handler
                 pic_score2_image3.Image = Image.FromFile(global_values.score2_image3);
                 btn_score2_image3.BackColor = Color.Transparent;
 
-                XDocument xml = XDocument.Load(@"settings.xml");
+                XDocument xml = XDocument.Load(global_values.settings_file);
                 xml.Root.Element("image-scoring").Element("player2-3").ReplaceWith(new XElement("player2-3", global_values.score2_image3));
-                xml.Save(@"settings.xml");
+                xml.Save(global_values.settings_file);
             }
         }
 
@@ -3512,9 +3533,9 @@ namespace Stream_Info_Handler
             global_values.copy_video_title = ckb_clipboard.Checked;
 
             //Update the settings file
-            XDocument xml = XDocument.Load(@"settings.xml");
+            XDocument xml = XDocument.Load(global_values.settings_file);
             xml.Root.Element("youtube").Element("copy-title").ReplaceWith(new XElement("copy-title", ckb_clipboard.Checked.ToString()));
-            xml.Save(@"settings.xml");
+            xml.Save(global_values.settings_file);
         }
 
         private void ckb_youtube_CheckedChanged(object sender, EventArgs e)
@@ -3529,16 +3550,16 @@ namespace Stream_Info_Handler
             rdb_obs.Enabled = global_values.enable_youtube;
 
             //Update the settings file
-            XDocument xml = XDocument.Load(@"settings.xml");
+            XDocument xml = XDocument.Load(global_values.settings_file);
             xml.Root.Element("youtube").Element("enable-youtube").ReplaceWith(new XElement("enable-youtube", ckb_youtube.Checked.ToString()));
-            xml.Save(@"settings.xml");
+            xml.Save(global_values.settings_file);
         }
 
         private void txt_description_TextChanged(object sender, EventArgs e)
         {
-            XDocument xml = XDocument.Load(@"settings.xml");
+            XDocument xml = XDocument.Load(global_values.settings_file);
             xml.Root.Element("youtube").Element("default-description").ReplaceWith(new XElement("default-description", txt_description.Text));
-            xml.Save(@"settings.xml");
+            xml.Save(global_values.settings_file);
         }
 
         private void txt_playlist_TextChanged(object sender, EventArgs e)
@@ -3557,18 +3578,18 @@ namespace Stream_Info_Handler
         {
             global_values.sheets_info = "info-and-queue";
 
-            XDocument xml = XDocument.Load(@"settings.xml");
+            XDocument xml = XDocument.Load(global_values.settings_file);
             xml.Root.Element("google-sheets").Element("sheet-info").ReplaceWith(new XElement("sheet-info", global_values.sheets_info));
-            xml.Save(@"settings.xml");
+            xml.Save(global_values.settings_file);
         }
 
         private void rdb_infoonly_CheckedChanged(object sender, EventArgs e)
         {
             global_values.sheets_info = "info-only";
 
-            XDocument xml = XDocument.Load(@"settings.xml");
+            XDocument xml = XDocument.Load(global_values.settings_file);
             xml.Root.Element("google-sheets").Element("sheet-info").ReplaceWith(new XElement("sheet-info", global_values.sheets_info));
-            xml.Save(@"settings.xml");
+            xml.Save(global_values.settings_file);
         }
 
         private void btn_test_sheet_Click(object sender, EventArgs e)
@@ -3762,10 +3783,25 @@ namespace Stream_Info_Handler
                 System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", cbx_name2.Text + " [L]");
             }
         }
+
+        private void txt_playlist_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btn_playlist_Click(this, new EventArgs());
+            }
+        }
+
+        private void btn_dashboard_Click(object sender, EventArgs e)
+        {
+            var dashboard = new frm_streamqueue(txt_sheets.Text);
+            dashboard.Show();
+        }
     }
 
     public static class global_values
     {
+        public static string settings_file = @"C:\Users\Public\Stream Info Handler\settings.xml";
         public static int[] player_roster_number;
         public static string sheets_style;
         public static string sheets_info;

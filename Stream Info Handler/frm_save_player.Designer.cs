@@ -130,7 +130,7 @@
             this.cbx_main.Name = "cbx_main";
             this.cbx_main.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cbx_main.Size = new System.Drawing.Size(105, 20);
-            this.cbx_main.TabIndex = 8;
+            this.cbx_main.TabIndex = 4;
             this.cbx_main.SelectedIndexChanged += new System.EventHandler(this.cbx_main_SelectedIndexChanged);
             // 
             // cbx_colors1
@@ -141,7 +141,7 @@
             this.cbx_colors1.Location = new System.Drawing.Point(12, 103);
             this.cbx_colors1.Name = "cbx_colors1";
             this.cbx_colors1.Size = new System.Drawing.Size(105, 72);
-            this.cbx_colors1.TabIndex = 9;
+            this.cbx_colors1.TabIndex = 5;
             // 
             // cbx_secondary2
             // 
@@ -154,7 +154,7 @@
             this.cbx_secondary2.Name = "cbx_secondary2";
             this.cbx_secondary2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cbx_secondary2.Size = new System.Drawing.Size(105, 20);
-            this.cbx_secondary2.TabIndex = 10;
+            this.cbx_secondary2.TabIndex = 0;
             this.cbx_secondary2.SelectedIndexChanged += new System.EventHandler(this.cbx_secondary2_SelectedIndexChanged);
             // 
             // cbx_colors2
@@ -165,7 +165,7 @@
             this.cbx_colors2.Location = new System.Drawing.Point(6, 46);
             this.cbx_colors2.Name = "cbx_colors2";
             this.cbx_colors2.Size = new System.Drawing.Size(105, 72);
-            this.cbx_colors2.TabIndex = 11;
+            this.cbx_colors2.TabIndex = 1;
             // 
             // cbx_secondary3
             // 
@@ -178,7 +178,7 @@
             this.cbx_secondary3.Name = "cbx_secondary3";
             this.cbx_secondary3.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cbx_secondary3.Size = new System.Drawing.Size(105, 20);
-            this.cbx_secondary3.TabIndex = 12;
+            this.cbx_secondary3.TabIndex = 2;
             this.cbx_secondary3.SelectedIndexChanged += new System.EventHandler(this.cbx_secondary3_SelectedIndexChanged);
             // 
             // cbx_colors3
@@ -189,7 +189,7 @@
             this.cbx_colors3.Location = new System.Drawing.Point(117, 46);
             this.cbx_colors3.Name = "cbx_colors3";
             this.cbx_colors3.Size = new System.Drawing.Size(105, 72);
-            this.cbx_colors3.TabIndex = 13;
+            this.cbx_colors3.TabIndex = 3;
             // 
             // cbx_secondary4
             // 
@@ -202,7 +202,7 @@
             this.cbx_secondary4.Name = "cbx_secondary4";
             this.cbx_secondary4.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cbx_secondary4.Size = new System.Drawing.Size(105, 20);
-            this.cbx_secondary4.TabIndex = 14;
+            this.cbx_secondary4.TabIndex = 4;
             this.cbx_secondary4.SelectedIndexChanged += new System.EventHandler(this.cbx_secondary4_SelectedIndexChanged);
             // 
             // cbx_colors4
@@ -213,7 +213,7 @@
             this.cbx_colors4.Location = new System.Drawing.Point(228, 46);
             this.cbx_colors4.Name = "cbx_colors4";
             this.cbx_colors4.Size = new System.Drawing.Size(105, 72);
-            this.cbx_colors4.TabIndex = 15;
+            this.cbx_colors4.TabIndex = 5;
             // 
             // cbx_secondary5
             // 
@@ -226,7 +226,7 @@
             this.cbx_secondary5.Name = "cbx_secondary5";
             this.cbx_secondary5.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cbx_secondary5.Size = new System.Drawing.Size(105, 20);
-            this.cbx_secondary5.TabIndex = 16;
+            this.cbx_secondary5.TabIndex = 6;
             this.cbx_secondary5.SelectedIndexChanged += new System.EventHandler(this.cbx_secondary5_SelectedIndexChanged);
             // 
             // cbx_colors5
@@ -237,7 +237,7 @@
             this.cbx_colors5.Location = new System.Drawing.Point(339, 46);
             this.cbx_colors5.Name = "cbx_colors5";
             this.cbx_colors5.Size = new System.Drawing.Size(105, 72);
-            this.cbx_colors5.TabIndex = 17;
+            this.cbx_colors5.TabIndex = 7;
             // 
             // label5
             // 
@@ -261,7 +261,7 @@
             this.groupBox1.Location = new System.Drawing.Point(123, 57);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(450, 128);
-            this.groupBox1.TabIndex = 19;
+            this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Secondaries";
             // 
@@ -270,7 +270,7 @@
             this.btn_save.Location = new System.Drawing.Point(184, 191);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(105, 29);
-            this.btn_save.TabIndex = 20;
+            this.btn_save.TabIndex = 7;
             this.btn_save.Text = "Save Information";
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
@@ -280,7 +280,7 @@
             this.btn_cancel.Location = new System.Drawing.Point(295, 191);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(105, 29);
-            this.btn_cancel.TabIndex = 21;
+            this.btn_cancel.TabIndex = 8;
             this.btn_cancel.Text = "Cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);

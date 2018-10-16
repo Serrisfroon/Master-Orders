@@ -150,6 +150,8 @@
             this.ttp_tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btn_dashboard = new System.Windows.Forms.Button();
             this.tab_main.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_game_logo)).BeginInit();
@@ -385,10 +387,10 @@
             this.cbx_colors2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_colors2.Font = new System.Drawing.Font("Microsoft Sans Serif", 54.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbx_colors2.FormattingEnabled = true;
-            this.cbx_colors2.Location = new System.Drawing.Point(68, 59);
+            this.cbx_colors2.Location = new System.Drawing.Point(78, 60);
             this.cbx_colors2.Name = "cbx_colors2";
             this.cbx_colors2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cbx_colors2.Size = new System.Drawing.Size(121, 91);
+            this.cbx_colors2.Size = new System.Drawing.Size(109, 91);
             this.cbx_colors2.TabIndex = 3;
             this.cbx_colors2.SelectedIndexChanged += new System.EventHandler(this.cbx_colors2_SelectedIndexChanged);
             // 
@@ -398,12 +400,12 @@
             this.nud_score2.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nud_score2.Location = new System.Drawing.Point(6, 59);
             this.nud_score2.Maximum = new decimal(new int[] {
-            3,
+            99,
             0,
             0,
             0});
             this.nud_score2.Name = "nud_score2";
-            this.nud_score2.Size = new System.Drawing.Size(56, 62);
+            this.nud_score2.Size = new System.Drawing.Size(66, 62);
             this.nud_score2.TabIndex = 31;
             this.nud_score2.TabStop = false;
             this.nud_score2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -511,14 +513,14 @@
             // 
             this.nud_score1.Enabled = false;
             this.nud_score1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nud_score1.Location = new System.Drawing.Point(313, 59);
+            this.nud_score1.Location = new System.Drawing.Point(301, 59);
             this.nud_score1.Maximum = new decimal(new int[] {
-            3,
+            99,
             0,
             0,
             0});
             this.nud_score1.Name = "nud_score1";
-            this.nud_score1.Size = new System.Drawing.Size(56, 62);
+            this.nud_score1.Size = new System.Drawing.Size(68, 62);
             this.nud_score1.TabIndex = 18;
             this.nud_score1.TabStop = false;
             this.nud_score1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -563,7 +565,7 @@
             this.cbx_colors1.FormattingEnabled = true;
             this.cbx_colors1.Location = new System.Drawing.Point(186, 59);
             this.cbx_colors1.Name = "cbx_colors1";
-            this.cbx_colors1.Size = new System.Drawing.Size(121, 91);
+            this.cbx_colors1.Size = new System.Drawing.Size(109, 91);
             this.cbx_colors1.TabIndex = 3;
             this.cbx_colors1.SelectedIndexChanged += new System.EventHandler(this.cbx_colors1_SelectedIndexChanged);
             // 
@@ -1015,6 +1017,7 @@
             this.txt_playlist.Size = new System.Drawing.Size(282, 22);
             this.txt_playlist.TabIndex = 0;
             this.txt_playlist.TextChanged += new System.EventHandler(this.txt_playlist_TextChanged);
+            this.txt_playlist.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_playlist_KeyDown);
             // 
             // tab_sheets
             // 
@@ -1479,6 +1482,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btn_dashboard);
+            this.tabPage2.Controls.Add(this.button2);
             this.tabPage2.Controls.Add(this.btn_upload_vod);
             this.tabPage2.Controls.Add(this.btn_top8);
             this.tabPage2.Controls.Add(this.btn_thumbnail);
@@ -1493,7 +1498,7 @@
             // btn_upload_vod
             // 
             this.btn_upload_vod.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_upload_vod.Location = new System.Drawing.Point(446, 51);
+            this.btn_upload_vod.Location = new System.Drawing.Point(360, 51);
             this.btn_upload_vod.Name = "btn_upload_vod";
             this.btn_upload_vod.Size = new System.Drawing.Size(167, 108);
             this.btn_upload_vod.TabIndex = 2;
@@ -1504,7 +1509,7 @@
             // btn_top8
             // 
             this.btn_top8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_top8.Location = new System.Drawing.Point(31, 51);
+            this.btn_top8.Location = new System.Drawing.Point(5, 51);
             this.btn_top8.Name = "btn_top8";
             this.btn_top8.Size = new System.Drawing.Size(176, 108);
             this.btn_top8.TabIndex = 0;
@@ -1515,7 +1520,7 @@
             // btn_thumbnail
             // 
             this.btn_thumbnail.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_thumbnail.Location = new System.Drawing.Point(243, 51);
+            this.btn_thumbnail.Location = new System.Drawing.Point(187, 51);
             this.btn_thumbnail.Name = "btn_thumbnail";
             this.btn_thumbnail.Size = new System.Drawing.Size(167, 108);
             this.btn_thumbnail.TabIndex = 1;
@@ -1542,6 +1547,26 @@
             // 
             this.openFileDialog3.FileName = "openFileDialog3";
             this.openFileDialog3.Filter = "PNG Image Files|*.png";
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(706, 51);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(167, 108);
+            this.button2.TabIndex = 3;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // btn_dashboard
+            // 
+            this.btn_dashboard.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_dashboard.Location = new System.Drawing.Point(533, 51);
+            this.btn_dashboard.Name = "btn_dashboard";
+            this.btn_dashboard.Size = new System.Drawing.Size(167, 108);
+            this.btn_dashboard.TabIndex = 4;
+            this.btn_dashboard.Text = "Stream Queue Dashboard";
+            this.btn_dashboard.UseVisualStyleBackColor = true;
+            this.btn_dashboard.Click += new System.EventHandler(this.btn_dashboard_Click);
             // 
             // frm_main
             // 
@@ -1725,6 +1750,8 @@
         private System.Windows.Forms.Button btn_reset_scores;
         private System.Windows.Forms.CheckBox ckb_loser2;
         private System.Windows.Forms.CheckBox ckb_loser1;
+        private System.Windows.Forms.Button btn_dashboard;
+        private System.Windows.Forms.Button button2;
     }
 }
 

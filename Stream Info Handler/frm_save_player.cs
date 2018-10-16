@@ -13,6 +13,7 @@ namespace Stream_Info_Handler
     public partial class frm_save_player : Form
     {
         public static string secondary_text = "Add a Secondary";
+        string hold_name;
         public frm_save_player(player_info save_player)
         {
             InitializeComponent();
@@ -49,6 +50,16 @@ namespace Stream_Info_Handler
                 cbx_colors5.SelectedIndex = save_player.color[4] - 1;
             }
 
+        }
+        public frm_save_player(string new_name)
+        {
+            InitializeComponent();
+            load_combobox(ref cbx_main, false);
+            load_combobox(ref cbx_secondary2, true);
+            load_combobox(ref cbx_secondary3, true);
+            load_combobox(ref cbx_secondary4, true);
+            load_combobox(ref cbx_secondary5, true);
+            txt_tag.Text = new_name;
         }
 
         private void load_combobox(ref ComboBox sender, bool add_character)

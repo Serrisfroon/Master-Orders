@@ -185,3 +185,4 @@ C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream
 C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_settings_start.resources
 C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_uploading.resources
 C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_results.resources
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_streamqueue.resources

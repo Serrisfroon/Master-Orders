@@ -52,7 +52,7 @@
             this.btn_dont_replace.Location = new System.Drawing.Point(145, 140);
             this.btn_dont_replace.Name = "btn_dont_replace";
             this.btn_dont_replace.Size = new System.Drawing.Size(112, 32);
-            this.btn_dont_replace.TabIndex = 2;
+            this.btn_dont_replace.TabIndex = 5;
             this.btn_dont_replace.Text = "Do not replace";
             this.btn_dont_replace.UseVisualStyleBackColor = true;
             this.btn_dont_replace.Click += new System.EventHandler(this.btn_okay_Click);
@@ -62,7 +62,7 @@
             this.btn_character1.Location = new System.Drawing.Point(15, 62);
             this.btn_character1.Name = "btn_character1";
             this.btn_character1.Size = new System.Drawing.Size(70, 70);
-            this.btn_character1.TabIndex = 3;
+            this.btn_character1.TabIndex = 0;
             this.btn_character1.UseVisualStyleBackColor = true;
             this.btn_character1.Click += new System.EventHandler(this.btn_character1_Click);
             // 
@@ -71,7 +71,7 @@
             this.btn_character2.Location = new System.Drawing.Point(91, 62);
             this.btn_character2.Name = "btn_character2";
             this.btn_character2.Size = new System.Drawing.Size(70, 70);
-            this.btn_character2.TabIndex = 4;
+            this.btn_character2.TabIndex = 1;
             this.btn_character2.UseVisualStyleBackColor = true;
             this.btn_character2.Click += new System.EventHandler(this.btn_character2_Click);
             // 
@@ -80,7 +80,7 @@
             this.btn_character3.Location = new System.Drawing.Point(167, 62);
             this.btn_character3.Name = "btn_character3";
             this.btn_character3.Size = new System.Drawing.Size(70, 70);
-            this.btn_character3.TabIndex = 5;
+            this.btn_character3.TabIndex = 2;
             this.btn_character3.UseVisualStyleBackColor = true;
             this.btn_character3.Click += new System.EventHandler(this.btn_character3_Click);
             // 
@@ -89,7 +89,7 @@
             this.btn_character4.Location = new System.Drawing.Point(243, 62);
             this.btn_character4.Name = "btn_character4";
             this.btn_character4.Size = new System.Drawing.Size(70, 70);
-            this.btn_character4.TabIndex = 6;
+            this.btn_character4.TabIndex = 3;
             this.btn_character4.UseVisualStyleBackColor = true;
             this.btn_character4.Click += new System.EventHandler(this.btn_character4_Click);
             // 
@@ -98,7 +98,7 @@
             this.btn_character5.Location = new System.Drawing.Point(319, 62);
             this.btn_character5.Name = "btn_character5";
             this.btn_character5.Size = new System.Drawing.Size(70, 70);
-            this.btn_character5.TabIndex = 7;
+            this.btn_character5.TabIndex = 4;
             this.btn_character5.UseVisualStyleBackColor = true;
             this.btn_character5.Click += new System.EventHandler(this.btn_character5_Click);
             // 
