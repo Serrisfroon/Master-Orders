@@ -22,7 +22,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>63</ApplicationRevision>
+    <ApplicationRevision>64</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -115,6 +115,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComboBoxTools.cs" />
+    <Compile Include="frm_edit_match.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_edit_match.Designer.cs">
+      <DependentUpon>frm_edit_match.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_newplayer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_newplayer.Designer.cs">
+      <DependentUpon>frm_newplayer.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_streamqueue.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +177,12 @@
     <Compile Include="frm_results.Designer.cs">
       <DependentUpon>frm_results.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frm_edit_match.resx">
+      <DependentUpon>frm_edit_match.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_newplayer.resx">
+      <DependentUpon>frm_newplayer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_streamqueue.resx">
       <DependentUpon>frm_streamqueue.cs</DependentUpon>
     </EmbeddedResource>

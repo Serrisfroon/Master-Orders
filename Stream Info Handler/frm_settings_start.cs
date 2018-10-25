@@ -186,10 +186,16 @@ namespace Stream_Info_Handler
                          new XElement("player2-2", ""),
                          new XElement("player2-3", "")
                         ),
+                    new XElement("sponsor-and-region",
+                         new XElement("enable-sponsor", "False"),
+                         new XElement("sponsor-directory", ""),
+                         new XElement("enable-region", "False"),
+                         new XElement("region-directory", "")
+                        ),
                     new XElement("etc",
                          new XElement("automatic-updates", auto_update),
                          new XElement("stream-software", software),
-                         new XElement("settings-version", "2")
+                         new XElement("settings-version", "3")
                         )));
 
                 doc.Save(global_values.settings_file);

@@ -34,6 +34,7 @@ namespace Stream_Info_Handler
         //Initialize the variables to contain the character image file directories
         public string image_directory1 = Directory.GetCurrentDirectory();
         public string image_directory2 = Directory.GetCurrentDirectory();
+        public static string save_name;
 
         public static Color warning_color = Color.FromArgb(234, 153, 153);
 
@@ -74,6 +75,10 @@ namespace Stream_Info_Handler
         public frm_main()
         {
             InitializeComponent();
+            cbx_name1.MouseWheel += new MouseEventHandler(comboBox_MouseWheel);
+            cbx_name2.MouseWheel += new MouseEventHandler(comboBox_MouseWheel);
+            cbx_characters1.MouseWheel += new MouseEventHandler(comboBox_MouseWheel);
+            cbx_characters2.MouseWheel += new MouseEventHandler(comboBox_MouseWheel);
         }
 
         private void frm_main_Shown(object sender, EventArgs e)
@@ -133,17 +138,31 @@ namespace Stream_Info_Handler
             XDocument xml = XDocument.Load(global_values.settings_file);
 
             string version = (string)xml.Root.Element("etc").Element("settings-version");
-            if (version != "2")
+            switch(version)
             {
-                MessageBox.Show("The settings file is out of date and must be recreated.");
-                File.Delete(global_values.settings_file);
-                //Show the settings initial setup window to create a settings file
-                var settings_box = new frm_settings_start();
-                Point starting_location = this.Location;
-                starting_location = Point.Add(starting_location, new Size(0, -200));
-                settings_box.Location = starting_location;
-                settings_box.ShowDialog();
-                xml = XDocument.Load(global_values.settings_file);
+                case "3":
+                    break;
+                case "2":
+                    xml.Root.Add(new XElement("sponsor-and-region",
+                                 new XElement("enable-sponsor", "False"),
+                                 new XElement("sponsor-directory", ""),
+                                 new XElement("enable-region", "False"),
+                                 new XElement("region-directory", "")));
+                    xml.Root.Element("etc").Element("settings-version").ReplaceWith(new XElement("settings-version", "3"));
+                    xml.Save(global_values.settings_file);
+                    MessageBox.Show("The settings file has been updated for use with this version of Master Orders.");
+                    break;
+                default:
+                    MessageBox.Show("The settings file is out of date and must be recreated.");
+                    File.Delete(global_values.settings_file);
+                    //Show the settings initial setup window to create a settings file
+                    var settings_box = new frm_settings_start();
+                    Point starting_location = this.Location;
+                    starting_location = Point.Add(starting_location, new Size(0, -200));
+                    settings_box.Location = starting_location;
+                    settings_box.ShowDialog();
+                    xml = XDocument.Load(global_values.settings_file);
+                    break;
             }
 
 
@@ -237,6 +256,41 @@ namespace Stream_Info_Handler
             global_values.vod_monitor.Created += FileSystemWatcher_Created;             //Associate the file creation event to the monitor
             global_values.vod_monitor.Deleted += FileSystemWatcher_Deleted;             //Associate the file deletion event to the monitor
             global_values.vod_monitor.EnableRaisingEvents = true;                       //Enable to monitor to trigger these events
+
+
+            //Read the region setting and directory from the data
+            string copy_region = (string)xml.Root.Element("sponsor-and-region").Element("enable-region");
+            global_values.region_directory = (string)xml.Root.Element("sponsor-and-region").Element("region-directory");
+            txt_region.Text = global_values.region_directory;
+
+            if (copy_region == "True")
+            {
+                ckb_region.Checked = true;
+                if (!Directory.Exists(global_values.region_directory))
+                {
+                    txt_region.BackColor = warning_color;
+                    tab_main.SelectedIndex = 3;
+                    tab_mainsettings.SelectedIndex = 2;
+                }
+            }
+
+
+            //Read the sponsor setting and directory from the data
+            string copy_sponsor = (string)xml.Root.Element("sponsor-and-region").Element("enable-sponsor");
+            global_values.sponsor_directory = (string)xml.Root.Element("sponsor-and-region").Element("sponsor-directory");
+            txt_sponsor.Text = global_values.sponsor_directory;
+
+            if (copy_sponsor == "True")
+            {
+                ckb_sponsor.Checked = true;
+                if (!Directory.Exists(global_values.sponsor_directory))
+                {
+                    txt_sponsor.BackColor = warning_color;
+                    tab_main.SelectedIndex = 3;
+                    tab_mainsettings.SelectedIndex = 2;
+                }
+            }
+
 
             //Read the video Title Copying flag from the data
             string copy_title = (string)xml.Root.Element("youtube").Element("copy-title");
@@ -700,6 +754,14 @@ namespace Stream_Info_Handler
             ttp_tooltip.SetToolTip(btn_upload_vod,
                 "Select a .uldata file to import data for a\n" +
                 "YouTube upload.");
+            ttp_tooltip.SetToolTip(btn_dashboard,
+                "Open the Stream Queue Dashboard. The Google Sheets\n" +
+                "integration must be enabled and set to use Info and\n" +
+                "Queue to use this.");
+            ttp_tooltip.SetToolTip(btn_addplayer,
+                "Add a new player to the Google Sheet database. The\n" +
+                "Google Sheets integration must be enabled to use this.");
+
         }
 
         //Create a thumbnail image using the information input for the players and tournament
@@ -901,6 +963,7 @@ namespace Stream_Info_Handler
         {
             //Reset the image of the update button to default
             btn_update.Image = null;
+            string output_name = "";
 
             switch (btn_update.Text)                        //Perform action based on the current text of the button
             {
@@ -914,26 +977,14 @@ namespace Stream_Info_Handler
                         "into the Stream Files Directory.");
 
                     //Save Player 1's information to seperate files to be used by the stream program
-                    if (ckb_loser1.Checked == false)
-                    {
-                        System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", cbx_name1.Text);
-                    }
-                    else
-                    {
-                        System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", cbx_name1.Text + " [L]");
-                    }
+                    output_name = get_output_name(cbx_name1.Text, ckb_loser1.Checked, 1);
+                    System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", output_name);
                     System.IO.File.WriteAllText(global_values.output_directory + @"\alt text1.txt", txt_alt1.Text);
                     System.IO.File.WriteAllText(global_values.output_directory + @"\score1.txt", nud_score1.Value.ToString());
                     System.IO.File.WriteAllText(global_values.output_directory + @"\character name1.txt", cbx_characters1.Text);
                     //Save Player 2's information to seperate files to be used by the stream program
-                    if (ckb_loser2.Checked == false)
-                    {
-                        System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", cbx_name2.Text);
-                    }
-                    else
-                    {
-                        System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", cbx_name2.Text + " [L]");
-                    }
+                    output_name = get_output_name(cbx_name2.Text, ckb_loser2.Checked, 2);
+                    System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", output_name);
                     System.IO.File.WriteAllText(global_values.output_directory + @"\alt text2.txt", txt_alt2.Text);
                     System.IO.File.WriteAllText(global_values.output_directory + @"\score2.txt", nud_score2.Value.ToString());
                     System.IO.File.WriteAllText(global_values.output_directory + @"\character name2.txt", cbx_characters2.Text);
@@ -948,27 +999,15 @@ namespace Stream_Info_Handler
 
                     //Save Player 1's information to seperate files to be used by the stream program
                     System.IO.File.WriteAllText(global_values.output_directory + @"\score1.txt", nud_score1.Value.ToString());
-                    if (ckb_loser1.Checked == false)
-                    {
-                        System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", cbx_name1.Text);
-                    }
-                    else
-                    {
-                        System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", cbx_name1.Text + " [L]");
-                    }
+                    output_name = get_output_name(cbx_name1.Text, ckb_loser1.Checked, 1);
+                    System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", output_name);
                     System.IO.File.WriteAllText(global_values.output_directory + @"\alt text1.txt", txt_alt1.Text);
                     System.IO.File.WriteAllText(global_values.output_directory + @"\score1.txt", nud_score1.Value.ToString());
                     System.IO.File.WriteAllText(global_values.output_directory + @"\character name1.txt", cbx_characters1.Text);
                     //Save Player 2's information to seperate files to be used by the stream program
                     System.IO.File.WriteAllText(global_values.output_directory + @"\score2.txt", nud_score2.Value.ToString());
-                    if (ckb_loser2.Checked == false)
-                    {
-                        System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", cbx_name2.Text);
-                    }
-                    else
-                    {
-                        System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", cbx_name2.Text + " [L]");
-                    }
+                    output_name = get_output_name(cbx_name2.Text, ckb_loser2.Checked, 2);
+                    System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", output_name);
                     System.IO.File.WriteAllText(global_values.output_directory + @"\alt text2.txt", txt_alt2.Text);
                     System.IO.File.WriteAllText(global_values.output_directory + @"\score2.txt", nud_score2.Value.ToString());
                     System.IO.File.WriteAllText(global_values.output_directory + @"\character name2.txt", cbx_characters2.Text);
@@ -1230,35 +1269,7 @@ namespace Stream_Info_Handler
         private void cbx_name2_TextChanged(object sender, EventArgs e)
         {
             btn_update.Enabled = true;
-            switch(btn_update.Text)
-            {
-                case "Start":
-                    btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
-                    break;
-                case "Update":
-                    if (global_values.auto_update == false)
-                    {
-                        btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\blue.gif");
-                    }
-                    else
-                    {
-                        btn_update.Enabled = false;
-                        if (ckb_loser2.Checked == false)
-                        {
-                            System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", cbx_name2.Text);
-                        }
-                        else
-                        {
-                            System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", cbx_name2.Text + " [L]");
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void cbx_name1_TextChanged(object sender, EventArgs e)
-        {
-            btn_update.Enabled = true;
+            string output_name = get_output_name(cbx_name2.Text, ckb_loser2.Checked, 2);
             switch (btn_update.Text)
             {
                 case "Start":
@@ -1272,7 +1283,30 @@ namespace Stream_Info_Handler
                     else
                     {
                         btn_update.Enabled = false;
-                        System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", cbx_name1.Text);
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", output_name);
+                    }
+                    break;
+            }
+        }
+
+        private void cbx_name1_TextChanged(object sender, EventArgs e)
+        {
+            btn_update.Enabled = true;
+            string output_name = get_output_name(cbx_name1.Text, ckb_loser1.Checked, 1);
+            switch (btn_update.Text)
+            {
+                case "Start":
+                    btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
+                    break;
+                case "Update":
+                    if (global_values.auto_update == false)
+                    {
+                        btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\blue.gif");
+                    }
+                    else
+                    {
+                        btn_update.Enabled = false;
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", output_name);
                     }
                     break;
             }
@@ -1383,19 +1417,19 @@ namespace Stream_Info_Handler
             btn_update.Image = null;
             btn_update.Enabled = true;
 
-            string score_file = global_values.output_directory + @"\score1.png";
-            if (File.Exists(score_file))
+            string[] image_files = { @"\score1.png", @"\score2.png", @"\Stock Icon 1.png", @"\Stock Icon 2.png",
+                                     @"\sponsor 1.png", @"\sponsor 2.png" };
+            foreach(string replace_image in image_files)
             {
-                File.Delete(score_file);
+                if (File.Exists(replace_image))
+                {
+                    File.Delete(replace_image);
+                }
+                File.Copy(@"left.png", replace_image);
             }
-            File.Copy(@"left.png", score_file);
 
-            score_file = global_values.output_directory + @"\score2.png";
-            if (File.Exists(score_file))
-            {
-                File.Delete(score_file);
-            }
-            File.Copy(@"left.png", score_file);
+            global_values.player_roster_number[1] = -1;
+            global_values.player_roster_number[2] = -1;
 
 
             if (global_values.enable_sheets == true && txt_sheets.Text != "" && txt_sheets.Text != null)
@@ -1717,6 +1751,17 @@ namespace Stream_Info_Handler
                         tab_mainsettings.SelectedIndex = 1;
                         System.Media.SystemSounds.Asterisk.Play();
                     }
+                    if ((ckb_sponsor.Checked == true &&
+                        (txt_sponsor.BackColor == warning_color ||
+                         txt_sponsor.Text == "")) ||
+                        (ckb_region.Checked == true &&
+                        (txt_region.BackColor == warning_color ||
+                         txt_region.Text == "")))
+                    {
+                        tab_main.SelectedIndex = 3;
+                        tab_mainsettings.SelectedIndex = 2;
+                        System.Media.SystemSounds.Asterisk.Play();
+                    }
                     if (txt_json.BackColor == warning_color)
                     {
                         tab_main.SelectedIndex = 3;
@@ -2036,6 +2081,7 @@ namespace Stream_Info_Handler
             //Get the checked status of this checkbox
             bool status = ckb_sheets.Checked;
 
+            ckb_region.Enabled = status;
             //Set the enable status of all sheets settings to the checked status
             txt_sheets.Enabled = status;
             ckb_startup_sheets.Enabled = status;
@@ -2240,18 +2286,25 @@ namespace Stream_Info_Handler
             }
 
             int round_number = Int32.Parse(upcoming_matches[1][1].ToString());
-            string manual_update = upcoming_matches[1][2].ToString();
-            if (manual_update == "" && global_values.first_match == false)
+            string manual_update = upcoming_matches[1][3].ToString();
+            if ((manual_update == "" || manual_update == null))
             {
-                if (reverse == true)
+                if (global_values.first_match == false)
                 {
-                    round_number -= 1;
+                    if (reverse == true)
+                    {
+                        round_number -= 1;
 
+                    }
+                    else
+                    {
+                        round_number += 1;
+                    }
                 }
-                else
-                {
-                    round_number += 1;
-                }
+            }
+            else
+            {
+                round_number = Int32.Parse(manual_update);
             }
 
             if(round_number == -1)
@@ -2373,13 +2426,12 @@ namespace Stream_Info_Handler
             currentmatch.Range = "Current Round Info!A4:D18";
             currentmatch.MajorDimension = "COLUMNS";
 
-            oblist = new List<object>() { (round_number).ToString() };
-            oblist2 = new List<object>() { "" };
+            oblist = new List<object>() { (round_number).ToString(), "Next Match to Stream", "" };
 
             Google.Apis.Sheets.v4.Data.ValueRange upcoming = new Google.Apis.Sheets.v4.Data.ValueRange();
-            upcoming.Range = "Upcoming Matches!B2:C2";
-            upcoming.Values = new List<IList<object>> { oblist, oblist2 }; ;
-            upcoming.MajorDimension = "COLUMNS";
+            upcoming.Range = "Upcoming Matches!B2:D2";
+            upcoming.Values = new List<IList<object>> { oblist }; ;
+            upcoming.MajorDimension = "ROWS";
 
             List<Google.Apis.Sheets.v4.Data.ValueRange> data = new List<Google.Apis.Sheets.v4.Data.ValueRange>() { currentmatch , upcoming };  // TODO: Update placeholder value.
 
@@ -2398,12 +2450,14 @@ namespace Stream_Info_Handler
             if (global_values.auto_update == true)
             {
                 //Save Player 1's information to seperate files to be used by the stream program
-                System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", cbx_name1.Text);
+                string output_name = get_output_name(cbx_name1.Text, ckb_loser1.Checked, 1);
+                System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", output_name);
                 System.IO.File.WriteAllText(global_values.output_directory + @"\alt text1.txt", txt_alt1.Text);
                 System.IO.File.WriteAllText(global_values.output_directory + @"\score1.txt", nud_score1.Value.ToString());
                 System.IO.File.WriteAllText(global_values.output_directory + @"\character name1.txt", cbx_characters1.Text);
                 //Save Player 2's information to seperate files to be used by the stream program
-                System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", cbx_name2.Text);
+                output_name = get_output_name(cbx_name2.Text, ckb_loser2.Checked, 2);
+                System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", output_name);
                 System.IO.File.WriteAllText(global_values.output_directory + @"\alt text2.txt", txt_alt2.Text);
                 System.IO.File.WriteAllText(global_values.output_directory + @"\score2.txt", nud_score2.Value.ToString());
                 System.IO.File.WriteAllText(global_values.output_directory + @"\character name2.txt", cbx_characters2.Text);
@@ -3201,37 +3255,42 @@ namespace Stream_Info_Handler
             }
         }
 
-        private void check_for_sponsor(string check_divider, ref string player_name, ref string player_team)
+        private void check_for_sponsor(ref string player_name, ref string player_team)
         {
-            //Check if the tag contains the seperator
-            if (player_name.Contains(check_divider))
+            //Set the list of possible seperators between sponsor and tag
+            string[] check_seperators = { " | ", " / ", @" \ " };
+            foreach (string element in check_seperators)
             {
-                //Initialize the sponsor and tag checking variables
-                string check_team = player_name;
-                string check_name = player_name;
-
-                //Check each index of the tag string
-                for (int i = 0; i < check_team.Length; i++)
+                //Check if the tag contains the seperator
+                if (player_name.Contains(element))
                 {
-                    //Check if the seperator is present at this index
-                    if (check_team.Substring(i).StartsWith(check_divider) == true)
-                    {
-                        //Set the sponsor to be before this index
-                        check_team = player_name.Substring(0, i);
-                        //Set the tag to be after the seperator at this index
-                        check_name = player_name.Substring(i + 3);
+                    //Initialize the sponsor and tag checking variables
+                    string check_team = player_name;
+                    string check_name = player_name;
 
-                        //Verify that this is a seperator
-                        if (MessageBox.Show("Does this player have the sponsor '" + check_team + "'?",
-                            "Sponsor Name Detected", MessageBoxButtons.YesNo)
-                            == DialogResult.Yes)
+                    //Check each index of the tag string
+                    for (int i = 0; i < check_team.Length; i++)
+                    {
+                        //Check if the seperator is present at this index
+                        if (check_team.Substring(i).StartsWith(element) == true)
                         {
-                            //Pass the sponsor and tag onto the actual variables
-                            player_team = check_team;
-                            player_name = check_name;
+                            //Set the sponsor to be before this index
+                            check_team = player_name.Substring(0, i);
+                            //Set the tag to be after the seperator at this index
+                            check_name = player_name.Substring(i + 3);
+
+                            //Verify that this is a seperator
+                            //if (MessageBox.Show("Does this player have the sponsor '" + check_team + "'?",
+                            //    "Sponsor Name Detected", MessageBoxButtons.YesNo)
+                            //    == DialogResult.Yes)
+                            //{
+                                //Pass the sponsor and tag onto the actual variables
+                                player_team = check_team;
+                                player_name = check_name;
+                            //}
+                            //Stop checking for the seperator
+                            return;
                         }
-                        //Stop checking for the seperator
-                        break;
                     }
                 }
             }
@@ -3243,67 +3302,63 @@ namespace Stream_Info_Handler
             player_info save_player = new player_info();
             save_player.tag = cbx_name1.Text;
             save_player.twitter = txt_alt1.Text;
+            save_player.region = "";
+            for (int i = 1; i < 5; i++)
+            {
+                save_player.character[i] = "";
+                save_player.color[i] = 1;
+            }
 
             //This variable controls the slot that the enterred character gets input into.
             int overwrite_slot = 0;
+            //Test to see if a seperator is present in the tag and seperate the tag and sponsor appropriately
+            check_for_sponsor(ref save_player.tag, ref save_player.sponsor);
 
-            //Set the list of possible seperators between sponsor and tag
-            string[] check_seperators = { " I ", " | ", " / ", @" \ " };
-            foreach(string element in check_seperators)
-            {
-                //Test to see if each seperator is present in the tag and seperate the tag and sponsor appropriately
-                check_for_sponsor(element, ref save_player.tag, ref save_player.sponsor);
-            }
+
 
             //Check if a player in the roster has been selected from the combobox. 
             //Also ensure that the sheets integration is enabled
             if (global_values.player_roster_number[1] != -1 && global_values.enable_sheets == true &&
                 txt_sheets.Text != "")
             {
-                //store the roster player's info locally
-                player_info grab_info = global_values.roster[global_values.player_roster_number[1]];
-                //Set the player profile's characters, colors, and region to that of the roster player
-                save_player.character = grab_info.character;
-                save_player.color = grab_info.color;
-                save_player.region = grab_info.region;
-                //Check if the selected character is one of the player profile's characters. If not...
-                if (!save_player.character.Contains(cbx_characters1.Text))
+                if (global_values.roster[global_values.player_roster_number[1]].tag == cbx_name1.Text)
                 {
-                    //Loop through each character slot of the player
-                    for (int i = 0; i < 5; i++)
+                    //store the roster player's info locally
+                    player_info grab_info = global_values.roster[global_values.player_roster_number[1]];
+                    //Set the player profile's characters, colors, and region to that of the roster player
+                    save_player.character = grab_info.character;
+                    save_player.color = grab_info.color;
+                    save_player.region = grab_info.region;
+                    //Check if the selected character is one of the player profile's characters. If not...
+                    if (!save_player.character.Contains(cbx_characters1.Text))
                     {
-                        //If there is no character in the slot, set the slot as the overwrite slot and break the loop
-                        if (save_player.character[i] == "")
+                        //Loop through each character slot of the player
+                        for (int i = 0; i < 5; i++)
                         {
-                            overwrite_slot = i;
-                            break;
-                        }
-                        else
-                        {
-                            //If no slot is empty...
-                            if (i == 4)
+                            //If there is no character in the slot, set the slot as the overwrite slot and break the loop
+                            if (save_player.character[i] == "")
                             {
-                                //Show the window to select an overwrite slot
-                                var check_character = new frm_replace_character(save_player, cbx_characters1.Text);
-                                check_character.ShowDialog();
-                                overwrite_slot = get_character_slot;
+                                overwrite_slot = i;
+                                break;
+                            }
+                            else
+                            {
+                                //If no slot is empty...
+                                if (i == 4)
+                                {
+                                    //Show the window to select an overwrite slot
+                                    var check_character = new frm_replace_character(save_player, cbx_characters1.Text);
+                                    check_character.ShowDialog();
+                                    overwrite_slot = get_character_slot;
+                                }
                             }
                         }
                     }
-                }
-                else
-                {
-                    //Set the overwrite slot to the slot that contains it.
-                    overwrite_slot = Array.IndexOf(save_player.character, cbx_characters1.Text);
-                }
-            }
-            else
-            {
-                save_player.region = "";
-                for (int i = 1; i < 5; i ++)
-                {
-                    save_player.character[i] = "";
-                    save_player.color[i] = 1;
+                    else
+                    {
+                        //Set the overwrite slot to the slot that contains it.
+                        overwrite_slot = Array.IndexOf(save_player.character, cbx_characters1.Text);
+                    }
                 }
             }
 
@@ -3344,69 +3399,67 @@ namespace Stream_Info_Handler
         {
             //Create a player profile and set its tag and twitter to the enterred information
             player_info save_player = new player_info();
-            save_player.tag = cbx_name2.Text;
-            save_player.twitter = txt_alt2.Text;
+            save_player.tag = cbx_name1.Text;
+            save_player.twitter = txt_alt1.Text;
+            save_player.region = "";
+            for (int i = 1; i < 5; i++)
+            {
+                save_player.character[i] = "";
+                save_player.color[i] = 1;
+            }
 
             //This variable controls the slot that the enterred character gets input into.
             int overwrite_slot = 0;
 
-            //Set the list of possible seperators between sponsor and tag
-            string[] check_seperators = { " I ", " | ", " / ", @" \ " };
-            foreach (string element in check_seperators)
-            {
-                //Test to see if each seperator is present in the tag and seperate the tag and sponsor appropriately
-                check_for_sponsor(element, ref save_player.tag, ref save_player.sponsor);
-            }
+
+            //Test to see if each seperator is present in the tag and seperate the tag and sponsor appropriately
+            check_for_sponsor(ref save_player.tag, ref save_player.sponsor);
+
+
 
             //Check if a player in the roster has been selected from the combobox. 
             //Also ensure that the sheets integration is enabled
             if (global_values.player_roster_number[2] != -1 && global_values.enable_sheets == true &&
                 txt_sheets.Text != "")
             {
-                //store the roster player's info locally
-                player_info grab_info = global_values.roster[global_values.player_roster_number[2]];
-                //Set the player profile's characters, colors, and region to that of the roster player
-                save_player.character = grab_info.character;
-                save_player.color = grab_info.color;
-                save_player.region = grab_info.region;
-                //Check if the selected character is one of the player profile's characters. If not...
-                if (!save_player.character.Contains(cbx_characters2.Text))
+                if (global_values.roster[global_values.player_roster_number[2]].tag == cbx_name1.Text)
                 {
-                    //Loop through each character slot of the player
-                    for (int i = 0; i < 5; i++)
+                    //store the roster player's info locally
+                    player_info grab_info = global_values.roster[global_values.player_roster_number[2]];
+                    //Set the player profile's characters, colors, and region to that of the roster player
+                    save_player.character = grab_info.character;
+                    save_player.color = grab_info.color;
+                    save_player.region = grab_info.region;
+                    //Check if the selected character is one of the player profile's characters. If not...
+                    if (!save_player.character.Contains(cbx_characters2.Text))
                     {
-                        //If there is no character in the slot, set the slot as the overwrite slot and break the loop
-                        if (save_player.character[i] == "")
+                        //Loop through each character slot of the player
+                        for (int i = 0; i < 5; i++)
                         {
-                            overwrite_slot = i;
-                            break;
-                        }
-                        else
-                        {
-                            //If no slot is empty...
-                            if (i == 4)
+                            //If there is no character in the slot, set the slot as the overwrite slot and break the loop
+                            if (save_player.character[i] == "")
                             {
-                                //Show the window to select an overwrite slot
-                                var check_character = new frm_replace_character(save_player, cbx_characters2.Text);
-                                check_character.ShowDialog();
-                                overwrite_slot = get_character_slot;
+                                overwrite_slot = i;
+                                break;
+                            }
+                            else
+                            {
+                                //If no slot is empty...
+                                if (i == 4)
+                                {
+                                    //Show the window to select an overwrite slot
+                                    var check_character = new frm_replace_character(save_player, cbx_characters2.Text);
+                                    check_character.ShowDialog();
+                                    overwrite_slot = get_character_slot;
+                                }
                             }
                         }
                     }
-                }
-                else
-                {
-                    //Set the overwrite slot to the slot that contains it.
-                    overwrite_slot = Array.IndexOf(save_player.character, cbx_characters2.Text);
-                }
-            }
-            else
-            {
-                save_player.region = "";
-                for (int i = 1; i < 5; i++)
-                {
-                    save_player.character[i] = "";
-                    save_player.color[i] = 1;
+                    else
+                    {
+                        //Set the overwrite slot to the slot that contains it.
+                        overwrite_slot = Array.IndexOf(save_player.character, cbx_characters2.Text);
+                    }
                 }
             }
 
@@ -3641,6 +3694,16 @@ namespace Stream_Info_Handler
                 tab_mainsettings.SelectedIndex = 1;
                 System.Media.SystemSounds.Asterisk.Play();
             }
+            if ((ckb_sponsor.Checked == true &&
+                (txt_sponsor.BackColor == warning_color ||
+                 txt_sponsor.Text == "")) ||
+                (ckb_region.Checked == true &&
+                (txt_region.BackColor == warning_color ||
+                 txt_region.Text == "")))
+            {
+                tab_mainsettings.SelectedIndex = 2;
+                System.Media.SystemSounds.Asterisk.Play();
+            }
         }
 
         private void btn_reset_scores_Click(object sender, EventArgs e)
@@ -3734,6 +3797,7 @@ namespace Stream_Info_Handler
         private void cbx_name1_TextChanged_1(object sender, EventArgs e)
         {
             btn_update.Enabled = true;
+            string output_name = get_output_name(cbx_name1.Text, ckb_loser1.Checked, 1);
             switch (btn_update.Text)
             {
                 case "Start":
@@ -3747,14 +3811,7 @@ namespace Stream_Info_Handler
                     else
                     {
                         btn_update.Enabled = false;
-                        if (ckb_loser1.Checked == false)
-                        {
-                            System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", cbx_name1.Text);
-                        }
-                        else
-                        {
-                            System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", cbx_name1.Text + " [L]");
-                        }
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", output_name);
                     }
                     break;
             }
@@ -3762,26 +3819,14 @@ namespace Stream_Info_Handler
 
         private void ckb_loser1_CheckedChanged(object sender, EventArgs e)
         {
-            if (ckb_loser1.Checked == false)
-            {
-                System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", cbx_name1.Text);
-            }
-            else
-            {
-                System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", cbx_name1.Text + " [L]");
-            }
+            string output_name = get_output_name(cbx_name1.Text, ckb_loser1.Checked, 1);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", output_name);
         }
 
         private void ckb_loser2_CheckedChanged(object sender, EventArgs e)
         {
-            if (ckb_loser2.Checked == false)
-            {
-                System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", cbx_name2.Text);
-            }
-            else
-            {
-                System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", cbx_name2.Text + " [L]");
-            }
+            string output_name = get_output_name(cbx_name2.Text, ckb_loser2.Checked, 2);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", output_name);
         }
 
         private void txt_playlist_KeyDown(object sender, KeyEventArgs e)
@@ -3794,13 +3839,199 @@ namespace Stream_Info_Handler
 
         private void btn_dashboard_Click(object sender, EventArgs e)
         {
-            var dashboard = new frm_streamqueue(txt_sheets.Text);
-            dashboard.Show();
+            if (global_values.sheets_info == "info-and-queue" && global_values.enable_sheets == true && txt_sheets.Text != "" && txt_sheets.Text != null)
+            {
+                var dashboard = new frm_streamqueue(txt_sheets.Text);
+                dashboard.Show();
+            }
+            else
+            {
+                MessageBox.Show("The Google Sheets integration must be enabled and set to use both Info and Queue in order to use this feature. Please check the settings to ensure this is set up correctly.");
+            }
+        }
+
+        private void btn_addplayer_Click(object sender, EventArgs e)
+        {
+            if (global_values.enable_sheets == true && txt_sheets.Text != "" && txt_sheets.Text != null)
+            {
+                var get_tag = new frm_newplayer();
+                get_tag.ShowDialog();
+
+                var player_info_box = new frm_save_player(save_name);
+                if (player_info_box.ShowDialog() == DialogResult.OK)
+                {
+                    add_to_sheets(get_new_player);
+                    string new_player = get_new_player.tag;
+                    MessageBox.Show(new_player + " has been added to the player database within the connected Google Sheet.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("The Google Sheets integration must be enabled in order to use this feature. Please check the settings to ensure this is set up correctly.");
+            }
+        }
+
+        void comboBox_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void ckb_sponsor_CheckedChanged(object sender, EventArgs e)
+        {
+            global_values.enable_sponsor = ckb_sponsor.Checked;
+            txt_sponsor.Enabled = ckb_sponsor.Checked;
+            btn_sponsor.Enabled = ckb_sponsor.Checked;
+
+            //Update the settings file
+            XDocument xml = XDocument.Load(global_values.settings_file);
+            xml.Root.Element("sponsor-and-region").Element("enable-sponsor").ReplaceWith(new XElement("enable-sponsor", ckb_sponsor.Checked.ToString()));
+            xml.Save(global_values.settings_file);
+        }
+
+        private void ckb_region_CheckedChanged(object sender, EventArgs e)
+        {
+            global_values.enable_region = ckb_region.Checked;
+            txt_region.Enabled = ckb_region.Checked;
+            btn_region.Enabled = ckb_region.Checked;
+
+            //Update the settings file
+            XDocument xml = XDocument.Load(global_values.settings_file);
+            xml.Root.Element("sponsor-and-region").Element("enable-region").ReplaceWith(new XElement("enable-region", ckb_region.Checked.ToString()));
+            xml.Save(global_values.settings_file);
+        }
+
+        private void txt_sponsor_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_sponsor.Text != @"")
+            {
+                if (Directory.Exists(txt_sponsor.Text) &&
+                    global_values.vods_directory != txt_sponsor.Text)
+                {
+                    txt_sponsor.BackColor = Color.White;
+                    global_values.sponsor_directory = txt_sponsor.Text;
+                    XDocument xml = XDocument.Load(global_values.settings_file);
+                    xml.Root.Element("sponsor-and-region").Element("sponsor-directory").ReplaceWith(new XElement("sponsor-directory", txt_sponsor.Text));
+                    xml.Save(global_values.settings_file);
+                }
+                else
+                {
+                    txt_sponsor.BackColor = warning_color;
+                }
+            }
+        }
+
+        private void txt_region_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_region.Text != @"")
+            {
+                if (Directory.Exists(txt_region.Text) &&
+                    global_values.vods_directory != txt_region.Text)
+                {
+                    txt_region.BackColor = Color.White;
+                    global_values.region_directory = txt_region.Text;
+                    XDocument xml = XDocument.Load(global_values.settings_file);
+                    xml.Root.Element("sponsor-and-region").Element("region-directory").ReplaceWith(new XElement("region-directory", txt_region.Text));
+                    xml.Save(global_values.settings_file);
+                }
+                else
+                {
+                    txt_region.BackColor = warning_color;
+                }
+            }
+        }
+
+        private void btn_sponsor_Click(object sender, EventArgs e)
+        {
+            //Ask the user to select the folder that sponsor files are stored in
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                txt_sponsor.Text = folderBrowserDialog1.SelectedPath;                 //Update the global value with the new directory
+                if (global_values.vods_directory != txt_sponsor.Text)
+                {
+                    global_values.sponsor_directory = txt_sponsor.Text;         //Save the directory
+                                                                                        //Save the setting to the settings file
+                    XDocument xml = XDocument.Load(global_values.settings_file);
+                    xml.Root.Element("sponsor-and-region").Element("sponsor-directory").ReplaceWith(new XElement("sponsor-directory", txt_sponsor.Text));
+                    xml.Save(global_values.settings_file);
+                }
+            }
+        }
+
+        private void btn_region_Click(object sender, EventArgs e)
+        {
+            //Ask the user to select the folder that region files are stored in
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                txt_region.Text = folderBrowserDialog1.SelectedPath;                 //Update the global value with the new directory
+                if (global_values.vods_directory != txt_region.Text)
+                {
+                    global_values.region_directory = txt_region.Text;         //Save the directory
+                                                                                //Save the setting to the settings file
+                    XDocument xml = XDocument.Load(global_values.settings_file);
+                    xml.Root.Element("sponsor-and-region").Element("region-directory").ReplaceWith(new XElement("region-directory", global_values.region_directory));
+                    xml.Save(global_values.settings_file);
+                }
+            }
+        }
+
+        private string get_output_name(string raw_name, bool loser, int player_number)
+        {
+            string output_name = raw_name;
+            string sponsor_name = "";
+            if (global_values.enable_sponsor == true)
+            {
+                check_for_sponsor(ref output_name, ref sponsor_name);
+                if(File.Exists(global_values.sponsor_directory + @"\" + sponsor_name + @".png"))
+                {
+                    Image sponsor_image = Image.FromFile(global_values.sponsor_directory + @"\" + sponsor_name + @".png");
+                    sponsor_image.Save(global_values.output_directory + @"\sponsor " + player_number.ToString() + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                }
+            }
+
+            //Check if the region contains the seperator
+            if (global_values.enable_region == true && global_values.player_roster_number[player_number] != -1)
+            {
+                string find_region = global_values.roster[global_values.player_roster_number[player_number]].region;
+
+                if (find_region.Contains(" - "))
+                {
+                    //Check each index of the region string
+                    for (int i = 0; i < find_region.Length; i++)
+                    {
+                        //Check if the seperator is present at this index
+                        if (find_region.Substring(i).StartsWith(" - ") == true)
+                        {
+                            //Set the region to be before this index
+                            find_region = find_region.Substring(0, i);
+                            break;
+                        }
+                    }
+                }
+
+                if (File.Exists(global_values.region_directory + @"\" + find_region + @".png"))
+                {
+                    Image region_image = Image.FromFile(global_values.region_directory + @"\" + find_region + @".png");
+                    region_image.Save(global_values.output_directory + @"\region " + player_number.ToString() + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                }
+            }
+
+            if (loser == false)
+            {
+                return output_name;
+            }
+            else
+            {
+                return output_name + " [L]";
+            }
         }
     }
 
     public static class global_values
     {
+        public static bool enable_region;
+        public static string region_directory;
+        public static bool enable_sponsor;
+        public static string sponsor_directory;
         public static string settings_file = @"C:\Users\Public\Stream Info Handler\settings.xml";
         public static int[] player_roster_number;
         public static string sheets_style;
@@ -3853,7 +4084,7 @@ namespace Stream_Info_Handler
         {
             if(sponsor != "")
             {
-                return sponsor + " I " + tag;
+                return sponsor + " | " + tag;
             }
             else
             {

@@ -23,7 +23,7 @@ namespace Stream_Info_Handler
             load_combobox(ref cbx_secondary4, true);
             load_combobox(ref cbx_secondary5, true);
             txt_tag.Text = save_player.tag;
-            txt_region.Text = save_player.region;
+            cbx_region.Text = save_player.region;
             txt_sponsor.Text = save_player.sponsor;
             txt_twitter.Text = save_player.twitter;
             cbx_main.SelectedIndex = cbx_main.Items.IndexOf(save_player.character[0]);
@@ -92,7 +92,7 @@ namespace Stream_Info_Handler
             player_info save_player = new player_info();
             save_player.tag = txt_tag.Text;
             save_player.twitter = txt_twitter.Text;
-            save_player.region = txt_region.Text;
+            save_player.region = cbx_region.Text;
             save_player.sponsor = txt_sponsor.Text;
 
             save_player.character[0] = cbx_main.Text;

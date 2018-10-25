@@ -39,7 +39,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btn_reset = new System.Windows.Forms.Button();
             this.btn_edit = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_remove = new System.Windows.Forms.Button();
             this.btn_push = new System.Windows.Forms.Button();
             this.btn_moveup = new System.Windows.Forms.Button();
             this.btn_movedown = new System.Windows.Forms.Button();
@@ -85,7 +85,7 @@
             this.cbx_round.Location = new System.Drawing.Point(6, 32);
             this.cbx_round.Name = "cbx_round";
             this.cbx_round.Size = new System.Drawing.Size(194, 28);
-            this.cbx_round.TabIndex = 1;
+            this.cbx_round.TabIndex = 0;
             // 
             // cbx_player1
             // 
@@ -96,7 +96,7 @@
             this.cbx_player1.Location = new System.Drawing.Point(206, 32);
             this.cbx_player1.Name = "cbx_player1";
             this.cbx_player1.Size = new System.Drawing.Size(201, 28);
-            this.cbx_player1.TabIndex = 3;
+            this.cbx_player1.TabIndex = 1;
             // 
             // cbx_player2
             // 
@@ -107,7 +107,7 @@
             this.cbx_player2.Location = new System.Drawing.Point(413, 32);
             this.cbx_player2.Name = "cbx_player2";
             this.cbx_player2.Size = new System.Drawing.Size(204, 28);
-            this.cbx_player2.TabIndex = 4;
+            this.cbx_player2.TabIndex = 2;
             // 
             // groupBox1
             // 
@@ -121,7 +121,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(706, 64);
-            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Add a Match to Stream Queue";
             // 
@@ -130,7 +130,7 @@
             this.btn_add.Location = new System.Drawing.Point(623, 32);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(77, 28);
-            this.btn_add.TabIndex = 8;
+            this.btn_add.TabIndex = 3;
             this.btn_add.Text = "Add Match";
             this.btn_add.UseVisualStyleBackColor = true;
             this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
@@ -167,55 +167,64 @@
             this.btn_reset.Location = new System.Drawing.Point(12, 380);
             this.btn_reset.Name = "btn_reset";
             this.btn_reset.Size = new System.Drawing.Size(96, 37);
-            this.btn_reset.TabIndex = 6;
+            this.btn_reset.TabIndex = 7;
             this.btn_reset.Text = "Reset Queue";
             this.btn_reset.UseVisualStyleBackColor = true;
+            this.btn_reset.Click += new System.EventHandler(this.btn_reset_Click);
             // 
             // btn_edit
             // 
+            this.btn_edit.Enabled = false;
             this.btn_edit.Location = new System.Drawing.Point(366, 380);
             this.btn_edit.Name = "btn_edit";
             this.btn_edit.Size = new System.Drawing.Size(173, 37);
-            this.btn_edit.TabIndex = 7;
+            this.btn_edit.TabIndex = 5;
             this.btn_edit.Text = "Edit Selected Match";
             this.btn_edit.UseVisualStyleBackColor = true;
+            this.btn_edit.Click += new System.EventHandler(this.btn_edit_Click);
             // 
-            // button1
+            // btn_remove
             // 
-            this.button1.Location = new System.Drawing.Point(187, 380);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(173, 37);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Remove Selected Match";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_remove.Enabled = false;
+            this.btn_remove.Location = new System.Drawing.Point(187, 380);
+            this.btn_remove.Name = "btn_remove";
+            this.btn_remove.Size = new System.Drawing.Size(173, 37);
+            this.btn_remove.TabIndex = 6;
+            this.btn_remove.Text = "Remove Selected Match";
+            this.btn_remove.UseVisualStyleBackColor = true;
+            this.btn_remove.Click += new System.EventHandler(this.button1_Click);
             // 
             // btn_push
             // 
+            this.btn_push.Enabled = false;
             this.btn_push.Location = new System.Drawing.Point(545, 380);
             this.btn_push.Name = "btn_push";
             this.btn_push.Size = new System.Drawing.Size(173, 37);
-            this.btn_push.TabIndex = 9;
+            this.btn_push.TabIndex = 4;
             this.btn_push.Text = "Push Selected Match to Stream";
             this.btn_push.UseVisualStyleBackColor = true;
+            this.btn_push.Click += new System.EventHandler(this.btn_push_Click);
             // 
             // btn_moveup
             // 
+            this.btn_moveup.Enabled = false;
             this.btn_moveup.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_moveup.Location = new System.Drawing.Point(724, 82);
             this.btn_moveup.Name = "btn_moveup";
             this.btn_moveup.Size = new System.Drawing.Size(34, 134);
-            this.btn_moveup.TabIndex = 10;
+            this.btn_moveup.TabIndex = 2;
             this.btn_moveup.Text = "↑";
             this.btn_moveup.UseVisualStyleBackColor = true;
             this.btn_moveup.Click += new System.EventHandler(this.btn_moveup_Click);
             // 
             // btn_movedown
             // 
+            this.btn_movedown.Enabled = false;
             this.btn_movedown.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_movedown.Location = new System.Drawing.Point(724, 240);
             this.btn_movedown.Name = "btn_movedown";
             this.btn_movedown.Size = new System.Drawing.Size(34, 134);
-            this.btn_movedown.TabIndex = 11;
+            this.btn_movedown.TabIndex = 3;
             this.btn_movedown.Text = "↓";
             this.btn_movedown.UseVisualStyleBackColor = true;
             this.btn_movedown.Click += new System.EventHandler(this.btn_movedown_Click);
@@ -235,9 +244,10 @@
             this.lvw_matches.Location = new System.Drawing.Point(12, 82);
             this.lvw_matches.Name = "lvw_matches";
             this.lvw_matches.Size = new System.Drawing.Size(706, 292);
-            this.lvw_matches.TabIndex = 12;
+            this.lvw_matches.TabIndex = 1;
             this.lvw_matches.UseCompatibleStateImageBehavior = false;
             this.lvw_matches.View = System.Windows.Forms.View.Details;
+            this.lvw_matches.SelectedIndexChanged += new System.EventHandler(this.lvw_matches_SelectedIndexChanged);
             // 
             // clm_match
             // 
@@ -268,7 +278,7 @@
             this.Controls.Add(this.btn_movedown);
             this.Controls.Add(this.btn_moveup);
             this.Controls.Add(this.btn_push);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_remove);
             this.Controls.Add(this.btn_edit);
             this.Controls.Add(this.btn_reset);
             this.Controls.Add(this.groupBox1);
@@ -294,7 +304,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_reset;
         private System.Windows.Forms.Button btn_edit;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_remove;
         private System.Windows.Forms.Button btn_push;
         private System.Windows.Forms.Button btn_moveup;
         private System.Windows.Forms.Button btn_movedown;

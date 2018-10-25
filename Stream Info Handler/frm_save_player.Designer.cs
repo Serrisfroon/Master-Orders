@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_save_player));
             this.txt_tag = new System.Windows.Forms.TextBox();
             this.txt_twitter = new System.Windows.Forms.TextBox();
-            this.txt_region = new System.Windows.Forms.TextBox();
             this.txt_sponsor = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,6 +50,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btn_save = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
+            this.cbx_region = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,13 +68,6 @@
             this.txt_twitter.Name = "txt_twitter";
             this.txt_twitter.Size = new System.Drawing.Size(155, 20);
             this.txt_twitter.TabIndex = 1;
-            // 
-            // txt_region
-            // 
-            this.txt_region.Location = new System.Drawing.Point(334, 25);
-            this.txt_region.Name = "txt_region";
-            this.txt_region.Size = new System.Drawing.Size(131, 20);
-            this.txt_region.TabIndex = 2;
             // 
             // txt_sponsor
             // 
@@ -285,11 +278,73 @@
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
+            // cbx_region
+            // 
+            this.cbx_region.FormattingEnabled = true;
+            this.cbx_region.Items.AddRange(new object[] {
+            "AL - Alabama",
+            "AK - Alaska",
+            "AZ - Arizona",
+            "AR -Arkansas",
+            "Ca - California",
+            "CO - Colorado",
+            "CT - Connecticut",
+            "DE - Deleware",
+            "DC - Washington, DC",
+            "FL - florida",
+            "GA - Georgia",
+            "HI - Hawaii",
+            "ID - Idaho",
+            "IL - Illinois",
+            "IN - Indiana",
+            "IA - Iowa",
+            "KS - Kansas",
+            "KY - Kentucky",
+            "LA - Louisiana",
+            "ME - Maine",
+            "MD - Maryland",
+            "MA - Massachusetts",
+            "MI - Michigan",
+            "MN - Minnesota",
+            "MS - Mississippi",
+            "MO - Missouri",
+            "MT - Montana",
+            "NE - Nebraska",
+            "NV - Nevada",
+            "NH - New Hampshire",
+            "NJ - New Jersey",
+            "NM - New Mexico",
+            "NY - New York",
+            "NC - North Carolina",
+            "ND - North Dakota",
+            "OH - Ohio",
+            "OK - Oklahoma",
+            "OR - Oregon",
+            "PA - Pennsylvania",
+            "RI - Rhode Island",
+            "SC - South Carolina",
+            "SD - South Dakota",
+            "TN - Tennessee",
+            "TX - Texas",
+            "UT - Utah",
+            "VT - Vermont",
+            "VA - Virginia",
+            "WA - Washington",
+            "WV - West Virginia",
+            "WI - Wisconsin",
+            "WY - Wyoming",
+            "MX - Mexico"});
+            this.cbx_region.Location = new System.Drawing.Point(335, 25);
+            this.cbx_region.Name = "cbx_region";
+            this.cbx_region.Size = new System.Drawing.Size(130, 21);
+            this.cbx_region.TabIndex = 19;
+            // 
             // frm_save_player
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(576, 225);
+            this.Controls.Add(this.cbx_region);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_save);
             this.Controls.Add(this.groupBox1);
@@ -301,7 +356,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_sponsor);
-            this.Controls.Add(this.txt_region);
             this.Controls.Add(this.txt_twitter);
             this.Controls.Add(this.txt_tag);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -317,7 +371,6 @@
 
         private System.Windows.Forms.TextBox txt_tag;
         private System.Windows.Forms.TextBox txt_twitter;
-        private System.Windows.Forms.TextBox txt_region;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -337,5 +390,6 @@
         private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.TextBox txt_sponsor;
         private System.Windows.Forms.Button btn_cancel;
+        private System.Windows.Forms.ComboBox cbx_region;
     }
 }

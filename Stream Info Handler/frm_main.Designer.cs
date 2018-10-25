@@ -140,7 +140,18 @@
             this.pic_score1_image3 = new System.Windows.Forms.PictureBox();
             this.pic_score1_image2 = new System.Windows.Forms.PictureBox();
             this.pic_score1_image1 = new System.Windows.Forms.PictureBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.ckb_sponsor = new System.Windows.Forms.CheckBox();
+            this.ckb_region = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txt_sponsor = new System.Windows.Forms.TextBox();
+            this.btn_sponsor = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txt_region = new System.Windows.Forms.TextBox();
+            this.btn_region = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btn_dashboard = new System.Windows.Forms.Button();
+            this.btn_addplayer = new System.Windows.Forms.Button();
             this.btn_upload_vod = new System.Windows.Forms.Button();
             this.btn_top8 = new System.Windows.Forms.Button();
             this.btn_thumbnail = new System.Windows.Forms.Button();
@@ -150,8 +161,6 @@
             this.ttp_tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btn_dashboard = new System.Windows.Forms.Button();
             this.tab_main.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_game_logo)).BeginInit();
@@ -182,6 +191,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image1)).BeginInit();
+            this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1115,6 +1125,7 @@
             // 
             this.tab_mainsettings.Controls.Add(this.tab_directories);
             this.tab_mainsettings.Controls.Add(this.tab_scoreboard);
+            this.tab_mainsettings.Controls.Add(this.tabPage1);
             this.tab_mainsettings.Location = new System.Drawing.Point(3, 3);
             this.tab_mainsettings.Name = "tab_mainsettings";
             this.tab_mainsettings.SelectedIndex = 0;
@@ -1480,10 +1491,114 @@
             this.pic_score1_image1.TabIndex = 0;
             this.pic_score1_image1.TabStop = false;
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.ckb_sponsor);
+            this.tabPage1.Controls.Add(this.ckb_region);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.txt_sponsor);
+            this.tabPage1.Controls.Add(this.btn_sponsor);
+            this.tabPage1.Controls.Add(this.label12);
+            this.tabPage1.Controls.Add(this.txt_region);
+            this.tabPage1.Controls.Add(this.btn_region);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(454, 181);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "Sponsors & Regions";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // ckb_sponsor
+            // 
+            this.ckb_sponsor.AutoSize = true;
+            this.ckb_sponsor.Location = new System.Drawing.Point(6, 25);
+            this.ckb_sponsor.Name = "ckb_sponsor";
+            this.ckb_sponsor.Size = new System.Drawing.Size(138, 17);
+            this.ckb_sponsor.TabIndex = 17;
+            this.ckb_sponsor.Text = "Enable Sponsor Images";
+            this.ckb_sponsor.UseVisualStyleBackColor = true;
+            this.ckb_sponsor.CheckedChanged += new System.EventHandler(this.ckb_sponsor_CheckedChanged);
+            // 
+            // ckb_region
+            // 
+            this.ckb_region.AutoSize = true;
+            this.ckb_region.Enabled = false;
+            this.ckb_region.Location = new System.Drawing.Point(6, 101);
+            this.ckb_region.Name = "ckb_region";
+            this.ckb_region.Size = new System.Drawing.Size(133, 17);
+            this.ckb_region.TabIndex = 16;
+            this.ckb_region.Text = "Enable Region Images";
+            this.ckb_region.UseVisualStyleBackColor = true;
+            this.ckb_region.CheckedChanged += new System.EventHandler(this.ckb_region_CheckedChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(123, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Sponsor Image Directory";
+            // 
+            // txt_sponsor
+            // 
+            this.txt_sponsor.Enabled = false;
+            this.txt_sponsor.Location = new System.Drawing.Point(6, 61);
+            this.txt_sponsor.Name = "txt_sponsor";
+            this.txt_sponsor.Size = new System.Drawing.Size(366, 20);
+            this.txt_sponsor.TabIndex = 11;
+            this.txt_sponsor.TabStop = false;
+            this.txt_sponsor.TextChanged += new System.EventHandler(this.txt_sponsor_TextChanged);
+            // 
+            // btn_sponsor
+            // 
+            this.btn_sponsor.Enabled = false;
+            this.btn_sponsor.Location = new System.Drawing.Point(378, 61);
+            this.btn_sponsor.Name = "btn_sponsor";
+            this.btn_sponsor.Size = new System.Drawing.Size(65, 20);
+            this.btn_sponsor.TabIndex = 10;
+            this.btn_sponsor.Text = "Browse";
+            this.btn_sponsor.UseVisualStyleBackColor = true;
+            this.btn_sponsor.Click += new System.EventHandler(this.btn_sponsor_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Cursor = System.Windows.Forms.Cursors.Default;
+            this.label12.Location = new System.Drawing.Point(6, 121);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(118, 13);
+            this.label12.TabIndex = 15;
+            this.label12.Text = "Region Image Directory";
+            // 
+            // txt_region
+            // 
+            this.txt_region.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txt_region.Enabled = false;
+            this.txt_region.Location = new System.Drawing.Point(6, 137);
+            this.txt_region.Name = "txt_region";
+            this.txt_region.Size = new System.Drawing.Size(366, 20);
+            this.txt_region.TabIndex = 13;
+            this.txt_region.TabStop = false;
+            this.txt_region.TextChanged += new System.EventHandler(this.txt_region_TextChanged);
+            // 
+            // btn_region
+            // 
+            this.btn_region.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_region.Enabled = false;
+            this.btn_region.Location = new System.Drawing.Point(378, 136);
+            this.btn_region.Name = "btn_region";
+            this.btn_region.Size = new System.Drawing.Size(65, 21);
+            this.btn_region.TabIndex = 12;
+            this.btn_region.Text = "Browse";
+            this.btn_region.UseVisualStyleBackColor = true;
+            this.btn_region.Click += new System.EventHandler(this.btn_region_Click);
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.btn_dashboard);
-            this.tabPage2.Controls.Add(this.button2);
+            this.tabPage2.Controls.Add(this.btn_addplayer);
             this.tabPage2.Controls.Add(this.btn_upload_vod);
             this.tabPage2.Controls.Add(this.btn_top8);
             this.tabPage2.Controls.Add(this.btn_thumbnail);
@@ -1494,6 +1609,28 @@
             this.tabPage2.TabIndex = 4;
             this.tabPage2.Text = "Other Tools";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btn_dashboard
+            // 
+            this.btn_dashboard.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_dashboard.Location = new System.Drawing.Point(533, 51);
+            this.btn_dashboard.Name = "btn_dashboard";
+            this.btn_dashboard.Size = new System.Drawing.Size(167, 108);
+            this.btn_dashboard.TabIndex = 4;
+            this.btn_dashboard.Text = "Stream Queue Dashboard";
+            this.btn_dashboard.UseVisualStyleBackColor = true;
+            this.btn_dashboard.Click += new System.EventHandler(this.btn_dashboard_Click);
+            // 
+            // btn_addplayer
+            // 
+            this.btn_addplayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_addplayer.Location = new System.Drawing.Point(706, 51);
+            this.btn_addplayer.Name = "btn_addplayer";
+            this.btn_addplayer.Size = new System.Drawing.Size(167, 108);
+            this.btn_addplayer.TabIndex = 3;
+            this.btn_addplayer.Text = "Add Player to Sheets";
+            this.btn_addplayer.UseVisualStyleBackColor = true;
+            this.btn_addplayer.Click += new System.EventHandler(this.btn_addplayer_Click);
             // 
             // btn_upload_vod
             // 
@@ -1547,26 +1684,6 @@
             // 
             this.openFileDialog3.FileName = "openFileDialog3";
             this.openFileDialog3.Filter = "PNG Image Files|*.png";
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(706, 51);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(167, 108);
-            this.button2.TabIndex = 3;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // btn_dashboard
-            // 
-            this.btn_dashboard.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_dashboard.Location = new System.Drawing.Point(533, 51);
-            this.btn_dashboard.Name = "btn_dashboard";
-            this.btn_dashboard.Size = new System.Drawing.Size(167, 108);
-            this.btn_dashboard.TabIndex = 4;
-            this.btn_dashboard.Text = "Stream Queue Dashboard";
-            this.btn_dashboard.UseVisualStyleBackColor = true;
-            this.btn_dashboard.Click += new System.EventHandler(this.btn_dashboard_Click);
             // 
             // frm_main
             // 
@@ -1624,6 +1741,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image1)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -1751,7 +1870,16 @@
         private System.Windows.Forms.CheckBox ckb_loser2;
         private System.Windows.Forms.CheckBox ckb_loser1;
         private System.Windows.Forms.Button btn_dashboard;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn_addplayer;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.CheckBox ckb_sponsor;
+        private System.Windows.Forms.CheckBox ckb_region;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txt_sponsor;
+        private System.Windows.Forms.Button btn_sponsor;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txt_region;
+        private System.Windows.Forms.Button btn_region;
     }
 }
 
