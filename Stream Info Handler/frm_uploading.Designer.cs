@@ -175,6 +175,7 @@
             this.Controls.Add(this.lbl_videotitle);
             this.Controls.Add(this.txt_videotitle);
             this.Controls.Add(this.pic_thumbnail);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_uploading";
             this.Text = "Upload to YouTube";

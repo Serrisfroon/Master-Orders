@@ -2100,6 +2100,7 @@
             this.Controls.Add(this.txt_event_number);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_results";
             this.Text = "Master Orders - Results Generator";

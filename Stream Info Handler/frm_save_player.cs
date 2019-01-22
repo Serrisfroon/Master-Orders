@@ -94,6 +94,8 @@ namespace Stream_Info_Handler
             save_player.twitter = txt_twitter.Text;
             save_player.region = cbx_region.Text;
             save_player.sponsor = txt_sponsor.Text;
+            save_player.fullname = txt_name.Text;
+            save_player.fullsponsor = txt_fullsponsor.Text;
 
             save_player.character[0] = cbx_main.Text;
             save_player.color[0] = cbx_colors1.SelectedIndex + 1;

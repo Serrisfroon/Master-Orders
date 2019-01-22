@@ -115,6 +115,7 @@
             this.Controls.Add(this.btn_character1);
             this.Controls.Add(this.btn_dont_replace);
             this.Controls.Add(this.lbl_character);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_replace_character";
             this.Text = "Replace a Character";

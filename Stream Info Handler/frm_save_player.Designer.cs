@@ -51,6 +51,10 @@
             this.btn_save = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.cbx_region = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txt_name = new System.Windows.Forms.TextBox();
+            this.txt_fullsponsor = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,7 +75,7 @@
             // 
             // txt_sponsor
             // 
-            this.txt_sponsor.Location = new System.Drawing.Point(471, 25);
+            this.txt_sponsor.Location = new System.Drawing.Point(470, 24);
             this.txt_sponsor.Name = "txt_sponsor";
             this.txt_sponsor.Size = new System.Drawing.Size(90, 20);
             this.txt_sponsor.TabIndex = 3;
@@ -106,11 +110,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(468, 9);
+            this.label4.Location = new System.Drawing.Point(467, 8);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 13);
+            this.label4.Size = new System.Drawing.Size(75, 13);
             this.label4.TabIndex = 7;
-            this.label4.Text = "Sponsor";
+            this.label4.Text = "Sponsor Prefix";
             // 
             // cbx_main
             // 
@@ -119,7 +123,7 @@
             this.cbx_main.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_main.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbx_main.FormattingEnabled = true;
-            this.cbx_main.Location = new System.Drawing.Point(12, 77);
+            this.cbx_main.Location = new System.Drawing.Point(10, 97);
             this.cbx_main.Name = "cbx_main";
             this.cbx_main.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cbx_main.Size = new System.Drawing.Size(105, 20);
@@ -131,7 +135,7 @@
             this.cbx_colors1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_colors1.Font = new System.Drawing.Font("Microsoft Sans Serif", 42F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbx_colors1.FormattingEnabled = true;
-            this.cbx_colors1.Location = new System.Drawing.Point(12, 103);
+            this.cbx_colors1.Location = new System.Drawing.Point(10, 123);
             this.cbx_colors1.Name = "cbx_colors1";
             this.cbx_colors1.Size = new System.Drawing.Size(105, 72);
             this.cbx_colors1.TabIndex = 5;
@@ -235,7 +239,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 57);
+            this.label5.Location = new System.Drawing.Point(10, 77);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 13);
             this.label5.TabIndex = 18;
@@ -251,7 +255,7 @@
             this.groupBox1.Controls.Add(this.cbx_secondary3);
             this.groupBox1.Controls.Add(this.cbx_secondary4);
             this.groupBox1.Controls.Add(this.cbx_colors4);
-            this.groupBox1.Location = new System.Drawing.Point(123, 57);
+            this.groupBox1.Location = new System.Drawing.Point(121, 77);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(450, 128);
             this.groupBox1.TabIndex = 6;
@@ -260,7 +264,7 @@
             // 
             // btn_save
             // 
-            this.btn_save.Location = new System.Drawing.Point(184, 191);
+            this.btn_save.Location = new System.Drawing.Point(182, 211);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(105, 29);
             this.btn_save.TabIndex = 7;
@@ -270,7 +274,7 @@
             // 
             // btn_cancel
             // 
-            this.btn_cancel.Location = new System.Drawing.Point(295, 191);
+            this.btn_cancel.Location = new System.Drawing.Point(293, 211);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(105, 29);
             this.btn_cancel.TabIndex = 8;
@@ -280,6 +284,8 @@
             // 
             // cbx_region
             // 
+            this.cbx_region.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbx_region.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbx_region.FormattingEnabled = true;
             this.cbx_region.Items.AddRange(new object[] {
             "AL - Alabama",
@@ -334,16 +340,52 @@
             "WI - Wisconsin",
             "WY - Wyoming",
             "MX - Mexico"});
-            this.cbx_region.Location = new System.Drawing.Point(335, 25);
+            this.cbx_region.Location = new System.Drawing.Point(334, 24);
             this.cbx_region.Name = "cbx_region";
             this.cbx_region.Size = new System.Drawing.Size(130, 21);
-            this.cbx_region.TabIndex = 19;
+            this.cbx_region.TabIndex = 2;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(9, 54);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(54, 13);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Full Name";
+            // 
+            // txt_name
+            // 
+            this.txt_name.Location = new System.Drawing.Point(69, 51);
+            this.txt_name.Name = "txt_name";
+            this.txt_name.Size = new System.Drawing.Size(193, 20);
+            this.txt_name.TabIndex = 20;
+            // 
+            // txt_fullsponsor
+            // 
+            this.txt_fullsponsor.Location = new System.Drawing.Point(370, 50);
+            this.txt_fullsponsor.Name = "txt_fullsponsor";
+            this.txt_fullsponsor.Size = new System.Drawing.Size(190, 20);
+            this.txt_fullsponsor.TabIndex = 21;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(268, 53);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(96, 13);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "Full Sponsor Name";
             // 
             // frm_save_player
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(576, 225);
+            this.ClientSize = new System.Drawing.Size(576, 249);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txt_fullsponsor);
+            this.Controls.Add(this.txt_name);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.cbx_region);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_save);
@@ -358,7 +400,9 @@
             this.Controls.Add(this.txt_sponsor);
             this.Controls.Add(this.txt_twitter);
             this.Controls.Add(this.txt_tag);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "frm_save_player";
             this.Text = "Save Player Information";
             this.groupBox1.ResumeLayout(false);
@@ -391,5 +435,9 @@
         private System.Windows.Forms.TextBox txt_sponsor;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.ComboBox cbx_region;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txt_name;
+        private System.Windows.Forms.TextBox txt_fullsponsor;
+        private System.Windows.Forms.Label label7;
     }
 }

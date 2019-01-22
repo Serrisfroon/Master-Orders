@@ -188,3 +188,14 @@ C:\Users\Dan\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_streamqueue.resources
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_edit_match.resources
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_newplayer.resources
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_playerinfo.resources
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_streamqueue_dubs.resources
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_playerinfo_dubs.resources
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_edit_match_dubs.resources
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Protobuf.dll
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\MySql.Data.dll
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\Google.Protobuf.xml
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\MySql.Data.xml
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_login.resources
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_startup.resources
+C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_settings.resources

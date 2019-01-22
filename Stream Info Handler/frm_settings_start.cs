@@ -172,7 +172,6 @@ namespace Stream_Info_Handler
                         ),
                     new XElement("google-sheets",
                          new XElement("enable-sheets", "false"),
-                         new XElement("startup-sheets", "false"),
                          new XElement("sheet-style", "info-and-queue"),
                          new XElement("sheet-info", "info-and-queue"),
                          new XElement("sheets-id", "")
@@ -195,7 +194,8 @@ namespace Stream_Info_Handler
                     new XElement("etc",
                          new XElement("automatic-updates", auto_update),
                          new XElement("stream-software", software),
-                         new XElement("settings-version", "3")
+                         new XElement("format", "Singles"),
+                         new XElement("settings-version", "4")
                         )));
 
                 doc.Save(global_values.settings_file);

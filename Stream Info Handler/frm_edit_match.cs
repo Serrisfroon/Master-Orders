@@ -137,6 +137,80 @@ namespace Stream_Info_Handler
                 ApplicationName = this.GetType().ToString()
             });
 
+            String spreadsheetId = frm_streamqueue.sheets_id;
+
+            List<string> ranges = new List<string>(new string[] { "Upcoming Matches!A1:E56" });
+
+            SpreadsheetsResource.ValuesResource.BatchGetRequest request = service.Spreadsheets.Values.BatchGet(spreadsheetId);
+            request.Ranges = ranges;
+
+            Google.Apis.Sheets.v4.Data.BatchGetValuesResponse response = request.Execute();
+            IList<IList<object>> matches = response.ValueRanges[0].Values;
+            List<Google.Apis.Sheets.v4.Data.ValueRange> data = new List<Google.Apis.Sheets.v4.Data.ValueRange>();
+
+            int updating_match = Int32.Parse(change_match);
+            int this_match = Int32.Parse(matches[1][1].ToString());
+            int next_match = 0;
+            if(Int32.TryParse(matches[1][3].ToString(), out next_match) == false)
+            {
+                next_match = this_match + 1;
+            }
+            if (updating_match == this_match || updating_match == next_match)
+            {
+                // The new values to apply to the spreadsheet.
+                Google.Apis.Sheets.v4.Data.ValueRange current_info = new Google.Apis.Sheets.v4.Data.ValueRange();
+
+                string round = matches[this_match + 3][1].ToString();
+                string nextround = matches[next_match + 3][1].ToString();
+                string[] update_players = { } ;
+                if (updating_match == this_match)
+                {
+                    round = new_round;
+                    string[] new_players = { new_player1,
+                                    new_player2,
+                                    matches[next_match+3][2].ToString(),
+                                    matches[next_match+3][3].ToString() };
+                    update_players = new_players;
+                }
+                else
+                {
+                    nextround = new_round;
+                    string[] new_players = { matches[this_match+3][2].ToString(),
+                                    matches[this_match+3][3].ToString(),
+                                    new_player1,
+                                    new_player2 };
+                    update_players = new_players;
+                }
+
+                player_info[] player_data = { new player_info(), new player_info(), new player_info(), new player_info() };
+                for (int ii = 0; ii < 4; ii++)
+                {
+                    for (int i = 0; i <= global_values.roster_size; i++)
+                    {
+                        if (global_values.roster[i].tag == update_players[ii])
+                        {
+                            player_data[ii] = global_values.roster[i];
+                            break;
+                        }
+                    }
+                }
+
+                var uoblist1 = new List<object>() { "Current Match", "P1", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:", "",
+                                                "Next Match", "P1", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" };
+                var uoblist2 = new List<object>() { "", "", player_data[0].tag, player_data[0].twitter, player_data[0].region, player_data[0].sponsor, player_data[0].character[0], "",
+                                                "", "", player_data[2].tag, player_data[2].twitter, player_data[2].region, player_data[2].sponsor, player_data[2].character[0] };
+                var uoblist3 = new List<object>() { round, "P2", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:", "",
+                                                nextround, "P2", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:"};
+                var uoblist4 = new List<object>() { "", "", player_data[1].tag, player_data[1].twitter, player_data[1].region, player_data[1].sponsor, player_data[1].character[0], "",
+                                                "", "", player_data[3].tag, player_data[3].twitter, player_data[3].region, player_data[3].sponsor, player_data[3].character[0] };
+
+                current_info.Values = new List<IList<object>>() { uoblist1, uoblist2, uoblist3, uoblist4 };
+                current_info.Range = "Current Round Info!A4:D18";
+                current_info.MajorDimension = "COLUMNS";
+
+                data.Add(current_info);
+            }
+
 
             // The new values to apply to the spreadsheet.
             Google.Apis.Sheets.v4.Data.ValueRange upcoming = new Google.Apis.Sheets.v4.Data.ValueRange();
@@ -145,12 +219,12 @@ namespace Stream_Info_Handler
             var oblist = new List<object>() { new_round, new_player1, new_player2 };
             upcoming.Values.Add(oblist);
 
-            string update_row = (4 + Int32.Parse(change_match)).ToString();
+            string update_row = (4 + updating_match).ToString();
 
             upcoming.Range = "Upcoming Matches!B" + update_row + ":D" + update_row;
             upcoming.MajorDimension = "ROWS";
 
-            List<Google.Apis.Sheets.v4.Data.ValueRange> data = new List<Google.Apis.Sheets.v4.Data.ValueRange>() { upcoming };  // TODO: Update placeholder value.
+            data.Add(upcoming);  
 
             // TODO: Assign values to desired properties of `requestBody`:
             Google.Apis.Sheets.v4.Data.BatchUpdateValuesRequest requestBody = new Google.Apis.Sheets.v4.Data.BatchUpdateValuesRequest();

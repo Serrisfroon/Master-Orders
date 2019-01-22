@@ -39,8 +39,9 @@ namespace Stream_Info_Handler
         public long video_size;
         public long video_multiplier = 100;
         public string reenable_button;
+        public bool bypass_lock;
 
-        public frm_uploading(string title, string description, string thumbnail, string vodfile, string reenable)
+        public frm_uploading(string title, string description, string thumbnail, string vodfile, string reenable, bool bypass)
         {
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
@@ -60,8 +61,12 @@ namespace Stream_Info_Handler
             txt_videofile.Text = vodfile;
 
             youtube_data = global_values.current_youtube_data;
-
+            if(global_values.new_vod_detected != "")
+            {
+                btn_upload_video.Enabled = true;
+            }
             reenable_button = reenable;
+            bypass_lock = bypass;
         }
 
         private void Form4_FormClosed(object sender, FormClosedEventArgs e)
@@ -115,7 +120,7 @@ namespace Stream_Info_Handler
 
         private void btn_upload_video_Click(object sender, EventArgs e)
         {
-            if (global_values.allow_upload == true)
+            if (global_values.allow_upload == true || bypass_lock == true)
             {
                 if(global_values.stream_software == "OBS")
                 {

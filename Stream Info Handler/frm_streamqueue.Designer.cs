@@ -97,6 +97,8 @@
             this.cbx_player1.Name = "cbx_player1";
             this.cbx_player1.Size = new System.Drawing.Size(201, 28);
             this.cbx_player1.TabIndex = 1;
+            this.cbx_player1.TextChanged += new System.EventHandler(this.cbx_player1_TextChanged);
+            this.cbx_player1.Enter += new System.EventHandler(this.cbx_player1_Enter);
             // 
             // cbx_player2
             // 
@@ -108,6 +110,8 @@
             this.cbx_player2.Name = "cbx_player2";
             this.cbx_player2.Size = new System.Drawing.Size(204, 28);
             this.cbx_player2.TabIndex = 2;
+            this.cbx_player2.TextChanged += new System.EventHandler(this.cbx_player2_TextChanged);
+            this.cbx_player2.Enter += new System.EventHandler(this.cbx_player2_Enter);
             // 
             // groupBox1
             // 
@@ -273,7 +277,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(768, 428);
+            this.ClientSize = new System.Drawing.Size(768, 421);
             this.Controls.Add(this.lvw_matches);
             this.Controls.Add(this.btn_movedown);
             this.Controls.Add(this.btn_moveup);
@@ -286,7 +290,11 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frm_streamqueue";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Steam Queue Dashboard";
+            this.Activated += new System.EventHandler(this.frm_streamqueue_Activated);
+            this.Deactivate += new System.EventHandler(this.frm_streamqueue_Deactivate);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frm_streamqueue_FormClosed);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

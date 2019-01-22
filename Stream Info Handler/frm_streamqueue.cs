@@ -19,20 +19,26 @@ namespace Stream_Info_Handler
     public partial class frm_streamqueue : Form
     {
         public static string sheets_id;
+        bool reactivate = false;
         Color current_match_color = Color.FromArgb(138, 240, 146);
         Color next_match_color = Color.FromArgb(234, 153, 153);
+
 
         private System.Windows.Forms.Timer refresh_queue;
         public void init_refresh()
         {
             refresh_queue = new System.Windows.Forms.Timer();
             refresh_queue.Tick += new EventHandler(queue_Tick);
-            refresh_queue.Interval = 15000; // in miliseconds
+            refresh_queue.Interval = 12000; // in miliseconds
             refresh_queue.Start();
         }
         private void queue_Tick(object sender, EventArgs e)
         {
+            this.Activated -= frm_streamqueue_Activated;
+            this.Deactivate -= frm_streamqueue_Deactivate;
             load_queue();
+            this.Activated += frm_streamqueue_Activated;
+            this.Deactivate += frm_streamqueue_Deactivate;
         }
 
         public frm_streamqueue(string sheet_id)
@@ -43,6 +49,7 @@ namespace Stream_Info_Handler
 
             load_queue();
             init_refresh();
+            frm_playerinfo.GetInstance.Show();
         }
 
         public void load_queue()
@@ -129,26 +136,24 @@ namespace Stream_Info_Handler
                 }
             }
 
-
-            cbx_player1.BeginUpdate();                                            //Begin
-            cbx_player1.Items.Clear();                                            //Empty the item list
-            for (int i = 0; i <= global_values.roster_size; i++)
+            if (cbx_player1.Focused == false && cbx_player2.Focused == false)
             {
-                cbx_player1.Items.Add(global_values.roster[i].tag);
-            }
-            cbx_player1.EndUpdate();                                              //End
-            //cbx_player1.SelectedIndex = cbx_player1.Items.IndexOf(player[1].tag);   //Set the combobox index to 0
+                cbx_player1.BeginUpdate();                                            //Begin
+                cbx_player1.Items.Clear();                                            //Empty the item list
+                for (int i = 0; i <= global_values.roster_size; i++)
+                {
+                    cbx_player1.Items.Add(global_values.roster[i].tag);
+                }
+                cbx_player1.EndUpdate();                                              //End
 
-            cbx_player2.BeginUpdate();                                            //Begin
-            cbx_player2.Items.Clear();                                            //Empty the item list
-            for (int i = 0; i <= global_values.roster_size; i++)
-            {
-                cbx_player2.Items.Add(global_values.roster[i].tag);
+                cbx_player2.BeginUpdate();                                            //Begin
+                cbx_player2.Items.Clear();                                            //Empty the item list
+                for (int i = 0; i <= global_values.roster_size; i++)
+                {
+                    cbx_player2.Items.Add(global_values.roster[i].tag);
+                }
+                cbx_player2.EndUpdate();                                              //End
             }
-            cbx_player2.EndUpdate();                                              //End
-            //cbx_player2.SelectedIndex = cbx_player2.Items.IndexOf(player[2].tag);   //Set the combobox index to 0
-
-            //cbx_round.Text = upcoming_matches[4 + round_number][1].ToString();
 
 
             lvw_matches.BeginUpdate();
@@ -191,10 +196,6 @@ namespace Stream_Info_Handler
             bool check_player1 = false;
             bool check_player2 = false;
 
-            cbx_round.Text = "";
-            cbx_player1.Text = "";
-            cbx_player2.Text = "";
-
             for (int i = 0; i <= global_values.roster_size; i++)
             {
                 if (global_values.roster[i].tag == new_player1)
@@ -221,11 +222,17 @@ namespace Stream_Info_Handler
                     }
                     else
                     {
+                        cbx_round.Text = "";
+                        cbx_player1.Text = "";
+                        cbx_player2.Text = "";
                         return;
                     }
                 }
                 else
                 {
+                    cbx_round.Text = "";
+                    cbx_player1.Text = "";
+                    cbx_player2.Text = "";
                     return;
                 }
             }
@@ -244,14 +251,24 @@ namespace Stream_Info_Handler
                     }
                     else
                     {
+                        cbx_round.Text = "";
+                        cbx_player1.Text = "";
+                        cbx_player2.Text = "";
                         return;
                     }
                 }
                 else
                 {
+                    cbx_round.Text = "";
+                    cbx_player1.Text = "";
+                    cbx_player2.Text = "";
                     return;
                 }
             }
+
+            cbx_round.Text = "";
+            cbx_player1.Text = "";
+            cbx_player2.Text = "";
 
             int hold_index = -1;
             int topItemIndex = 0;
@@ -317,6 +334,43 @@ namespace Stream_Info_Handler
             upcoming.MajorDimension = "ROWS";
 
             update_queue(upcoming, sheets_id, service);
+
+            if ((round_number + 5) == new_match)
+            {
+                player_info player_info1 = new player_info();
+                player_info player_info2 = new player_info();
+
+                for (int i = 0; i <= global_values.roster_size; i++)
+                {
+                    if (global_values.roster[i].tag == new_player1)
+                    {
+                        player_info1 = global_values.roster[i];
+                        break;
+                    }
+                }
+                for (int i = 0; i <= global_values.roster_size; i++)
+                {
+                    if (global_values.roster[i].tag == new_player2)
+                    {
+                        player_info2 = global_values.roster[i];
+                        break;
+                    }
+                }
+
+                // The new values to apply to the spreadsheet.
+                var oblist1 = new List<object>() { "Next Match", "P1", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" };
+                var oblist2 = new List<object>() { "", "", player_info1.tag, player_info1.twitter, player_info1.region, player_info1.sponsor, player_info1.character[0] };
+                var oblist3 = new List<object>() { upcoming_matches[6 + round_number][1].ToString(), "P2", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" };
+                var oblist4 = new List<object>() { "", "", player_info2.tag, player_info2.twitter, player_info2.region, player_info2.sponsor, player_info2.character[0] };
+
+
+                upcoming = new Google.Apis.Sheets.v4.Data.ValueRange();
+                upcoming.Values = new List<IList<object>> { oblist1, oblist2, oblist3, oblist4 };
+                upcoming.Range = "Current Round Info!A12:D18";
+                upcoming.MajorDimension = "COLUMNS";
+
+                update_queue(upcoming, sheets_id, service);
+            }
         }
 
         public void add_to_sheets(player_info new_player)
@@ -406,6 +460,12 @@ namespace Stream_Info_Handler
 
         private void btn_moveup_Click(object sender, EventArgs e)
         {
+            if (lvw_matches.SelectedItems.Count == 0)
+            {
+                btn_movedown.Enabled = false;
+                btn_moveup.Enabled = false;
+                return;
+            }
             if (lvw_matches.SelectedItems[0].Text == "1")
             {
                 System.Media.SystemSounds.Asterisk.Play();
@@ -462,10 +522,83 @@ namespace Stream_Info_Handler
             upcoming.MajorDimension = "ROWS";
 
             update_queue(upcoming, sheets_id, service);
+
+            if (selected_index == round_number || selected_index == next_match ||
+                selected_index - 1 == next_match || selected_index - 1 == round_number || (next_match <= 0 && (
+                selected_index == round_number + 1 || selected_index - 1 == round_number + 1)))
+            {
+                if (next_match <= 0)
+                {
+                    if (round_number < lvw_matches.Items.Count)
+                    {
+                        next_match = round_number + 1;
+                    }
+                    else
+                    {
+                        next_match = round_number;
+                    }
+                }
+
+                string round = lvw_matches.Items[round_number - 1].SubItems[1].Text;
+                string nextround = lvw_matches.Items[next_match - 1].SubItems[1].Text;
+
+                string[] update_players = { lvw_matches.Items[round_number - 1].SubItems[2].Text,
+                                    lvw_matches.Items[round_number - 1].SubItems[3].Text,
+                                    lvw_matches.Items[next_match - 1].SubItems[2].Text,
+                                    lvw_matches.Items[next_match - 1].SubItems[3].Text};
+                player_info[] player_data = { new player_info(), new player_info(), new player_info(), new player_info() };
+                for (int ii = 0; ii < 4; ii++)
+                {
+                    for (int i = 0; i <= global_values.roster_size; i++)
+                    {
+                        if (global_values.roster[i].tag == update_players[ii])
+                        {
+                            player_data[ii] = global_values.roster[i];
+                            break;
+                        }
+                    }
+                }
+
+                // The new values to apply to the spreadsheet.
+                var uoblist1 = new List<object>() { "Current Match", "P1", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:", "",
+                                                "Next Match", "P1", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" };
+                var uoblist2 = new List<object>();
+                var uoblist3 = new List<object>() { round, "P2", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:", "",
+                                                nextround, "P2", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:"};
+                var uoblist4 = new List<object>();
+                if (round_number != next_match)
+                {
+                    uoblist2 = new List<object>() { "", "", player_data[0].tag, player_data[0].twitter, player_data[0].region, player_data[0].sponsor, player_data[0].character[0], "",
+                                                "", "", player_data[2].tag, player_data[2].twitter, player_data[2].region, player_data[2].sponsor, player_data[2].character[0] };
+
+                    uoblist4 = new List<object>() { "", "", player_data[1].tag, player_data[1].twitter, player_data[1].region, player_data[1].sponsor, player_data[1].character[0], "",
+                                                "", "", player_data[3].tag, player_data[3].twitter, player_data[3].region, player_data[3].sponsor, player_data[3].character[0] };
+                }
+                else
+                {
+                    uoblist2 = new List<object>() { "", "", player_data[0].tag, player_data[0].twitter, player_data[0].region, player_data[0].sponsor, player_data[0].character[0], "",
+                                                "", "", "", "", "", "", "" };
+                    uoblist4 = new List<object>() { "", "", player_data[1].tag, player_data[1].twitter, player_data[1].region, player_data[1].sponsor, player_data[1].character[0], "",
+                                                "", "", "", "", "", "", "" };
+                }
+
+                upcoming = new Google.Apis.Sheets.v4.Data.ValueRange();
+                upcoming.Values = new List<IList<object>> { uoblist1, uoblist2, uoblist3, uoblist4 };
+                upcoming.Range = "Current Round Info!A4:D18";
+                upcoming.MajorDimension = "COLUMNS";
+
+                update_queue(upcoming, sheets_id, service);
+            }
         }
 
         private void btn_movedown_Click(object sender, EventArgs e)
         {
+            if(lvw_matches.SelectedItems.Count == 0)
+            {
+                btn_movedown.Enabled = false;
+                btn_moveup.Enabled = false;
+                return;
+            }
             if (lvw_matches.SelectedItems[0].Text == lvw_matches.Items.Count.ToString())
             {
                 System.Media.SystemSounds.Asterisk.Play();
@@ -522,6 +655,73 @@ namespace Stream_Info_Handler
             upcoming.MajorDimension = "ROWS";
 
             update_queue(upcoming, sheets_id, service);
+
+            if (selected_index == round_number || selected_index == next_match ||
+               selected_index + 1 == next_match || selected_index + 1 == round_number || (next_match <= 0 &&
+                selected_index == round_number + 1))
+            {
+                if (next_match <= 0)
+                {
+                    if (round_number < lvw_matches.Items.Count)
+                    {
+                        next_match = round_number + 1;
+                    }
+                    else
+                    {
+                        next_match = round_number;
+                    }
+                }
+
+                string round = lvw_matches.Items[round_number - 1].SubItems[1].Text;
+                string nextround = lvw_matches.Items[next_match - 1].SubItems[1].Text;
+
+                string[] update_players = { lvw_matches.Items[round_number - 1].SubItems[2].Text,
+                                    lvw_matches.Items[round_number - 1].SubItems[3].Text,
+                                    lvw_matches.Items[next_match - 1].SubItems[2].Text,
+                                    lvw_matches.Items[next_match - 1].SubItems[3].Text};
+                player_info[] player_data = { new player_info(), new player_info(), new player_info(), new player_info() };
+                for (int ii = 0; ii < 4; ii++)
+                {
+                    for (int i = 0; i <= global_values.roster_size; i++)
+                    {
+                        if (global_values.roster[i].tag == update_players[ii])
+                        {
+                            player_data[ii] = global_values.roster[i];
+                            break;
+                        }
+                    }
+                }
+
+                // The new values to apply to the spreadsheet.
+                var uoblist1 = new List<object>() { "Current Match", "P1", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:", "",
+                                                "Next Match", "P1", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" };
+                var uoblist2 = new List<object>();
+                var uoblist3 = new List<object>() { round, "P2", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:", "",
+                                                nextround, "P2", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:"};
+                var uoblist4 = new List<object>();
+                if (round_number != next_match)
+                {
+                    uoblist2 = new List<object>() { "", "", player_data[0].tag, player_data[0].twitter, player_data[0].region, player_data[0].sponsor, player_data[0].character[0], "",
+                                                "", "", player_data[2].tag, player_data[2].twitter, player_data[2].region, player_data[2].sponsor, player_data[2].character[0] };
+
+                    uoblist4 = new List<object>() { "", "", player_data[1].tag, player_data[1].twitter, player_data[1].region, player_data[1].sponsor, player_data[1].character[0], "",
+                                                "", "", player_data[3].tag, player_data[3].twitter, player_data[3].region, player_data[3].sponsor, player_data[3].character[0] };
+                }
+                else
+                {
+                    uoblist2 = new List<object>() { "", "", player_data[0].tag, player_data[0].twitter, player_data[0].region, player_data[0].sponsor, player_data[0].character[0], "",
+                                                "", "", "", "", "", "", "" };
+                    uoblist4 = new List<object>() { "", "", player_data[1].tag, player_data[1].twitter, player_data[1].region, player_data[1].sponsor, player_data[1].character[0], "",
+                                                "", "", "", "", "", "", "" };
+                }
+
+                upcoming = new Google.Apis.Sheets.v4.Data.ValueRange();
+                upcoming.Values = new List<IList<object>> { uoblist1, uoblist2, uoblist3, uoblist4 };
+                upcoming.Range = "Current Round Info!A4:D18";
+                upcoming.MajorDimension = "COLUMNS";
+
+                update_queue(upcoming, sheets_id, service);
+            }
         }
 
         private void btn_push_Click(object sender, EventArgs e)
@@ -547,6 +747,44 @@ namespace Stream_Info_Handler
             upcoming.Values = new List<IList<object>> { oblist };
             upcoming.Range = "Upcoming Matches!D2";
             upcoming.MajorDimension = "ROWS";
+
+            update_queue(upcoming, sheets_id, service);
+
+            string round = lvw_matches.SelectedItems[0].SubItems[1].Text;
+            string player1 = lvw_matches.SelectedItems[0].SubItems[2].Text;
+            string player2 = lvw_matches.SelectedItems[0].SubItems[3].Text;
+
+            player_info player_info1 = new player_info();
+            player_info player_info2 = new player_info();
+
+            for (int i = 0; i <= global_values.roster_size; i++)
+            {
+                if (global_values.roster[i].tag == player1)
+                {
+                    player_info1 = global_values.roster[i];
+                    break;
+                }
+            }
+            for (int i = 0; i <= global_values.roster_size; i++)
+            {
+                if (global_values.roster[i].tag == player2)
+                {
+                    player_info2 = global_values.roster[i];
+                    break;
+                }
+            }
+
+            // The new values to apply to the spreadsheet.
+            var oblist1 = new List<object>() { "Next Match", "P1", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" };
+            var oblist2 = new List<object>() { "", "", player_info1.tag, player_info1.twitter, player_info1.region, player_info1.sponsor, player_info1.character[0] };
+            var oblist3 = new List<object>() { round, "P2", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" };
+            var oblist4 = new List<object>() { "", "", player_info2.tag, player_info2.twitter, player_info2.region, player_info2.sponsor, player_info2.character[0] };
+
+
+            upcoming = new Google.Apis.Sheets.v4.Data.ValueRange();
+            upcoming.Values = new List<IList<object>> { oblist1, oblist2, oblist3, oblist4 };
+            upcoming.Range = "Current Round Info!A12:D18";
+            upcoming.MajorDimension = "COLUMNS";
 
             update_queue(upcoming, sheets_id, service);
         }
@@ -580,10 +818,13 @@ namespace Stream_Info_Handler
             int round_number = Int32.Parse(upcoming_matches[1][1].ToString());
             int next_match = get_next_match(upcoming_matches[1][3].ToString());
             int delete_index = -1;
+            int current_modifier = 0;
+            int next_modifier = 0;
 
             lvw_matches.BeginUpdate();
             lvw_matches.Items.Clear();
             ListViewItem add_item = new ListViewItem();
+            int next_current = 0;
             for (int i = 1; i <= 50; i++)
             {
                 if (upcoming_matches[3 + i][1].ToString() == "")
@@ -593,6 +834,11 @@ namespace Stream_Info_Handler
                 if (i == selected_index)
                 {
                     delete_index = i;
+                    if (i == round_number)
+                    {
+                        next_current = 1;
+                        current_modifier = i;
+                    }
                     continue;
                 }
                 int next_write = i;
@@ -600,25 +846,29 @@ namespace Stream_Info_Handler
                 {
                     next_write--;
                     add_item = new ListViewItem(next_write.ToString());
-                    if (i == round_number + 1)
+                    if (i == round_number + next_current)
                     {
                         add_item.BackColor = current_match_color;
+                        current_modifier = next_write;
                     }
-                    if (i == next_match + 1)
+                    if (i == next_match)
                     {
                         add_item.BackColor = next_match_color;
+                        next_modifier = next_write;
                     }
                 }
                 else
                 {
                     add_item = new ListViewItem(next_write.ToString());
-                    if (i == round_number)
+                    if (i == round_number + next_current)
                     {
                         add_item.BackColor = current_match_color;
+                        current_modifier = next_write;
                     }
                     if (i == next_match)
                     {
                         add_item.BackColor = next_match_color;
+                        next_modifier = next_write;
                     }
                 }
                 add_item.SubItems.Add(upcoming_matches[3 + i][1].ToString());
@@ -636,12 +886,39 @@ namespace Stream_Info_Handler
             catch (Exception ex)
             { }
 
-            lvw_matches.Items[hold_index + 1].EnsureVisible();
 
+            if (lvw_matches.Items.Count > hold_index+1)
+            {
+                lvw_matches.Items[hold_index + 1].EnsureVisible();
+            }
+            else
+            {
+                lvw_matches.Items[lvw_matches.Items.Count-1].EnsureVisible();
+            }
 
             // The new values to apply to the spreadsheet.
             Google.Apis.Sheets.v4.Data.ValueRange upcoming = new Google.Apis.Sheets.v4.Data.ValueRange();
-            upcoming.Values = new List<IList<object>>();
+
+            string current_match = "";
+            string upcoming_match = "";
+
+            current_match = current_modifier.ToString();
+            if (current_modifier == 0)
+            {
+                current_match = lvw_matches.Items.Count.ToString();
+            }
+
+            upcoming_match = next_modifier.ToString();
+            if (next_modifier == 0)
+            {
+                upcoming_match = "";
+            }
+
+            var oblist1 = new List<object>() { current_match, "Next Match to Stream", upcoming_match };
+            var oblist2 = new List<object>() { "", "", "" };
+            var oblist3 = new List<object>() { "Round", "Player 1", "Player 2" };
+
+            upcoming.Values = new List<IList<object>> { oblist1, oblist2, oblist3 };
 
             for (int i = 1; i <= lvw_matches.Items.Count; i++)
             {
@@ -652,21 +929,100 @@ namespace Stream_Info_Handler
             var lastlist = new List<object>() { "", "", "" };
             upcoming.Values.Add(lastlist);
 
-            upcoming.Range = "Upcoming Matches!B5:D" + (lvw_matches.Items.Count + 5).ToString();
+            upcoming.Range = "Upcoming Matches!B2:D" + (lvw_matches.Items.Count + 5).ToString();
             upcoming.MajorDimension = "ROWS";
+
+            update_queue(upcoming, sheets_id, service);
+
+            int thismatch = Int32.Parse(current_match);
+            int nextmatch = 0;
+            if(Int32.TryParse(upcoming_match, out nextmatch) == false)
+            {
+                nextmatch = thismatch + 1;
+                if(nextmatch > lvw_matches.Items.Count)
+                {
+                    nextmatch = thismatch;
+                }
+            }
+
+            string round = lvw_matches.Items[thismatch - 1].SubItems[1].Text;
+            string nextround = lvw_matches.Items[nextmatch - 1].SubItems[1].Text;
+
+            string[] update_players = { lvw_matches.Items[thismatch - 1].SubItems[2].Text,
+                                    lvw_matches.Items[thismatch - 1].SubItems[3].Text,
+                                    lvw_matches.Items[nextmatch - 1].SubItems[2].Text,
+                                    lvw_matches.Items[nextmatch - 1].SubItems[3].Text};
+            player_info[] player_data = { new player_info(), new player_info(), new player_info(), new player_info() };
+            for(int ii = 0; ii < 4; ii++)
+            {
+                for (int i = 0; i <= global_values.roster_size; i++)
+                {
+                    if (global_values.roster[i].tag == update_players[ii])
+                    {
+                        player_data[ii] = global_values.roster[i];
+                        break;
+                    }
+                }
+            }
+
+            // The new values to apply to the spreadsheet.
+            var uoblist1 = new List<object>() { "Current Match", "P1", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:", "",
+                                                "Next Match", "P1", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" };
+            var uoblist2 = new List<object>(); 
+            var uoblist3 = new List<object>() { round, "P2", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:", "",
+                                                nextround, "P2", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:"};
+            var uoblist4 = new List<object>();
+            if (thismatch != nextmatch)
+            {
+                uoblist2 = new List<object>() { "", "", player_data[0].tag, player_data[0].twitter, player_data[0].region, player_data[0].sponsor, player_data[0].character[0], "",
+                                                "", "", player_data[2].tag, player_data[2].twitter, player_data[2].region, player_data[2].sponsor, player_data[2].character[0] };
+
+                uoblist4 = new List<object>() { "", "", player_data[1].tag, player_data[1].twitter, player_data[1].region, player_data[1].sponsor, player_data[1].character[0], "",
+                                                "", "", player_data[3].tag, player_data[3].twitter, player_data[3].region, player_data[3].sponsor, player_data[3].character[0] };
+            }
+            else
+            {
+                uoblist2 = new List<object>() { "", "", player_data[0].tag, player_data[0].twitter, player_data[0].region, player_data[0].sponsor, player_data[0].character[0], "",
+                                                "", "", "", "", "", "", "" };
+                uoblist4 = new List<object>() { "", "", player_data[1].tag, player_data[1].twitter, player_data[1].region, player_data[1].sponsor, player_data[1].character[0], "",
+                                                "", "", "", "", "", "", "" };
+            }
+
+            upcoming = new Google.Apis.Sheets.v4.Data.ValueRange();
+            upcoming.Values = new List<IList<object>> { uoblist1, uoblist2, uoblist3, uoblist4 };
+            upcoming.Range = "Current Round Info!A4:D18";
+            upcoming.MajorDimension = "COLUMNS";
 
             update_queue(upcoming, sheets_id, service);
         }
 
         private void lvw_matches_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lvw_matches.SelectedIndices.Count > 0)
+            if (lvw_matches.SelectedIndices.Count > 0 && cbx_player1.Focused == false && cbx_player2.Focused == false)
             {
                 btn_edit.Enabled = true;
                 btn_movedown.Enabled = true;
                 btn_moveup.Enabled = true;
                 btn_remove.Enabled = true;
                 btn_push.Enabled = true;
+                for (int i = 0; i <= global_values.roster_size; i++)
+                {
+                    if (global_values.roster[i].tag == lvw_matches.SelectedItems[0].SubItems[2].Text)
+                    {
+                        frm_playerinfo.GetInstance.player1_name = global_values.roster[i];
+                        frm_playerinfo.GetInstance.BringToFront();
+                        break;
+                    }
+                }
+                for (int i = 0; i <= global_values.roster_size; i++)
+                {
+                    if (global_values.roster[i].tag == lvw_matches.SelectedItems[0].SubItems[3].Text)
+                    {
+                        frm_playerinfo.GetInstance.player2_name = global_values.roster[i];
+                        frm_playerinfo.GetInstance.BringToFront();
+                        break;
+                    }
+                }
             }
         }
 
@@ -690,7 +1046,7 @@ namespace Stream_Info_Handler
 
             var service = connect_to_sheets();
 
-            var oblist = new List<object>() { "1", "Next Match to Stream", "" };
+            var oblist = new List<object>() { "1", "Next Match to Stream", "1" };
             var oblist2 = new List<object>() { "", "", "" };
             var oblist3 = new List<object>() { "Round", "Player 1", "Player 2" };
 
@@ -835,6 +1191,94 @@ namespace Stream_Info_Handler
             {
                 load_queue();
             }
+        }
+
+        private void frm_streamqueue_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frm_playerinfo.GetInstance.Close();
+        }
+
+        private void cbx_player1_Enter(object sender, EventArgs e)
+        {
+            update_new_match();
+        }
+
+        private void update_new_match()
+        {
+            player_info empty_info = new player_info();
+            empty_info.tag = "";
+            empty_info.twitter = "";
+            empty_info.region = "";
+            empty_info.sponsor = "";
+            empty_info.character[0] = "";
+            empty_info.character[1] = "";
+            empty_info.character[2] = "";
+            empty_info.character[3] = "";
+            empty_info.character[4] = "";
+            empty_info.color[0] = 1;
+            empty_info.color[1] = 1;
+            empty_info.color[2] = 1;
+            empty_info.color[3] = 1;
+            empty_info.color[4] = 1;
+
+            for (int i = 0; i <= global_values.roster_size; i++)
+            {
+                if (global_values.roster[i].tag == cbx_player1.Text)
+                {
+                    frm_playerinfo.GetInstance.player1_name = global_values.roster[i];
+                    break;
+                }
+                if (global_values.roster_size == i)
+                {
+                    frm_playerinfo.GetInstance.player1_name = empty_info;
+                }
+            }
+            for (int i = 0; i <= global_values.roster_size; i++)
+            {
+                if (global_values.roster[i].tag == cbx_player2.Text)
+                {
+                    frm_playerinfo.GetInstance.player2_name = global_values.roster[i];
+                    break;
+                }
+                if (global_values.roster_size == i)
+                {
+                    frm_playerinfo.GetInstance.player2_name = empty_info;
+                }
+            }
+        }
+
+        private void cbx_player2_Enter(object sender, EventArgs e)
+        {
+            update_new_match();
+        }
+
+        private void cbx_player2_TextChanged(object sender, EventArgs e)
+        {
+            update_new_match();
+        }
+
+        private void cbx_player1_TextChanged(object sender, EventArgs e)
+        {
+            update_new_match();
+        }
+
+        private void frm_streamqueue_Activated(object sender, EventArgs e)
+        {
+            if (reactivate == true)
+            { 
+                reactivate = false;
+                this.Activated -= frm_streamqueue_Activated;
+                this.Deactivate -= frm_streamqueue_Deactivate;
+                frm_playerinfo.GetInstance.BringToFront();
+                this.BringToFront();
+                this.Activated += frm_streamqueue_Activated;
+                this.Deactivate += frm_streamqueue_Deactivate;
+            }
+        }
+
+        private void frm_streamqueue_Deactivate(object sender, EventArgs e)
+        {
+                reactivate = true;
         }
     }
 }

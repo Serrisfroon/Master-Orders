@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace Stream_Info_Handler
 {
@@ -26,11 +27,40 @@ namespace Stream_Info_Handler
 
             // Add the images to the ComboBox's items.
             cbo.Items.Clear();
-            foreach (Image image in images) cbo.Items.Add(image);
+            foreach (Image image in images)
+            {
+                Image update_image = ResizeImage(image, 82, 82);
+                cbo.Items.Add(update_image);
+            }
 
             // Subscribe to the DrawItem event.
             cbo.MeasureItem += cboDrawImage_MeasureItem;
             cbo.DrawItem += cboDrawImage_DrawItem;
+        }
+
+        public static Bitmap ResizeImage(Image image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
         }
 
         // Measure a ComboBox item that is displaying an image.
@@ -62,7 +92,7 @@ namespace Stream_Info_Handler
             RectangleF rect = new RectangleF(
                 e.Bounds.X + MarginWidth,
                 e.Bounds.Y + MarginHeight,
-                wid, hgt);
+                img.Width, img.Height);
             e.Graphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
             e.Graphics.DrawImage(img, rect);
 

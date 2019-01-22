@@ -292,6 +292,7 @@
             this.Controls.Add(this.btn_thumb_directory);
             this.Controls.Add(this.txt_thumbnail_directory);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_settings_start";
             this.Text = "Master Orders";

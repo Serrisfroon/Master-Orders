@@ -3,7 +3,7 @@
 //Stream Information Management Tool
 //Developed by Dan Sanchez
 //For use by UGS Gaming only, at the developer's discretion
-//Copyright 2018, Dan Sanchez, All rights reserved.
+//Copyright 2019, Dan Sanchez, All rights reserved.
 //////////////////////////////////////////////////////////////////////////////////////////
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Services;
@@ -27,6 +27,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
+using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
+using MySql.Data;
+
 namespace Stream_Info_Handler
 {
     public partial class frm_main : Form
@@ -34,11 +38,20 @@ namespace Stream_Info_Handler
         //Initialize the variables to contain the character image file directories
         public string image_directory1 = Directory.GetCurrentDirectory();
         public string image_directory2 = Directory.GetCurrentDirectory();
+        public string image_directory3 = Directory.GetCurrentDirectory();
+        public string image_directory4 = Directory.GetCurrentDirectory();
         public static string save_name;
+
+        public static bool update_check = true;
+
+
+        public static player_fields[] player_boxes = new player_fields[5];
+
 
         public static Color warning_color = Color.FromArgb(234, 153, 153);
 
         bool ignore_settings;
+
 
         private static int _get_character_slot;
         public static int get_character_slot
@@ -69,7 +82,7 @@ namespace Stream_Info_Handler
         //Initialize the variables containing YouTube Playlist information
         List<string> playlist_items = new List<string>();
         List<string> playlist_names = new List<string>();
-        public const int MAX_PLAYERS = 200;
+        public static int MAX_PLAYERS = 200;
 
 
         public frm_main()
@@ -83,8 +96,10 @@ namespace Stream_Info_Handler
 
         private void frm_main_Shown(object sender, EventArgs e)
         {
-            string url = "http://masterorders.org/masterorders.html";
 
+            
+            string url = "http://masterorders.org/masterorders.html";
+            
             using (HttpClient client = new HttpClient())
             {
                 using (HttpResponseMessage response = client.GetAsync(url).Result)
@@ -112,10 +127,34 @@ namespace Stream_Info_Handler
                     }
                 }
             }
+
+            //Set the player fields to the default values
+            player_boxes[1] = new player_fields();
+            player_boxes[2] = new player_fields();
+            player_boxes[3] = new player_fields();
+            player_boxes[4] = new player_fields();
+            player_boxes[1].tag = cbx_name1;
+            player_boxes[1].twitter = txt_alt1;
+            player_boxes[1].character = cbx_characters1;
+            player_boxes[1].color = cbx_colors1;
+            player_boxes[2].tag = cbx_name2;
+            player_boxes[2].twitter = txt_alt2;
+            player_boxes[2].character = cbx_characters2;
+            player_boxes[2].color = cbx_colors2;
+
+            player_boxes[3].tag = cbx_team1_name2;
+            player_boxes[3].twitter = txt_team1_twitter2;
+            player_boxes[3].character = cbx_team1_character2;
+            player_boxes[3].color = cbx_team1_color2;
+            player_boxes[4].tag = cbx_team2_name2;
+            player_boxes[4].twitter = txt_team2_twitter2;
+            player_boxes[4].character = cbx_team2_character2;
+            player_boxes[4].color = cbx_team2_color2;
+
+
             global_values.roster = new player_info[MAX_PLAYERS];
-            global_values.player_roster_number = new int[3];
-            global_values.player_roster_number[1] = -1;
-            global_values.player_roster_number[2] = -1;
+            global_values.player_roster_number = new int[5] { -1, -1, -1, -1, -1 };
+
             //Check if a settings file exists
             if (!Directory.Exists(@"C:\Users\Public\Stream Info Handler"))
             {
@@ -140,15 +179,26 @@ namespace Stream_Info_Handler
             string version = (string)xml.Root.Element("etc").Element("settings-version");
             switch(version)
             {
+                case "4":
+                    break;
                 case "3":
+                    xml.Root.Element("etc").Add(new XElement("format", "Singles"));
+                    xml.Root.Element("etc").Element("settings-version").ReplaceWith(new XElement("settings-version", "4"));
+                    xml.Root.Element("google-sheets").Element("startup-sheets").Remove();
+                    xml.Save(global_values.settings_file);
+                    MessageBox.Show("The settings file has been updated for use with this version of Master Orders.");
+
                     break;
                 case "2":
+                    xml.Root.Element("etc").Add(new XElement("format", "Singles"));
+                    xml.Root.Element("google-sheets").Element("startup-sheets").Remove();
+
                     xml.Root.Add(new XElement("sponsor-and-region",
                                  new XElement("enable-sponsor", "False"),
                                  new XElement("sponsor-directory", ""),
                                  new XElement("enable-region", "False"),
                                  new XElement("region-directory", "")));
-                    xml.Root.Element("etc").Element("settings-version").ReplaceWith(new XElement("settings-version", "3"));
+                    xml.Root.Element("etc").Element("settings-version").ReplaceWith(new XElement("settings-version", "4"));
                     xml.Save(global_values.settings_file);
                     MessageBox.Show("The settings file has been updated for use with this version of Master Orders.");
                     break;
@@ -165,157 +215,40 @@ namespace Stream_Info_Handler
                     break;
             }
 
+            cbx_format.Text = (string)xml.Root.Element("etc").Element("format");
 
-
-            //Read the stream file and thumbnail output directories from the data
-            global_values.output_directory = (string)xml.Root.Element("directories").Element("stream-directory");
-            txt_stream_directory.Text = global_values.output_directory;
-            if (!Directory.Exists(global_values.output_directory))
-            {
-                txt_stream_directory.BackColor = warning_color;
-                tab_main.SelectedIndex = 3;
-            }
-
-            global_values.thumbnail_directory = (string)xml.Root.Element("directories").Element("thumbnail-directory");
-            txt_thumbnail_directory.Text = global_values.thumbnail_directory;
-            if (!Directory.Exists(global_values.thumbnail_directory))
-            {
-                txt_thumbnail_directory.BackColor = warning_color;
-                tab_main.SelectedIndex = 3;
-            }
-
-            //Read the character roster from the data
-            global_values.game_path = (string)xml.Root.Element("directories").Element("game-directory");
-            txt_roster_directory.Text = global_values.game_path;
-
-            //Verify that a directory has been provided
-            if (txt_roster_directory.Text != "")
-            {
-                //Verify that the necessary files for a roster directory are present
-                if (File.Exists(txt_roster_directory.Text + @"\game info.txt") && File.Exists(txt_roster_directory.Text + @"\characters.txt"))
-                {
-                    //Read the files for the game information and character roster
-                    global_values.game_info = System.IO.File.ReadAllLines(txt_roster_directory.Text + @"\game info.txt");
-                    global_values.characters = System.IO.File.ReadAllLines(txt_roster_directory.Text + @"\characters.txt");
-                    pic_game_logo.Image = Image.FromFile(txt_roster_directory.Text + @"\game_logo.png");
-
-                    //Update the character list combobox
-                    cbx_characters1.BeginUpdate();                                      //Begin
-                    cbx_characters1.Items.Clear();                                      //Empty the item list
-                    int character_count = Int32.Parse(global_values.game_info[1]);      //Store the number of characters
-                    //Loop through every character
-                    for (int x = 0; x < character_count; x++)
-                    {
-                        cbx_characters1.Items.Add(global_values.characters[x]);         //Add the character's name to the combobox
-                    }
-                    cbx_characters1.EndUpdate();                                        //End
-                    cbx_characters1.SelectedIndex = 0;                                  //Set the combobox index to 0
-
-                    //Update the character list combobox
-                    cbx_characters2.BeginUpdate();                                      //Begin
-                    cbx_characters2.Items.Clear();                                      //Empty the item list
-                    //Loop through every character
-                    for (int x = 0; x < character_count; x++)
-                    {
-                        cbx_characters2.Items.Add(global_values.characters[x]);         //Add the character's name to the combobox
-                    }
-                    cbx_characters2.EndUpdate();                                        //End
-                    cbx_characters2.SelectedIndex = 0;                                  //Set the combobox index to 0
-                }
-                else
-                {
-                    //If the files are not present, mark the field for an error and switch tabs to show it
-                    txt_roster_directory.BackColor = warning_color;
-                    tab_main.SelectedIndex = 3;
-                }
-            }
-            else
-            {
-                //If a directory has not been provided, mark the field for an error and switch tabs to show it
-                txt_roster_directory.BackColor = warning_color;
-                tab_main.SelectedIndex = 3;
-            }
-
-
-            //Read the VoDs directory from the data
-            global_values.vods_directory = (string)xml.Root.Element("directories").Element("vods-directory");
             //Create a directory monitor
             global_values.vod_monitor = new FileSystemWatcher();
-            txt_vods.Text = global_values.vods_directory;                               //Set text of the VoDs directory setting
-            if (!Directory.Exists(global_values.vods_directory))
-            {
-                //If a directory has not been provided, mark the field for an error and switch tabs to show it
-                txt_vods.BackColor = warning_color;
-                tab_main.SelectedIndex = 3;
-                global_values.vod_monitor.Path = null;              //Set the path of the directory monitor to the VoDs directory
-            }
-            else
-            {
-                global_values.vod_monitor.Path = global_values.vods_directory;              //Set the path of the directory monitor to the VoDs directory
-            }
             global_values.vod_monitor.Created += FileSystemWatcher_Created;             //Associate the file creation event to the monitor
             global_values.vod_monitor.Deleted += FileSystemWatcher_Deleted;             //Associate the file deletion event to the monitor
-            global_values.vod_monitor.EnableRaisingEvents = true;                       //Enable to monitor to trigger these events
+            global_values.vod_monitor.Renamed += FileSystemWatcher_Renamed;             //Associate the file deletion event to the monitor
 
+            //Read the stream file and thumbnail output directories from the data
+            txt_stream_directory.Text = (string)xml.Root.Element("directories").Element("stream-directory");
+            txt_thumbnail_directory.Text = (string)xml.Root.Element("directories").Element("thumbnail-directory");
+            txt_roster_directory.Text = (string)xml.Root.Element("directories").Element("game-directory");
+            txt_vods.Text = (string)xml.Root.Element("directories").Element("vods-directory");
 
             //Read the region setting and directory from the data
-            string copy_region = (string)xml.Root.Element("sponsor-and-region").Element("enable-region");
-            global_values.region_directory = (string)xml.Root.Element("sponsor-and-region").Element("region-directory");
-            txt_region.Text = global_values.region_directory;
-
-            if (copy_region == "True")
-            {
-                ckb_region.Checked = true;
-                if (!Directory.Exists(global_values.region_directory))
-                {
-                    txt_region.BackColor = warning_color;
-                    tab_main.SelectedIndex = 3;
-                    tab_mainsettings.SelectedIndex = 2;
-                }
-            }
-
+            txt_region.Text = (string)xml.Root.Element("sponsor-and-region").Element("region-directory");
+            ckb_region.Checked = Convert.ToBoolean((string)xml.Root.Element("sponsor-and-region").Element("enable-region"));
 
             //Read the sponsor setting and directory from the data
-            string copy_sponsor = (string)xml.Root.Element("sponsor-and-region").Element("enable-sponsor");
-            global_values.sponsor_directory = (string)xml.Root.Element("sponsor-and-region").Element("sponsor-directory");
-            txt_sponsor.Text = global_values.sponsor_directory;
+            txt_sponsor.Text = (string)xml.Root.Element("sponsor-and-region").Element("sponsor-directory");
+            ckb_sponsor.Checked = Convert.ToBoolean((string)xml.Root.Element("sponsor-and-region").Element("enable-sponsor"));
 
-            if (copy_sponsor == "True")
-            {
-                ckb_sponsor.Checked = true;
-                if (!Directory.Exists(global_values.sponsor_directory))
-                {
-                    txt_sponsor.BackColor = warning_color;
-                    tab_main.SelectedIndex = 3;
-                    tab_mainsettings.SelectedIndex = 2;
-                }
-            }
+            //Read the automatic updates flag from the data
+            rdb_automatic.Checked = Convert.ToBoolean((string)xml.Root.Element("etc").Element("automatic-updates"));
+            rdb_manual.Checked = !rdb_automatic.Checked;
 
 
-            //Read the video Title Copying flag from the data
-            string copy_title = (string)xml.Root.Element("youtube").Element("copy-title");
-            //Check if the video title should be added to the clipboard
-            if (copy_title == "True")
-            {
-                ckb_clipboard.Checked = true;                                            //Check the setting box, triggering the related event
-                global_values.copy_video_title = true;                                  //Set the global video title flag to true
-            }
-            else
-            {
-                global_values.copy_video_title = false;                                 //Set the global video title flag to false
-            }
+            txt_json.Text = (string)xml.Root.Element("youtube").Element("json-file");
+            global_values.youtube_username = (string)xml.Root.Element("youtube").Element("username");
 
-            //Read the Youtube Flag from the data
-            string use_youtube = (string)xml.Root.Element("youtube").Element("enable-youtube");
-            //Check if youtube is enabled
-            if (use_youtube == "True")
-            {
-                ckb_youtube.Checked = true;
-            }
-            else
-            {
-                btn_upload.Text = "Create Thumbnail";
-            }
+            //Read the Youtube Information from the data
+            ckb_youtube.Checked = Convert.ToBoolean((string)xml.Root.Element("youtube").Element("enable-youtube"));
+            txt_description.Text = (string)xml.Root.Element("youtube").Element("default-description");
+            ckb_clipboard.Checked = Convert.ToBoolean((string)xml.Root.Element("youtube").Element("copy-title"));
 
             //Read the YouTube Playlist flag from the data
             string playlist_name = (string)xml.Root.Element("youtube").Element("playlist-name");
@@ -327,20 +260,10 @@ namespace Stream_Info_Handler
                 txt_playlist.Text = playlist_name;
             }
 
-            //Read the Default youtube description from the data
-            global_values.youtube_description = (string)xml.Root.Element("youtube").Element("default-description");
-            txt_description.Text = System.Text.RegularExpressions.Regex.Replace(global_values.youtube_description, @"\r\n|\n|\r", Environment.NewLine);
 
-            //Read the Google Sheets flag from the data
-            string use_sheets = (string)xml.Root.Element("google-sheets").Element("enable-sheets");
-            //Read the Google Sheet ID from the data
+            //Read the Google Sheets Information from the data
+            ckb_sheets.Checked = Convert.ToBoolean((string)xml.Root.Element("google-sheets").Element("enable-sheets"));
             txt_sheets.Text = (string)xml.Root.Element("google-sheets").Element("sheets-id");
-
-            string startup_sheets = (string)xml.Root.Element("google-sheets").Element("startup-sheets");
-            if (startup_sheets == "True")
-            {
-                ckb_startup_sheets.Checked = true;
-            }
 
             global_values.sheets_style = (string)xml.Root.Element("google-sheets").Element("sheet-style");
             global_values.sheets_info = (string)xml.Root.Element("google-sheets").Element("sheet-info");
@@ -364,31 +287,12 @@ namespace Stream_Info_Handler
             btn_test_sheet.Enabled = false;
 
 
-            //Read the automatic updates flag from the data
-            string automatic_updates = (string)xml.Root.Element("etc").Element("automatic-updates");
-            //Check if automatic updates are enabled
-            if (automatic_updates == "true")
-            {
-                global_values.auto_update = true;                                       //Set the global automatic updates flag to true
-            }
-            else
-            {
-                global_values.auto_update = false;                                      //Set the global automatic updates flag to false
-                rdb_automatic.Checked = false;                                          //Remove the check on the automatic update radio button
-                rdb_manual.Checked = true;                                              //Add the check to the manual update radio button
-            }
-
-            //Read the username and json file from the data
-            global_values.youtube_username = (string)xml.Root.Element("youtube").Element("username");
-            global_values.json_file = (string)xml.Root.Element("youtube").Element("json-file");
-
 
 
             //Check if the Google Sheets integration is enabled
-            if (use_sheets == "True" && File.Exists(global_values.json_file))
-            {
-                ckb_sheets.Checked = true;                                              //Check the setting box, triggering the related event
-                                                                                        //Check if the Google Sheet ID is empty
+            if (ckb_sheets.Checked = true && File.Exists(txt_json.Text))
+            {                    
+                //Check if the Google Sheet ID is empty
                 if (txt_sheets.Text == "")
                 {
                     //Mark the field for an error and switch tabs to show it
@@ -397,36 +301,23 @@ namespace Stream_Info_Handler
                     tab_integrations.SelectedIndex = 2;
                 }
                 else
-                {
+                {             
                     if (global_values.sheets_style == "info-and-queue")
                     {
                         rdb_fullsheet.Enabled = true;
+                        rdb_infoonly.Enabled = true;
+                        cbx_format.Enabled = false;
                     }
-                    rdb_infoonly.Enabled = true;
-                    xml.Root.Element("google-sheets").Element("startup-sheets").ReplaceWith(new XElement("startup-sheets", "False"));
+                    btn_test_sheet.Enabled = false;
+
                     xml.Root.Element("google-sheets").Element("sheets-id").ReplaceWith(new XElement("sheets-id", ""));
                     xml.Root.Element("youtube").Element("json-file").ReplaceWith(new XElement("json-file", ""));
                     xml.Save(global_values.settings_file);
                     ignore_settings = true;
 
-                    if (startup_sheets == "True")
-                    {
-                        if (global_values.sheets_info == "info-and-queue")
-                        {
-                            import_from_sheets(false);
-                        }
-                        else
-                        {
-                            info_from_sheets();
-                        }
-                    }
-                    else
-                    {
-                        info_from_sheets();
-                    }
+                    info_from_sheets();
 
                     ignore_settings = false;
-                    xml.Root.Element("google-sheets").Element("startup-sheets").ReplaceWith(new XElement("startup-sheets", "True"));
                     xml.Root.Element("google-sheets").Element("sheets-id").ReplaceWith(new XElement("sheets-id", txt_sheets.Text));
                     xml.Root.Element("youtube").Element("json-file").ReplaceWith(new XElement("json-file", global_values.json_file));
                     xml.Save(global_values.settings_file);
@@ -435,8 +326,6 @@ namespace Stream_Info_Handler
                     btn_save1.Visible = true;
                     btn_save2.Visible = true;
                     btn_save2.Enabled = true;
-
-
                 }
             }
 
@@ -445,14 +334,6 @@ namespace Stream_Info_Handler
             if (global_values.stream_software == "OBS")
             {
                 rdb_obs.Checked = true;
-            }
-
-
-            txt_json.Text = global_values.json_file;
-            if (!File.Exists(global_values.json_file))
-            {
-                ckb_youtube.Checked = false;
-                ckb_sheets.Checked = false;
             }
 
 
@@ -735,9 +616,6 @@ namespace Stream_Info_Handler
                 "that the associated sheet is formatted for use with\n" +
                 "Master Orders and will determine the type of information\n" +
                 "it contains.");
-            ttp_tooltip.SetToolTip(ckb_startup_sheets,
-                "Enable stream queue information loading from the sheet\n" +
-                "when Master Orders starts up.");
             ttp_tooltip.SetToolTip(rdb_fullsheet,
                 "Set Master Orders to load both player information and\n" +
                 "the stream queue from the Google Sheet.");
@@ -765,7 +643,7 @@ namespace Stream_Info_Handler
         }
 
         //Create a thumbnail image using the information input for the players and tournament
-        public string create_thumbnail(string character_directory1, string character_directory2, 
+        public string create_thumbnail(int player_count, 
             string player_name1, string player_name2, string round_text, string match_date)
         {
             //Create a new bitmap image
@@ -784,17 +662,44 @@ namespace Stream_Info_Handler
 
 
             //Create an image resource for each player's character
-            Image left_character = Image.FromFile(character_directory1 + @"\left.png");
-            Image right_character = Image.FromFile(character_directory2 + @"\right.png");
+            Image left_character;
+            Image right_character;
+            Image left_character2;
+            Image right_character2;
 
-            drawing.Clear(Color.White);                                         //Clear the surface of all data
+            switch(player_count)
+            {
+                case 2:
+                    left_character = Image.FromFile(image_directory1 + @"\left.png");
+                    right_character = Image.FromFile(image_directory2 + @"\right.png");
+                    drawing.Clear(Color.White);                                         //Clear the surface of all data
 
-            drawing.DrawImage(background, 0, 0, 1920, 1080);                    //Draw the background
+                    drawing.DrawImage(background, 0, 0, 1920, 1080);                    //Draw the background
 
-            drawing.DrawImage(left_character, 0, 0, 1920, 1080);                //Draw Player 1's character
-            drawing.DrawImage(right_character, 0, 0, 1920, 1080);               //Draw Player 2's character
+                    drawing.DrawImage(left_character, 0, 0, 1920, 1080);                //Draw Player 1's character
+                    drawing.DrawImage(right_character, 0, 0, 1920, 1080);               //Draw Player 2's character
 
-            drawing.DrawImage(foreground, 0, 0, 1920, 1080);                    //Draw the overlay over the characters
+                    drawing.DrawImage(foreground, 0, 0, 1920, 1080);                    //Draw the overlay over the characters
+                    break;
+                case 4:
+                    left_character = Image.FromFile(image_directory1 + @"\left.png");
+                    right_character = Image.FromFile(image_directory2 + @"\right.png");
+                    left_character2 = Image.FromFile(image_directory3 + @"\left.png");
+                    right_character2 = Image.FromFile(image_directory4 + @"\right.png");
+                    drawing.Clear(Color.White);                                         //Clear the surface of all data
+
+                    drawing.DrawImage(background, 0, 0, 1920, 1080);                    //Draw the background
+
+                    drawing.DrawImage(left_character2, -100, 0, 1920, 1080);                //Draw Player 3's character
+                    drawing.DrawImage(right_character2, 100, 0, 1920, 1080);               //Draw Player 4's character
+
+                    drawing.DrawImage(left_character, 0, 200, 1920, 1080);                //Draw Player 1's character
+                    drawing.DrawImage(right_character, 0, 200, 1920, 1080);               //Draw Player 2's character
+
+                    drawing.DrawImage(foreground, 0, 0, 1920, 1080);                    //Draw the overlay over the characters
+
+                    break;
+            }
 
             //Convert each player's name and the round in bracket to all capital letters and store them seperately
             player_name1 = player_name1.ToUpper();
@@ -832,8 +737,8 @@ namespace Stream_Info_Handler
                 new Point(300, 980),                                            //drawing location
                 text_center);                                                   //text alignment
             //Set the outline and filling to the appropriate colors
-            drawing.DrawPath(black_stroke, draw_date);
-            drawing.FillPath(white_text, draw_date);
+            //drawing.DrawPath(black_stroke, draw_date);
+            //drawing.FillPath(white_text, draw_date);
 
             //Start a loop
             do
@@ -841,7 +746,7 @@ namespace Stream_Info_Handler
                 font_size -= 5;                                                         //Reduce the font size
                 calmfont = new Font("Keep Calm Med", font_size, FontStyle.Regular);     //Create a new font with this new size
                 namesize = TextRenderer.MeasureText(player_name1, calmfont);            //Measure the width of Player 1's name with this font size
-            } while (namesize.Width >= 1100);                                           //End the loop when the name fits within its boundaries
+            } while (namesize.Width >= 1000);      //1100                                     //End the loop when the name fits within its boundaries
             //Adjust the thiccness of the outline to match the size of the text
             black_stroke.Width = font_size / 11 + 4;
 
@@ -851,20 +756,20 @@ namespace Stream_Info_Handler
                 keepcalm,                                                       //font family
                 (int)FontStyle.Regular,                                         //font style
                 font_size,                                                      //font size (drawing.DpiY * 120 / 72)
-                new Point(480, 110),                                            //drawing location
+                new Point(420, 160),          //110                                  //drawing location 480
                 text_center);                                                   //text alignment
             //Draw the outline and filling in the appropriate colors
             drawing.DrawPath(black_stroke, draw_name1);
             drawing.FillPath(white_text, draw_name1);
 
-            font_size = 115;                                                            //Reset the font size
+            font_size = 115;                      //115                                      //Reset the font size
             //Start a loop
             do
             {
                 font_size -= 5;                                                         //Reduce the font size
                 calmfont = new Font("Keep Calm Med", font_size, FontStyle.Regular);     //Create a new font with this new size
                 namesize = TextRenderer.MeasureText(player_name2, calmfont);            //Measure the width of Player 2's name with this font size
-            } while (namesize.Width >= 1100);                                           //End the loop when the name fits within its boundaries
+            } while (namesize.Width >= 1000);        //1100                                   //End the loop when the name fits within its boundaries
             //Adjust the thiccness of the outline to match the size of the text
             black_stroke.Width = font_size / 11 + 4;
 
@@ -874,7 +779,7 @@ namespace Stream_Info_Handler
                 keepcalm,                                                       //font family
                 (int)FontStyle.Regular,                                         //font style
                 font_size,                                                      //font size (drawing.DpiY * 120 / 72)
-                new Point(1440, 110),                                           //drawing location
+                new Point(1500, 160), //110                                          //drawing location 1440
                 text_center);                                                   //text alignment                                        // text to draw
             //Draw the outline and filling in the appropriate colors
             drawing.DrawPath(black_stroke, draw_name2);
@@ -886,7 +791,7 @@ namespace Stream_Info_Handler
                 keepcalm,                                                       //font family
                 (int)FontStyle.Regular,                                         //font style
                 60,                                                             //font size (drawing.DpiY * 120 / 72)
-                new Point(960, 620),                                            //drawing location
+                new Point(960, 720), //620                                           //drawing location
                 text_center);                                                   //text alignment     
             //Draw the outline and filling in the appropriate colors
             drawing.DrawPath(light_stroke, draw_round);
@@ -916,6 +821,7 @@ namespace Stream_Info_Handler
             string hold_character = cbx_characters1.Text;
             int hold_color = cbx_colors1.SelectedIndex;
             string hold_directory = image_directory1;
+            bool hold_L = ckb_loser1.Checked;
 
             //Move Player 2's information to Player 1's slot
             txt_alt1.Text = txt_alt2.Text;
@@ -924,6 +830,7 @@ namespace Stream_Info_Handler
             cbx_characters1.Text = cbx_characters2.Text;
             cbx_colors1.SelectedIndex = cbx_colors2.SelectedIndex;
             image_directory1 = image_directory2;
+            ckb_loser1.Checked = ckb_loser2.Checked;
 
             //Move the information stored within temporary variables to Player 2's slot
             txt_alt2.Text = hold_alt;
@@ -932,6 +839,8 @@ namespace Stream_Info_Handler
             cbx_characters2.Text = hold_character;
             cbx_colors2.SelectedIndex = hold_color;
             image_directory2 = hold_directory;
+            ckb_loser2.Checked = hold_L;
+
         }
 
         private void btn_import_Click(object sender, EventArgs e)
@@ -940,22 +849,6 @@ namespace Stream_Info_Handler
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 txt_roster_directory.Text = folderBrowserDialog1.SelectedPath;                            //Update the setting text
-                if (File.Exists(txt_roster_directory.Text + @"\game info.txt") && 
-                    File.Exists(txt_roster_directory.Text + @"\characters.txt") &&
-                    global_values.vods_directory != txt_roster_directory.Text)
-                {
-                    txt_roster_directory.BackColor = Color.White;
-                    global_values.game_path = txt_roster_directory.Text;                    //Save the directory
-
-                    //Save the setting to the settings file
-                    XDocument xml = XDocument.Load(global_values.settings_file);
-                    xml.Root.Element("directories").Element("game-directory").ReplaceWith(new XElement("game-directory", txt_roster_directory.Text));
-                    xml.Save(global_values.settings_file);
-                }
-                else
-                {
-                    txt_roster_directory.BackColor = warning_color;
-                }
             }
         }
 
@@ -975,7 +868,8 @@ namespace Stream_Info_Handler
                     ttp_tooltip.SetToolTip(btn_update,
                         "Pushes updates to the player and match information " +
                         "into the Stream Files Directory.");
-
+                    //Create a ULdata for the new match
+                    global_values.current_youtube_data = create_uldata(2);
                     //Save Player 1's information to seperate files to be used by the stream program
                     output_name = get_output_name(cbx_name1.Text, ckb_loser1.Checked, 1);
                     System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", output_name);
@@ -996,7 +890,9 @@ namespace Stream_Info_Handler
                     break;
                 case "Update":                              //Update the stream files with the new information provided
                     btn_update.Enabled = false;             //Disable this button until further action is needed
-
+                    update_uldata(1, global_values.current_youtube_data);
+                    update_uldata(2, global_values.current_youtube_data);
+                    update_uldata(5, global_values.current_youtube_data);
                     //Save Player 1's information to seperate files to be used by the stream program
                     System.IO.File.WriteAllText(global_values.output_directory + @"\score1.txt", nud_score1.Value.ToString());
                     output_name = get_output_name(cbx_name1.Text, ckb_loser1.Checked, 1);
@@ -1091,14 +987,6 @@ namespace Stream_Info_Handler
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 txt_stream_directory.Text = folderBrowserDialog1.SelectedPath;                 //Update the global value with the new directory
-                if (global_values.vods_directory != txt_stream_directory.Text)
-                {
-                    global_values.output_directory = txt_stream_directory.Text;         //Save the directory
-                                                                                                //Save the setting to the settings file
-                    XDocument xml = XDocument.Load(global_values.settings_file);
-                    xml.Element("stream-directory").ReplaceWith(new XElement("stream-directory", txt_stream_directory.Text));
-                    xml.Save(global_values.settings_file);
-                }
             }
         }
 
@@ -1145,8 +1033,7 @@ namespace Stream_Info_Handler
             }
 
             //Create a thumbnail image
-            string thumbnail_image_name = create_thumbnail(global_values.game_path + @"\" + cbx_characters1.Text + @"\" + (cbx_colors1.SelectedIndex + 1).ToString() + @"\",
-                global_values.game_path + @"\" + cbx_characters2.Text + @"\" + (cbx_colors2.SelectedIndex + 1).ToString() + @"\",
+            string thumbnail_image_name = create_thumbnail(2,
                 cbx_name1.Text,
                 cbx_name2.Text,
                 cbx_round.Text,
@@ -1159,14 +1046,6 @@ namespace Stream_Info_Handler
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 txt_thumbnail_directory.Text = folderBrowserDialog1.SelectedPath;                   //Update the setting with the new information
-                if (global_values.vods_directory != txt_thumbnail_directory.Text)
-                {
-                    global_values.thumbnail_directory = txt_thumbnail_directory.Text;              //Save the directory
-                                                                                                   //Save the information to the settings file
-                    XDocument xml = XDocument.Load(global_values.settings_file);
-                    xml.Root.Element("directories").Element("thumbnail-directory").ReplaceWith(new XElement("thumbnail-directory", txt_thumbnail_directory.Text));
-                    xml.Save(global_values.settings_file);
-                }
             }
         }
 
@@ -1284,6 +1163,7 @@ namespace Stream_Info_Handler
                     {
                         btn_update.Enabled = false;
                         System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", output_name);
+                        update_uldata(2, global_values.current_youtube_data);                        
                     }
                     break;
             }
@@ -1345,6 +1225,7 @@ namespace Stream_Info_Handler
                     {
                         btn_update.Enabled = false;
                         System.IO.File.WriteAllText(global_values.output_directory + @"\round.txt", cbx_round.Text);
+                        update_uldata(5, global_values.current_youtube_data);
                     }
                     break;
             }
@@ -1367,6 +1248,8 @@ namespace Stream_Info_Handler
                     {
                         btn_update.Enabled = false;
                         System.IO.File.WriteAllText(global_values.output_directory + @"\tournament.txt", txt_tournament.Text);
+                        update_uldata(5, global_values.current_youtube_data);
+
                     }
                     break;
             }
@@ -1389,6 +1272,7 @@ namespace Stream_Info_Handler
                     {
                         btn_update.Enabled = false;
                         System.IO.File.WriteAllText(global_values.output_directory + @"\bracket url.txt", txt_bracket.Text);
+                        update_uldata(5, global_values.current_youtube_data);
                     }
                     break;
             }
@@ -1421,11 +1305,11 @@ namespace Stream_Info_Handler
                                      @"\sponsor 1.png", @"\sponsor 2.png" };
             foreach(string replace_image in image_files)
             {
-                if (File.Exists(replace_image))
+                if (File.Exists(global_values.output_directory + replace_image))
                 {
-                    File.Delete(replace_image);
+                    File.Delete(global_values.output_directory + replace_image);
                 }
-                File.Copy(@"left.png", replace_image);
+                File.Copy(@"left.png", global_values.output_directory + replace_image);
             }
 
             global_values.player_roster_number[1] = -1;
@@ -1436,7 +1320,7 @@ namespace Stream_Info_Handler
             {
                 if (global_values.sheets_info == "info-and-queue")
                 {
-                    import_from_sheets(false);
+                    import_from_sheets(false, 2);
                 }
                 else
                 {
@@ -1485,7 +1369,16 @@ namespace Stream_Info_Handler
                     btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
                     break;
                 case "Update":
-                    btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\blue.gif");
+                    if (global_values.auto_update == false)
+                    {
+                        btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\blue.gif");
+                    }
+                    else
+                    {
+                        btn_update.Enabled = false;
+                        update_uldata(1, global_values.current_youtube_data);
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\alt text1.txt", txt_alt1.Text);
+                    }
                     break;
             }
         }
@@ -1499,7 +1392,16 @@ namespace Stream_Info_Handler
                     btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
                     break;
                 case "Update":
-                    btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\blue.gif");
+                    if (global_values.auto_update == false)
+                    {
+                        btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\blue.gif");
+                    }
+                    else
+                    {
+                        btn_update.Enabled = false;
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\alt text2.txt", txt_alt2.Text);
+                        update_uldata(2, global_values.current_youtube_data);
+                    }
                     break;
             }
         }
@@ -1535,10 +1437,6 @@ namespace Stream_Info_Handler
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 txt_json.Text = openFileDialog1.FileName;
-                global_values.json_file = txt_json.Text;
-                XDocument xml = XDocument.Load(global_values.settings_file);
-                xml.Root.Element("youtube").Element("json-file").ReplaceWith(new XElement("json-file", txt_json.Text));
-                xml.Save(global_values.settings_file);
             }
         }
 
@@ -1570,6 +1468,7 @@ namespace Stream_Info_Handler
                     ckb_sheets.Checked = false;
                     ckb_youtube.Enabled = false;
                     ckb_sheets.Enabled = false;
+                    tab_main.SelectedIndex = 3;
                 }
             }
         }
@@ -1590,7 +1489,13 @@ namespace Stream_Info_Handler
                 else
                 {
                     txt_stream_directory.BackColor = warning_color;
+                    tab_main.SelectedIndex = 3;
                 }
+            }
+            else
+            {
+                txt_stream_directory.BackColor = warning_color;
+                tab_main.SelectedIndex = 3;
             }
         }
 
@@ -1610,7 +1515,13 @@ namespace Stream_Info_Handler
                 else
                 {
                     txt_thumbnail_directory.BackColor = warning_color;
+                    tab_main.SelectedIndex = 3;
                 }
+            }
+            else
+            {
+                txt_thumbnail_directory.BackColor = warning_color;
+                tab_main.SelectedIndex = 3;
             }
         }
 
@@ -1638,27 +1549,12 @@ namespace Stream_Info_Handler
                     pic_game_logo.Image = Image.FromFile(txt_roster_directory.Text + @"\game_logo.png");
 
                     //Update the character list combobox
-                    cbx_characters1.BeginUpdate();                                      //Begin
-                    cbx_characters1.Items.Clear();                                      //Empty the item list
-                    int character_count = Int32.Parse(global_values.game_info[1]);      //Store the number of characters
-                    //Loop through every character
-                    for (int x = 0; x < character_count; x++)
-                    {
-                        cbx_characters1.Items.Add(global_values.characters[x]);         //Add the character's name to the combobox
-                    }
-                    cbx_characters1.EndUpdate();                                        //End
-                    cbx_characters1.SelectedIndex = 0;                                  //Set the combobox index to 0
-
-                    //Update the character list combobox
-                    cbx_characters2.BeginUpdate();                                      //Begin
-                    cbx_characters2.Items.Clear();                                      //Empty the item list
-                    //Loop through every character
-                    for (int x = 0; x < character_count; x++)
-                    {
-                        cbx_characters2.Items.Add(global_values.characters[x]);         //Add the character's name to the combobox
-                    }
-                    cbx_characters2.EndUpdate();                                        //End
-                    cbx_characters2.SelectedIndex = 0;                                  //Set the combobox index to 0
+                    update_characters(ref cbx_characters1);
+                    update_characters(ref cbx_characters2);
+                    update_characters(ref cbx_team1_character1);
+                    update_characters(ref cbx_team1_character2);
+                    update_characters(ref cbx_team2_character1);
+                    update_characters(ref cbx_team2_character2);
                 }
                 else
                 {
@@ -1957,10 +1853,7 @@ namespace Stream_Info_Handler
                     // This OAuth 2.0 access scope allows for read-only access to the authenticated 
                     // user's account, but not other types of account access.
                     new[] { YouTubeService.Scope.Youtube,
-                    YouTubeService.Scope.Youtubepartner,
-                    YouTubeService.Scope.YoutubeUpload,
-                    YouTubeService.Scope.YoutubepartnerChannelAudit,
-                    YouTubeService.Scope.YoutubeReadonly  },
+                    YouTubeService.Scope.YoutubeUpload  },
                     global_values.youtube_username,
                     CancellationToken.None,
                     new FileDataStore(this.GetType().ToString())
@@ -2084,7 +1977,7 @@ namespace Stream_Info_Handler
             ckb_region.Enabled = status;
             //Set the enable status of all sheets settings to the checked status
             txt_sheets.Enabled = status;
-            ckb_startup_sheets.Enabled = status;
+            btn_test_sheet.Enabled = status;
 
             //Enable/Disable the player save buttons accordingly
             btn_save1.Enabled = status;
@@ -2092,10 +1985,11 @@ namespace Stream_Info_Handler
             btn_save2.Visible = status;
             btn_save2.Enabled = status;
 
-            if(status == false)
+            if (status == false)
             {
                 btn_previous_match.Enabled = false;
                 btn_previous_match.Visible = false;
+                cbx_format.Enabled = true;
             }
 
             //Update the global toggle and settings file
@@ -2107,6 +2001,7 @@ namespace Stream_Info_Handler
 
         public void add_to_sheets(player_info new_player)
         {
+            /*
             UserCredential credential;
 
             using (var stream =
@@ -2175,7 +2070,7 @@ namespace Stream_Info_Handler
                 }
             }
 
-
+            
 
             //Add the new player's information to an array.
             var oblist = new List<object>() { global_values.roster[player_index].tag,
@@ -2204,6 +2099,8 @@ namespace Stream_Info_Handler
             SpreadsheetsResource.ValuesResource.UpdateRequest update = service.Spreadsheets.Values.Update(data, spreadsheetId, range2);
             update.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
             Google.Apis.Sheets.v4.Data.UpdateValuesResponse result2 = update.Execute();
+            
+
 
             MessageBox.Show("The following player information has been added to the database:" +
                                 "\n Tag: " + global_values.roster[player_index].tag +
@@ -2212,10 +2109,59 @@ namespace Stream_Info_Handler
                                 "\n Sponsor: " + global_values.roster[player_index].sponsor +
                                 "\n Main: " + global_values.roster[player_index].character[0] +
                                 "\n Color: " + global_values.roster[player_index].color[0]);
+            */               
+            
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = "Master Orders Global Playerbase";
+            dbCon.DatabaseUserName = global_values.database_username;
+            dbCon.DatabasePassword = global_values.database_password;
+            List<MySqlParameter> playerparams = new List<MySqlParameter>();            
+            MySqlParameter add_player_param = new MySqlParameter("", "");
+            string tablename = "`Super Smash Bros. Ultimate`";
+            playerparams.Add(new MySqlParameter("@tag", new_player.tag));
+            playerparams.Add(new MySqlParameter("@fullname", new_player.fullname));
+            playerparams.Add(new MySqlParameter("@twitter", new_player.twitter));
+            playerparams.Add(new MySqlParameter("@region", new_player.region));
+            playerparams.Add(new MySqlParameter("@sponsor", new_player.fullsponsor));
+            playerparams.Add(new MySqlParameter("@sponsorprefix", new_player.sponsor));
+            playerparams.Add(new MySqlParameter("@character1", new_player.character[0]));
+            playerparams.Add(new MySqlParameter("@character2", new_player.character[1]));
+            playerparams.Add(new MySqlParameter("@character3", new_player.character[2]));
+            playerparams.Add(new MySqlParameter("@character4", new_player.character[3]));
+            playerparams.Add(new MySqlParameter("@character5", new_player.character[4]));
+            playerparams.Add(new MySqlParameter("@color1", new_player.color[0]));
+            playerparams.Add(new MySqlParameter("@color2", new_player.color[1]));
+            playerparams.Add(new MySqlParameter("@color3", new_player.color[2]));
+            playerparams.Add(new MySqlParameter("@color4", new_player.color[3]));
+            playerparams.Add(new MySqlParameter("@color5", new_player.color[4]));
 
+            dbCon.Insert("INSERT INTO " + tablename +" (`Tag`, `Full Name`, `Twitter`, `Region`, `Sponsor`, `Sponsor Prefix`, " +
+                "`Character 1`, `Character 2`, `Character 3`, `Character 4`, " +
+                "`Character 5`, `Color 1`, `Color 2`, `Color 3`, `Color 4`, `Color 5`) " +
+                "VALUES(@tag, @fullname, @twitter, @region, @sponsor, @sponsorprefix, " +
+                "@character1, @character2, @character3, @character4, @character5, " +
+                "@color1, @color2, @color3, @color4, @color5)", playerparams );
+            
+
+
+            if (dbCon.IsConnect())
+            {
+                //suppose col0 and col1 are defined as VARCHAR in the DB
+                string query = "SELECT `Tag`,`Full Name` FROM `Super Smash Bros. Ultimate`";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    string someStringFromColumnZero = reader.GetString(0);
+                    string someStringFromColumnOne = reader.GetString(1);
+                    MessageBox.Show(someStringFromColumnZero + "," + someStringFromColumnOne);
+                }
+                dbCon.Close();
+            }
+            
         }
 
-        private void import_from_sheets( bool reverse )
+        private void import_from_sheets( bool reverse, int player_count )
         {
             UserCredential credential;
 
@@ -2244,7 +2190,7 @@ namespace Stream_Info_Handler
             // Define request parameters.
             String spreadsheetId = txt_sheets.Text;
 
-            List<string> ranges = new List<string>(new string[] { "Current Round Info!A1:D18", "Upcoming Matches!A1:E56", "Player Information!A2:O" + (MAX_PLAYERS + 1).ToString() });
+            List<string> ranges = new List<string>(new string[] { "Current Round Info!A1:D18", "Upcoming Matches!A1:G56", "Player Information!A2:O" + (MAX_PLAYERS + 1).ToString() });
             
             SpreadsheetsResource.ValuesResource.BatchGetRequest request = service.Spreadsheets.Values.BatchGet(spreadsheetId);
             request.Ranges = ranges;
@@ -2307,24 +2253,42 @@ namespace Stream_Info_Handler
                 round_number = Int32.Parse(manual_update);
             }
 
-            if(round_number == -1)
+            if(round_number == 0)
             {
-                round_number = 0;
+                round_number = 1;
             }
 
             global_values.first_match = false;
 
 
-            string[] player_name = new string[5];
-            player_name[1] = upcoming_matches[3 + round_number][2].ToString();
-            player_name[2] = upcoming_matches[3 + round_number][3].ToString();
-            player_name[3] = upcoming_matches[5 + round_number][2].ToString();
-            player_name[4] = upcoming_matches[5 + round_number][3].ToString();
+            string[] player_name = new string[9];
+            player_info[] player = new player_info[9];
 
-            player_info[] player = new player_info[5];
+            switch(player_count)
+            {
+                case 2:
+                    player_name[1] = upcoming_matches[3 + round_number][2].ToString();
+                    player_name[2] = upcoming_matches[3 + round_number][3].ToString();
+                    player_name[3] = upcoming_matches[4 + round_number][2].ToString();
+                    player_name[4] = upcoming_matches[4 + round_number][3].ToString();
+                    break;
+                case 4:
+                    player_name[1] = upcoming_matches[3 + round_number][2].ToString();
+                    player_name[2] = upcoming_matches[3 + round_number][4].ToString();
+                    player_name[3] = upcoming_matches[3 + round_number][3].ToString();
+                    player_name[4] = upcoming_matches[3 + round_number][5].ToString();
+
+                    player_name[5] = upcoming_matches[4 + round_number][2].ToString();
+                    player_name[6] = upcoming_matches[4 + round_number][4].ToString();
+                    player_name[7] = upcoming_matches[4 + round_number][3].ToString();
+                    player_name[8] = upcoming_matches[4 + round_number][5].ToString();
+                    break;
+            }
 
 
-            for (int player_number = 1; player_number <= 4; player_number++)
+
+
+            for (int player_number = 1; player_number <= player_count*2; player_number++)
             {
                 for (int i = 0; i <= global_values.roster_size; i++)
                 {
@@ -2340,30 +2304,41 @@ namespace Stream_Info_Handler
                             player[player_number].character[ii] = "";
                             player[player_number].color[ii] = 1;
                         }
-                        int character_count = Int32.Parse(global_values.game_info[1]);      //Store the number of characters
-                        switch (player_number)
+                        switch (player_count)
                         {
-                            case 1:
-                                txt_alt1.Text = "";
-                                cbx_characters1.Items.Clear();
-                                cbx_characters1.BeginUpdate();
-                                for (int x = 0; x < character_count; x++)
-                                {
-                                    cbx_characters1.Items.Add(global_values.characters[x]);         //Add the character's name to the combobox
-                                }
-                                cbx_characters1.EndUpdate();                                        //End
-                                cbx_characters1.SelectedIndex = 0;                                  //Set the combobox index to 0
-                                break;
                             case 2:
-                                txt_alt2.Text = "";
-                                cbx_characters2.Items.Clear();
-                                cbx_characters2.BeginUpdate();
-                                for (int x = 0; x < character_count; x++)
+                                switch (player_number)
                                 {
-                                    cbx_characters2.Items.Add(global_values.characters[x]);         //Add the character's name to the combobox
+                                    case 1:
+                                        txt_alt1.Text = "";
+                                        update_characters(ref cbx_characters1);
+                                        break;
+                                    case 2:
+                                        txt_alt2.Text = "";
+                                        update_characters(ref cbx_characters2);
+                                        break;
                                 }
-                                cbx_characters2.EndUpdate();                                        //End
-                                cbx_characters2.SelectedIndex = 0;                                  //Set the combobox index to 0
+                                break;
+                            case 4:
+                                switch (player_number)
+                                {
+                                    case 1:
+                                        txt_team1_twitter1.Text = "";
+                                        update_characters(ref cbx_team1_character1);
+                                        break;
+                                    case 2:
+                                        txt_team2_twitter1.Text = "";
+                                        update_characters(ref cbx_team2_character1);
+                                        break;
+                                    case 3:
+                                        txt_team1_twitter2.Text = "";
+                                        update_characters(ref cbx_team1_character2);
+                                        break;
+                                    case 4:
+                                        txt_team2_twitter2.Text = "";
+                                        update_characters(ref cbx_team2_character2);
+                                        break;
+                                }
                                 break;
                         }
                         break;
@@ -2376,61 +2351,100 @@ namespace Stream_Info_Handler
                 }
             }
 
+            Google.Apis.Sheets.v4.Data.ValueRange currentmatch = new Google.Apis.Sheets.v4.Data.ValueRange();
 
-            cbx_name1.BeginUpdate();                                            //Begin
-            cbx_name1.Items.Clear();                                            //Empty the item list
-            for (int i = 0; i <= global_values.roster_size; i++)
+            switch (player_count)
             {
-                cbx_name1.Items.Add(global_values.roster[i].tag);
-            }
-            cbx_name1.EndUpdate();                                              //End
-            cbx_name1.SelectedIndex = cbx_name1.Items.IndexOf(player[1].tag);   //Set the combobox index to 0
-            int hold_index = tab_main.SelectedIndex;
-            tab_main.SelectedIndex = 1;
-            cbx_name1.Text = player[1].get_display_name();
+                case 2:
+                    update_names(ref cbx_name1);
+                    cbx_name1.SelectedIndex = cbx_name1.Items.IndexOf(player[1].tag);   //Set the combobox index to 0
+                    cbx_name1.Text = player[1].get_display_name();
 
-            cbx_name2.BeginUpdate();                                            //Begin
-            cbx_name2.Items.Clear();                                            //Empty the item list
-            for (int i = 0; i <= global_values.roster_size; i++)
-            {
-                cbx_name2.Items.Add(global_values.roster[i].tag);
-            }
-            cbx_name2.EndUpdate();                                              //End
-            cbx_name2.SelectedIndex = cbx_name2.Items.IndexOf(player[2].tag);   //Set the combobox index to 0
-            cbx_name2.Text = player[2].get_display_name();
-            tab_main.SelectedIndex = hold_index;
+                    update_names(ref cbx_name2);
+                    cbx_name2.SelectedIndex = cbx_name2.Items.IndexOf(player[2].tag);   //Set the combobox index to 0
+                    cbx_name2.Text = player[2].get_display_name();
 
-            cbx_round.Text = upcoming_matches[3 + round_number][1].ToString();
-            txt_bracket.Text = current_round_info[1][2].ToString();
-            txt_tournament.Text = current_round_info[0][2].ToString();
+                    cbx_round.Text = upcoming_matches[3 + round_number][1].ToString();
 
-            cbx_colors1.SelectedIndex = player[1].color[0] - 1;
-            cbx_colors2.SelectedIndex = player[2].color[0] - 1;
+                    cbx_colors1.SelectedIndex = player[1].color[0] - 1;
+                    cbx_colors2.SelectedIndex = player[2].color[0] - 1;
 
 
 
-            var oblist = new List<object>() { "Current Match", "P1",  "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" ,
+                    var oblist = new List<object>() { "Tournament Name", "Bracket URL", ".", "Current Match", "P1",  "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" ,
                                                 ".", "Next Match", "P1", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" };
-            var oblist2 = new List<object>() { "", "", player[1].tag, player[1].twitter, player[1].region, player[1].sponsor, player[1].character[0] ,
+                    var oblist2 = new List<object>() { "", "", ".", "", "", player[1].tag, player[1].twitter, player[1].region, player[1].sponsor, player[1].character[0] ,
                                                 "", "", "", player[3].tag, player[3].twitter, player[3].region, player[3].sponsor, player[3].character[0]};
-            var oblist3 = new List<object>() { cbx_round.Text, "P2", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" ,
+                    var oblist3 = new List<object>() { txt_tournament.Text, txt_bracket.Text, "", cbx_round.Text, "P2", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" ,
                                                 ".", upcoming_matches[5 + round_number][1].ToString(), "P2", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" };
-            var oblist4 = new List<object>() { "", "", player[2].tag, player[2].twitter, player[2].region, player[2].sponsor, player[2].character[0] ,
+                    var oblist4 = new List<object>() { "", "", ".", "", "", player[2].tag, player[2].twitter, player[2].region, player[2].sponsor, player[2].character[0] ,
                                                 "", "", "", player[4].tag, player[4].twitter, player[4].region, player[4].sponsor, player[4].character[0] };
 
+                    // The new values to apply to the spreadsheet.
+                    currentmatch.Values = new List<IList<object>> { oblist, oblist2, oblist3, oblist4 };
+                    currentmatch.Range = "Current Round Info!A1:D18";
+                    currentmatch.MajorDimension = "COLUMNS";
+                    break;
+                case 4:
+                    update_names(ref cbx_team1_name1);
+                    cbx_team1_name1.SelectedIndex = cbx_team1_name1.Items.IndexOf(player[1].tag);   //Set the combobox index to 0
+                    cbx_team1_name1.Text = player[1].get_display_name();
+
+                    update_names(ref cbx_team2_name1);
+                    cbx_team2_name1.SelectedIndex = cbx_team2_name1.Items.IndexOf(player[2].tag);   //Set the combobox index to 0
+                    cbx_team2_name1.Text = player[2].get_display_name();
+
+                    update_names(ref cbx_team1_name2);
+                    cbx_team1_name2.SelectedIndex = cbx_team1_name2.Items.IndexOf(player[3].tag);   //Set the combobox index to 0
+                    cbx_team1_name2.Text = player[3].get_display_name();
+
+                    update_names(ref cbx_team2_name2);
+                    cbx_team2_name2.SelectedIndex = cbx_team2_name2.Items.IndexOf(player[4].tag);   //Set the combobox index to 0
+                    cbx_team2_name2.Text = player[4].get_display_name();
 
 
-            // The new values to apply to the spreadsheet.
-            Google.Apis.Sheets.v4.Data.ValueRange currentmatch = new Google.Apis.Sheets.v4.Data.ValueRange();
-            currentmatch.Values = new List<IList<object>> { oblist, oblist2, oblist3, oblist4 };
-            currentmatch.Range = "Current Round Info!A4:D18";
-            currentmatch.MajorDimension = "COLUMNS";
+                    cbx_team_round.Text = upcoming_matches[3 + round_number][1].ToString();
 
-            oblist = new List<object>() { (round_number).ToString(), "Next Match to Stream", "" };
+                    cbx_team1_color1.SelectedIndex = player[1].color[0] - 1;
+                    cbx_team2_color1.SelectedIndex = player[2].color[0] - 1;
+                    cbx_team1_color2.SelectedIndex = player[3].color[0] - 1;
+                    cbx_team2_color2.SelectedIndex = player[4].color[0] - 1;
+
+
+
+                    var oblist11 = new List<object>() { "Tournament Name", "Bracket URL", ".", "Current Match", "TEAM1 P1",  "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" ,
+                                                ".", "Next Match", "TEAM1 P1", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" };
+                    var oblist22 = new List<object>() { "", "", ".", "", "", player[1].tag, player[1].twitter, player[1].region, player[1].sponsor, player[1].character[0] ,
+                                                "", "", "", player[5].tag, player[5].twitter, player[5].region, player[5].sponsor, player[5].character[0]};
+                    var oblist33 = new List<object>() { txt_tournament.Text, txt_bracket.Text, "", cbx_team_round.Text, "TEAM1 P2", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" ,
+                                                ".", upcoming_matches[5 + round_number][1].ToString(), "TEAM1 P2", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" };
+                    var oblist44 = new List<object>() { "", "", ".", "", "", player[3].tag, player[3].twitter, player[3].region, player[3].sponsor, player[3].character[0] ,
+                                                "", "", "", player[7].tag, player[7].twitter, player[7].region, player[7].sponsor, player[7].character[0] };
+                    var oblist55 = new List<object>() { "", "", "", "", "TEAM2 P1", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" ,
+                                                ".", ".", "TEAM2 P1", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" };
+                    var oblist66 = new List<object>() { "", "", ".", "", "", player[2].tag, player[2].twitter, player[2].region, player[2].sponsor, player[2].character[0] ,
+                                                "", "", "", player[6].tag, player[6].twitter, player[6].region, player[6].sponsor, player[6].character[0] };
+                    var oblist77 = new List<object>() { "", "", "", "", "TEAM2 P2", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" ,
+                                                ".", ".", "TEAM2 P2", "Tag:", "Twitter:", "Region:", "Sponsor:", "Character:" };
+                    var oblist88 = new List<object>() { "", "", ".", "", "", player[4].tag, player[4].twitter, player[4].region, player[4].sponsor, player[4].character[0] ,
+                                                "", "", "", player[8].tag, player[8].twitter, player[8].region, player[8].sponsor, player[8].character[0] };
+
+                    // The new values to apply to the spreadsheet.
+                    currentmatch.Values = new List<IList<object>> { oblist11, oblist22, oblist33, oblist44, oblist55, oblist66, oblist77, oblist88 };
+                    currentmatch.Range = "Current Round Info!A1:H18";
+                    currentmatch.MajorDimension = "COLUMNS";
+                    break;
+            }
+
+
+
+
+
+            var oblist5 = new List<object>() { (round_number).ToString(), "Next Match to Stream", "" };
 
             Google.Apis.Sheets.v4.Data.ValueRange upcoming = new Google.Apis.Sheets.v4.Data.ValueRange();
             upcoming.Range = "Upcoming Matches!B2:D2";
-            upcoming.Values = new List<IList<object>> { oblist }; ;
+            upcoming.Values = new List<IList<object>> { oblist5 }; ;
             upcoming.MajorDimension = "ROWS";
 
             List<Google.Apis.Sheets.v4.Data.ValueRange> data = new List<Google.Apis.Sheets.v4.Data.ValueRange>() { currentmatch , upcoming };  // TODO: Update placeholder value.
@@ -2533,24 +2547,12 @@ namespace Stream_Info_Handler
                 }
             }
 
-            cbx_name1.BeginUpdate();                                            //Begin
-            cbx_name1.Items.Clear();                                            //Empty the item list
-            for (int i = 0; i <= global_values.roster_size; i++)
-            {
-                cbx_name1.Items.Add(global_values.roster[i].tag);
-            }
-            cbx_name1.EndUpdate();                                              //End
-            cbx_name1.Text = "";
-
-            cbx_name2.BeginUpdate();                                            //Begin
-            cbx_name2.Items.Clear();                                            //Empty the item list
-            for (int i = 0; i <= global_values.roster_size; i++)
-            {
-                cbx_name2.Items.Add(global_values.roster[i].tag);
-            }
-            cbx_name2.EndUpdate();                                              //End
-            cbx_name2.Text = "";
-
+            update_names(ref cbx_name1);
+            update_names(ref cbx_name2);
+            update_names(ref cbx_team1_name1);
+            update_names(ref cbx_team1_name2);
+            update_names(ref cbx_team2_name1);
+            update_names(ref cbx_team2_name2);
         }
 
         private void check_sheets()
@@ -2600,28 +2602,50 @@ namespace Stream_Info_Handler
 
             btn_previous_match.Enabled = false;
             btn_previous_match.Visible = false;
+            cbx_format.Enabled = true;
 
             int sheet_number = sheet_information.Count;
             switch(sheet_number)
             {
-                case 4:
-                    if (sheet_information[0].Properties.Title == "Current Round Info" &&
+                case 5:
+                    if (sheet_information[0].Properties.Title == "Current Round Info" && 
                         sheet_information[1].Properties.Title == "Upcoming Matches" &&
                         sheet_information[2].Properties.Title == "Player Information" &&
                         sheet_information[3].Properties.Title == "Characters and Rounds")
                     {
+                        switch(sheet_information[4].Properties.Title)
+                        {
+                            case "Singles":
+                                MessageBox.Show("The designated Google Sheet contains the following information:\n\n" +
+                                                "Player Database\n" +
+                                                "Stream Queue for Singles\n\n" +
+                                                "Master Orders will use adapt to its information.");
+                                cbx_format.Text = "Singles";
+                                break;
+                            case "Doubles":
+                                MessageBox.Show("The designated Google Sheet contains the following information:\n\n" +
+                                                "Player Database\n" +
+                                                "Stream Queue for Doubles\n\n" +
+                                                "Master Orders will use adapt to its information.");
+                                cbx_format.Text = "Doubles";
+                                break;
+                            default:
+                                MessageBox.Show("The designated Google Sheet is not formatted to be used with Master Orders.");
+                                txt_sheets.Text = "";
+                                return;
+                        }
+                        cbx_format.Enabled = false;
                         rdb_fullsheet.Checked = true;
                         rdb_fullsheet.Enabled = true;
                         rdb_infoonly.Enabled = true;
-
-                        btn_test_sheet.Enabled = false;
-                        MessageBox.Show("The designated Google Sheet contains both player information and a stream queue. " +
-                                        "Master Orders will use adapt to its information.");
                         btn_previous_match.Enabled = true;
                         btn_previous_match.Visible = true;
+                        global_values.sheets_style = "info-and-queue";
                         XDocument xml = XDocument.Load(global_values.settings_file);
                         xml.Root.Element("google-sheets").Element("sheets-id").ReplaceWith(new XElement("sheets-id", txt_sheets.Text));
+                        xml.Root.Element("google-sheets").Element("sheet-style").ReplaceWith(new XElement("sheet-style", global_values.sheets_style));
                         xml.Save(global_values.settings_file);
+                        info_from_sheets();
                     }
                     else
                     {
@@ -2635,12 +2659,14 @@ namespace Stream_Info_Handler
                     {
                         rdb_infoonly.Checked = true;
                         rdb_fullsheet.Enabled = false;
-                        btn_test_sheet.Enabled = false;
                         MessageBox.Show("The designated Google Sheet contains only player information. " +
                                         "Master Orders will use adapt to its information.");
+                        global_values.sheets_style = "info-only";
                         XDocument xml = XDocument.Load(global_values.settings_file);
                         xml.Root.Element("google-sheets").Element("sheets-id").ReplaceWith(new XElement("sheets-id", txt_sheets.Text));
+                        xml.Root.Element("google-sheets").Element("sheet-style").ReplaceWith(new XElement("sheet-style", global_values.sheets_style));
                         xml.Save(global_values.settings_file);
+                        info_from_sheets();
                     }
                     else
                     {
@@ -2660,104 +2686,14 @@ namespace Stream_Info_Handler
             cbx_colors1.Items.Clear();
             string character_path = global_values.game_path + @"\" + cbx_characters1.Text;
             int colors_count = Int32.Parse(System.IO.File.ReadAllText(character_path + @"\colors.txt"));
-
-            switch (colors_count)
+            Image[] colors = new Image[colors_count];
+            for(int i = 0; i < colors_count; i++)
             {
-                case 1:
-                    Image[] colors1 =
-                    {
-                        Image.FromFile(character_path + @"\1\stamp.png"),
-                    };
-                    cbx_colors1.DisplayImages(colors1);
-                    break;
-                case 2:
-                    Image[] colors2 =
-                    {
-                        Image.FromFile(character_path + @"\1\stamp.png"),
-                        Image.FromFile(character_path + @"\2\stamp.png"),
-                    };
-                    cbx_colors1.DisplayImages(colors2);
-                    break;
-                case 3:
-                    Image[] colors3 =
-                    {
-                        Image.FromFile(character_path + @"\1\stamp.png"),
-                        Image.FromFile(character_path + @"\2\stamp.png"),
-                        Image.FromFile(character_path + @"\3\stamp.png"),
-                    };
-                    cbx_colors1.DisplayImages(colors3);
-                    break;
-                case 4:
-                    Image[] colors4 =
-                    {
-                        Image.FromFile(character_path + @"\1\stamp.png"),
-                        Image.FromFile(character_path + @"\2\stamp.png"),
-                        Image.FromFile(character_path + @"\3\stamp.png"),
-                        Image.FromFile(character_path + @"\4\stamp.png"),
-                    };
-                    cbx_colors1.DisplayImages(colors4);
-                    break;
-                case 5:
-                    Image[] colors5 =
-                    {
-                        Image.FromFile(character_path + @"\1\stamp.png"),
-                        Image.FromFile(character_path + @"\2\stamp.png"),
-                        Image.FromFile(character_path + @"\3\stamp.png"),
-                        Image.FromFile(character_path + @"\4\stamp.png"),
-                        Image.FromFile(character_path + @"\5\stamp.png"),
-                    };
-                    cbx_colors1.DisplayImages(colors5);
-                    break;
-                case 6:
-                    Image[] colors6 =
-                    {
-                        Image.FromFile(character_path + @"\1\stamp.png"),
-                        Image.FromFile(character_path + @"\2\stamp.png"),
-                        Image.FromFile(character_path + @"\3\stamp.png"),
-                        Image.FromFile(character_path + @"\4\stamp.png"),
-                        Image.FromFile(character_path + @"\5\stamp.png"),
-                        Image.FromFile(character_path + @"\6\stamp.png"),
-                    };
-                    cbx_colors1.DisplayImages(colors6);
-                    break;
-                case 8:
-                    Image[] colors8 =
-                    {
-                        Image.FromFile(character_path + @"\1\stamp.png"),
-                        Image.FromFile(character_path + @"\2\stamp.png"),
-                        Image.FromFile(character_path + @"\3\stamp.png"),
-                        Image.FromFile(character_path + @"\4\stamp.png"),
-                        Image.FromFile(character_path + @"\5\stamp.png"),
-                        Image.FromFile(character_path + @"\6\stamp.png"),
-                        Image.FromFile(character_path + @"\7\stamp.png"),
-                        Image.FromFile(character_path + @"\8\stamp.png"),
-                    };
-                    cbx_colors1.DisplayImages(colors8);
-                    break;
-                case 16:
-                    Image[] colors16 =
-                    {
-                        Image.FromFile(character_path + @"\1\stamp.png"),
-                        Image.FromFile(character_path + @"\2\stamp.png"),
-                        Image.FromFile(character_path + @"\3\stamp.png"),
-                        Image.FromFile(character_path + @"\4\stamp.png"),
-                        Image.FromFile(character_path + @"\5\stamp.png"),
-                        Image.FromFile(character_path + @"\6\stamp.png"),
-                        Image.FromFile(character_path + @"\7\stamp.png"),
-                        Image.FromFile(character_path + @"\8\stamp.png"),
-                        Image.FromFile(character_path + @"\9\stamp.png"),
-                        Image.FromFile(character_path + @"\10\stamp.png"),
-                        Image.FromFile(character_path + @"\11\stamp.png"),
-                        Image.FromFile(character_path + @"\12\stamp.png"),
-                        Image.FromFile(character_path + @"\13\stamp.png"),
-                        Image.FromFile(character_path + @"\14\stamp.png"),
-                        Image.FromFile(character_path + @"\15\stamp.png"),
-                        Image.FromFile(character_path + @"\16\stamp.png"),
-                    };
-                    cbx_colors1.DisplayImages(colors16);
-                    break;
+                colors[i] = Image.FromFile(character_path + @"\" + (i+1).ToString() + @"\stamp.png");
             }
+            cbx_colors1.DisplayImages(colors);
             cbx_colors1.SelectedIndex = 0;
+
             if (global_values.player_roster_number[1] != -1 && global_values.enable_sheets == true &&
                 txt_sheets.Text != "")
             {
@@ -2772,6 +2708,10 @@ namespace Stream_Info_Handler
                 }
             }
             cbx_colors1.DropDownHeight = 400;
+            if (global_values.auto_update == true && btn_update.Text == "Update")
+            {
+                update_uldata(1, global_values.current_youtube_data);
+            }
         }
 
         private void cbx_characters2_SelectedIndexChanged(object sender, EventArgs e)
@@ -2779,103 +2719,12 @@ namespace Stream_Info_Handler
             cbx_colors2.Items.Clear();
             string character_path = global_values.game_path + @"\" + cbx_characters2.Text;
             int colors_count = Int32.Parse(System.IO.File.ReadAllText(character_path + @"\colors.txt"));
-
-            switch (colors_count)
+            Image[] colors = new Image[colors_count];
+            for (int i = 0; i < colors_count; i++)
             {
-                case 1:
-                    Image[] colors1 =
-                    {
-                        Image.FromFile(character_path + @"\1\stamp.png"),
-                    };
-                    cbx_colors2.DisplayImages(colors1);
-                    break;
-                case 2:
-                    Image[] colors2 =
-                    {
-                        Image.FromFile(character_path + @"\1\stamp.png"),
-                        Image.FromFile(character_path + @"\2\stamp.png"),
-                    };
-                    cbx_colors2.DisplayImages(colors2);
-                    break;
-                case 3:
-                    Image[] colors3 =
-                    {
-                        Image.FromFile(character_path + @"\1\stamp.png"),
-                        Image.FromFile(character_path + @"\2\stamp.png"),
-                        Image.FromFile(character_path + @"\3\stamp.png"),
-                    };
-                    cbx_colors2.DisplayImages(colors3);
-                    break;
-                case 4:
-                    Image[] colors4 =
-                    {
-                        Image.FromFile(character_path + @"\1\stamp.png"),
-                        Image.FromFile(character_path + @"\2\stamp.png"),
-                        Image.FromFile(character_path + @"\3\stamp.png"),
-                        Image.FromFile(character_path + @"\4\stamp.png"),
-                    };
-                    cbx_colors2.DisplayImages(colors4);
-                    break;
-                case 5:
-                    Image[] colors5 =
-                    {
-                        Image.FromFile(character_path + @"\1\stamp.png"),
-                        Image.FromFile(character_path + @"\2\stamp.png"),
-                        Image.FromFile(character_path + @"\3\stamp.png"),
-                        Image.FromFile(character_path + @"\4\stamp.png"),
-                        Image.FromFile(character_path + @"\5\stamp.png"),
-                    };
-                    cbx_colors2.DisplayImages(colors5);
-                    break;
-                case 6:
-                    Image[] colors6 =
-                    {
-                        Image.FromFile(character_path + @"\1\stamp.png"),
-                        Image.FromFile(character_path + @"\2\stamp.png"),
-                        Image.FromFile(character_path + @"\3\stamp.png"),
-                        Image.FromFile(character_path + @"\4\stamp.png"),
-                        Image.FromFile(character_path + @"\5\stamp.png"),
-                        Image.FromFile(character_path + @"\6\stamp.png"),
-                    };
-                    cbx_colors2.DisplayImages(colors6);
-                    break;
-                case 8:
-                    Image[] colors8 =
-                    {
-                        Image.FromFile(character_path + @"\1\stamp.png"),
-                        Image.FromFile(character_path + @"\2\stamp.png"),
-                        Image.FromFile(character_path + @"\3\stamp.png"),
-                        Image.FromFile(character_path + @"\4\stamp.png"),
-                        Image.FromFile(character_path + @"\5\stamp.png"),
-                        Image.FromFile(character_path + @"\6\stamp.png"),
-                        Image.FromFile(character_path + @"\7\stamp.png"),
-                        Image.FromFile(character_path + @"\8\stamp.png"),
-                    };
-                    cbx_colors2.DisplayImages(colors8);
-                    break;
-                case 16:
-                    Image[] colors16 =
-                    {
-                        Image.FromFile(character_path + @"\1\stamp.png"),
-                        Image.FromFile(character_path + @"\2\stamp.png"),
-                        Image.FromFile(character_path + @"\3\stamp.png"),
-                        Image.FromFile(character_path + @"\4\stamp.png"),
-                        Image.FromFile(character_path + @"\5\stamp.png"),
-                        Image.FromFile(character_path + @"\6\stamp.png"),
-                        Image.FromFile(character_path + @"\7\stamp.png"),
-                        Image.FromFile(character_path + @"\8\stamp.png"),
-                        Image.FromFile(character_path + @"\9\stamp.png"),
-                        Image.FromFile(character_path + @"\10\stamp.png"),
-                        Image.FromFile(character_path + @"\11\stamp.png"),
-                        Image.FromFile(character_path + @"\12\stamp.png"),
-                        Image.FromFile(character_path + @"\13\stamp.png"),
-                        Image.FromFile(character_path + @"\14\stamp.png"),
-                        Image.FromFile(character_path + @"\15\stamp.png"),
-                        Image.FromFile(character_path + @"\16\stamp.png"),
-                    };
-                    cbx_colors2.DisplayImages(colors16);
-                    break;
+                colors[i] = Image.FromFile(character_path + @"\" + (i + 1).ToString() + @"\stamp.png");
             }
+            cbx_colors2.DisplayImages(colors);
             cbx_colors2.SelectedIndex = 0;
             if (global_values.player_roster_number[2] != -1)
             {
@@ -2890,6 +2739,10 @@ namespace Stream_Info_Handler
                 }
             }
             cbx_colors2.DropDownHeight = 400;
+            if (global_values.auto_update == true && btn_update.Text == "Update")
+            {
+                update_uldata(2, global_values.current_youtube_data);
+            }
         }
 
         private void cbx_colors1_SelectedIndexChanged(object sender, EventArgs e)
@@ -2897,6 +2750,10 @@ namespace Stream_Info_Handler
             image_directory1 = global_values.game_path + @"\" + cbx_characters1.Text + @"\" + (cbx_colors1.SelectedIndex+1).ToString() + @"\";
             Image stock_icon1 = Image.FromFile(image_directory1 + @"\stock.png");
             stock_icon1.Save(global_values.output_directory + @"\Stock Icon 1.png", System.Drawing.Imaging.ImageFormat.Png);
+            if (global_values.auto_update == true && btn_update.Text == "Update")
+            {
+                update_uldata(1, global_values.current_youtube_data);
+            }
         }
 
         private void cbx_colors2_SelectedIndexChanged(object sender, EventArgs e)
@@ -2904,7 +2761,10 @@ namespace Stream_Info_Handler
             image_directory2 = global_values.game_path + @"\" + cbx_characters2.Text + @"\" + (cbx_colors2.SelectedIndex+1).ToString() + @"\";
             Image stock_icon2 = Image.FromFile(image_directory2 + @"\stock.png");
             stock_icon2.Save(global_values.output_directory + @"\Stock Icon 2.png", System.Drawing.Imaging.ImageFormat.Png);
-
+            if (global_values.auto_update == true && btn_update.Text == "Update")
+            {
+                update_uldata(2, global_values.current_youtube_data);
+            }
         }
 
         private void txt_sheets_TextChanged(object sender, EventArgs e)
@@ -2915,6 +2775,7 @@ namespace Stream_Info_Handler
             }
             else
             {
+                btn_test_sheet.BackColor = Color.Transparent;
                 btn_test_sheet.Enabled = false;
             }
         }
@@ -2935,11 +2796,19 @@ namespace Stream_Info_Handler
 
                     global_values.vods_directory = txt_vods.Text;
                     global_values.vod_monitor.Path = global_values.vods_directory;
-               }
+                    global_values.vod_monitor.EnableRaisingEvents = true;                       //Enable to monitor to trigger these events
+
+                }
                 else
                 {
                     txt_vods.BackColor = warning_color;
+                    tab_main.SelectedIndex = 3;
                 }
+            }
+            else
+            {
+                txt_vods.BackColor = warning_color;
+                tab_main.SelectedIndex = 3;
             }
         }
 
@@ -2952,62 +2821,69 @@ namespace Stream_Info_Handler
                     global_values.new_vod_detected = e.Name;
                     if (File.Exists(global_values.current_youtube_data))
                     {
-                        XDocument xml = XDocument.Load(global_values.current_youtube_data);
-                        xml.Root.Element("Match-Information").Element("VoD-File").ReplaceWith(new XElement("VoD-File", global_values.vods_directory + @"\" + global_values.new_vod_detected));
-                        xml.Save(global_values.current_youtube_data);
+                        update_uldata(1, global_values.current_youtube_data);
+                        update_uldata(2, global_values.current_youtube_data);
+                        update_uldata(3, global_values.current_youtube_data);
+                        update_uldata(4, global_values.current_youtube_data);
+                        update_uldata(5, global_values.current_youtube_data);
                     }
+                    btn_upload.BeginInvoke((Action)delegate ()
+                    {
+                        if (global_values.stream_software == "XSplit")
+                        {
+                            global_values.allow_upload = false;
+                            btn_upload.Text = "Recording in Progress";
+                            btn_upload.Enabled = false;
+                        }
+                    });
                 }
                 else
                 {
                     global_values.temp_file = e.Name;
 
                 }
-                btn_upload.BeginInvoke((Action)delegate ()
-                {
-                    if (global_values.stream_software == "XSplit")
-                    {
-                        global_values.allow_upload = false;
-                        btn_upload.Text = "Recording in Progress";
-                        btn_upload.Enabled = false;
-                    }
-                });
             }
         }
 
         private void FileSystemWatcher_Deleted(object sender, FileSystemEventArgs e)
         {
+            /*
             if (global_values.enable_youtube == true)
             {
-                if (e.Name == global_values.temp_file)
+                if (e.OldName == global_values.new_vod_detected)
                 {
                     global_values.allow_upload = true;
-                    btn_upload.Text = "Upload to YouTube";
                     btn_upload.BeginInvoke((Action)delegate ()
                     {
+                        btn_upload.Text = "Upload to YouTube";
+                        btn_upload.Enabled = true;
+                    });
+                }
+            }
+            */
+        }
+
+        private void FileSystemWatcher_Renamed(object sender, RenamedEventArgs e)
+        {
+            if (global_values.enable_youtube == true)
+            {
+                if (e.OldName == global_values.new_vod_detected)
+                {
+                    global_values.new_vod_detected = e.Name;
+                    global_values.allow_upload = true;
+                    btn_upload.Invoke((Action)delegate ()
+                    {
+                        btn_upload.Text = "Upload to YouTube";
                         btn_upload.Enabled = true;
                     });
                 }
             }
         }
-
         private void btn_vods_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 txt_vods.Text = folderBrowserDialog1.SelectedPath;
-                if (txt_vods.Text != txt_roster_directory.Text &&
-                    txt_vods.Text != txt_stream_directory.Text &&
-                    txt_vods.Text != txt_thumbnail_directory.Text)
-                {
-                    global_values.vods_directory = txt_vods.Text;
-                    XDocument xml = XDocument.Load(global_values.settings_file);
-                    xml.Root.Element("directories").Element("vods-directory").ReplaceWith(new XElement("vods-directory", txt_vods.Text));
-                    xml.Save(global_values.settings_file);
-                }
-                else
-                {
-                    txt_vods.BackColor = warning_color;
-                }
             }
         }
 
@@ -3015,8 +2891,7 @@ namespace Stream_Info_Handler
         {
             if (global_values.enable_youtube == false)
             {
-                string thumbnail_image_name = create_thumbnail(global_values.game_path + @"\" + cbx_characters1.Text + @"\" + (cbx_colors1.SelectedIndex + 1).ToString() + @"\",
-                        global_values.game_path + @"\" + cbx_characters2.Text + @"\" + (cbx_colors2.SelectedIndex + 1).ToString() + @"\",
+                string thumbnail_image_name = create_thumbnail(2,
                         cbx_name1.Text,
                         cbx_name2.Text,
                         cbx_round.Text,
@@ -3035,41 +2910,11 @@ namespace Stream_Info_Handler
             else
             {
                 //Create a thumbnail image and save its name
-                string thumbnail_image_name = create_thumbnail(global_values.game_path + @"\" + cbx_characters1.Text + @"\" + (cbx_colors1.SelectedIndex + 1).ToString() + @"\",
-                    global_values.game_path + @"\" + cbx_characters2.Text + @"\" + (cbx_colors2.SelectedIndex + 1).ToString() + @"\",
+                string thumbnail_image_name = create_thumbnail(2,
                     cbx_name1.Text,
                     cbx_name2.Text,
                     cbx_round.Text,
                     txt_date.Text);
-
-                XDocument doc = new XDocument(
-                    new XElement("YouTube-Upload-Data",
-                    new XElement("Player-Information",
-                            new XElement("Player-1-Name", cbx_name1.Text),
-                            new XElement("Player-1-Twitter", txt_alt1.Text),
-                            new XElement("Player-1-Character", cbx_characters1.Text),
-                            new XElement("Player-1-Color", cbx_colors1.SelectedIndex),
-                            new XElement("Player-2-Name", cbx_name2.Text),
-                            new XElement("Player-2-Twitter", txt_alt2.Text),
-                            new XElement("Player-2-Character", cbx_characters2.Text),
-                            new XElement("Player-2-Color", cbx_colors2.SelectedIndex)
-                            ),
-                    new XElement("Match-Information",
-                            new XElement("Round", cbx_round.Text),
-                            new XElement("Bracket-URL", txt_bracket.Text),
-                            new XElement("Tournament-Name", txt_tournament.Text),
-                            new XElement("Date", txt_date.Text),
-                            new XElement("VoD-File", global_values.vods_directory + @"\" + global_values.new_vod_detected))
-                    ));
-
-                global_values.current_youtube_data = global_values.thumbnail_directory + @"\" +
-                    txt_tournament.Text + "_" +
-                    cbx_round.Text + "_" +
-                    cbx_name1.Text + "_VS_" +
-                    cbx_name2.Text + "_" +
-                    DateTime.Now.ToString("MMddyyyyHHmmss") + @".uldata";
-
-                doc.Save(global_values.current_youtube_data);
 
                 //Pass the event upload_form_enable_button_event() to the new form as the function "enable_button()"
                 btn_upload.Text = "Upload Window Open";
@@ -3083,18 +2928,7 @@ namespace Stream_Info_Handler
                     MessageBox.Show("Video title copied to clipboard: \n" + video_title);
                 }
 
-                string video_description = txt_description.Text.Replace("INFO_TOURNAMENT", txt_tournament.Text);
-                video_description = video_description.Replace("INFO_DATE", txt_date.Text);
-                video_description = video_description.Replace("INFO_ROUND", cbx_round.Text);
-                video_description = video_description.Replace("INFO_DATE", txt_date.Text);
-                video_description = video_description.Replace("INFO_ROUND", cbx_round.Text);
-                video_description = video_description.Replace("INFO_BRACKET", txt_bracket.Text);
-                video_description = video_description.Replace("INFO_PLAYER1", cbx_name1.Text);
-                video_description = video_description.Replace("INFO_PLAYER2", cbx_name2.Text);
-                video_description = video_description.Replace("INFO_TWITTER1", txt_alt1.Text);
-                video_description = video_description.Replace("INFO_TWITTER2", txt_alt2.Text);
-                video_description = video_description.Replace("INFO_CHARACTER1", cbx_characters1.Text);
-                video_description = video_description.Replace("INFO_CHARACTER2", cbx_characters2.Text);
+                string video_description = get_video_description();
 
 
                 //Create a new form and provide it with a Video title based off the provided information,
@@ -3103,48 +2937,164 @@ namespace Stream_Info_Handler
                     video_description,
                     global_values.thumbnail_directory + @"\" + thumbnail_image_name,
                     global_values.vods_directory + @"\" + global_values.new_vod_detected,
-                    global_values.reenable_upload);
+                    global_values.reenable_upload, false);
                 upload_form.enable_button += new enable_button_event(upload_form_enable_button_event);
                 upload_form.Show();                     //Show the form        
             }
         }
 
+        private string get_video_description()
+        {
+            string description = txt_description.Text.Replace("INFO_TOURNAMENT", txt_tournament.Text);
+            switch (cbx_format.Text)
+            {
+                case "Singles":
+                    description = description.Replace("INFO_DATE", txt_date.Text);
+                    description = description.Replace("INFO_ROUND", cbx_round.Text);
+                    description = description.Replace("INFO_DATE", txt_date.Text);
+                    description = description.Replace("INFO_ROUND", cbx_round.Text);
+                    description = description.Replace("INFO_BRACKET", txt_bracket.Text);
+                    description = description.Replace("INFO_PLAYER1", cbx_name1.Text);
+                    description = description.Replace("INFO_PLAYER2", cbx_name2.Text);
+                    description = description.Replace("INFO_TWITTER1", txt_alt1.Text);
+                    description = description.Replace("INFO_TWITTER2", txt_alt2.Text);
+                    description = description.Replace("INFO_CHARACTER1", cbx_characters1.Text);
+                    description = description.Replace("INFO_CHARACTER2", cbx_characters2.Text);
+                    break;
+                case "Doubles":
+                    description = description.Replace("INFO_DATE", txt_date.Text);
+                    description = description.Replace("INFO_ROUND", cbx_round.Text);
+                    description = description.Replace("INFO_DATE", txt_date.Text);
+                    description = description.Replace("INFO_ROUND", cbx_round.Text);
+                    description = description.Replace("INFO_BRACKET", txt_bracket.Text);
+                    description = description.Replace("INFO_PLAYER1", cbx_team1_name1.Text);
+                    description = description.Replace("INFO_PLAYER2", cbx_team2_name1.Text);
+                    description = description.Replace("INFO_TWITTER1", txt_team1_twitter1.Text);
+                    description = description.Replace("INFO_TWITTER2", txt_team2_twitter1.Text);
+                    description = description.Replace("INFO_CHARACTER1", cbx_team1_character1.Text);
+                    description = description.Replace("INFO_CHARACTER2", cbx_team2_character1.Text);
+                    description = description.Replace("INFO_PLAYER3", cbx_team1_name2.Text);
+                    description = description.Replace("INFO_PLAYER4", cbx_team2_name2.Text);
+                    description = description.Replace("INFO_TWITTER3", txt_team1_twitter2.Text);
+                    description = description.Replace("INFO_TWITTER4", txt_team2_twitter2.Text);
+                    description = description.Replace("INFO_CHARACTER3", cbx_team1_character2.Text);
+                    description = description.Replace("INFO_CHARACTER4", cbx_team2_character2.Text);
+                    break;
+            }
+            return description;
+
+        }
+
         private void btn_upload_vod_Click(object sender, EventArgs e)
         {
+            XDocument doc = new XDocument(
+                new XElement("YouTube-Upload-Data",
+                new XElement("Player-Information",
+                        new XElement("Player-1",
+                            new XElement("Name", ""),
+                            new XElement("Twitter", ""),
+                            new XElement("Character", ""),
+                            new XElement("Color", "")),
+                        new XElement("Player-2",
+                            new XElement("Name", ""),
+                            new XElement("Twitter", ""),
+                            new XElement("Character", ""),
+                            new XElement("Color", "")),
+                        new XElement("Player-3",
+                            new XElement("Name", ""),
+                            new XElement("Twitter", ""),
+                            new XElement("Character", ""),
+                            new XElement("Color", "")),
+                        new XElement("Player-4",
+                            new XElement("Name", ""),
+                            new XElement("Twitter", ""),
+                            new XElement("Character", ""),
+                            new XElement("Color", ""))
+                        ),
+                new XElement("Match-Information",
+                        new XElement("Game", global_values.game_info[0]),
+                        new XElement("Format", cbx_format.Text),
+                        new XElement("Round", cbx_round.Text),
+                        new XElement("Bracket-URL", txt_bracket.Text),
+                        new XElement("Tournament-Name", txt_tournament.Text),
+                        new XElement("Date", txt_date.Text),
+                        new XElement("VoD-File", global_values.vods_directory + @"\" + global_values.new_vod_detected))
+                ));
             openFileDialog2.InitialDirectory = global_values.thumbnail_directory;
             if (openFileDialog2.ShowDialog() == DialogResult.OK)
             {
                 //Load the settings file data
                 XDocument xml = XDocument.Load(openFileDialog2.FileName);
-                string player1_name = (string)xml.Root.Element("Player-Information").Element("Player-1-Name");
-                string player1_twitter = (string)xml.Root.Element("Player-Information").Element("Player-1-Twitter");
-                string player1_character = (string)xml.Root.Element("Player-Information").Element("Player-1-Character");
-                int player1_color = (int)xml.Root.Element("Player-Information").Element("Player-1-Color");
-                string player2_name = (string)xml.Root.Element("Player-Information").Element("Player-2-Name");
-                string player2_twitter = (string)xml.Root.Element("Player-Information").Element("Player-2-Twitter");
-                string player2_character = (string)xml.Root.Element("Player-Information").Element("Player-2-Character");
-                int player2_color = (int)xml.Root.Element("Player-Information").Element("Player-2-Color");
 
+                string game = (string)xml.Root.Element("Match-Information").Element("Game");
+                if(game != global_values.game_info[0])
+                {
+                    MessageBox.Show("This ULData file is not associated with the game that Master Orders is currently configured to! To use this ULdata, go to the Settings tab and update the Character Roster Directory to the following game: \n" + game);
+                    return;
+                }
+                string format = (string)xml.Root.Element("Match-Information").Element("Format");
                 string round = (string)xml.Root.Element("Match-Information").Element("Round");
                 string bracket_url = (string)xml.Root.Element("Match-Information").Element("Bracket-URL");
                 string tournament_name = (string)xml.Root.Element("Match-Information").Element("Tournament-Name");
                 string date = (string)xml.Root.Element("Match-Information").Element("Date");
                 string vod_file = (string)xml.Root.Element("Match-Information").Element("VoD-File");
 
+                string player1_name = (string)xml.Root.Element("Player-Information").Element("Player-1").Element("Name");
+                string player1_twitter = (string)xml.Root.Element("Player-Information").Element("Player-1").Element("Twitter");
+                string player1_character = (string)xml.Root.Element("Player-Information").Element("Player-1").Element("Character");
+                int player1_color = (int)xml.Root.Element("Player-Information").Element("Player-1").Element("Color");
+                string player2_name = (string)xml.Root.Element("Player-Information").Element("Player-2").Element("Name");
+                string player2_twitter = (string)xml.Root.Element("Player-Information").Element("Player-2").Element("Twitter");
+                string player2_character = (string)xml.Root.Element("Player-Information").Element("Player-2").Element("Character");
+                int player2_color = (int)xml.Root.Element("Player-Information").Element("Player-2").Element("Color");
 
-                string thumbnail_image_name = create_thumbnail(global_values.game_path + @"\" + player1_character + @"\" + (player1_color + 1).ToString() + @"\",
-                    global_values.game_path + @"\" + player2_character + @"\" + (player2_color + 1).ToString() + @"\",
-                    player1_name,
-                    player2_name,
-                    round,
-                    date);
-                var upload_form = new frm_uploading(tournament_name + @" - " + round + @" - " + player1_name + @" (" + player1_character + @") Vs. " + player2_name + @" (" + player2_character + @")",
-                    tournament_name + @" | " + date + "\r\nRomeoville, Illinois \r\nOrganized and streamed by UGS Gaming \r\nWatch live at https://www.twitch.tv/ugsgaming \r\nFollow us and our players on Twitter! \r\n@UGS_GAMlNG \r\n" + player1_name + @": " + player1_twitter + " \r\n" + player2_name + @": " + player2_twitter,
-                    global_values.thumbnail_directory + @"\" + thumbnail_image_name,
-                    vod_file,
-                    "0");
-                upload_form.enable_button += new enable_button_event(upload_form_enable_button_event);
-                upload_form.Show();                     //Show the form        
+                switch (format)
+                {
+                    case "Singles":
+                        string thumbnail_image_name = create_thumbnail(2,
+                            player1_name,
+                            player2_name,
+                            round,
+                            date);
+                        var upload_form = new frm_uploading(tournament_name + @" - " + round + @" - " + player1_name + @" (" + player1_character + @") Vs. " + player2_name + @" (" + player2_character + @")",
+                            get_video_description(),
+                            global_values.thumbnail_directory + @"\" + thumbnail_image_name,
+                            vod_file,
+                            "0", true);
+                        upload_form.enable_button += new enable_button_event(upload_form_enable_button_event);
+                        upload_form.Show();                     //Show the form 
+                        break;
+                    case "Doubles":
+                        string player3_name = (string)xml.Root.Element("Player-Information").Element("Player-3").Element("Name");
+                        string player3_twitter = (string)xml.Root.Element("Player-Information").Element("Player-3").Element("Twitter");
+                        string player3_character = (string)xml.Root.Element("Player-Information").Element("Player-3").Element("Character");
+                        int player3_color = (int)xml.Root.Element("Player-Information").Element("Player-3").Element("Color");
+                        string player4_name = (string)xml.Root.Element("Player-Information").Element("Player-4").Element("Name");
+                        string player4_twitter = (string)xml.Root.Element("Player-Information").Element("Player-4").Element("Twitter");
+                        string player4_character = (string)xml.Root.Element("Player-Information").Element("Player-4").Element("Character");
+                        int player4_color = (int)xml.Root.Element("Player-Information").Element("Player-4").Element("Color");
+
+                        string team_name1 = player1_name + " + " + player3_name;
+                        string team_name2 = player2_name + " + " + player4_name;
+
+                        string thumbnail_team_name = create_thumbnail(4,
+                            team_name1,
+                            team_name2,
+                            round,
+                            date);
+                        var team_form = new frm_uploading(tournament_name + @" - " + round + @" - " + team_name1 + @" (" + player1_character + " + " + player3_character + @") Vs. " + team_name2 + @" (" + player2_character + " + " + player4_character + @")",
+                            get_video_description(),
+                            global_values.thumbnail_directory + @"\" + thumbnail_team_name,
+                            vod_file,
+                            "0", true);
+                        team_form.enable_button += new enable_button_event(upload_form_enable_button_event);
+                        team_form.Show();                     //Show the form 
+                        break;
+                }
+
+
+
+       
             }
         }
 
@@ -3160,20 +3110,8 @@ namespace Stream_Info_Handler
         {
             if(global_values.enable_sheets == true)
             {
-                import_from_sheets(true);
+                import_from_sheets(true, 2);
             }
-        }
-
-        private void gbx_entrants_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ckb_startup_sheets_CheckedChanged(object sender, EventArgs e)
-        {
-            XDocument xml = XDocument.Load(global_values.settings_file);
-            xml.Root.Element("google-sheets").Element("startup-sheets").ReplaceWith(new XElement("startup-sheets", ckb_startup_sheets.Checked.ToString()));
-            xml.Save(global_values.settings_file);
         }
 
         private void rdb_obs_CheckedChanged(object sender, EventArgs e)
@@ -3190,6 +3128,7 @@ namespace Stream_Info_Handler
             {
                 if(global_values.roster[i].tag == cbx_name1.Text)
                 {
+                    update_check = false;
                     global_values.player_roster_number[1] = i;
                     this.BeginInvoke((MethodInvoker)delegate { this.cbx_name1.Text = global_values.roster[i].get_display_name(); });
                     txt_alt1.Text = global_values.roster[i].twitter;
@@ -3214,6 +3153,11 @@ namespace Stream_Info_Handler
                     cbx_characters1.SelectedIndex = 0;                                  //Set the combobox index to 0
 
                     cbx_colors1.SelectedIndex = global_values.roster[i].color[0] - 1;
+                    update_check = true;
+                    if (global_values.auto_update == true && btn_update.Text == "Update")
+                    {
+                        update_uldata(1, global_values.current_youtube_data);
+                    }
                     return;
                 }
             }
@@ -3225,6 +3169,7 @@ namespace Stream_Info_Handler
             {
                 if (global_values.roster[i].tag == cbx_name2.Text)
                 {
+                    update_check = false;
                     global_values.player_roster_number[2] = i;
                     this.BeginInvoke((MethodInvoker)delegate { this.cbx_name2.Text = global_values.roster[i].get_display_name(); });
                     txt_alt2.Text = global_values.roster[i].twitter;
@@ -3249,7 +3194,11 @@ namespace Stream_Info_Handler
                     cbx_characters2.SelectedIndex = 0;                                  //Set the combobox index to 0
 
                     cbx_colors2.SelectedIndex = global_values.roster[i].color[0] - 1;
-
+                    update_check = true;
+                    if (global_values.auto_update == true && btn_update.Text == "Update")
+                    {
+                        update_uldata(2, global_values.current_youtube_data);
+                    }
                     return;
                 }
             }
@@ -3321,7 +3270,7 @@ namespace Stream_Info_Handler
             if (global_values.player_roster_number[1] != -1 && global_values.enable_sheets == true &&
                 txt_sheets.Text != "")
             {
-                if (global_values.roster[global_values.player_roster_number[1]].tag == cbx_name1.Text)
+                if (global_values.roster[global_values.player_roster_number[1]].tag == save_player.tag)
                 {
                     //store the roster player's info locally
                     player_info grab_info = global_values.roster[global_values.player_roster_number[1]];
@@ -3399,8 +3348,8 @@ namespace Stream_Info_Handler
         {
             //Create a player profile and set its tag and twitter to the enterred information
             player_info save_player = new player_info();
-            save_player.tag = cbx_name1.Text;
-            save_player.twitter = txt_alt1.Text;
+            save_player.tag = cbx_name2.Text;
+            save_player.twitter = txt_alt2.Text;
             save_player.region = "";
             for (int i = 1; i < 5; i++)
             {
@@ -3422,7 +3371,7 @@ namespace Stream_Info_Handler
             if (global_values.player_roster_number[2] != -1 && global_values.enable_sheets == true &&
                 txt_sheets.Text != "")
             {
-                if (global_values.roster[global_values.player_roster_number[2]].tag == cbx_name1.Text)
+                if (global_values.roster[global_values.player_roster_number[2]].tag == save_player.tag)
                 {
                     //store the roster player's info locally
                     player_info grab_info = global_values.roster[global_values.player_roster_number[2]];
@@ -3602,6 +3551,17 @@ namespace Stream_Info_Handler
             rdb_xsplit.Enabled = global_values.enable_youtube;
             rdb_obs.Enabled = global_values.enable_youtube;
 
+            if (ckb_youtube.Checked == false)
+            {
+                btn_upload.Text = "Create Thumbnail";
+                btn_team_upload.Text = "Create Thumbnail";
+            }
+            else
+            {
+                btn_upload.Text = "Upload to YouTube";
+                btn_team_upload.Text = "Upload to YouTube";
+            }
+
             //Update the settings file
             XDocument xml = XDocument.Load(global_values.settings_file);
             xml.Root.Element("youtube").Element("enable-youtube").ReplaceWith(new XElement("enable-youtube", ckb_youtube.Checked.ToString()));
@@ -3649,6 +3609,7 @@ namespace Stream_Info_Handler
         {
             btn_test_sheet.BackColor = Color.Transparent;
             txt_sheets.BackColor = Color.White;
+            btn_test_sheet.Enabled = false;
             check_sheets();
         }
 
@@ -3811,6 +3772,7 @@ namespace Stream_Info_Handler
                     else
                     {
                         btn_update.Enabled = false;
+                        update_uldata(1, global_values.current_youtube_data);
                         System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", output_name);
                     }
                     break;
@@ -3841,8 +3803,16 @@ namespace Stream_Info_Handler
         {
             if (global_values.sheets_info == "info-and-queue" && global_values.enable_sheets == true && txt_sheets.Text != "" && txt_sheets.Text != null)
             {
-                var dashboard = new frm_streamqueue(txt_sheets.Text);
-                dashboard.Show();
+                if (cbx_format.Text == "Singles")
+                {
+                    var dashboard = new frm_streamqueue(txt_sheets.Text);
+                    dashboard.Show();
+                }
+                else
+                {
+                    var dashboard = new frm_streamqueue_dubs(txt_sheets.Text);
+                    dashboard.Show();
+                }
             }
             else
             {
@@ -3882,6 +3852,13 @@ namespace Stream_Info_Handler
             txt_sponsor.Enabled = ckb_sponsor.Checked;
             btn_sponsor.Enabled = ckb_sponsor.Checked;
 
+            if (txt_sponsor.Text == "")
+            {
+                txt_sponsor.BackColor = warning_color;
+                tab_main.SelectedIndex = 3;
+                tab_mainsettings.SelectedIndex = 2;
+            }
+
             //Update the settings file
             XDocument xml = XDocument.Load(global_values.settings_file);
             xml.Root.Element("sponsor-and-region").Element("enable-sponsor").ReplaceWith(new XElement("enable-sponsor", ckb_sponsor.Checked.ToString()));
@@ -3894,6 +3871,13 @@ namespace Stream_Info_Handler
             txt_region.Enabled = ckb_region.Checked;
             btn_region.Enabled = ckb_region.Checked;
 
+            if(txt_region.Text == "")
+            {
+                txt_region.BackColor = warning_color;
+                tab_main.SelectedIndex = 3;
+                tab_mainsettings.SelectedIndex = 2;
+            }
+
             //Update the settings file
             XDocument xml = XDocument.Load(global_values.settings_file);
             xml.Root.Element("sponsor-and-region").Element("enable-region").ReplaceWith(new XElement("enable-region", ckb_region.Checked.ToString()));
@@ -3902,8 +3886,6 @@ namespace Stream_Info_Handler
 
         private void txt_sponsor_TextChanged(object sender, EventArgs e)
         {
-            if (txt_sponsor.Text != @"")
-            {
                 if (Directory.Exists(txt_sponsor.Text) &&
                     global_values.vods_directory != txt_sponsor.Text)
                 {
@@ -3916,27 +3898,27 @@ namespace Stream_Info_Handler
                 else
                 {
                     txt_sponsor.BackColor = warning_color;
+                    tab_main.SelectedIndex = 3;
+                    tab_mainsettings.SelectedIndex = 2;
                 }
-            }
         }
 
         private void txt_region_TextChanged(object sender, EventArgs e)
         {
-            if (txt_region.Text != @"")
+            if (Directory.Exists(txt_region.Text) &&
+                global_values.vods_directory != txt_region.Text)
             {
-                if (Directory.Exists(txt_region.Text) &&
-                    global_values.vods_directory != txt_region.Text)
-                {
-                    txt_region.BackColor = Color.White;
-                    global_values.region_directory = txt_region.Text;
-                    XDocument xml = XDocument.Load(global_values.settings_file);
-                    xml.Root.Element("sponsor-and-region").Element("region-directory").ReplaceWith(new XElement("region-directory", txt_region.Text));
-                    xml.Save(global_values.settings_file);
-                }
-                else
-                {
-                    txt_region.BackColor = warning_color;
-                }
+                txt_region.BackColor = Color.White;
+                global_values.region_directory = txt_region.Text;
+                XDocument xml = XDocument.Load(global_values.settings_file);
+                xml.Root.Element("sponsor-and-region").Element("region-directory").ReplaceWith(new XElement("region-directory", txt_region.Text));
+                xml.Save(global_values.settings_file);
+            }
+            else
+            {
+                txt_region.BackColor = warning_color;
+                tab_main.SelectedIndex = 3;
+                tab_mainsettings.SelectedIndex = 2;
             }
         }
 
@@ -3946,14 +3928,6 @@ namespace Stream_Info_Handler
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 txt_sponsor.Text = folderBrowserDialog1.SelectedPath;                 //Update the global value with the new directory
-                if (global_values.vods_directory != txt_sponsor.Text)
-                {
-                    global_values.sponsor_directory = txt_sponsor.Text;         //Save the directory
-                                                                                        //Save the setting to the settings file
-                    XDocument xml = XDocument.Load(global_values.settings_file);
-                    xml.Root.Element("sponsor-and-region").Element("sponsor-directory").ReplaceWith(new XElement("sponsor-directory", txt_sponsor.Text));
-                    xml.Save(global_values.settings_file);
-                }
             }
         }
 
@@ -3963,19 +3937,21 @@ namespace Stream_Info_Handler
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 txt_region.Text = folderBrowserDialog1.SelectedPath;                 //Update the global value with the new directory
-                if (global_values.vods_directory != txt_region.Text)
-                {
-                    global_values.region_directory = txt_region.Text;         //Save the directory
-                                                                                //Save the setting to the settings file
-                    XDocument xml = XDocument.Load(global_values.settings_file);
-                    xml.Root.Element("sponsor-and-region").Element("region-directory").ReplaceWith(new XElement("region-directory", global_values.region_directory));
-                    xml.Save(global_values.settings_file);
-                }
             }
         }
 
         private string get_output_name(string raw_name, bool loser, int player_number)
         {
+            string[] image_files = { @"\sponsor " + player_number.ToString() + ".png",
+                                    @"\region " + player_number.ToString() + ".png" };
+            foreach (string replace_image in image_files)
+            {
+                if (File.Exists(global_values.output_directory + replace_image))
+                {
+                    File.Delete(global_values.output_directory + replace_image);
+                }
+                File.Copy(@"left.png", global_values.output_directory + replace_image);
+            }
             string output_name = raw_name;
             string sponsor_name = "";
             if (global_values.enable_sponsor == true)
@@ -4024,72 +4000,1358 @@ namespace Stream_Info_Handler
                 return output_name + " [L]";
             }
         }
-    }
 
-    public static class global_values
-    {
-        public static bool enable_region;
-        public static string region_directory;
-        public static bool enable_sponsor;
-        public static string sponsor_directory;
-        public static string settings_file = @"C:\Users\Public\Stream Info Handler\settings.xml";
-        public static int[] player_roster_number;
-        public static string sheets_style;
-        public static string sheets_info;
-        public static string youtube_description;
-        public static bool enable_youtube;
-        public static bool copy_video_title;
-        public static int roster_size;
-        public static player_info[] roster;
-        public static bool first_match = true;
-        public static string reenable_upload = "";
-        public static string stream_software = @"XSplit";
-        public static string temp_file;
-        public static bool allow_upload = true;
-        public static string current_youtube_data;
-        public static FileSystemWatcher vod_monitor;
-        public static string new_vod_detected = "";
-        public static string[] characters;
-        public static string[] game_info;
-        public static string score1_image1 = @"file";
-        public static string score1_image2 = @"file";
-        public static string score1_image3 = @"file";
-        public static string score2_image1 = @"file";
-        public static string score2_image2 = @"file";
-        public static string score2_image3 = @"file";
-        public static string game_path;
-        public static string output_directory;
-        public static string thumbnail_directory;
-        public static string json_file;
-        public static string youtube_username;
-        public static string vods_directory;
-        public static bool auto_update = true;
-        public static int player_number;
-        public static int[] player_image;
-        public static string playlist_name;
-        public static string playlist_id;
-        public static bool enable_sheets;
-    }
-    
-
-    public class player_info
-    {
-        public string tag;
-        public string twitter;
-        public string region;
-        public string sponsor;
-        public string[] character = new string[5];
-        public int[] color = new int[5];
-        public string get_display_name()
+        private void cbx_format_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(sponsor != "")
+            tab_main.TabPages.Remove(tab_ingame_display);
+            tab_main.TabPages.Remove(tab_doubles_display);
+            if (cbx_format.Text == "Singles")
             {
-                return sponsor + " | " + tag;
+                tab_main.TabPages.Insert(1, tab_ingame_display);
+                player_boxes[1].tag = cbx_name1;
+                player_boxes[1].twitter = txt_alt1;
+                player_boxes[1].character = cbx_characters1;
+                player_boxes[1].color = cbx_colors1;
+                player_boxes[2].tag = cbx_name2;
+                player_boxes[2].twitter = txt_alt2;
+                player_boxes[2].character = cbx_characters2;
+                player_boxes[2].color = cbx_colors2;
+
+            }
+            if (cbx_format.Text == "Doubles")
+            {
+                tab_main.TabPages.Insert(1, tab_doubles_display);
+                player_boxes[1].tag = cbx_team1_name1;
+                player_boxes[1].twitter = txt_team1_twitter1;
+                player_boxes[1].character = cbx_team1_character1;
+                player_boxes[1].color = cbx_team1_color1;
+                player_boxes[2].tag = cbx_team2_name1;
+                player_boxes[2].twitter = txt_team2_twitter1;
+                player_boxes[2].character = cbx_team2_character1;
+                player_boxes[2].color = cbx_team2_color1;
+            }
+            XDocument xml = XDocument.Load(global_values.settings_file);
+            xml.Root.Element("etc").Element("format").ReplaceWith(new XElement("format", cbx_format.Text));
+            xml.Save(global_values.settings_file);
+        }
+
+        private void update_characters(ref ComboBox update_box)
+        {
+            //Update the character list combobox
+            update_box.BeginUpdate();                                      //Begin
+            update_box.Items.Clear();                                      //Empty the item list
+            int character_count = Int32.Parse(global_values.game_info[1]);      //Store the number of characters
+                                                                                //Loop through every character
+            for (int x = 0; x < character_count; x++)
+            {
+                update_box.Items.Add(global_values.characters[x]);         //Add the character's name to the combobox
+            }
+            update_box.EndUpdate();                                        //End
+            update_box.SelectedIndex = 0;                                  //Set the combobox index to 0
+
+        }
+        
+        private void update_names(ref ComboBox update_box)
+        {
+            update_box.BeginUpdate();                                            //Begin
+            update_box.Items.Clear();                                            //Empty the item list
+            for (int i = 0; i <= global_values.roster_size; i++)
+            {
+                update_box.Items.Add(global_values.roster[i].tag);
+            }
+            update_box.EndUpdate();                                              //End
+            update_box.Text = "";
+        }
+
+        private void cbx_team1_name1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i <= global_values.roster_size; i++)
+            {
+                if (global_values.roster[i].tag == cbx_team1_name1.Text)
+                {
+                    global_values.player_roster_number[1] = i;
+                    this.BeginInvoke((MethodInvoker)delegate { this.cbx_team1_name1.Text = global_values.roster[i].get_display_name(); });
+                    txt_team1_twitter1.Text = global_values.roster[i].twitter;
+
+                    cbx_team1_character1.BeginUpdate();                                      //Begin
+                    cbx_team1_character1.Items.Clear();                                      //Empty the item list
+                    for (int ii = 0; ii <= 4; ii++)
+                    {
+                        string character_name = global_values.roster[i].character[ii];
+                        if (character_name != "")
+                        {
+                            cbx_team1_character1.Items.Add(character_name);
+                        }
+                    }
+                    int character_count = Int32.Parse(global_values.game_info[1]);      //Store the number of characters
+                                                                                        //Loop through every character
+                    for (int x = 0; x < character_count; x++)
+                    {
+                        cbx_team1_character1.Items.Add(global_values.characters[x]);         //Add the character's name to the combobox
+                    }
+                    cbx_team1_character1.EndUpdate();                                        //End
+                    cbx_team1_character1.SelectedIndex = 0;                                  //Set the combobox index to 0
+
+                    cbx_team1_color1.SelectedIndex = global_values.roster[i].color[0] - 1;
+                    return;
+                }
+            }
+        }
+
+        private void cbx_team1_character1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbx_team1_color1.Items.Clear();
+            string character_path = global_values.game_path + @"\" + cbx_team1_character1.Text;
+            int colors_count = Int32.Parse(System.IO.File.ReadAllText(character_path + @"\colors.txt"));
+            Image[] colors = new Image[colors_count];
+            for (int i = 0; i < colors_count; i++)
+            {
+                colors[i] = ResizeImage(Image.FromFile(character_path + @"\" + (i + 1).ToString() + @"\stock.png"), 32, 32);
+            }
+            cbx_team1_color1.DisplayImages(colors);
+            cbx_team1_color1.SelectedIndex = 0;
+
+            if (global_values.player_roster_number[1] != -1 && global_values.enable_sheets == true &&
+                txt_sheets.Text != "")
+            {
+                player_info check_player = global_values.roster[global_values.player_roster_number[1]];
+                for (int i = 0; i < 5; i++)
+                {
+                    if (check_player.character[i] == cbx_team1_character1.Text)
+                    {
+                        cbx_team1_color1.SelectedIndex = check_player.color[i] - 1;
+                        break;
+                    }
+                }
+            }
+            cbx_team1_color1.DropDownHeight = 400;
+            if (global_values.auto_update == true && btn_team_update.Text == "Update")
+            {
+                update_uldata(1, global_values.current_youtube_data);
+            }
+        }
+
+        public static Bitmap ResizeImage(Image image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new System.Drawing.Imaging.ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
+        }
+
+        private void cbx_team1_name1_TextChanged(object sender, EventArgs e)
+        {
+            btn_team_update.Enabled = true;
+            switch (btn_team_update.Text)
+            {
+                case "Start":
+                    btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
+                    break;
+                case "Update":
+                    if (global_values.auto_update == false)
+                    {
+                        btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\blue.gif");
+                    }
+                    else
+                    {
+                        btn_team_update.Enabled = false;
+                        string output_name = get_output_name(cbx_team1_name1.Text, ckb_team1_lose.Checked, 1);
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", output_name);
+                        output_name = get_output_name(cbx_team1_name1.Text, false, 1) + " + " +
+                                        get_output_name(cbx_team1_name2.Text, ckb_team1_lose.Checked, 3);
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\team name1.txt", output_name);
+                        update_uldata(1, global_values.current_youtube_data);
+                    }
+                    break;
+            }
+        }
+
+        private void txt_team1_twitter1_TextChanged(object sender, EventArgs e)
+        {
+            btn_team_update.Enabled = true;
+            switch (btn_team_update.Text)
+            {
+                case "Start":
+                    btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
+                    break;
+                case "Update":
+                    if (global_values.auto_update == false)
+                    {
+                        btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\blue.gif");
+                    }
+                    else
+                    {
+                        btn_team_update.Enabled = false;
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\alt text1.txt", txt_team1_twitter1.Text);
+                        update_uldata(1, global_values.current_youtube_data);
+                    }
+                    break;
+            }
+        }
+
+        private void cbx_team1_color1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            image_directory1 = global_values.game_path + @"\" + cbx_team1_character1.Text + @"\" + (cbx_team1_color1.SelectedIndex + 1).ToString() + @"\";
+            Image stock_icon1 = Image.FromFile(image_directory1 + @"\stock.png");
+            stock_icon1.Save(global_values.output_directory + @"\Stock Icon 1.png", System.Drawing.Imaging.ImageFormat.Png);
+            if (global_values.auto_update == true && btn_team_update.Text == "Update")
+            {
+                update_uldata(1, global_values.current_youtube_data);
+            }
+        }
+
+        private void nud_team1_score_ValueChanged(object sender, EventArgs e)
+        {
+            decimal current_point = nud_team1_score.Value;       //Pull the current game wins for Player 1
+
+            //Keep the current point value at or below the match point value
+            if (current_point >= 3 && ckb_scoreboad.Checked == true)
+            {
+                nud_team1_score.Value = 3;
+            }
+            //Check if automatic updates are enabled
+            if (global_values.auto_update == true)
+            {
+                //Write Player 1's score to a file to be used by the stream program
+                System.IO.File.WriteAllText(global_values.output_directory + @"\score1.txt", nud_team1_score.Value.ToString());
+                //Check if Image Scoreboard is enabled
+                if (ckb_scoreboad.Checked == true)
+                {
+                    //Store the location of the score image for Player 1 used by the stream program
+                    string score_file = global_values.output_directory + @"\score1.png";
+
+                    //Delete the score image if it exists
+                    if (File.Exists(score_file))
+                    {
+                        File.Delete(score_file);
+                    }
+
+                    //Check the current value of Player 1's score
+                    switch (nud_team1_score.Value)
+                    {
+                        case 0:                     //Save an empty image for Player 1's score                                      
+                            File.Copy(@"left.png", score_file);
+                            break;
+                        case 1:                     //Copy the Player 1 Score 1 image for Player 1's score
+                            File.Copy(global_values.score1_image1, score_file);
+                            break;
+                        case 2:                     //Copy the Player 1 Score 2 image for Player 1's score
+                            File.Copy(global_values.score1_image2, score_file);
+                            break;
+                        case 3:                     //Copy the Player 1 Score 3 image for Player 1's score
+                            File.Copy(global_values.score1_image3, score_file);
+                            break;
+                    }
+                }
             }
             else
             {
-                return tag;
+
+                btn_team_update.Enabled = true;                                                              //Unable the update button
+                btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\blue.gif");    //Add a yellow glow to the update button
+            }
+        }
+
+        private void ckb_team1_lose_CheckedChanged(object sender, EventArgs e)
+        {
+            string output_name = get_output_name(cbx_team1_name1.Text, ckb_team1_lose.Checked, 1);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", output_name);
+            output_name = get_output_name(cbx_team1_name2.Text, ckb_team1_lose.Checked, 3);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\player name3.txt", output_name);
+            output_name = get_output_name(cbx_team1_name1.Text, false, 1) + " + " + 
+                get_output_name(cbx_team1_name2.Text, ckb_team1_lose.Checked, 3);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\team name1.txt", output_name);
+        }
+
+        private void cbx_team1_name2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i <= global_values.roster_size; i++)
+            {
+                if (global_values.roster[i].tag == cbx_team1_name2.Text)
+                {
+                    global_values.player_roster_number[1] = i;
+                    this.BeginInvoke((MethodInvoker)delegate { this.cbx_team1_name2.Text = global_values.roster[i].get_display_name(); });
+                    txt_team1_twitter2.Text = global_values.roster[i].twitter;
+
+                    cbx_team1_character2.BeginUpdate();                                      //Begin
+                    cbx_team1_character2.Items.Clear();                                      //Empty the item list
+                    for (int ii = 0; ii <= 4; ii++)
+                    {
+                        string character_name = global_values.roster[i].character[ii];
+                        if (character_name != "")
+                        {
+                            cbx_team1_character2.Items.Add(character_name);
+                        }
+                    }
+                    int character_count = Int32.Parse(global_values.game_info[1]);      //Store the number of characters
+                                                                                        //Loop through every character
+                    for (int x = 0; x < character_count; x++)
+                    {
+                        cbx_team1_character2.Items.Add(global_values.characters[x]);         //Add the character's name to the combobox
+                    }
+                    cbx_team1_character2.EndUpdate();                                        //End
+                    cbx_team1_character2.SelectedIndex = 0;                                  //Set the combobox index to 0
+
+                    cbx_team1_color2.SelectedIndex = global_values.roster[i].color[0] - 1;
+                    return;
+                }
+            }
+        }
+
+        private void txt_team1_twitter2_TextChanged(object sender, EventArgs e)
+        {
+            btn_team_update.Enabled = true;
+            switch (btn_team_update.Text)
+            {
+                case "Start":
+                    btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
+                    break;
+                case "Update":
+                    if (global_values.auto_update == false)
+                    {
+                        btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\blue.gif");
+                    }
+                    else
+                    {
+                        btn_team_update.Enabled = false;
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\alt text3.txt", txt_team1_twitter2.Text);
+                        update_uldata(3, global_values.current_youtube_data);
+                    }
+                    break;
+            }
+        }
+
+        private void cbx_team1_character2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbx_team1_color2.Items.Clear();
+            string character_path = global_values.game_path + @"\" + cbx_team1_character2.Text;
+            int colors_count = Int32.Parse(System.IO.File.ReadAllText(character_path + @"\colors.txt"));
+            Image[] colors = new Image[colors_count];
+            for (int i = 0; i < colors_count; i++)
+            {
+                colors[i] = ResizeImage(Image.FromFile(character_path + @"\" + (i + 1).ToString() + @"\stock.png"), 32, 32);
+            }
+            cbx_team1_color2.DisplayImages(colors);
+            cbx_team1_color2.SelectedIndex = 0;
+
+            if (global_values.player_roster_number[1] != -1 && global_values.enable_sheets == true &&
+                txt_sheets.Text != "")
+            {
+                player_info check_player = global_values.roster[global_values.player_roster_number[1]];
+                for (int i = 0; i < 5; i++)
+                {
+                    if (check_player.character[i] == cbx_team1_character2.Text)
+                    {
+                        cbx_team1_color2.SelectedIndex = check_player.color[i] - 1;
+                        break;
+                    }
+                }
+            }
+            cbx_team1_color2.DropDownHeight = 400;
+            if (global_values.auto_update == true && btn_team_update.Text == "Update")
+            {
+                update_uldata(3, global_values.current_youtube_data);
+            }
+        }
+
+        private void cbx_team1_color2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            image_directory3 = global_values.game_path + @"\" + cbx_team1_character2.Text + @"\" + (cbx_team1_color2.SelectedIndex + 1).ToString() + @"\";
+            Image stock_icon1 = Image.FromFile(image_directory3 + @"\stock.png");
+            stock_icon1.Save(global_values.output_directory + @"\Stock Icon 3.png", System.Drawing.Imaging.ImageFormat.Png);
+            if (global_values.auto_update == true && btn_team_update.Text == "Update")
+            {
+                update_uldata(3, global_values.current_youtube_data);
+            }
+        }
+
+        private void cbx_team2_name1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i <= global_values.roster_size; i++)
+            {
+                if (global_values.roster[i].tag == cbx_team2_name1.Text)
+                {
+                    global_values.player_roster_number[1] = i;
+                    this.BeginInvoke((MethodInvoker)delegate { this.cbx_team2_name1.Text = global_values.roster[i].get_display_name(); });
+                    txt_team2_twitter1.Text = global_values.roster[i].twitter;
+
+                    cbx_team2_character1.BeginUpdate();                                      //Begin
+                    cbx_team2_character1.Items.Clear();                                      //Empty the item list
+                    for (int ii = 0; ii <= 4; ii++)
+                    {
+                        string character_name = global_values.roster[i].character[ii];
+                        if (character_name != "")
+                        {
+                            cbx_team2_character1.Items.Add(character_name);
+                        }
+                    }
+                    int character_count = Int32.Parse(global_values.game_info[1]);      //Store the number of characters
+                                                                                        //Loop through every character
+                    for (int x = 0; x < character_count; x++)
+                    {
+                        cbx_team2_character1.Items.Add(global_values.characters[x]);         //Add the character's name to the combobox
+                    }
+                    cbx_team2_character1.EndUpdate();                                        //End
+                    cbx_team2_character1.SelectedIndex = 0;                                  //Set the combobox index to 0
+
+                    cbx_team2_color1.SelectedIndex = global_values.roster[i].color[0] - 1;
+                    return;
+                }
+            }
+        }
+
+        private void cbx_team2_name1_TextChanged(object sender, EventArgs e)
+        {
+            btn_team_update.Enabled = true;
+            switch (btn_team_update.Text)
+            {
+                case "Start":
+                    btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
+                    break;
+                case "Update":
+                    if (global_values.auto_update == false)
+                    {
+                        btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\blue.gif");
+                    }
+                    else
+                    {
+                        btn_team_update.Enabled = false;
+                        string output_name = get_output_name(cbx_team2_name1.Text, ckb_team1_lose.Checked, 1);
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", output_name);
+                        output_name = get_output_name(cbx_team2_name1.Text, false, 1) + " + " +
+                                        get_output_name(cbx_team2_name2.Text, ckb_team1_lose.Checked, 3);
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\team name2.txt", output_name);
+                        update_uldata(2, global_values.current_youtube_data);
+                    }
+                    break;
+            }
+        }
+
+        private void txt_team2_twitter1_TextChanged(object sender, EventArgs e)
+        {
+            btn_team_update.Enabled = true;
+            switch (btn_team_update.Text)
+            {
+                case "Start":
+                    btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
+                    break;
+                case "Update":
+                    if (global_values.auto_update == false)
+                    {
+                        btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\blue.gif");
+                    }
+                    else
+                    {
+                        btn_team_update.Enabled = false;
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\alt text2.txt", txt_team2_twitter1.Text);
+                        update_uldata(2, global_values.current_youtube_data);
+                    }
+                    break;
+            }
+        }
+
+        private void cbx_team2_character1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbx_team2_color1.Items.Clear();
+            string character_path = global_values.game_path + @"\" + cbx_team2_character1.Text;
+            int colors_count = Int32.Parse(System.IO.File.ReadAllText(character_path + @"\colors.txt"));
+            Image[] colors = new Image[colors_count];
+            for (int i = 0; i < colors_count; i++)
+            {
+                colors[i] = ResizeImage(Image.FromFile(character_path + @"\" + (i + 1).ToString() + @"\stock.png"), 32, 32);
+            }
+            cbx_team2_color1.DisplayImages(colors);
+            cbx_team2_color1.SelectedIndex = 0;
+
+            if (global_values.player_roster_number[1] != -1 && global_values.enable_sheets == true &&
+                txt_sheets.Text != "")
+            {
+                player_info check_player = global_values.roster[global_values.player_roster_number[1]];
+                for (int i = 0; i < 5; i++)
+                {
+                    if (check_player.character[i] == cbx_team2_character1.Text)
+                    {
+                        cbx_team2_color1.SelectedIndex = check_player.color[i] - 1;
+                        break;
+                    }
+                }
+            }
+            cbx_team2_color1.DropDownHeight = 400;
+            if (global_values.auto_update == true && btn_team_update.Text == "Update")
+            {
+                update_uldata(2, global_values.current_youtube_data);
+            }
+        }
+
+        private void cbx_team2_color1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            image_directory2 = global_values.game_path + @"\" + cbx_team2_character1.Text + @"\" + (cbx_team2_color1.SelectedIndex + 1).ToString() + @"\";
+            Image stock_icon1 = Image.FromFile(image_directory2 + @"\stock.png");
+            stock_icon1.Save(global_values.output_directory + @"\Stock Icon 2.png", System.Drawing.Imaging.ImageFormat.Png);
+            if (global_values.auto_update == true && btn_team_update.Text == "Update")
+            {
+                update_uldata(2, global_values.current_youtube_data);
+            }
+        }
+
+        private void cbx_team2_name2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i <= global_values.roster_size; i++)
+            {
+                if (global_values.roster[i].tag == cbx_team2_name2.Text)
+                {
+                    global_values.player_roster_number[1] = i;
+                    this.BeginInvoke((MethodInvoker)delegate { this.cbx_team2_name2.Text = global_values.roster[i].get_display_name(); });
+                    txt_team2_twitter2.Text = global_values.roster[i].twitter;
+
+                    cbx_team2_character2.BeginUpdate();                                      //Begin
+                    cbx_team2_character2.Items.Clear();                                      //Empty the item list
+                    for (int ii = 0; ii <= 4; ii++)
+                    {
+                        string character_name = global_values.roster[i].character[ii];
+                        if (character_name != "")
+                        {
+                            cbx_team2_character2.Items.Add(character_name);
+                        }
+                    }
+                    int character_count = Int32.Parse(global_values.game_info[1]);      //Store the number of characters
+                                                                                        //Loop through every character
+                    for (int x = 0; x < character_count; x++)
+                    {
+                        cbx_team2_character2.Items.Add(global_values.characters[x]);         //Add the character's name to the combobox
+                    }
+                    cbx_team2_character2.EndUpdate();                                        //End
+                    cbx_team2_character2.SelectedIndex = 0;                                  //Set the combobox index to 0
+
+                    cbx_team2_color2.SelectedIndex = global_values.roster[i].color[0] - 1;
+                    return;
+                }
+            }
+        }
+
+        private void cbx_team1_name2_TextChanged(object sender, EventArgs e)
+        {
+            btn_team_update.Enabled = true;
+            switch (btn_team_update.Text)
+            {
+                case "Start":
+                    btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
+                    break;
+                case "Update":
+                    if (global_values.auto_update == false)
+                    {
+                        btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\blue.gif");
+                    }
+                    else
+                    {
+                        btn_team_update.Enabled = false;
+                        string output_name = get_output_name(cbx_team1_name2.Text, ckb_team1_lose.Checked, 1);
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\player name3.txt", output_name);
+                        output_name = get_output_name(cbx_team1_name1.Text, false, 1) + " + " +
+                                        get_output_name(cbx_team1_name2.Text, ckb_team1_lose.Checked, 3);
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\team name1.txt", output_name);
+                        update_uldata(3, global_values.current_youtube_data);
+                    }
+                    break;
+            }
+        }
+
+        private void cbx_team2_name2_TextChanged(object sender, EventArgs e)
+        {
+            btn_team_update.Enabled = true;
+            switch (btn_team_update.Text)
+            {
+                case "Start":
+                    btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
+                    break;
+                case "Update":
+                    if (global_values.auto_update == false)
+                    {
+                        btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\blue.gif");
+                    }
+                    else
+                    {
+                        btn_team_update.Enabled = false;
+                        string output_name = get_output_name(cbx_team2_name2.Text, ckb_team1_lose.Checked, 1);
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\player name3.txt", output_name);
+                        output_name = get_output_name(cbx_team2_name1.Text, false, 1) + " + " +
+                                        get_output_name(cbx_team2_name2.Text, ckb_team1_lose.Checked, 3);
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\team name1.txt", output_name);
+                        update_uldata(4, global_values.current_youtube_data);
+                    }
+                    break;
+            }
+        }
+
+        private void cbx_team2_twitter2_TextChanged(object sender, EventArgs e)
+        {
+            btn_team_update.Enabled = true;
+            switch (btn_team_update.Text)
+            {
+                case "Start":
+                    btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
+                    break;
+                case "Update":
+                    if (global_values.auto_update == false)
+                    {
+                        btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\blue.gif");
+                    }
+                    else
+                    {
+                        btn_team_update.Enabled = false;
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\alt text4.txt", txt_team2_twitter2.Text);
+                        update_uldata(4, global_values.current_youtube_data);
+                    }
+                    break;
+            }
+        }
+
+        private void cbx_team2_character2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbx_team2_color2.Items.Clear();
+            string character_path = global_values.game_path + @"\" + cbx_team2_character2.Text;
+            int colors_count = Int32.Parse(System.IO.File.ReadAllText(character_path + @"\colors.txt"));
+            Image[] colors = new Image[colors_count];
+            for (int i = 0; i < colors_count; i++)
+            {
+                colors[i] = ResizeImage(Image.FromFile(character_path + @"\" + (i + 1).ToString() + @"\stock.png"), 32, 32);
+            }
+            cbx_team2_color2.DisplayImages(colors);
+            cbx_team2_color2.SelectedIndex = 0;
+
+            if (global_values.player_roster_number[1] != -1 && global_values.enable_sheets == true &&
+                txt_sheets.Text != "")
+            {
+                player_info check_player = global_values.roster[global_values.player_roster_number[1]];
+                for (int i = 0; i < 5; i++)
+                {
+                    if (check_player.character[i] == cbx_team2_character2.Text)
+                    {
+                        cbx_team2_color2.SelectedIndex = check_player.color[i] - 1;
+                        break;
+                    }
+                }
+            }
+            cbx_team2_color2.DropDownHeight = 400;
+            if (global_values.auto_update == true && btn_team_update.Text == "Update")
+            {
+                update_uldata(4, global_values.current_youtube_data);
+            }
+        }
+
+        private void cbx_team2_color2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            image_directory4 = global_values.game_path + @"\" + cbx_team2_character2.Text + @"\" + (cbx_team2_color2.SelectedIndex + 1).ToString() + @"\";
+            Image stock_icon1 = Image.FromFile(image_directory4 + @"\stock.png");
+            stock_icon1.Save(global_values.output_directory + @"\Stock Icon 4.png", System.Drawing.Imaging.ImageFormat.Png);
+            if (global_values.auto_update == true && btn_team_update.Text == "Update")
+            {
+                update_uldata(4, global_values.current_youtube_data);
+            }
+        }
+
+        private void cbx_team1_character1_KeyUp(object sender, KeyEventArgs e)
+        {
+            ComboBox cb = (ComboBox)sender;
+            string nextkey = "";
+
+            while (cb.FindString(cb.Text) < 0 && cb.Text.Length > 0)
+
+            {
+                //Find the previously enterred text
+                string subStringText = cb.Text.Substring(0, cb.Text.Length - 1);
+                if (subStringText.Length > 0)
+                {
+                    nextkey = subStringText.Substring(subStringText.Length - 1, 1);
+                }
+                else
+                {
+                    nextkey = "";
+                }
+                cb.Text = subStringText;
+                cb.Select(subStringText.Length, 0);
+
+
+            }
+            if (nextkey != "")
+            {
+                cb.Text = cb.Text.Substring(0, cb.Text.Length - 1);
+                //Need to remove most recent key
+                SendKeys.Send(nextkey);
+            }
+        }
+
+        private void cbx_team_round_TextChanged(object sender, EventArgs e)
+        {
+            btn_team_update.Enabled = true;
+            if (cbx_team_round.Text == "Grand Finals")
+            {
+                ckb_team1_lose.Enabled = true;
+                ckb_team1_lose.Visible = true;
+                ckb_team2_lose.Enabled = true;
+                ckb_team2_lose.Visible = true;
+            }
+            else
+            {
+                ckb_team1_lose.Checked = false;
+                ckb_team1_lose.Enabled = false;
+                ckb_team1_lose.Visible = false;
+                ckb_team2_lose.Checked = false;
+                ckb_team2_lose.Enabled = false;
+                ckb_team2_lose.Visible = false;
+            }
+            switch (btn_team_update.Text)
+            {
+                case "Start":
+                    btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\green.gif");
+                    break;
+                case "Update":
+                    if (global_values.auto_update == false)
+                    {
+                        btn_team_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\blue.gif");
+                    }
+                    else
+                    {
+                        btn_team_update.Enabled = false;
+                        System.IO.File.WriteAllText(global_values.output_directory + @"\round.txt", cbx_team_round.Text);
+                        update_uldata(5, global_values.current_youtube_data);
+                    }
+                    break;
+            }
+        }
+
+        private void btn_team_swap_Click(object sender, EventArgs e)
+        {
+            //Hold Player 1's information within temporary variables
+            string hold_alt = txt_team1_twitter1.Text;
+            string hold_name = cbx_team1_name1.Text;
+            decimal hold_score = nud_team1_score.Value;
+            string hold_character = cbx_team1_character1.Text;
+            int hold_color = cbx_team1_color1.SelectedIndex;
+            string hold_directory = image_directory1;
+            bool hold_L = ckb_team1_lose.Checked;
+
+            //Move Player 2's information to Player 1's slot
+            txt_team1_twitter1.Text = txt_team2_twitter1.Text;
+            cbx_team1_name1.Text = cbx_team2_name1.Text;
+            nud_team1_score.Value = nud_team2_score.Value;
+            cbx_team1_character1.Text = cbx_team2_character1.Text;
+            cbx_team1_color1.SelectedIndex = cbx_team2_color1.SelectedIndex;
+            image_directory1 = image_directory2;
+            ckb_team1_lose.Checked = ckb_team2_lose.Checked;
+
+            //Move the information stored within temporary variables to Player 2's slot
+            txt_team2_twitter1.Text = hold_alt;
+            cbx_team2_name1.Text = hold_name;
+            nud_team2_score.Value = hold_score;
+            cbx_team2_character1.Text = hold_character;
+            cbx_team2_color1.SelectedIndex = hold_color;
+            image_directory2 = hold_directory;
+            ckb_team2_lose.Checked = hold_L;
+
+            //Hold Player 1's information within temporary variables
+            hold_alt = txt_team1_twitter2.Text;
+            hold_name = cbx_team1_name2.Text;
+            hold_character = cbx_team1_character2.Text;
+            hold_color = cbx_team1_color2.SelectedIndex;
+            hold_directory = image_directory3;
+
+            //Move Player 2's information to Player 1's slot
+            txt_team1_twitter2.Text = txt_team2_twitter2.Text;
+            cbx_team1_name2.Text = cbx_team2_name2.Text;
+            cbx_team1_character2.Text = cbx_team2_character2.Text;
+            cbx_team1_color2.SelectedIndex = cbx_team2_color2.SelectedIndex;
+            image_directory3 = image_directory4;
+
+            //Move the information stored within temporary variables to Player 2's slot
+            txt_team2_twitter2.Text = hold_alt;
+            cbx_team2_name2.Text = hold_name;
+            cbx_team2_character2.Text = hold_character;
+            cbx_team2_color2.SelectedIndex = hold_color;
+            image_directory4 = hold_directory;
+        }
+
+        private void btn_team_reset_Click(object sender, EventArgs e)
+        {
+                nud_team1_score.Value = 0;
+                nud_team2_score.Value = 0;
+        }
+
+        private void btn_team_update_Click(object sender, EventArgs e)
+        {
+            btn_team_update.Enabled = false;             //Disable this button until further action is needed
+            //Reset the image of the update button to default
+            btn_team_update.Image = null;
+            string output_name = "";
+
+            //Save Player 1's information to seperate files to be used by the stream program
+            output_name = get_output_name(cbx_team1_name1.Text, ckb_team1_lose.Checked, 1);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\player name1.txt", output_name);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\alt text1.txt", txt_team1_twitter1.Text);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\score1.txt", nud_team1_score.Value.ToString());
+            System.IO.File.WriteAllText(global_values.output_directory + @"\character name1.txt", cbx_team1_character1.Text);
+            //Save Player 2's information to seperate files to be used by the stream program
+            output_name = get_output_name(cbx_team2_name1.Text, ckb_team2_lose.Checked, 2);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", output_name);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\alt text2.txt", txt_team2_twitter1.Text);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\score2.txt", nud_team2_score.Value.ToString());
+            System.IO.File.WriteAllText(global_values.output_directory + @"\character name2.txt", cbx_team2_character1.Text);
+            //Save Player 3's information to seperate files to be used by the stream program
+            output_name = get_output_name(cbx_team1_name2.Text, ckb_team1_lose.Checked, 1);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\player name3.txt", output_name);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\alt text3.txt", txt_team1_twitter2.Text);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\character name3.txt", cbx_team1_character2.Text);
+            //Save Player 4's information to seperate files to be used by the stream program
+            output_name = get_output_name(cbx_team2_name2.Text, ckb_team2_lose.Checked, 2);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\player name4.txt", output_name);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\alt text4.txt", txt_team2_twitter2.Text);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\character name4.txt", cbx_team2_character2.Text);
+            //Save the Tournament information to seperate files to be used by the stream program
+            System.IO.File.WriteAllText(global_values.output_directory + @"\round.txt", cbx_team_round.Text);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\bracket url.txt", txt_bracket.Text);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\tournament.txt", txt_tournament.Text);
+            output_name = get_output_name(cbx_team1_name1.Text, false, 1) + " + " +
+                get_output_name(cbx_team1_name2.Text, ckb_team1_lose.Checked, 3);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\team name1.txt", output_name);
+            output_name = get_output_name(cbx_team2_name1.Text, false, 1) + " + " +
+                get_output_name(cbx_team2_name2.Text, ckb_team2_lose.Checked, 3);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\team name2.txt", output_name);
+
+            switch (btn_team_update.Text)                        //Perform action based on the current text of the button
+            {
+                case "Start":                               //Start the match
+                    nud_team1_score.Enabled = true;              //Enable score control for Player 1
+                    nud_team2_score.Enabled = true;              //Enable score control for Player 2
+                    btn_team_update.Text = "Update";             //Update the text of this button
+                    ttp_tooltip.SetToolTip(btn_team_update,
+                        "Pushes updates to the player and match information " +
+                        "into the Stream Files Directory.");
+                    global_values.current_youtube_data = create_uldata(4);
+                    break;
+                case "Update":                              //Update the stream files with the new information provided
+                    //Check if Image Scoreboard is enabled
+                    update_uldata(1, global_values.current_youtube_data);
+                    update_uldata(2, global_values.current_youtube_data);
+                    update_uldata(3, global_values.current_youtube_data);
+                    update_uldata(4, global_values.current_youtube_data);
+                    update_uldata(5, global_values.current_youtube_data);
+                    if (ckb_scoreboad.Checked == true)
+                    {
+                        //Store the location of the score image for Player 1 used by the stream program
+                        string score_file = global_values.output_directory + @"\score1.png";
+
+                        //Delete the score image if it exists
+                        if (File.Exists(score_file))
+                        {
+                            File.Delete(score_file);
+                        }
+
+                        //Check the current value of Player 1's score
+                        switch (nud_team1_score.Value)
+                        {
+                            case 0:                     //Save an empty image for Player 1's score                                      
+                                File.Copy(@"left.png", score_file);
+                                break;
+                            case 1:                     //Copy the Player 1 Score 1 image for Player 1's score
+                                File.Copy(global_values.score1_image1, score_file);
+                                break;
+                            case 2:                     //Copy the Player 1 Score 2 image for Player 1's score
+                                File.Copy(global_values.score1_image2, score_file);
+                                break;
+                            case 3:                     //Copy the Player 1 Score 3 image for Player 1's score
+                                File.Copy(global_values.score1_image3, score_file);
+                                break;
+                        }
+
+                        score_file = global_values.output_directory + @"\score2.png";
+
+                        if (File.Exists(score_file))
+                        {
+                            File.Delete(score_file);
+                        }
+
+                        switch (nud_team2_score.Value)
+                        {
+                            case 0:
+                                File.Copy(@"left.png", score_file);
+                                break;
+                            case 1:
+                                File.Copy(global_values.score2_image1, score_file);
+                                break;
+                            case 2:
+                                File.Copy(global_values.score2_image2, score_file);
+                                break;
+                            case 3:
+                                File.Copy(global_values.score2_image3, score_file);
+                                break;
+
+                        }
+                    }
+
+                    break;
+            }
+        }
+
+        private void nud_team2_score_ValueChanged(object sender, EventArgs e)
+        {
+            decimal current_point = nud_team2_score.Value;
+
+            if (current_point >= 3 && ckb_scoreboad.Checked == true)
+            {
+                nud_team2_score.Value = 3;
+            }
+            if (global_values.auto_update == true)
+            {
+                System.IO.File.WriteAllText(global_values.output_directory + @"\score2.txt", nud_team2_score.Value.ToString());
+                if (ckb_scoreboad.Checked == true)
+                {
+                    string score_file = global_values.output_directory + @"\score2.png";
+
+                    if (File.Exists(score_file))
+                    {
+                        File.Delete(score_file);
+                    }
+
+                    switch (nud_team2_score.Value)
+                    {
+                        case 0:
+                            File.Copy(@"left.png", score_file);
+                            break;
+                        case 1:
+                            File.Copy(global_values.score2_image1, score_file);
+                            break;
+                        case 2:
+                            File.Copy(global_values.score2_image2, score_file);
+                            break;
+                        case 3:
+                            File.Copy(global_values.score2_image3, score_file);
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                btn_update.Enabled = true;
+                btn_update.Image = Image.FromFile(Directory.GetCurrentDirectory() + @"\blue.gif");
+            }
+        }
+
+        private void ckb_team2_lose_CheckedChanged(object sender, EventArgs e)
+        {
+            string output_name = get_output_name(cbx_team2_name1.Text, ckb_team2_lose.Checked, 1);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\player name2.txt", output_name);
+            output_name = get_output_name(cbx_team2_name2.Text, ckb_team2_lose.Checked, 3);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\player name4.txt", output_name);
+            output_name = get_output_name(cbx_team2_name1.Text, false, 1) + " + " +
+                get_output_name(cbx_team2_name2.Text, ckb_team2_lose.Checked, 3);
+            System.IO.File.WriteAllText(global_values.output_directory + @"\team name2.txt", output_name);
+        }
+
+        private void btn_team_upload_Click(object sender, EventArgs e)
+        {
+            string team_name1 = cbx_team1_name1.Text + " + " + cbx_team1_name2.Text;
+            string team_name2 = cbx_team2_name1.Text + " + " + cbx_team2_name2.Text;
+
+            if (global_values.enable_youtube == false)
+            {
+                string thumbnail_image_name = create_thumbnail(4,
+                        team_name1,
+                        team_name2,
+                        cbx_team_round.Text,
+                        txt_date.Text);
+                string video_title = txt_tournament.Text + @" - " + cbx_team_round.Text + @" - " + 
+                    team_name1 + @" (" + cbx_team1_character1.Text + " + " + cbx_team1_character2.Text + @") Vs. " + 
+                    team_name2 + @" (" + cbx_team2_character1.Text + " + " + cbx_team2_character2.Text + @")";
+                if (global_values.copy_video_title == true)
+                {
+                    Clipboard.SetText(video_title);
+                    MessageBox.Show("A thumbnail image has been generated. \r\nVideo title copied to clipboard: \n" + video_title);
+                }
+                else
+                {
+                    MessageBox.Show("A thumbnail image has been generated.");
+                }
+            }
+            else
+            {
+                //Create a thumbnail image and save its name
+                string thumbnail_image_name = create_thumbnail(4,
+                    team_name1,
+                    team_name2,
+                    cbx_team_round.Text,
+                    txt_date.Text);
+
+                XDocument doc = new XDocument(
+                    new XElement("YouTube-Upload-Data",
+                    new XElement("Player-Information",
+                            new XElement("Player-1-Name", cbx_team1_name1.Text),
+                            new XElement("Player-1-Twitter", txt_team1_twitter1.Text),
+                            new XElement("Player-1-Character", cbx_team1_character1.Text),
+                            new XElement("Player-1-Color", cbx_team1_color1.SelectedIndex),
+                            new XElement("Player-2-Name", cbx_team1_name2.Text),
+                            new XElement("Player-2-Twitter", txt_team1_twitter2.Text),
+                            new XElement("Player-2-Character", cbx_team1_character2.Text),
+                            new XElement("Player-2-Color", cbx_team1_color2.SelectedIndex),
+                            new XElement("Player-3-Name", cbx_team2_name1.Text),
+                            new XElement("Player-3-Twitter", txt_team2_twitter1.Text),
+                            new XElement("Player-3-Character", cbx_team2_character1.Text),
+                            new XElement("Player-3-Color", cbx_team2_color1.SelectedIndex),
+                            new XElement("Player-4-Name", cbx_team2_name2.Text),
+                            new XElement("Player-4-Twitter", txt_team2_twitter2.Text),
+                            new XElement("Player-4-Character", cbx_team2_character2.Text),
+                            new XElement("Player-4-Color", cbx_team2_color2.SelectedIndex)
+                            ),
+                    new XElement("Match-Information",
+                            new XElement("Format", cbx_format.Text),
+                            new XElement("Round", cbx_team_round.Text),
+                            new XElement("Bracket-URL", txt_bracket.Text),
+                            new XElement("Tournament-Name", txt_tournament.Text),
+                            new XElement("Date", txt_date.Text),
+                            new XElement("VoD-File", global_values.vods_directory + @"\" + global_values.new_vod_detected))
+                    ));
+
+                global_values.current_youtube_data =
+                    txt_tournament.Text + "_" +
+                    cbx_team_round.Text + "_" +
+                    team_name1 + "_VS_" +
+                    team_name2 + "_" +
+                    DateTime.Now.ToString("MMddyyyyHHmmss") + @".uldata";
+
+                global_values.current_youtube_data = global_values.current_youtube_data.Replace("|", "l")
+                        .Replace(@"\", "l").Replace(@"/", "l").Replace(":", "").Replace("*", "").Replace("?", "")
+                        .Replace('"'.ToString(), "").Replace("'", "").Replace(">", "").Replace("<", "");
+
+                global_values.current_youtube_data = global_values.thumbnail_directory + @"\" + global_values.current_youtube_data;
+
+                if (global_values.current_youtube_data.Length > 250)
+                {
+                    global_values.current_youtube_data = global_values.current_youtube_data.Substring(0, 250);
+                }
+
+                doc.Save(global_values.current_youtube_data);
+
+                //Pass the event upload_form_enable_button_event() to the new form as the function "enable_button()"
+                btn_upload.Text = "Upload Window Open";
+                btn_upload.Enabled = false;             //Disable this button until further action is needed
+                global_values.reenable_upload = DateTime.Now.ToString("MMddyyyyHHmmss");   //Set the flag to allow the button to be re-abled on form close
+
+                string video_title = txt_tournament.Text + @" - " + cbx_team_round.Text + @" - " +
+                    team_name1 + @" (" + cbx_team1_character1.Text + " + " + cbx_team1_character2.Text + @") Vs. " +
+                    team_name2 + @" (" + cbx_team2_character1.Text + " + " + cbx_team2_character2.Text + @")";
+
+                if (global_values.copy_video_title == true)
+                {
+                    Clipboard.SetText(video_title);
+                    MessageBox.Show("Video title copied to clipboard: \n" + video_title);
+                }
+
+                string video_description = txt_description.Text.Replace("INFO_TOURNAMENT", txt_tournament.Text);
+                video_description = video_description.Replace("INFO_DATE", txt_date.Text);
+                video_description = video_description.Replace("INFO_ROUND", cbx_team_round.Text);
+                video_description = video_description.Replace("INFO_BRACKET", txt_bracket.Text);
+                video_description = video_description.Replace("INFO_PLAYER1", team_name1);
+                video_description = video_description.Replace("INFO_PLAYER2", team_name2);
+                video_description = video_description.Replace("INFO_TWITTER1", txt_team1_twitter1.Text + " + " + txt_team1_twitter2.Text);
+                video_description = video_description.Replace("INFO_TWITTER2", txt_team2_twitter1.Text + " + " + txt_team2_twitter2.Text);
+                video_description = video_description.Replace("INFO_CHARACTER1", cbx_team1_character1.Text + " + " + cbx_team1_character2.Text);
+                video_description = video_description.Replace("INFO_CHARACTER2", cbx_team2_character1.Text + " + " + cbx_team2_character2.Text);
+
+
+                //Create a new form and provide it with a Video title based off the provided information,
+                //as well as a description and the thumbnail image created
+                var upload_form = new frm_uploading(video_title,
+                    video_description,
+                    global_values.thumbnail_directory + @"\" + thumbnail_image_name,
+                    global_values.vods_directory + @"\" + global_values.new_vod_detected,
+                    global_values.reenable_upload, false);
+                upload_form.enable_button += new enable_button_event(upload_form_enable_button_event);
+                upload_form.Show();                     //Show the form        
+            }
+        }
+
+        private void btn_team_next_Click(object sender, EventArgs e)
+        {
+            if (global_values.enable_youtube == true)
+            {
+                global_values.reenable_upload = "";
+                btn_team_upload.Enabled = true;
+                btn_team_upload.Text = "Upload to YouTube";
+            }
+
+            nud_team1_score.Value = 0;
+            nud_team1_score.Enabled = false;
+            nud_team2_score.Value = 0;
+            nud_team2_score.Enabled = false;
+
+            btn_team_update.Text = @"Start";
+            ttp_tooltip.SetToolTip(btn_team_update,
+                "Click to begin the set and enable score control.\n" +
+                "Pushes player and match information into the\n" +
+                "Stream Files Directory.");
+
+            btn_team_update.Image = null;
+            btn_team_update.Enabled = true;
+
+            string[] image_files = { @"\score1.png", @"\score2.png", @"\Stock Icon 1.png", @"\Stock Icon 2.png",
+                 @"\Stock Icon 3.png", @"\Stock Icon 4.png", @"\sponsor 1.png", @"\sponsor 2.png", @"\sponsor 3.png",
+                 @"\sponsor 4.png", @"\region 1.png" , @"\region 2.png" , @"\region 3.png" , @"\region 4.png" };
+            foreach (string replace_image in image_files)
+            {
+                if (File.Exists(global_values.output_directory + replace_image))
+                {
+                    File.Delete(global_values.output_directory + replace_image);
+                }
+                File.Copy(@"left.png", global_values.output_directory + replace_image);
+            }
+
+            global_values.player_roster_number[1] = -1;
+            global_values.player_roster_number[2] = -1;
+            global_values.player_roster_number[3] = -1;
+            global_values.player_roster_number[4] = -1;
+
+            cbx_team1_name1.Text = "";
+            txt_team1_twitter1.Text = "";
+            cbx_team1_character1.SelectedIndex = 0;
+            cbx_team1_color1.SelectedIndex = 0;
+
+            cbx_team1_name2.Text = "";
+            txt_team1_twitter2.Text = "";
+            cbx_team1_character2.SelectedIndex = 0;
+            cbx_team1_color2.SelectedIndex = 0;
+
+            cbx_team2_name1.Text = "";
+            txt_team2_twitter1.Text = "";
+            cbx_team2_character1.SelectedIndex = 0;
+            cbx_team2_color1.SelectedIndex = 0;
+
+            cbx_team2_name2.Text = "";
+            txt_team2_twitter2.Text = "";
+            cbx_team2_character2.SelectedIndex = 0;
+            cbx_team2_color2.SelectedIndex = 0;
+
+
+
+            if (global_values.enable_sheets == true && txt_sheets.Text != "" && txt_sheets.Text != null)
+            {
+                if (global_values.sheets_info == "info-and-queue")
+                {
+                    import_from_sheets(false, 4);
+                }
+                else
+                {
+                    info_from_sheets();
+                }
+            }
+        }
+
+        private string create_uldata(int player_number)
+        {
+            //Creates a ULdata file that contains information on the ongoing match.
+            //Used to upload a video to YouTube using the information of a previous
+            //match in the situation where an upload failed or was missed.
+            //Returns a string of the file location.
+            ///////////////////////////////////////////////////////////////////////
+
+            //Initialize the file name
+            string uldata_file = "";
+
+            //Create the uldata
+            XDocument doc = new XDocument(
+                new XElement("YouTube-Upload-Data",
+                new XElement("Player-Information",
+                        new XElement("Player-1",
+                            new XElement("Name", ""),
+                            new XElement("Twitter", ""),
+                            new XElement("Character", ""),
+                            new XElement("Color", "")),
+                        new XElement("Player-2",
+                            new XElement("Name", ""),
+                            new XElement("Twitter", ""),
+                            new XElement("Character", ""),
+                            new XElement("Color", "")),
+                        new XElement("Player-3",
+                            new XElement("Name", ""),
+                            new XElement("Twitter", ""),
+                            new XElement("Character", ""),
+                            new XElement("Color", "")),
+                        new XElement("Player-4",
+                            new XElement("Name", ""),
+                            new XElement("Twitter", ""),
+                            new XElement("Character", ""),
+                            new XElement("Color", ""))
+                        ),
+                new XElement("Match-Information",
+                        new XElement("Game", global_values.game_info[0]),
+                        new XElement("Format", cbx_format.Text),
+                        new XElement("Round", cbx_round.Text),
+                        new XElement("Bracket-URL", txt_bracket.Text),
+                        new XElement("Tournament-Name", txt_tournament.Text),
+                        new XElement("Date", txt_date.Text),
+                        new XElement("VoD-File", global_values.vods_directory + @"\" + global_values.new_vod_detected))
+                ));
+
+            //Insert player information depending on the number of players
+            switch(player_number)
+            {
+                case 2:
+                    doc.Root.Element("Player-Information").Element("Player-1").ReplaceWith(
+                            new XElement("Player-1",
+                                new XElement("Name", cbx_name1.Text),
+                                new XElement("Twitter", txt_alt1.Text),
+                                new XElement("Character", cbx_characters1.Text),
+                                new XElement("Color", cbx_colors1.SelectedIndex + 1)));
+                    doc.Root.Element("Player-Information").Element("Player-2").ReplaceWith(
+                            new XElement("Player-2",
+                                new XElement("Name", cbx_name2.Text),
+                                new XElement("Twitter", txt_alt2.Text),
+                                new XElement("Character", cbx_characters2.Text),
+                                new XElement("Color", cbx_colors2.SelectedIndex + 1)));
+                    uldata_file =
+                            txt_tournament.Text + "_" +
+                            cbx_round.Text + "_" +
+                            cbx_name1.Text + "_VS_" +
+                            cbx_name2.Text + "_" +
+                            DateTime.Now.ToString("MMddyyyyHHmmss") + @".uldata";
+                    break;
+                case 4:
+                    doc.Root.Element("Player-Information").Element("Player-1").ReplaceWith(
+                            new XElement("Player-1",
+                                new XElement("Name", cbx_team1_name1.Text),
+                                new XElement("Twitter", txt_team1_twitter1.Text),
+                                new XElement("Character", cbx_team1_character1.Text),
+                                new XElement("Color", cbx_team1_color1.SelectedIndex + 1)));
+                    doc.Root.Element("Player-Information").Element("Player-2").ReplaceWith(
+                            new XElement("Player-2",
+                                new XElement("Name", cbx_team2_name1.Text),
+                                new XElement("Twitter", txt_team2_twitter1.Text),
+                                new XElement("Character", cbx_team2_character1.Text),
+                                new XElement("Color", cbx_team2_color1.SelectedIndex + 1)));
+                    doc.Root.Element("Player-Information").Element("Player-3").ReplaceWith(
+                            new XElement("Player-3",
+                                new XElement("Name", cbx_team1_name2.Text),
+                                new XElement("Twitter", txt_team1_twitter2.Text),
+                                new XElement("Character", cbx_team1_character2.Text),
+                                new XElement("Color", cbx_team1_color2.SelectedIndex + 1)));
+                    doc.Root.Element("Player-Information").Element("Player-4").ReplaceWith(
+                            new XElement("Player-4",
+                                new XElement("Name", cbx_team2_name2.Text),
+                                new XElement("Twitter", txt_team2_twitter2.Text),
+                                new XElement("Character", cbx_team2_character2.Text),
+                                new XElement("Color", cbx_team2_color2.SelectedIndex + 1)));
+                    string team_name1 = cbx_team1_name1.Text + " + " + cbx_team1_name2.Text;
+                    string team_name2 = cbx_team2_name1.Text + " + " + cbx_team2_name2.Text;
+
+                    uldata_file =
+                            txt_tournament.Text + "_" +
+                            cbx_round.Text + "_" +
+                            team_name1 + "_VS_" +
+                            team_name2 + "_" +
+                            DateTime.Now.ToString("MMddyyyyHHmmss") + @".uldata";
+                    break;
+            }
+
+            //Remove invalid characters from the name
+            uldata_file = uldata_file.Replace("|", "-")
+                    .Replace(@"\", "-").Replace(@"/", "-").Replace(":", "").Replace("*", "").Replace("?", "")
+                    .Replace('"'.ToString(), "").Replace("'", "").Replace(">", "").Replace("<", "");
+
+            uldata_file = global_values.thumbnail_directory + @"\" + uldata_file;
+
+            if (uldata_file.Length > 250)
+            {
+                uldata_file = uldata_file.Substring(0, 250);
+            }
+
+            doc.Save(uldata_file);
+
+            return uldata_file;
+        }
+
+        private void update_uldata(int player_number, string uldata)
+        {
+            //updates a uldata file with new info for a player or round settings.
+            //player_number is the number of the player according to the main window(1-4)
+            /////////Setting this value to 5 will instead update the round settings.
+            //uldata is the path to the uldata file to update
+            //format is Singles or Doubles and will pull information from the fields
+            /////////related to the specified format.
+            //////////////////////////////////////////////////////////////////////////////
+
+            //lock this to a single execution
+            if (update_check == true)
+            { 
+                //Load the uldata file
+                XDocument doc = XDocument.Load(uldata);
+
+                switch(player_number)
+                {
+                    case 5:
+                        doc.Root.Element("Match-Information").ReplaceWith(new XElement("Match-Information",
+                            new XElement("Game", global_values.game_info[0]),
+                            new XElement("Format", cbx_format.Text),
+                            new XElement("Round", cbx_round.Text),
+                            new XElement("Bracket-URL", txt_bracket.Text),
+                            new XElement("Tournament-Name", txt_tournament.Text),
+                            new XElement("Date", txt_date.Text),
+                            new XElement("VoD-File", global_values.vods_directory + @"\" + global_values.new_vod_detected)));
+                        break;
+                    default:
+                        string player_text = "Player-" + player_number.ToString();
+                        doc.Root.Element("Player-Information").Element(player_text).ReplaceWith(
+                            new XElement(player_text,
+                            new XElement("Name", player_boxes[player_number].tag.Text),
+                            new XElement("Twitter", player_boxes[player_number].twitter.Text),
+                            new XElement("Character", player_boxes[player_number].character.Text),
+                            new XElement("Color", player_boxes[player_number].color.SelectedIndex + 1)));
+                        break;
+                }
+
+                //Save the uldata file with the new information.
+                doc.Save(uldata);
+            }
+        }
+
+        private void btn_database_login_Click(object sender, EventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = "Master Orders Global Playerbase";
+            dbCon.DatabaseUserName = txt_database_username.Text;
+            dbCon.DatabasePassword = txt_database_password.Text;
+            try
+            {
+                dbCon.IsConnect();
+                MessageBox.Show("Database Login Successful.");
+                global_values.database_username = dbCon.DatabaseUserName;
+                global_values.database_password = dbCon.DatabasePassword;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Database Login Failed. Please ensure that your username and password are correct.");
+                dbCon.Close();
             }
         }
     }
+
+
+
+    
+ 
 }
