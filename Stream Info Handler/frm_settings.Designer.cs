@@ -65,6 +65,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.rdb_manual = new System.Windows.Forms.RadioButton();
             this.rdb_automatic = new System.Windows.Forms.RadioButton();
+            this.ckb_clipboard = new System.Windows.Forms.CheckBox();
             this.tab_directories = new System.Windows.Forms.TabPage();
             this.lbl_directories = new System.Windows.Forms.Label();
             this.ckb_regions = new System.Windows.Forms.CheckBox();
@@ -103,6 +104,7 @@
             this.txt_json = new System.Windows.Forms.TextBox();
             this.btn_json = new System.Windows.Forms.Button();
             this.tab_thumbnail = new System.Windows.Forms.TabPage();
+            this.btn_preview = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tab_templates = new System.Windows.Forms.TabPage();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
@@ -131,6 +133,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.tab_names = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.txt_name2_size = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
             this.txt_name2 = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.txt_name2_yoffset = new System.Windows.Forms.TextBox();
@@ -138,6 +142,8 @@
             this.txt_name2_xoffset = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.txt_name1_size = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
             this.txt_name1 = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.txt_name1_yoffset = new System.Windows.Forms.TextBox();
@@ -146,24 +152,29 @@
             this.label26 = new System.Windows.Forms.Label();
             this.tab_round = new System.Windows.Forms.TabPage();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.txt_patch_size = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
             this.ckb_patch = new System.Windows.Forms.CheckBox();
             this.txt_patch_yoffset = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
             this.txt_patch_xoffset = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.txt_date_size = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
             this.ckb_date = new System.Windows.Forms.CheckBox();
             this.txt_date_yoffset = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
             this.txt_date_xoffset = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.txt_round_size = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
             this.txt_round_yoffset = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
             this.txt_round_xoffset = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
             this.pic_thumbnail = new System.Windows.Forms.PictureBox();
-            this.ckb_clipboard = new System.Windows.Forms.CheckBox();
             this.tab_bracket = new System.Windows.Forms.TabPage();
             this.btn_dashboard = new System.Windows.Forms.Button();
             this.btn_addplayer = new System.Windows.Forms.Button();
@@ -177,17 +188,6 @@
             this.ofd_jpg = new System.Windows.Forms.OpenFileDialog();
             this.ofd_png = new System.Windows.Forms.OpenFileDialog();
             this.ofd_json = new System.Windows.Forms.OpenFileDialog();
-            this.txt_name1_size = new System.Windows.Forms.TextBox();
-            this.label33 = new System.Windows.Forms.Label();
-            this.txt_name2_size = new System.Windows.Forms.TextBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.txt_round_size = new System.Windows.Forms.TextBox();
-            this.label35 = new System.Windows.Forms.Label();
-            this.txt_date_size = new System.Windows.Forms.TextBox();
-            this.label36 = new System.Windows.Forms.Label();
-            this.txt_patch_size = new System.Windows.Forms.TextBox();
-            this.label37 = new System.Windows.Forms.Label();
-            this.btn_preview = new System.Windows.Forms.Button();
             this.tab_settings.SuspendLayout();
             this.tab_general.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -621,6 +621,17 @@
             this.rdb_automatic.UseVisualStyleBackColor = true;
             this.rdb_automatic.CheckedChanged += new System.EventHandler(this.rdb_automatic_CheckedChanged);
             // 
+            // ckb_clipboard
+            // 
+            this.ckb_clipboard.AutoSize = true;
+            this.ckb_clipboard.Location = new System.Drawing.Point(9, 216);
+            this.ckb_clipboard.Name = "ckb_clipboard";
+            this.ckb_clipboard.Size = new System.Drawing.Size(304, 17);
+            this.ckb_clipboard.TabIndex = 5;
+            this.ckb_clipboard.Text = "Copy Video Title to Clipboard  When Generating Thumbnail";
+            this.ckb_clipboard.UseVisualStyleBackColor = true;
+            this.ckb_clipboard.CheckedChanged += new System.EventHandler(this.ckb_clipboard_CheckedChanged);
+            // 
             // tab_directories
             // 
             this.tab_directories.Controls.Add(this.lbl_directories);
@@ -937,6 +948,7 @@
             this.txt_description.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt_description.Size = new System.Drawing.Size(386, 76);
             this.txt_description.TabIndex = 33;
+            this.txt_description.TextChanged += new System.EventHandler(this.txt_description_TextChanged);
             // 
             // groupBox8
             // 
@@ -1029,6 +1041,17 @@
             this.tab_thumbnail.TabIndex = 3;
             this.tab_thumbnail.Text = "Thumbnails";
             this.tab_thumbnail.UseVisualStyleBackColor = true;
+            // 
+            // btn_preview
+            // 
+            this.btn_preview.Enabled = false;
+            this.btn_preview.Location = new System.Drawing.Point(329, 75);
+            this.btn_preview.Name = "btn_preview";
+            this.btn_preview.Size = new System.Drawing.Size(59, 40);
+            this.btn_preview.TabIndex = 8;
+            this.btn_preview.Text = "Preview";
+            this.btn_preview.UseVisualStyleBackColor = true;
+            this.btn_preview.Click += new System.EventHandler(this.btn_preview_Click);
             // 
             // tabControl1
             // 
@@ -1329,6 +1352,24 @@
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Name 2";
             // 
+            // txt_name2_size
+            // 
+            this.txt_name2_size.Location = new System.Drawing.Point(58, 71);
+            this.txt_name2_size.Name = "txt_name2_size";
+            this.txt_name2_size.Size = new System.Drawing.Size(57, 20);
+            this.txt_name2_size.TabIndex = 9;
+            this.txt_name2_size.Text = "100";
+            this.txt_name2_size.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(1, 74);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(51, 13);
+            this.label34.TabIndex = 8;
+            this.label34.Text = "Font Size";
+            // 
             // txt_name2
             // 
             this.txt_name2.Location = new System.Drawing.Point(6, 111);
@@ -1397,6 +1438,24 @@
             this.groupBox11.TabIndex = 7;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Name 1";
+            // 
+            // txt_name1_size
+            // 
+            this.txt_name1_size.Location = new System.Drawing.Point(58, 71);
+            this.txt_name1_size.Name = "txt_name1_size";
+            this.txt_name1_size.Size = new System.Drawing.Size(57, 20);
+            this.txt_name1_size.TabIndex = 7;
+            this.txt_name1_size.Text = "100";
+            this.txt_name1_size.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(1, 74);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(51, 13);
+            this.label33.TabIndex = 6;
+            this.label33.Text = "Font Size";
             // 
             // txt_name1
             // 
@@ -1478,6 +1537,24 @@
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "Patch";
             // 
+            // txt_patch_size
+            // 
+            this.txt_patch_size.Location = new System.Drawing.Point(57, 108);
+            this.txt_patch_size.Name = "txt_patch_size";
+            this.txt_patch_size.Size = new System.Drawing.Size(57, 20);
+            this.txt_patch_size.TabIndex = 11;
+            this.txt_patch_size.Text = "60";
+            this.txt_patch_size.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(0, 111);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(51, 13);
+            this.label37.TabIndex = 10;
+            this.label37.Text = "Font Size";
+            // 
             // ckb_patch
             // 
             this.ckb_patch.AutoSize = true;
@@ -1487,6 +1564,7 @@
             this.ckb_patch.TabIndex = 5;
             this.ckb_patch.Text = "Include Patch\r\nin thumbnail";
             this.ckb_patch.UseVisualStyleBackColor = true;
+            this.ckb_patch.CheckedChanged += new System.EventHandler(this.checkbox_Changed);
             // 
             // txt_patch_yoffset
             // 
@@ -1540,6 +1618,24 @@
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "Date";
             // 
+            // txt_date_size
+            // 
+            this.txt_date_size.Location = new System.Drawing.Point(57, 108);
+            this.txt_date_size.Name = "txt_date_size";
+            this.txt_date_size.Size = new System.Drawing.Size(57, 20);
+            this.txt_date_size.TabIndex = 9;
+            this.txt_date_size.Text = "60";
+            this.txt_date_size.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(0, 111);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(51, 13);
+            this.label36.TabIndex = 8;
+            this.label36.Text = "Font Size";
+            // 
             // ckb_date
             // 
             this.ckb_date.AutoSize = true;
@@ -1549,6 +1645,7 @@
             this.ckb_date.TabIndex = 4;
             this.ckb_date.Text = "Include Date\r\nin thumbnail";
             this.ckb_date.UseVisualStyleBackColor = true;
+            this.ckb_date.CheckedChanged += new System.EventHandler(this.checkbox_Changed);
             // 
             // txt_date_yoffset
             // 
@@ -1601,6 +1698,24 @@
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Round";
             // 
+            // txt_round_size
+            // 
+            this.txt_round_size.Location = new System.Drawing.Point(57, 108);
+            this.txt_round_size.Name = "txt_round_size";
+            this.txt_round_size.Size = new System.Drawing.Size(57, 20);
+            this.txt_round_size.TabIndex = 9;
+            this.txt_round_size.Text = "60";
+            this.txt_round_size.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(0, 111);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(51, 13);
+            this.label35.TabIndex = 8;
+            this.label35.Text = "Font Size";
+            // 
             // txt_round_yoffset
             // 
             this.txt_round_yoffset.Location = new System.Drawing.Point(57, 83);
@@ -1646,16 +1761,6 @@
             this.pic_thumbnail.Size = new System.Drawing.Size(320, 180);
             this.pic_thumbnail.TabIndex = 6;
             this.pic_thumbnail.TabStop = false;
-            // 
-            // ckb_clipboard
-            // 
-            this.ckb_clipboard.AutoSize = true;
-            this.ckb_clipboard.Location = new System.Drawing.Point(9, 216);
-            this.ckb_clipboard.Name = "ckb_clipboard";
-            this.ckb_clipboard.Size = new System.Drawing.Size(304, 17);
-            this.ckb_clipboard.TabIndex = 5;
-            this.ckb_clipboard.Text = "Copy Video Title to Clipboard  When Generating Thumbnail";
-            this.ckb_clipboard.UseVisualStyleBackColor = true;
             // 
             // tab_bracket
             // 
@@ -1720,6 +1825,7 @@
             this.btn_apply.TabIndex = 0;
             this.btn_apply.Text = "Apply";
             this.btn_apply.UseVisualStyleBackColor = true;
+            this.btn_apply.Click += new System.EventHandler(this.btn_apply_Click);
             // 
             // btn_cancel
             // 
@@ -1750,106 +1856,6 @@
             // ofd_json
             // 
             this.ofd_json.Filter = ".json Files|*.json";
-            // 
-            // txt_name1_size
-            // 
-            this.txt_name1_size.Location = new System.Drawing.Point(58, 71);
-            this.txt_name1_size.Name = "txt_name1_size";
-            this.txt_name1_size.Size = new System.Drawing.Size(57, 20);
-            this.txt_name1_size.TabIndex = 7;
-            this.txt_name1_size.Text = "100";
-            this.txt_name1_size.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(1, 74);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(51, 13);
-            this.label33.TabIndex = 6;
-            this.label33.Text = "Font Size";
-            // 
-            // txt_name2_size
-            // 
-            this.txt_name2_size.Location = new System.Drawing.Point(58, 71);
-            this.txt_name2_size.Name = "txt_name2_size";
-            this.txt_name2_size.Size = new System.Drawing.Size(57, 20);
-            this.txt_name2_size.TabIndex = 9;
-            this.txt_name2_size.Text = "100";
-            this.txt_name2_size.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(1, 74);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(51, 13);
-            this.label34.TabIndex = 8;
-            this.label34.Text = "Font Size";
-            // 
-            // txt_round_size
-            // 
-            this.txt_round_size.Location = new System.Drawing.Point(57, 108);
-            this.txt_round_size.Name = "txt_round_size";
-            this.txt_round_size.Size = new System.Drawing.Size(57, 20);
-            this.txt_round_size.TabIndex = 9;
-            this.txt_round_size.Text = "60";
-            this.txt_round_size.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(0, 111);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(51, 13);
-            this.label35.TabIndex = 8;
-            this.label35.Text = "Font Size";
-            // 
-            // txt_date_size
-            // 
-            this.txt_date_size.Location = new System.Drawing.Point(57, 108);
-            this.txt_date_size.Name = "txt_date_size";
-            this.txt_date_size.Size = new System.Drawing.Size(57, 20);
-            this.txt_date_size.TabIndex = 9;
-            this.txt_date_size.Text = "30";
-            this.txt_date_size.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(0, 111);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(51, 13);
-            this.label36.TabIndex = 8;
-            this.label36.Text = "Font Size";
-            // 
-            // txt_patch_size
-            // 
-            this.txt_patch_size.Location = new System.Drawing.Point(57, 108);
-            this.txt_patch_size.Name = "txt_patch_size";
-            this.txt_patch_size.Size = new System.Drawing.Size(57, 20);
-            this.txt_patch_size.TabIndex = 11;
-            this.txt_patch_size.Text = "30";
-            this.txt_patch_size.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(0, 111);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(51, 13);
-            this.label37.TabIndex = 10;
-            this.label37.Text = "Font Size";
-            // 
-            // btn_preview
-            // 
-            this.btn_preview.Location = new System.Drawing.Point(329, 75);
-            this.btn_preview.Name = "btn_preview";
-            this.btn_preview.Size = new System.Drawing.Size(59, 40);
-            this.btn_preview.TabIndex = 8;
-            this.btn_preview.Text = "Preview";
-            this.btn_preview.UseVisualStyleBackColor = true;
-            this.btn_preview.Click += new System.EventHandler(this.btn_preview_Click);
             // 
             // frm_settings
             // 

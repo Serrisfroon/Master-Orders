@@ -47,7 +47,8 @@ namespace Stream_Info_Handler
         bool auto_update;
         bool image_scoreboard;
         string[] score_image = new string[6];
-
+        bool copy_video_title;
+        string default_description;
 
         string thumbnail_background;
         string thumbnail_foreground;
@@ -190,6 +191,9 @@ namespace Stream_Info_Handler
                 characters = System.IO.File.ReadAllLines(game_path + @"\characters.txt");
                 btn_apply.Enabled = true;
 
+                if (thumbnail_background != "" && thumbnail_background != null &&
+                    thumbnail_foreground != null && thumbnail_foreground != "")
+                    btn_preview.Enabled = true;
 
                 cbx_char1.BeginUpdate();                                      //Begin
                 cbx_char1.Items.Clear();                                      //Empty the item list
@@ -525,7 +529,8 @@ namespace Stream_Info_Handler
                 );
             }
 
-            await credential.RevokeTokenAsync(CancellationToken.None);
+            await credential.RefreshTokenAsync(CancellationToken.None);
+            //await credential.RevokeTokenAsync(CancellationToken.None);
 
         }
 
@@ -545,6 +550,7 @@ namespace Stream_Info_Handler
         {
             btn_playlist.Enabled = false;
             txt_playlist.Enabled = false;
+            btn_apply.Enabled = true;
             try
             {
                 Thread thead = new Thread(() =>
@@ -703,21 +709,25 @@ namespace Stream_Info_Handler
 
         private void rdb_xsplit_CheckedChanged(object sender, EventArgs e)
         {
+            btn_apply.Enabled = true;
             stream_software = @"XSplit";
         }
 
         private void rdb_obs_CheckedChanged(object sender, EventArgs e)
         {
+            btn_apply.Enabled = true;
             stream_software = @"OBS";
         }
 
         private void rdb_automatic_CheckedChanged(object sender, EventArgs e)
         {
+            btn_apply.Enabled = true;
             auto_update = rdb_automatic.Checked;
         }
 
         private void ckb_scoreboad_CheckedChanged(object sender, EventArgs e)
         {
+            btn_apply.Enabled = true;
             image_scoreboard = ckb_scoreboad.Checked;
             btn_score1_image1.Enabled = image_scoreboard;
             btn_score1_image2.Enabled = image_scoreboard;
@@ -732,6 +742,7 @@ namespace Stream_Info_Handler
             Button image_button = (Button)sender;
             if (ofd_png.ShowDialog() == DialogResult.OK)
             {
+                btn_apply.Enabled = true;
                 score_control clicked_control = find_score_control(image_button.Name);
                 score_image[clicked_control.picture_index] = ofd_png.FileName;
                 clicked_control.score_picture.Image = Image.FromFile(ofd_png.FileName);
@@ -749,15 +760,19 @@ namespace Stream_Info_Handler
         private void txt_background_TextChanged(object sender, EventArgs e)
         {
             txt_background.BackColor = warning_color;
+            btn_preview.Enabled = false;
             if (txt_background.Text != @"")
             {
                 if (File.Exists(txt_background.Text))
                 {
                     if (Path.GetExtension(txt_background.Text) == ".jpg")
                     {
+                        btn_apply.Enabled = true;
                         txt_background.BackColor = Color.White;
                         thumbnail_background = txt_background.Text;
-
+                        if (thumbnail_foreground != "" && thumbnail_foreground != null &&
+                            cbx_characters.Text != null && cbx_characters.Text != "")
+                            btn_preview.Enabled = true;
                     }
                     else
                     {
@@ -782,15 +797,20 @@ namespace Stream_Info_Handler
         private void txt_foreground_TextChanged(object sender, EventArgs e)
         {
             txt_foreground.BackColor = warning_color;
+            btn_preview.Enabled = false;
+
             if (txt_foreground.Text != @"")
             {
                 if (File.Exists(txt_foreground.Text))
                 {
                     if (Path.GetExtension(txt_foreground.Text) == ".png")
                     {
+                        btn_apply.Enabled = true;
                         txt_foreground.BackColor = Color.White;
                         thumbnail_foreground = txt_foreground.Text;
-
+                        if(thumbnail_background != "" && thumbnail_background != null &&
+                            cbx_characters.Text != null && cbx_characters.Text != "")
+                            btn_preview.Enabled = true;
                     }
                     else
                     {
@@ -818,12 +838,26 @@ namespace Stream_Info_Handler
                 (e.KeyChar != '-'))
             {
                 e.Handled = true;
+                return;
             }
 
             // only allow one negative sign
             if ((e.KeyChar == '-') && (((sender as TextBox).Text.IndexOf('-') > -1) || (sender as TextBox).SelectionStart != 0))
             {
                 e.Handled = true;
+                return;
+            }
+
+            btn_apply.Enabled = true;
+        }
+
+        private void numeric_FocusLeave(object sender, KeyPressEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text == @"" ||
+                textBox.Text == @"-")
+            {
+                textBox.Text = "0";
             }
         }
 
@@ -995,6 +1029,28 @@ namespace Stream_Info_Handler
         private void btn_preview_Click(object sender, EventArgs e)
         {
             create_thumbnail();
+        }
+
+        private void checkbox_Changed(object sender, EventArgs e)
+        {
+            btn_apply.Enabled = true;
+        }
+
+        private void btn_apply_Click(object sender, EventArgs e)
+        {
+            btn_apply.Enabled = false;
+        }
+
+        private void ckb_clipboard_CheckedChanged(object sender, EventArgs e)
+        {
+            btn_apply.Enabled = true;
+            copy_video_title = ckb_clipboard.Checked;
+        }
+
+        private void txt_description_TextChanged(object sender, EventArgs e)
+        {
+            btn_apply.Enabled = true;
+            default_description = txt_description.Text;
         }
     }
 }

@@ -138,14 +138,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Master Orders.exe" size="1766896">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Master Orders.exe" size="1767920">
       <assemblyIdentity name="Master Orders" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>NMZmNnklR0hg8SuJ5E815+NMiZlK9Q/E7CQLyOz+wS4=</dsig:DigestValue>
+        <dsig:DigestValue>kiLc0q8CDZeoOthixK3YauaZrtw0YX/vAw8ImkBR1e8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
