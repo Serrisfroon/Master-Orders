@@ -22,7 +22,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>75</ApplicationRevision>
+    <ApplicationRevision>126</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -48,22 +48,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>1C25078C9EC0A3026C909A342D48BDBE9E8D5E2E</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>CF9E9AE796B3A6E6B0A8AA51A94C100A47651A1D</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Stream Info Handler_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>Stream Info Handler_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>Resources\Graphics\master_orders_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="ChallongeCSharpDriver">
+      <HintPath>..\..\..\Downloads\ChallongeCSharpDriver-master\ChallongeCSharpDriver-master\ChallongeCSharpDriver\Library\ChallongeCSharpDriver.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Apis, Version=1.33.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.1.33.0\lib\net45\Google.Apis.dll</HintPath>
     </Reference>
@@ -88,11 +93,23 @@
     <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
+    <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
+      <HintPath>..\packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
+    </Reference>
+    <Reference Include="LightweightHTTPAPICaller">
+      <HintPath>..\..\..\Downloads\ChallongeCSharpDriver-master\ChallongeCSharpDriver-master\ChallongeCSharpDriver\Library\LightweightHTTPAPICaller.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=3.1.5.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.3.1.5\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.13\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SplitButtonDLL">
+      <HintPath>..\..\..\source\repos\SplitButtonDLL\SplitButtonDLL\bin\Debug\SplitButtonDLL.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
@@ -100,10 +117,22 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.5.0.0\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
-    <Reference Include="System.Net.Http, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Net.Http.4.3.1\lib\net46\System.Net.Http.dll</HintPath>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Reflection.TypeExtensions, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.TypeExtensions.4.5.1\lib\net461\System.Reflection.TypeExtensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
@@ -126,13 +155,139 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Tweetinvi, Version=5.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetinviAPI.5.0.3\lib\netstandard2.0\Tweetinvi.dll</HintPath>
+    </Reference>
+    <Reference Include="Tweetinvi.Controllers, Version=5.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetinviAPI.5.0.3\lib\netstandard2.0\Tweetinvi.Controllers.dll</HintPath>
+    </Reference>
+    <Reference Include="Tweetinvi.Core, Version=5.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetinviAPI.5.0.3\lib\netstandard2.0\Tweetinvi.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Tweetinvi.Credentials, Version=5.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetinviAPI.5.0.3\lib\netstandard2.0\Tweetinvi.Credentials.dll</HintPath>
+    </Reference>
+    <Reference Include="Tweetinvi.Logic, Version=5.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetinviAPI.5.0.3\lib\netstandard2.0\Tweetinvi.Logic.dll</HintPath>
+    </Reference>
+    <Reference Include="Tweetinvi.Security, Version=5.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetinviAPI.5.0.3\lib\netstandard2.0\Tweetinvi.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Tweetinvi.Streams, Version=5.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetinviAPI.5.0.3\lib\netstandard2.0\Tweetinvi.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="Tweetinvi.WebLogic, Version=5.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetinviAPI.5.0.3\lib\netstandard2.0\Tweetinvi.WebLogic.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.3.2.0\lib\netstandard2.0\TwitchLib.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api.Core, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.Core.3.2.0\lib\netstandard2.0\TwitchLib.Api.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api.Core.Enums, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.Core.Enums.3.2.0\lib\netstandard2.0\TwitchLib.Api.Core.Enums.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api.Core.Interfaces, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.Core.Interfaces.3.2.0\lib\netstandard2.0\TwitchLib.Api.Core.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api.Core.Models, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.Core.Models.3.2.0\lib\netstandard2.0\TwitchLib.Api.Core.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api.Helix, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.Helix.3.2.0\lib\netstandard2.0\TwitchLib.Api.Helix.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api.Helix.Models, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.Helix.Models.3.2.0\lib\netstandard2.0\TwitchLib.Api.Helix.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api.V5, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.V5.3.2.0\lib\netstandard2.0\TwitchLib.Api.V5.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Api.V5.Models, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Api.V5.Models.3.2.0\lib\netstandard2.0\TwitchLib.Api.V5.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Client, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Client.3.2.0\lib\netstandard2.0\TwitchLib.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Client.Enums, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Client.Enums.3.2.0\lib\netstandard2.0\TwitchLib.Client.Enums.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Client.Models, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Client.Models.3.2.0\lib\netstandard2.0\TwitchLib.Client.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.Communication, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.Communication.1.0.3\lib\netstandard2.0\TwitchLib.Communication.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitchLib.PubSub, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwitchLib.PubSub.3.2.0\lib\netstandard2.0\TwitchLib.PubSub.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComboBoxTools.cs" />
-    <Compile Include="frm_login.cs">
+    <Compile Include="AppSettings\DirectoryManagement.cs" />
+    <Compile Include="AppSettings\GeneralSettings\EditableSettings.cs" />
+    <Compile Include="AppSettings\GeneralSettings\LoadSettingsFormControls.cs" />
+    <Compile Include="AppSettings\GeneralSettings\ScoreControlModel.cs" />
+    <Compile Include="AppSettings\GlobalSettings.cs" />
+    <Compile Include="AppSettings\EnableSettings.cs" />
+    <Compile Include="CharacterSelect\CharacterSelect.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_login.Designer.cs">
+    <Compile Include="CharacterSelect\CharacterSelect.Designer.cs">
+      <DependentUpon>CharacterSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CharacterSelect\ColorSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CharacterSelect\ColorSelect.Designer.cs">
+      <DependentUpon>ColorSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CharacterSelect\GenerateCharacters.cs" />
+    <Compile Include="CharacterSelect\GenerateColors.cs" />
+    <Compile Include="Startup\FormManagement.cs" />
+    <Compile Include="StreamAssistant\DataManagement\TextFileManagement.cs" />
+    <Compile Include="StreamAssistant\DataManagement\ThumbnailConfiguration.cs" />
+    <Compile Include="StreamAssistant\StreamAssistantControlUpdates.cs" />
+    <Compile Include="StreamAssistant\DataManagement\DataOutputCaller.cs" />
+    <Compile Include="StreamAssistant\DataManagement\ImageManagement.cs" />
+    <Compile Include="StreamAssistant\PlayerSettings.cs" />
+    <Compile Include="StreamAssistant\DataManagement\XmlManagement.cs" />
+    <Compile Include="ClipToTwitter\ClipToTwitterConnection.cs" />
+    <Compile Include="ClipToTwitter\ClipToTwitterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClipToTwitter\ClipToTwitterForm.Designer.cs">
+      <DependentUpon>ClipToTwitterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClipToTwitter\TwitterPinForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClipToTwitter\TwitterPinForm.Designer.cs">
+      <DependentUpon>TwitterPinForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClipToTwitter\TwitterTwitchSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClipToTwitter\TwitterTwitchSettingsForm.Designer.cs">
+      <DependentUpon>TwitterTwitchSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComboBoxTools.cs" />
+    <Compile Include="database_tools.cs" />
+    <Compile Include="frm_modern.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_modern.Designer.cs">
+      <DependentUpon>frm_modern.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_othertools.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_othertools.Designer.cs">
+      <DependentUpon>frm_othertools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Startup\frm_login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Startup\frm_login.Designer.cs">
       <DependentUpon>frm_login.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_edit_match.cs">
@@ -141,83 +296,71 @@
     <Compile Include="frm_edit_match.Designer.cs">
       <DependentUpon>frm_edit_match.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_edit_match_dubs.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_edit_match_dubs.Designer.cs">
-      <DependentUpon>frm_edit_match_dubs.cs</DependentUpon>
-    </Compile>
     <Compile Include="frm_newplayer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm_newplayer.Designer.cs">
       <DependentUpon>frm_newplayer.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_playerinfo.cs">
+    <Compile Include="AppSettings\GeneralSettings\GeneralSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_playerinfo.Designer.cs">
-      <DependentUpon>frm_playerinfo.cs</DependentUpon>
+    <Compile Include="AppSettings\GeneralSettings\GeneralSettingsForm.Designer.cs">
+      <DependentUpon>GeneralSettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_playerinfo_dubs.cs">
+    <Compile Include="Startup\frm_startup.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_playerinfo_dubs.Designer.cs">
-      <DependentUpon>frm_playerinfo_dubs.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frm_settings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_settings.Designer.cs">
-      <DependentUpon>frm_settings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frm_startup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_startup.Designer.cs">
+    <Compile Include="Startup\frm_startup.Designer.cs">
       <DependentUpon>frm_startup.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_streamqueue.cs">
+    <Compile Include="frm_bracket_assistant.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_streamqueue.Designer.cs">
-      <DependentUpon>frm_streamqueue.cs</DependentUpon>
+    <Compile Include="frm_bracket_assistant.Designer.cs">
+      <DependentUpon>frm_bracket_assistant.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_save_player.cs">
+    <Compile Include="SavePlayer\SavePlayerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_save_player.Designer.cs">
-      <DependentUpon>frm_save_player.cs</DependentUpon>
+    <Compile Include="SavePlayer\SavePlayerForm.Designer.cs">
+      <DependentUpon>SavePlayerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_main.cs">
+    <Compile Include="StreamAssistant\StreamAssistantForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_main.Designer.cs">
-      <DependentUpon>frm_main.cs</DependentUpon>
+    <Compile Include="StreamAssistant\StreamAssistantForm.Designer.cs">
+      <DependentUpon>StreamAssistantForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_error.cs">
+    <Compile Include="AppSettings\GeneralSettings\frm_tables.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_error.Designer.cs">
-      <DependentUpon>frm_error.cs</DependentUpon>
+    <Compile Include="AppSettings\GeneralSettings\frm_tables.Designer.cs">
+      <DependentUpon>frm_tables.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_replace_character.cs">
+    <Compile Include="frm_playermanager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_replace_character.Designer.cs">
-      <DependentUpon>frm_replace_character.cs</DependentUpon>
+    <Compile Include="frm_playermanager.Designer.cs">
+      <DependentUpon>frm_playermanager.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_settings_start.cs">
+    <Compile Include="frm_rename_queue.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_settings_start.Designer.cs">
-      <DependentUpon>frm_settings_start.cs</DependentUpon>
+    <Compile Include="frm_rename_queue.Designer.cs">
+      <DependentUpon>frm_rename_queue.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_streamqueue_dubs.cs">
+    <Compile Include="frm_top8_character.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_streamqueue_dubs.Designer.cs">
-      <DependentUpon>frm_streamqueue_dubs.cs</DependentUpon>
+    <Compile Include="frm_top8_character.Designer.cs">
+      <DependentUpon>frm_top8_character.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_template.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_template.Designer.cs">
+      <DependentUpon>frm_template.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_uploading.cs">
       <SubType>Form</SubType>
@@ -225,6 +368,7 @@
     <Compile Include="frm_uploading.Designer.cs">
       <DependentUpon>frm_uploading.cs</DependentUpon>
     </Compile>
+    <Compile Include="global_values.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="frm_results.cs">
@@ -233,50 +377,88 @@
     <Compile Include="frm_results.Designer.cs">
       <DependentUpon>frm_results.cs</DependentUpon>
     </Compile>
+    <Compile Include="SavePlayer\updatePlayerInformation.cs" />
+    <Compile Include="Top8\Top8CharacterSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Top8\Top8CharacterSettingsForm.Designer.cs">
+      <DependentUpon>Top8CharacterSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Top8\Top8GeneratorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Top8\Top8GeneratorForm.Designer.cs">
+      <DependentUpon>Top8GeneratorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Top8\Top8TemplateSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Top8\Top8TemplateSettingsForm.Designer.cs">
+      <DependentUpon>Top8TemplateSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TournamentParser\TournamentParser.cs" />
+    <Compile Include="TournamentParser\TournamentPlayer.cs" />
+    <Compile Include="TournamentParser\TournamentPlayerbase.cs" />
+    <Compile Include="AppSettings\SettingsFile.cs" />
+    <EmbeddedResource Include="CharacterSelect\CharacterSelect.resx">
+      <DependentUpon>CharacterSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CharacterSelect\ColorSelect.resx">
+      <DependentUpon>ColorSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClipToTwitter\ClipToTwitterForm.resx">
+      <DependentUpon>ClipToTwitterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClipToTwitter\TwitterPinForm.resx">
+      <DependentUpon>TwitterPinForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClipToTwitter\TwitterTwitchSettingsForm.resx">
+      <DependentUpon>TwitterTwitchSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_edit_match.resx">
       <DependentUpon>frm_edit_match.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_edit_match_dubs.resx">
-      <DependentUpon>frm_edit_match_dubs.cs</DependentUpon>
+    <EmbeddedResource Include="frm_modern.resx">
+      <DependentUpon>frm_modern.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_login.resx">
+    <EmbeddedResource Include="frm_othertools.resx">
+      <DependentUpon>frm_othertools.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Startup\frm_login.resx">
       <DependentUpon>frm_login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_newplayer.resx">
       <DependentUpon>frm_newplayer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_playerinfo.resx">
-      <DependentUpon>frm_playerinfo.cs</DependentUpon>
+    <EmbeddedResource Include="AppSettings\GeneralSettings\GeneralSettingsForm.resx">
+      <DependentUpon>GeneralSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_playerinfo_dubs.resx">
-      <DependentUpon>frm_playerinfo_dubs.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_settings.resx">
-      <DependentUpon>frm_settings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_startup.resx">
+    <EmbeddedResource Include="Startup\frm_startup.resx">
       <DependentUpon>frm_startup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_streamqueue.resx">
-      <DependentUpon>frm_streamqueue.cs</DependentUpon>
+    <EmbeddedResource Include="frm_bracket_assistant.resx">
+      <DependentUpon>frm_bracket_assistant.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_save_player.resx">
-      <DependentUpon>frm_save_player.cs</DependentUpon>
+    <EmbeddedResource Include="SavePlayer\SavePlayerForm.resx">
+      <DependentUpon>SavePlayerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_main.resx">
-      <DependentUpon>frm_main.cs</DependentUpon>
+    <EmbeddedResource Include="StreamAssistant\StreamAssistantForm.resx">
+      <DependentUpon>StreamAssistantForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_error.resx">
-      <DependentUpon>frm_error.cs</DependentUpon>
+    <EmbeddedResource Include="AppSettings\GeneralSettings\frm_tables.resx">
+      <DependentUpon>frm_tables.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_replace_character.resx">
-      <DependentUpon>frm_replace_character.cs</DependentUpon>
+    <EmbeddedResource Include="frm_playermanager.resx">
+      <DependentUpon>frm_playermanager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_settings_start.resx">
-      <DependentUpon>frm_settings_start.cs</DependentUpon>
+    <EmbeddedResource Include="frm_rename_queue.resx">
+      <DependentUpon>frm_rename_queue.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_streamqueue_dubs.resx">
-      <DependentUpon>frm_streamqueue_dubs.cs</DependentUpon>
+    <EmbeddedResource Include="frm_top8_character.resx">
+      <DependentUpon>frm_top8_character.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_template.resx">
+      <DependentUpon>frm_template.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_uploading.resx">
       <DependentUpon>frm_uploading.cs</DependentUpon>
@@ -289,10 +471,19 @@
     <EmbeddedResource Include="frm_results.resx">
       <DependentUpon>frm_results.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="built titling sb.ttf">
+    <EmbeddedResource Include="Top8\Top8CharacterSettingsForm.resx">
+      <DependentUpon>Top8CharacterSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Top8\Top8GeneratorForm.resx">
+      <DependentUpon>Top8GeneratorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Top8\Top8TemplateSettingsForm.resx">
+      <DependentUpon>Top8TemplateSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Resources\built titling sb.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="KeepCalm-Medium.ttf">
+    <None Include="Resources\KeepCalm-Medium.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
@@ -310,28 +501,45 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\top8.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Resources\youtube_upload.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Stream Info Handler_1_TemporaryKey.pfx" />
     <None Include="Stream Info Handler_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="blue.gif">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Resources\Graphics\blue.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="green.gif">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Resources\Graphics\green.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\save_button.png">
+    <None Include="Resources\Graphics\save_button.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="master_orders_icon.ico" />
-    <None Include="Resources\MasterOrders.png" />
-    <Content Include="right.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="Resources\Graphics\MasterOrders.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Resources\Graphics\master_orders_icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="left.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Resources\bracket_rounds.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\Graphics\M_logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Resources\Graphics\right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Graphics\left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -346,5 +554,36 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CharacterLibrary\CharacterLibrary.csproj">
+      <Project>{04a72c74-4826-4896-9278-092114cfa3f6}</Project>
+      <Name>CharacterLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GraphicsLibrary\GraphicsLibrary.csproj">
+      <Project>{e62da89d-04c7-4e0e-bb47-11400c57022f}</Project>
+      <Name>GraphicsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OutputManagementLibrary\OutputManagementLibrary.csproj">
+      <Project>{473bd5b7-08e7-4cbf-97b8-48f5c49b8e1b}</Project>
+      <Name>OutputManagementLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SqlDatabaseLibrary\SqlDatabaseLibrary.csproj">
+      <Project>{f38d9057-45e8-4f38-92fc-c90d33a30bcd}</Project>
+      <Name>SqlDatabaseLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwitchLibrary\TwitchLibrary.csproj">
+      <Project>{54489db3-0f53-4c74-9218-abdd182ad389}</Project>
+      <Name>TwitchLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwitterLibrary\TwitterLibrary.csproj">
+      <Project>{facfa84c-3394-4169-a17f-8a0b128d49cc}</Project>
+      <Name>TwitterLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YoutubeLibrary\YoutubeLibrary.csproj">
+      <Project>{9298759f-3fc0-4251-a198-a5715d7e5425}</Project>
+      <Name>YoutubeLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

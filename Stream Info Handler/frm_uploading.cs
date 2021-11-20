@@ -6,25 +6,20 @@
 //Copyright 2018, Dan Sanchez, All rights reserved.
 //////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
 
 using System.Threading;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Upload;
-using Google.Apis.Util.Store;
 using Google.Apis.YouTube.v3;
 using Google.Apis.YouTube.v3.Data;
 using Google.Apis.Services;
 using System.Reflection;
+using YoutubeLibrary;
+using Stream_Info_Handler.AppSettings;
 
 namespace Stream_Info_Handler
 {
@@ -32,7 +27,6 @@ namespace Stream_Info_Handler
     public partial class frm_uploading : Form
     {
         public event enable_button_event enable_button;
-        public string video_id;
         public string thumbnail_file;
         public string old_thumbnail;
         public string youtube_data;
@@ -40,23 +34,39 @@ namespace Stream_Info_Handler
         public long video_multiplier = 100;
         public string reenable_button;
         public bool bypass_lock;
+        public string videoId { get; set; }
+        public YouTubeService videoUploadService { get; set; }
+        public enum uploadStages
+        {
+            video,
+            playlist,
+            thumbnail
+        }
+        public uploadStages uploadProgress { get; set; } = uploadStages.video;
 
         public frm_uploading(string title, string description, string thumbnail, string vodfile, string reenable, bool bypass)
         {
             InitializeComponent();
+            this.TopMost = global_values.keepWindowsOnTop;
+            this.CenterToScreen();
+
             Control.CheckForIllegalCrossThreadCalls = false;
             txt_videotitle.Text = title;
-            txt_description.Text = description;
-            thumbnail_file = "upload_thumbnail_" + DateTime.Now.ToString("MMddyyyyHHmmss") + ".jpg";
-            if (File.Exists(thumbnail_file))
-            {
-                File.Delete(thumbnail_file);
-            }
-            File.Copy(thumbnail, thumbnail_file);
+            txt_description.Text = description.Replace("\n", "\r\n");
 
-            old_thumbnail = thumbnail;
-            pic_thumbnail.Image = Image.FromFile(thumbnail);
-            pic_thumbnail.SizeMode = PictureBoxSizeMode.StretchImage;
+            if (YoutubeController.enableVideoThumbnails == true)
+            {
+                thumbnail_file = "upload_thumbnail_" + DateTime.Now.ToString("MMddyyyyHHmmss") + ".jpg";
+                if (File.Exists(thumbnail_file))
+                {
+                    File.Delete(thumbnail_file);
+                }
+                File.Copy(thumbnail, thumbnail_file);
+
+                old_thumbnail = thumbnail;
+                pic_thumbnail.Image = Image.FromFile(thumbnail);
+                pic_thumbnail.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
 
             txt_videofile.Text = vodfile;
 
@@ -71,31 +81,23 @@ namespace Stream_Info_Handler
 
         private void Form4_FormClosed(object sender, FormClosedEventArgs e)
         {
-            pic_thumbnail.Image.Dispose();
-            File.Delete(old_thumbnail);
-            File.Delete(thumbnail_file);
+            if (YoutubeController.enableVideoThumbnails == true)
+            {
+                pic_thumbnail.Image.Dispose();
+                File.Delete(old_thumbnail);
+                File.Delete(thumbnail_file);
+            }
             enable_button(reenable_button);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(btn_upload_cancel.Text == "Finish")
-            {
-                DialogResult dialogResult = MessageBox.Show("Do you want to delete the local upload data?", "Upload Complete", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    if (File.Exists(youtube_data))
-                    {
-                        File.Delete(youtube_data);
-                    }
-                }
-            }
             this.Close();
         }
 
         private void btn_videofile_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = global_values.vods_directory;
+            openFileDialog1.InitialDirectory = DirectoryManagement.vodsDirectory;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 txt_videofile.Text = openFileDialog1.FileName;
@@ -120,9 +122,10 @@ namespace Stream_Info_Handler
 
         private void btn_upload_video_Click(object sender, EventArgs e)
         {
+
             if (global_values.allow_upload == true || bypass_lock == true)
             {
-                if(global_values.stream_software == "OBS")
+                if(YoutubeLibrary.YoutubeController.streamSoftware == "OBS")
                 {
                     if (MessageBox.Show("Please ensure that you have ended the video recording.", "Warning", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                     {
@@ -139,20 +142,16 @@ namespace Stream_Info_Handler
                 lbl_progress.Text = @"Starting YouTube upload...";
                 FileInfo videofile = new FileInfo(txt_videofile.Text);
                 video_size = videofile.Length;
-                try
-                {
-                    Thread thead = new Thread(() =>
-                    {
-                        Run().Wait();
-                    });
-                    thead.IsBackground = true;
-                    thead.Start();
 
-                }
-                catch (AggregateException ex)
+                Thread videoThread = new Thread(() =>
                 {
-                    MessageBox.Show(ex.Message);
-                }
+                    GetYoutubeCredential().Wait();
+                    UploadVideo().Wait();
+                    AssignPlaylist().Wait();
+                    UploadThumbnail().Wait();
+                });
+                videoThread.IsBackground = true;
+                videoThread.Start();
             }
             else
             {
@@ -161,74 +160,137 @@ namespace Stream_Info_Handler
 
         }
         //                    pgb_upload.Value = (int)(progress.BytesSent / video_size * video_multiplier);
-        
-        private async Task Run()
+
+        private async Task UploadThumbnail()
         {
-            UserCredential credential;
-            using (var stream = new FileStream(global_values.json_file, FileMode.Open, FileAccess.Read))
+            if(uploadProgress != uploadStages.thumbnail)
             {
-                credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.Load(stream).Secrets,
-                    // This OAuth 2.0 access scope allows an application to upload files to the
-                    // authenticated user's YouTube channel, but doesn't allow other types of access.
-                    new[] { YouTubeService.Scope.Youtube,
-                    YouTubeService.Scope.Youtubepartner,
-                    YouTubeService.Scope.YoutubeUpload,
-                    YouTubeService.Scope.YoutubepartnerChannelAudit,
-                    YouTubeService.Scope.YoutubeReadonly  },
-                    global_values.youtube_username,
-                    CancellationToken.None
-                );
+                return;
             }
 
-            var youtubeService = new YouTubeService(new BaseClientService.Initializer()
+            try
             {
-                HttpClientInitializer = credential,
-                ApplicationName = Assembly.GetExecutingAssembly().GetName().Name
-            });
+                if (YoutubeController.enableVideoThumbnails == true)
+                {
+                    using (var tStream = new FileStream(thumbnail_file, FileMode.Open))
+                    {
+                        var tInsertRequest = videoUploadService.Thumbnails.Set(videoId, tStream, "image/jpeg");
+                        tInsertRequest.ProgressChanged += videosInsertRequest_ProgressChanged;
+                        tInsertRequest.ResponseReceived += thumbnailInsertRequest_ResponseReceived;
 
-            var video = new Video();
-            video.Snippet = new VideoSnippet();
-            video.Snippet.Title = txt_videotitle.Text;
-            video.Snippet.Description = txt_description.Text;
-            string[] video_tags = new string[] {"Wii U", "UGS", "UGS Gaming", "Smash 4"};
-            video.Snippet.Tags = video_tags;
-            video.Snippet.CategoryId = "20"; // See https://developers.google.com/youtube/v3/docs/videoCategories/list
-            video.Status = new VideoStatus();
-            video.Status.PrivacyStatus = "public"; // or "private" or "public"
-            var filePath = txt_videofile.Text; // Replace with path to actual movie file.
 
-            using (var fileStream = new FileStream(filePath, FileMode.Open))
-            {
-                var videosInsertRequest = youtubeService.Videos.Insert(video, "snippet,status", fileStream, "video/*");
-                videosInsertRequest.ProgressChanged += videosInsertRequest_ProgressChanged;
-                videosInsertRequest.ResponseReceived += videosInsertRequest_ResponseReceived;
-
-                await videosInsertRequest.UploadAsync();
+                        await tInsertRequest.UploadAsync();
+                    }
+                }
+                else
+                {
+                    thumbnailInsertRequest_ResponseReceived(new ThumbnailSetResponse());
+                }
             }
-
-            if (global_values.playlist_name != "" && global_values.playlist_name != null)
+            catch(Exception)
             {
-                // Add a video to the newly created playlist.
-                var newPlaylistItem = new PlaylistItem();
-                newPlaylistItem.Snippet = new PlaylistItemSnippet();
-                newPlaylistItem.Snippet.PlaylistId = global_values.playlist_id;
-                newPlaylistItem.Snippet.ResourceId = new ResourceId();
-                newPlaylistItem.Snippet.ResourceId.Kind = "youtube#video";
-                newPlaylistItem.Snippet.ResourceId.VideoId = video_id;
-                newPlaylistItem = await youtubeService.PlaylistItems.Insert(newPlaylistItem, "snippet").ExecuteAsync();
-            }
-
-            using (var tStream = new FileStream(thumbnail_file, FileMode.Open))
-            {
-                var tInsertRequest = youtubeService.Thumbnails.Set(video_id, tStream, "image/jpeg");
-                tInsertRequest.ProgressChanged += videosInsertRequest_ProgressChanged;
-                tInsertRequest.ResponseReceived += thumbnailInsertRequest_ResponseReceived;
-                
-
-                await tInsertRequest.UploadAsync();
+                lbl_progress.Text = string.Format("Error associating thumbnail to video. The video is uploaded. Wait a few minutes and click Retry.", videoId);
+                btn_upload_cancel.Enabled = true;
+                btn_upload_video.Enabled = true;
+                btn_upload_video.Text = "Retry";
             }
         }
+
+        private async Task AssignPlaylist()
+        {
+            if (uploadProgress != uploadStages.playlist)
+            {
+                return;
+            }
+            try
+            {
+                if (YoutubeController.playlistName != "" && YoutubeController.playlistName != null)
+                {
+                    // Add a video to the newly created playlist.
+                    var newPlaylistItem = new PlaylistItem();
+                    newPlaylistItem.Snippet = new PlaylistItemSnippet();
+                    newPlaylistItem.Snippet.PlaylistId = YoutubeController.playlistId;
+                    newPlaylistItem.Snippet.ResourceId = new ResourceId();
+                    newPlaylistItem.Snippet.ResourceId.Kind = "youtube#video";
+                    newPlaylistItem.Snippet.ResourceId.VideoId = videoId;
+                    newPlaylistItem = await videoUploadService.PlaylistItems.Insert(newPlaylistItem, "snippet").ExecuteAsync();
+                    uploadProgress = uploadStages.thumbnail;
+                }
+            }
+            catch (Exception)
+            {
+                lbl_progress.Text = string.Format("Error associating playlist to video. The video is uploaded. Wait a few minutes and click Retry.", videoId);
+                btn_upload_cancel.Enabled = true;
+                btn_upload_video.Enabled = true;
+                btn_upload_video.Text = "Retry";
+            }
+
+        }
+
+        private async Task UploadVideo()
+        {
+            if (uploadProgress != uploadStages.video)
+            {
+                return;
+            }
+            try
+            {
+                videoUploadService = new YouTubeService(new BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = global_values.youtubeCredential,
+                    ApplicationName = Assembly.GetExecutingAssembly().GetName().Name
+                });
+
+                var video = new Video();
+                video.Snippet = new VideoSnippet();
+                video.Snippet.Title = txt_videotitle.Text;
+                video.Snippet.Description = txt_description.Text;
+                string[] video_tags = YoutubeController.videoTags.Split('\n');
+
+                video.Snippet.Tags = video_tags;
+                video.Snippet.CategoryId = "20"; // See https://developers.google.com/youtube/v3/docs/videoCategories/list
+                video.Status = new VideoStatus();
+                video.Status.PrivacyStatus = "public"; // or "private" or "public"
+                var filePath = txt_videofile.Text; // Replace with path to actual movie file.
+
+                using (var fileStream = new FileStream(filePath, FileMode.Open))
+                {
+                    var videosInsertRequest = videoUploadService.Videos.Insert(video, "snippet,status", fileStream, "video/*");
+                    videosInsertRequest.ProgressChanged += videosInsertRequest_ProgressChanged;
+                    videosInsertRequest.ResponseReceived += videosInsertRequest_ResponseReceived;
+
+                    await videosInsertRequest.UploadAsync();
+                    uploadProgress = uploadStages.playlist;
+                }
+            }
+            catch (Exception)
+            {
+                lbl_progress.Text = string.Format("Failed to upload the video. Is the video still being recorded? Try again.", videoId);
+                btn_upload_cancel.Enabled = true;
+                btn_upload_video.Enabled = true;
+            }
+        }
+
+        private async Task GetYoutubeCredential()
+        {
+            if (global_values.youtubeCredential == null)
+                using (var stream = new FileStream(YoutubeController.jsonFile, FileMode.Open, FileAccess.Read))
+                {
+                    global_values.youtubeCredential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
+                        GoogleClientSecrets.Load(stream).Secrets,
+                        // This OAuth 2.0 access scope allows for read-only access to the authenticated 
+                        // user's account, but not other types of account access.
+                        new[] { YouTubeService.Scope.Youtube,
+                        YouTubeService.Scope.YoutubeUpload },
+                        global_values.youtube_username,
+                        CancellationToken.None,
+                        global_values.store
+                    );
+                }
+
+            await global_values.youtubeCredential.RefreshTokenAsync(CancellationToken.None);
+        }
+      
 
         void videosInsertRequest_ProgressChanged(Google.Apis.Upload.IUploadProgress progress)
         {
@@ -252,7 +314,7 @@ namespace Stream_Info_Handler
         {
             lbl_progress.Text = string.Format("Uploading Thumbnail...", video.Id);
             pgb_upload.Value = 100;
-            video_id = video.Id;
+            videoId = video.Id;
         }
 
         void thumbnailInsertRequest_ResponseReceived(ThumbnailSetResponse response)

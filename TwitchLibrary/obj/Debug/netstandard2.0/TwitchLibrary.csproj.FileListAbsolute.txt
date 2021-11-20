@@ -1,0 +1,28 @@
+C:\Users\serri\source\repos\TwitterDemo\TwitchLibrary\bin\Debug\netstandard2.0\TwitchLibrary.deps.json
+C:\Users\serri\source\repos\TwitterDemo\TwitchLibrary\bin\Debug\netstandard2.0\TwitchLibrary.dll
+C:\Users\serri\source\repos\TwitterDemo\TwitchLibrary\bin\Debug\netstandard2.0\TwitchLibrary.pdb
+C:\Users\serri\source\repos\TwitterDemo\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.csprojAssemblyReference.cache
+C:\Users\serri\source\repos\TwitterDemo\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.AssemblyInfoInputs.cache
+C:\Users\serri\source\repos\TwitterDemo\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.AssemblyInfo.cs
+C:\Users\serri\source\repos\TwitterDemo\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.csproj.CoreCompileInputs.cache
+C:\Users\serri\source\repos\TwitterDemo\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.dll
+C:\Users\serri\source\repos\TwitterDemo\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.pdb
+C:\Users\serri\Google Drive\Master-Orders\TwitchLibrary\bin\Debug\netstandard2.0\TwitchLibrary.deps.json
+C:\Users\serri\Google Drive\Master-Orders\TwitchLibrary\bin\Debug\netstandard2.0\TwitchLibrary.dll
+C:\Users\serri\Google Drive\Master-Orders\TwitchLibrary\bin\Debug\netstandard2.0\TwitchLibrary.pdb
+C:\Users\serri\Google Drive\Master-Orders\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.AssemblyInfoInputs.cache
+C:\Users\serri\Google Drive\Master-Orders\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.AssemblyInfo.cs
+C:\Users\serri\Google Drive\Master-Orders\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.csproj.CoreCompileInputs.cache
+C:\Users\serri\Google Drive\Master-Orders\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.dll
+C:\Users\serri\Google Drive\Master-Orders\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.pdb
+C:\Users\serri\Google Drive\Master-Orders\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.csprojAssemblyReference.cache
+C:\Users\serri\My Drive\Master-Orders\TwitchLibrary\bin\Debug\netstandard2.0\TwitchLibrary.deps.json
+C:\Users\serri\My Drive\Master-Orders\TwitchLibrary\bin\Debug\netstandard2.0\TwitchLibrary.dll
+C:\Users\serri\My Drive\Master-Orders\TwitchLibrary\bin\Debug\netstandard2.0\TwitchLibrary.pdb
+C:\Users\serri\My Drive\Master-Orders\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.csproj.AssemblyReference.cache
+C:\Users\serri\My Drive\Master-Orders\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\serri\My Drive\Master-Orders\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.AssemblyInfoInputs.cache
+C:\Users\serri\My Drive\Master-Orders\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.AssemblyInfo.cs
+C:\Users\serri\My Drive\Master-Orders\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.csproj.CoreCompileInputs.cache
+C:\Users\serri\My Drive\Master-Orders\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.dll
+C:\Users\serri\My Drive\Master-Orders\TwitchLibrary\obj\Debug\netstandard2.0\TwitchLibrary.pdb

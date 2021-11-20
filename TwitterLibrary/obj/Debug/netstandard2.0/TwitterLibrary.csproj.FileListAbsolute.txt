@@ -1,0 +1,28 @@
+C:\Users\serri\source\repos\TwitterDemo\TwitterLibrary\bin\Debug\netstandard2.0\TwitterLibrary.deps.json
+C:\Users\serri\source\repos\TwitterDemo\TwitterLibrary\bin\Debug\netstandard2.0\TwitterLibrary.dll
+C:\Users\serri\source\repos\TwitterDemo\TwitterLibrary\bin\Debug\netstandard2.0\TwitterLibrary.pdb
+C:\Users\serri\source\repos\TwitterDemo\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.csprojAssemblyReference.cache
+C:\Users\serri\source\repos\TwitterDemo\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.AssemblyInfoInputs.cache
+C:\Users\serri\source\repos\TwitterDemo\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.AssemblyInfo.cs
+C:\Users\serri\source\repos\TwitterDemo\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.csproj.CoreCompileInputs.cache
+C:\Users\serri\source\repos\TwitterDemo\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.dll
+C:\Users\serri\source\repos\TwitterDemo\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.pdb
+C:\Users\serri\Google Drive\Master-Orders\TwitterLibrary\bin\Debug\netstandard2.0\TwitterLibrary.deps.json
+C:\Users\serri\Google Drive\Master-Orders\TwitterLibrary\bin\Debug\netstandard2.0\TwitterLibrary.dll
+C:\Users\serri\Google Drive\Master-Orders\TwitterLibrary\bin\Debug\netstandard2.0\TwitterLibrary.pdb
+C:\Users\serri\Google Drive\Master-Orders\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.AssemblyInfoInputs.cache
+C:\Users\serri\Google Drive\Master-Orders\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.AssemblyInfo.cs
+C:\Users\serri\Google Drive\Master-Orders\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.csproj.CoreCompileInputs.cache
+C:\Users\serri\Google Drive\Master-Orders\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.dll
+C:\Users\serri\Google Drive\Master-Orders\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.pdb
+C:\Users\serri\Google Drive\Master-Orders\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.csprojAssemblyReference.cache
+C:\Users\serri\My Drive\Master-Orders\TwitterLibrary\bin\Debug\netstandard2.0\TwitterLibrary.deps.json
+C:\Users\serri\My Drive\Master-Orders\TwitterLibrary\bin\Debug\netstandard2.0\TwitterLibrary.dll
+C:\Users\serri\My Drive\Master-Orders\TwitterLibrary\bin\Debug\netstandard2.0\TwitterLibrary.pdb
+C:\Users\serri\My Drive\Master-Orders\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.csproj.AssemblyReference.cache
+C:\Users\serri\My Drive\Master-Orders\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\serri\My Drive\Master-Orders\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.AssemblyInfoInputs.cache
+C:\Users\serri\My Drive\Master-Orders\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.AssemblyInfo.cs
+C:\Users\serri\My Drive\Master-Orders\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.csproj.CoreCompileInputs.cache
+C:\Users\serri\My Drive\Master-Orders\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.dll
+C:\Users\serri\My Drive\Master-Orders\TwitterLibrary\obj\Debug\netstandard2.0\TwitterLibrary.pdb

@@ -199,3 +199,334 @@ C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\bin\Debug\MySq
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_login.resources
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_startup.resources
 C:\Users\serri\Documents\GitHub\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_settings.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\blue.gif
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\green.gif
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\right.png
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\left.png
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\KeepCalm-Medium.ttf
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\built titling sb.ttf
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\top8.ini
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\save_button.png
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.exe.config
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.exe.manifest
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.application
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.exe
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.pdb
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Auth.dll
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Core.dll
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.dll
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.PlatformServices.dll
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Sheets.v4.dll
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.YouTube.v3.dll
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Protobuf.dll
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\INIFileParser.dll
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\MySql.Data.dll
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Net.Http.dll
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Cryptography.Algorithms.dll
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Cryptography.Encoding.dll
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Cryptography.Primitives.dll
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.pdb
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.xml
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Auth.pdb
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Auth.xml
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Core.pdb
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Core.xml
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Sheets.v4.pdb
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Sheets.v4.xml
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.YouTube.v3.xml
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Protobuf.xml
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\INIFileParser.xml
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\MySql.Data.xml
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csprojResolveAssemblyReference.cache
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_edit_match.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_login.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_newplayer.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_settings.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_startup.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_bracket_assistant.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_save_player.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_main.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_replace_character.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_uploading.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Properties.Resources.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_results.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.GenerateResource.cache
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CoreCompileInputs.cache
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.exe.manifest
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.application
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CopyComplete
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.exe
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.pdb
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_top8_character.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_template.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_tables.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_othertools.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\bracket_rounds.txt
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\SplitButtonDLL.pdb
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_playermanager.resources
+C:\Users\Dan\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_rename_queue.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\KeepCalm-Medium.ttf
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\youtube_upload.json
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\Graphics\blue.gif
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\Graphics\green.gif
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\Graphics\master_orders_icon.ico
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\bracket_rounds.txt
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\Graphics\right.png
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\Graphics\left.png
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\built titling sb.ttf
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\top8.ini
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\Graphics\save_button.png
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\Graphics\MasterOrders.png
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\Graphics\M_logo.png
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.exe.config
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.exe.manifest
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.application
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.exe
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Master Orders.pdb
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Microsoft.Win32.Primitives.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\netstandard.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.AppContext.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Collections.Concurrent.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Collections.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Collections.NonGeneric.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Collections.Specialized.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.ComponentModel.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.ComponentModel.EventBasedAsync.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.ComponentModel.Primitives.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.ComponentModel.TypeConverter.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Console.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Data.Common.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Diagnostics.Contracts.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Diagnostics.Debug.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Diagnostics.FileVersionInfo.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Diagnostics.Process.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Diagnostics.StackTrace.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Diagnostics.TextWriterTraceListener.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Diagnostics.Tools.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Diagnostics.TraceSource.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Diagnostics.Tracing.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Drawing.Primitives.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Dynamic.Runtime.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Globalization.Calendars.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Globalization.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Globalization.Extensions.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.IO.Compression.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.IO.Compression.ZipFile.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.IO.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.IO.FileSystem.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.IO.FileSystem.DriveInfo.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.IO.FileSystem.Primitives.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.IO.FileSystem.Watcher.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.IO.IsolatedStorage.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.IO.MemoryMappedFiles.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.IO.Pipes.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.IO.UnmanagedMemoryStream.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Linq.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Linq.Expressions.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Linq.Parallel.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Linq.Queryable.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Net.Http.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Net.NameResolution.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Net.NetworkInformation.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Net.Ping.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Net.Primitives.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Net.Requests.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Net.Security.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Net.Sockets.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Net.WebHeaderCollection.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Net.WebSockets.Client.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Net.WebSockets.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.ObjectModel.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Reflection.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Reflection.Extensions.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Reflection.Primitives.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Resources.Reader.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Resources.ResourceManager.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Resources.Writer.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Runtime.CompilerServices.VisualC.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Runtime.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Runtime.Extensions.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Runtime.Handles.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Runtime.InteropServices.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Runtime.Numerics.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Runtime.Serialization.Formatters.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Runtime.Serialization.Json.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Runtime.Serialization.Primitives.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Runtime.Serialization.Xml.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Claims.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Cryptography.Algorithms.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Cryptography.Csp.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Cryptography.Encoding.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Cryptography.Primitives.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Security.Principal.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Security.SecureString.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Text.Encoding.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Text.Encoding.Extensions.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Text.RegularExpressions.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Threading.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Threading.Overlapped.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Threading.Tasks.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Threading.Tasks.Parallel.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Threading.Thread.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Threading.ThreadPool.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Threading.Timer.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.ValueTuple.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Xml.ReaderWriter.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Xml.XDocument.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Xml.XmlDocument.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Xml.XmlSerializer.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Xml.XPath.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Xml.XPath.XDocument.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Autofac.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\CharacterLibrary.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Auth.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Core.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.PlatformServices.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Sheets.v4.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.YouTube.v3.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Protobuf.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\GraphicsLibrary.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\INIFileParser.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\MySql.Data.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Newtonsoft.Json.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\OutputManagementLibrary.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\SqlDatabaseLibrary.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Drawing.Common.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Reflection.TypeExtensions.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.Controllers.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.Core.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.Credentials.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.Logic.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.Security.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.Streams.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.WebLogic.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitchLib.Api.Core.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitchLib.Api.Core.Enums.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitchLib.Api.Core.Interfaces.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitchLib.Api.Core.Models.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitchLib.Api.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitchLib.Api.Helix.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitchLib.Api.Helix.Models.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitchLib.Api.V5.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitchLib.Api.V5.Models.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitchLib.Client.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitchLib.Client.Enums.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitchLib.Client.Models.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitchLib.Communication.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitchLib.PubSub.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitchLibrary.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitterLibrary.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\YoutubeLibrary.dll
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\CharacterLibrary.pdb
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\GraphicsLibrary.pdb
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\OutputManagementLibrary.pdb
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\SqlDatabaseLibrary.pdb
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitchLibrary.pdb
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\TwitterLibrary.pdb
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\YoutubeLibrary.pdb
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Autofac.pdb
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Autofac.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.pdb
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Auth.pdb
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Auth.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Core.pdb
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Core.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Sheets.v4.pdb
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.Sheets.v4.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Apis.YouTube.v3.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Google.Protobuf.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\INIFileParser.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\MySql.Data.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Newtonsoft.Json.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.Controllers.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.Core.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.Credentials.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.Logic.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.Streams.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.WebLogic.xml
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.exe.config
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.CharacterSelect.CharacterSelect.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.CharacterSelect.ColorSelect.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.ClipToTwitter.ClipToTwitterForm.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.ClipToTwitter.TwitterPinForm.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.ClipToTwitter.TwitterTwitchSettingsForm.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_edit_match.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_modern.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_othertools.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Startup.frm_login.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_newplayer.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_settings.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_startup.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_bracket_assistant.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.SavePlayer.SavePlayerForm.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_main.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_tables.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_playermanager.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_rename_queue.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_top8_character.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_template.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_uploading.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Properties.Resources.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_results.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Top8.Top8CharacterSettingsForm.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Top8.Top8GeneratorForm.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Top8.Top8TemplateSettingsForm.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.GenerateResource.cache
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CoreCompileInputs.cache
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.exe.manifest
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.application
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CopyComplete
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.exe
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.pdb
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csprojAssemblyReference.cache
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.AppSettings.AppSettingsForm.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.StreamAssistant.StreamAssistantForm.resources
+C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.AssemblyReference.cache
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.AssemblyReference.cache
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.exe.config
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.CharacterSelect.CharacterSelect.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.CharacterSelect.ColorSelect.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.ClipToTwitter.ClipToTwitterForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.ClipToTwitter.TwitterPinForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.ClipToTwitter.TwitterTwitchSettingsForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_edit_match.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_modern.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_othertools.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Startup.frm_login.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_newplayer.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.AppSettings.AppSettingsForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_startup.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_bracket_assistant.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.SavePlayer.SavePlayerForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.StreamAssistant.StreamAssistantForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_tables.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_playermanager.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_rename_queue.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_top8_character.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_template.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_uploading.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Properties.Resources.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_results.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Top8.Top8CharacterSettingsForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Top8.Top8GeneratorForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Top8.Top8TemplateSettingsForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.GenerateResource.cache
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CoreCompileInputs.cache
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.exe
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.pdb

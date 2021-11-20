@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "5Kg1FmfW413rCB1Z9oaNnNXtJ5pNb7H10qZP84Y2vm9mwp/b107e9u6s4ihKHKS3KEAAFJv70509KnuNtjmBlA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\serri\\Google Drive\\Master-Orders\\CharacterLibrary\\CharacterLibrary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\serri\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\serri\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\serri\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

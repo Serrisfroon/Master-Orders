@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "A23xQBxHgyIDRaYHvx19Q4xjWaYs1IFuri7wnEqqL785SUYBSlVvaYINv9Cybasyo3dePQNLVpoG6nn3nVUwMQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\serri\\Google Drive\\Master-Orders\\GraphicsLibrary\\GraphicsLibrary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\serri\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\serri\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\serri\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

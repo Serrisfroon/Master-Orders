@@ -1,0 +1,9 @@
+C:\Users\serri\Google Drive\Master-Orders\SqlDatabaseLibrary\bin\Release\netstandard2.0\SqlDatabaseLibrary.deps.json
+C:\Users\serri\Google Drive\Master-Orders\SqlDatabaseLibrary\bin\Release\netstandard2.0\SqlDatabaseLibrary.dll
+C:\Users\serri\Google Drive\Master-Orders\SqlDatabaseLibrary\bin\Release\netstandard2.0\SqlDatabaseLibrary.pdb
+C:\Users\serri\Google Drive\Master-Orders\SqlDatabaseLibrary\obj\Release\netstandard2.0\SqlDatabaseLibrary.csprojAssemblyReference.cache
+C:\Users\serri\Google Drive\Master-Orders\SqlDatabaseLibrary\obj\Release\netstandard2.0\SqlDatabaseLibrary.AssemblyInfoInputs.cache
+C:\Users\serri\Google Drive\Master-Orders\SqlDatabaseLibrary\obj\Release\netstandard2.0\SqlDatabaseLibrary.AssemblyInfo.cs
+C:\Users\serri\Google Drive\Master-Orders\SqlDatabaseLibrary\obj\Release\netstandard2.0\SqlDatabaseLibrary.csproj.CoreCompileInputs.cache
+C:\Users\serri\Google Drive\Master-Orders\SqlDatabaseLibrary\obj\Release\netstandard2.0\SqlDatabaseLibrary.dll
+C:\Users\serri\Google Drive\Master-Orders\SqlDatabaseLibrary\obj\Release\netstandard2.0\SqlDatabaseLibrary.pdb

@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "tHiE43DzMbsg/nJnDQ8xIfv7MO5LnwrHRH5n6nnHm95UDuKo/rn38xt925BCrfJYWSSZ8iUhFHP1LV7ghNt52w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\serri\\Google Drive\\Master-Orders\\YoutubeLibrary\\YoutubeLibrary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\serri\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\serri\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

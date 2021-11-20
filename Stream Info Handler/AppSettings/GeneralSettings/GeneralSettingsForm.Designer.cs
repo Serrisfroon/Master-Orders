@@ -1,0 +1,2280 @@
+﻿namespace Stream_Info_Handler.AppSettings.GeneralSettings
+{
+    partial class GeneralSettingsForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeneralSettingsForm));
+            this.tab_settings = new System.Windows.Forms.TabControl();
+            this.tab_general = new System.Windows.Forms.TabPage();
+            this.label41 = new System.Windows.Forms.Label();
+            this.txt_seperator = new System.Windows.Forms.TextBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cbx_queuegame = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btn_queue_rename = new System.Windows.Forms.Button();
+            this.cbx_queues = new System.Windows.Forms.ComboBox();
+            this.txt_bracketrounds = new System.Windows.Forms.TextBox();
+            this.btn_bracketrounds = new System.Windows.Forms.Button();
+            this.ckb_ontop = new System.Windows.Forms.CheckBox();
+            this.cbx_format = new System.Windows.Forms.ComboBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_reassign = new System.Windows.Forms.Button();
+            this.lbl_characters = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txt_characters = new System.Windows.Forms.TextBox();
+            this.cbx_characters = new System.Windows.Forms.ComboBox();
+            this.btn_characters = new System.Windows.Forms.Button();
+            this.tab_stream = new System.Windows.Forms.TabPage();
+            this.tab_stream_tabs = new System.Windows.Forms.TabControl();
+            this.tab_general2 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.txt_titletemplate = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.cbx_shorten_video = new System.Windows.Forms.ComboBox();
+            this.ckb_clipboard = new System.Windows.Forms.CheckBox();
+            this.ckb_thumbnails = new System.Windows.Forms.CheckBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btn_score2_image3 = new System.Windows.Forms.Button();
+            this.btn_score2_image2 = new System.Windows.Forms.Button();
+            this.btn_score2_image1 = new System.Windows.Forms.Button();
+            this.pic_score2_image3 = new System.Windows.Forms.PictureBox();
+            this.pic_score2_image2 = new System.Windows.Forms.PictureBox();
+            this.pic_score2_image1 = new System.Windows.Forms.PictureBox();
+            this.ckb_scoreboad = new System.Windows.Forms.CheckBox();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.btn_score1_image3 = new System.Windows.Forms.Button();
+            this.btn_score1_image2 = new System.Windows.Forms.Button();
+            this.btn_score1_image1 = new System.Windows.Forms.Button();
+            this.pic_score1_image3 = new System.Windows.Forms.PictureBox();
+            this.pic_score1_image2 = new System.Windows.Forms.PictureBox();
+            this.pic_score1_image1 = new System.Windows.Forms.PictureBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.rdb_manual = new System.Windows.Forms.RadioButton();
+            this.rdb_automatic = new System.Windows.Forms.RadioButton();
+            this.tab_directories = new System.Windows.Forms.TabPage();
+            this.lbl_directories = new System.Windows.Forms.Label();
+            this.ckb_regions = new System.Windows.Forms.CheckBox();
+            this.ckb_sponsors = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txt_regions = new System.Windows.Forms.TextBox();
+            this.btn_regions = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txt_sponsors = new System.Windows.Forms.TextBox();
+            this.btn_sponsors = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txt_vods = new System.Windows.Forms.TextBox();
+            this.btn_vods = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txt_thumbnails = new System.Windows.Forms.TextBox();
+            this.btn_thumbnails = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txt_streamfiles = new System.Windows.Forms.TextBox();
+            this.btn_streamfiles = new System.Windows.Forms.Button();
+            this.tab_youtube = new System.Windows.Forms.TabPage();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txt_description = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.txt_tags = new System.Windows.Forms.TextBox();
+            this.ckb_vod_uploads = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btn_playlist = new System.Windows.Forms.Button();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.rdb_obs = new System.Windows.Forms.RadioButton();
+            this.rdb_xsplit = new System.Windows.Forms.RadioButton();
+            this.txt_playlist = new System.Windows.Forms.TextBox();
+            this.tab_thumbnail = new System.Windows.Forms.TabPage();
+            this.btn_preview = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tab_templates = new System.Windows.Forms.TabPage();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.lbl_font = new System.Windows.Forms.Label();
+            this.btn_font = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txt_foreground = new System.Windows.Forms.TextBox();
+            this.btn_foreground = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txt_background = new System.Windows.Forms.TextBox();
+            this.btn_background = new System.Windows.Forms.Button();
+            this.tab_characters = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.cbx_char2 = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txt_char2_yoffset = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txt_char2_xoffset = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.cbx_char1 = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txt_char1_yoffset = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txt_char1_xoffset = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tab_names = new System.Windows.Forms.TabPage();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.txt_name2_size = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.txt_name2 = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txt_name2_yoffset = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txt_name2_xoffset = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.txt_name1_size = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.txt_name1 = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.txt_name1_yoffset = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.txt_name1_xoffset = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.tab_round = new System.Windows.Forms.TabPage();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.txt_version = new System.Windows.Forms.TextBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.txt_patch_size = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.txt_patch_yoffset = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.txt_patch_xoffset = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.txt_date_size = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.ckb_date = new System.Windows.Forms.CheckBox();
+            this.txt_date_yoffset = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.txt_date_xoffset = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.txt_round_size = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.txt_round_yoffset = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.txt_round_xoffset = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.pic_thumbnail = new System.Windows.Forms.PictureBox();
+            this.tab_bracket = new System.Windows.Forms.TabPage();
+            this.btn_apply = new System.Windows.Forms.Button();
+            this.btn_cancel = new System.Windows.Forms.Button();
+            this.btn_ok = new System.Windows.Forms.Button();
+            this.ftd_thumbnail = new System.Windows.Forms.FontDialog();
+            this.fbd_directory = new System.Windows.Forms.FolderBrowserDialog();
+            this.ofd_jpg = new System.Windows.Forms.OpenFileDialog();
+            this.ofd_png = new System.Windows.Forms.OpenFileDialog();
+            this.ofd_json = new System.Windows.Forms.OpenFileDialog();
+            this.ofd_txt = new System.Windows.Forms.OpenFileDialog();
+            this.tab_settings.SuspendLayout();
+            this.tab_general.SuspendLayout();
+            this.groupBox16.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.tab_stream.SuspendLayout();
+            this.tab_stream_tabs.SuspendLayout();
+            this.tab_general2.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score2_image3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score2_image2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score2_image1)).BeginInit();
+            this.groupBox10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image1)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            this.tab_directories.SuspendLayout();
+            this.tab_youtube.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.tab_thumbnail.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tab_templates.SuspendLayout();
+            this.groupBox15.SuspendLayout();
+            this.tab_characters.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.tab_names.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            this.groupBox11.SuspendLayout();
+            this.tab_round.SuspendLayout();
+            this.groupBox14.SuspendLayout();
+            this.groupBox13.SuspendLayout();
+            this.groupBox12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_thumbnail)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // tab_settings
+            // 
+            this.tab_settings.Controls.Add(this.tab_general);
+            this.tab_settings.Controls.Add(this.tab_stream);
+            this.tab_settings.Controls.Add(this.tab_bracket);
+            this.tab_settings.Location = new System.Drawing.Point(2, 1);
+            this.tab_settings.Name = "tab_settings";
+            this.tab_settings.SelectedIndex = 0;
+            this.tab_settings.Size = new System.Drawing.Size(413, 424);
+            this.tab_settings.TabIndex = 0;
+            // 
+            // tab_general
+            // 
+            this.tab_general.Controls.Add(this.label41);
+            this.tab_general.Controls.Add(this.txt_seperator);
+            this.tab_general.Controls.Add(this.label40);
+            this.tab_general.Controls.Add(this.groupBox16);
+            this.tab_general.Controls.Add(this.txt_bracketrounds);
+            this.tab_general.Controls.Add(this.btn_bracketrounds);
+            this.tab_general.Controls.Add(this.ckb_ontop);
+            this.tab_general.Controls.Add(this.cbx_format);
+            this.tab_general.Controls.Add(this.label38);
+            this.tab_general.Controls.Add(this.groupBox1);
+            this.tab_general.Location = new System.Drawing.Point(4, 22);
+            this.tab_general.Name = "tab_general";
+            this.tab_general.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_general.Size = new System.Drawing.Size(405, 398);
+            this.tab_general.TabIndex = 0;
+            this.tab_general.Text = "General";
+            this.tab_general.UseVisualStyleBackColor = true;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(9, 349);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(95, 13);
+            this.label41.TabIndex = 16;
+            this.label41.Text = "Sponsor Seperator";
+            // 
+            // txt_seperator
+            // 
+            this.txt_seperator.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_seperator.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_seperator.Location = new System.Drawing.Point(110, 346);
+            this.txt_seperator.Name = "txt_seperator";
+            this.txt_seperator.Size = new System.Drawing.Size(67, 20);
+            this.txt_seperator.TabIndex = 15;
+            this.txt_seperator.TextChanged += new System.EventHandler(this.txt_seperator_TextChanged);
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(9, 304);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(103, 13);
+            this.label40.TabIndex = 13;
+            this.label40.Text = "Bracket Rounds File";
+            // 
+            // groupBox16
+            // 
+            this.groupBox16.Controls.Add(this.label7);
+            this.groupBox16.Controls.Add(this.cbx_queuegame);
+            this.groupBox16.Controls.Add(this.label3);
+            this.groupBox16.Controls.Add(this.btn_queue_rename);
+            this.groupBox16.Controls.Add(this.cbx_queues);
+            this.groupBox16.Location = new System.Drawing.Point(3, 157);
+            this.groupBox16.Name = "groupBox16";
+            this.groupBox16.Size = new System.Drawing.Size(399, 103);
+            this.groupBox16.TabIndex = 9;
+            this.groupBox16.TabStop = false;
+            this.groupBox16.Text = "Stream Queues";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 59);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(109, 13);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Stream Queue Game:";
+            // 
+            // cbx_queuegame
+            // 
+            this.cbx_queuegame.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbx_queuegame.FormattingEnabled = true;
+            this.cbx_queuegame.Location = new System.Drawing.Point(6, 75);
+            this.cbx_queuegame.Name = "cbx_queuegame";
+            this.cbx_queuegame.Size = new System.Drawing.Size(190, 21);
+            this.cbx_queuegame.TabIndex = 9;
+            this.cbx_queuegame.SelectedIndexChanged += new System.EventHandler(this.cbx_queuegame_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(162, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Use the following Stream Queue:";
+            // 
+            // btn_queue_rename
+            // 
+            this.btn_queue_rename.Location = new System.Drawing.Point(212, 35);
+            this.btn_queue_rename.Name = "btn_queue_rename";
+            this.btn_queue_rename.Size = new System.Drawing.Size(117, 21);
+            this.btn_queue_rename.TabIndex = 8;
+            this.btn_queue_rename.Text = "Rename Queue";
+            this.btn_queue_rename.UseVisualStyleBackColor = true;
+            this.btn_queue_rename.Click += new System.EventHandler(this.btn_queue_rename_Click);
+            // 
+            // cbx_queues
+            // 
+            this.cbx_queues.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbx_queues.FormattingEnabled = true;
+            this.cbx_queues.Location = new System.Drawing.Point(6, 35);
+            this.cbx_queues.Name = "cbx_queues";
+            this.cbx_queues.Size = new System.Drawing.Size(190, 21);
+            this.cbx_queues.TabIndex = 2;
+            this.cbx_queues.SelectedIndexChanged += new System.EventHandler(this.cbx_queues_SelectedIndexChanged);
+            // 
+            // txt_bracketrounds
+            // 
+            this.txt_bracketrounds.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_bracketrounds.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_bracketrounds.Location = new System.Drawing.Point(9, 320);
+            this.txt_bracketrounds.Name = "txt_bracketrounds";
+            this.txt_bracketrounds.Size = new System.Drawing.Size(310, 20);
+            this.txt_bracketrounds.TabIndex = 12;
+            this.txt_bracketrounds.TextChanged += new System.EventHandler(this.txt_bracketrounds_TextChanged);
+            // 
+            // btn_bracketrounds
+            // 
+            this.btn_bracketrounds.Location = new System.Drawing.Point(322, 319);
+            this.btn_bracketrounds.Name = "btn_bracketrounds";
+            this.btn_bracketrounds.Size = new System.Drawing.Size(74, 21);
+            this.btn_bracketrounds.TabIndex = 14;
+            this.btn_bracketrounds.Text = "Browse";
+            this.btn_bracketrounds.UseVisualStyleBackColor = true;
+            this.btn_bracketrounds.Click += new System.EventHandler(this.btn_bracketrounds_Click);
+            // 
+            // ckb_ontop
+            // 
+            this.ckb_ontop.AutoSize = true;
+            this.ckb_ontop.Location = new System.Drawing.Point(9, 375);
+            this.ckb_ontop.Name = "ckb_ontop";
+            this.ckb_ontop.Size = new System.Drawing.Size(204, 17);
+            this.ckb_ontop.TabIndex = 7;
+            this.ckb_ontop.Text = "Keep Master Orders Windows on Top";
+            this.ckb_ontop.UseVisualStyleBackColor = true;
+            this.ckb_ontop.CheckedChanged += new System.EventHandler(this.ckb_ontop_CheckedChanged);
+            // 
+            // cbx_format
+            // 
+            this.cbx_format.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbx_format.FormattingEnabled = true;
+            this.cbx_format.Items.AddRange(new object[] {
+            "Singles",
+            "Doubles"});
+            this.cbx_format.Location = new System.Drawing.Point(9, 279);
+            this.cbx_format.Name = "cbx_format";
+            this.cbx_format.Size = new System.Drawing.Size(190, 21);
+            this.cbx_format.TabIndex = 6;
+            this.cbx_format.SelectedIndexChanged += new System.EventHandler(this.cbx_queues_SelectedIndexChanged);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(9, 263);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(99, 13);
+            this.label38.TabIndex = 2;
+            this.label38.Text = "Tournament Format";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btn_reassign);
+            this.groupBox1.Controls.Add(this.lbl_characters);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.txt_characters);
+            this.groupBox1.Controls.Add(this.cbx_characters);
+            this.groupBox1.Controls.Add(this.btn_characters);
+            this.groupBox1.Location = new System.Drawing.Point(3, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(399, 145);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Characters";
+            // 
+            // btn_reassign
+            // 
+            this.btn_reassign.Enabled = false;
+            this.btn_reassign.Location = new System.Drawing.Point(212, 71);
+            this.btn_reassign.Name = "btn_reassign";
+            this.btn_reassign.Size = new System.Drawing.Size(117, 21);
+            this.btn_reassign.TabIndex = 11;
+            this.btn_reassign.Text = "Reassign Directory";
+            this.btn_reassign.UseVisualStyleBackColor = true;
+            this.btn_reassign.Click += new System.EventHandler(this.btn_reassign_Click);
+            // 
+            // lbl_characters
+            // 
+            this.lbl_characters.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_characters.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lbl_characters.Location = new System.Drawing.Point(6, 95);
+            this.lbl_characters.Name = "lbl_characters";
+            this.lbl_characters.Size = new System.Drawing.Size(387, 47);
+            this.lbl_characters.TabIndex = 5;
+            this.lbl_characters.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(152, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Character Databases Directory";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 55);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(174, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Use the following Character Roster:";
+            // 
+            // txt_characters
+            // 
+            this.txt_characters.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_characters.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_characters.Location = new System.Drawing.Point(6, 32);
+            this.txt_characters.Name = "txt_characters";
+            this.txt_characters.Size = new System.Drawing.Size(310, 20);
+            this.txt_characters.TabIndex = 0;
+            this.txt_characters.TextChanged += new System.EventHandler(this.txt_characters_TextChanged);
+            // 
+            // cbx_characters
+            // 
+            this.cbx_characters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbx_characters.Enabled = false;
+            this.cbx_characters.FormattingEnabled = true;
+            this.cbx_characters.Location = new System.Drawing.Point(6, 71);
+            this.cbx_characters.Name = "cbx_characters";
+            this.cbx_characters.Size = new System.Drawing.Size(190, 21);
+            this.cbx_characters.TabIndex = 2;
+            this.cbx_characters.SelectedIndexChanged += new System.EventHandler(this.cbx_characters_SelectedIndexChanged);
+            // 
+            // btn_characters
+            // 
+            this.btn_characters.Location = new System.Drawing.Point(319, 31);
+            this.btn_characters.Name = "btn_characters";
+            this.btn_characters.Size = new System.Drawing.Size(74, 21);
+            this.btn_characters.TabIndex = 1;
+            this.btn_characters.Text = "Browse";
+            this.btn_characters.UseVisualStyleBackColor = true;
+            this.btn_characters.Click += new System.EventHandler(this.btn_characters_Click);
+            // 
+            // tab_stream
+            // 
+            this.tab_stream.Controls.Add(this.tab_stream_tabs);
+            this.tab_stream.Location = new System.Drawing.Point(4, 22);
+            this.tab_stream.Name = "tab_stream";
+            this.tab_stream.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_stream.Size = new System.Drawing.Size(405, 398);
+            this.tab_stream.TabIndex = 1;
+            this.tab_stream.Text = "Stream Assistant";
+            this.tab_stream.UseVisualStyleBackColor = true;
+            // 
+            // tab_stream_tabs
+            // 
+            this.tab_stream_tabs.Controls.Add(this.tab_general2);
+            this.tab_stream_tabs.Controls.Add(this.tab_directories);
+            this.tab_stream_tabs.Controls.Add(this.tab_youtube);
+            this.tab_stream_tabs.Controls.Add(this.tab_thumbnail);
+            this.tab_stream_tabs.Location = new System.Drawing.Point(3, 6);
+            this.tab_stream_tabs.Name = "tab_stream_tabs";
+            this.tab_stream_tabs.SelectedIndex = 0;
+            this.tab_stream_tabs.Size = new System.Drawing.Size(399, 390);
+            this.tab_stream_tabs.TabIndex = 0;
+            this.tab_stream_tabs.SelectedIndexChanged += new System.EventHandler(this.tab_stream_tabs_SelectedIndexChanged);
+            // 
+            // tab_general2
+            // 
+            this.tab_general2.Controls.Add(this.groupBox2);
+            this.tab_general2.Controls.Add(this.ckb_thumbnails);
+            this.tab_general2.Controls.Add(this.groupBox4);
+            this.tab_general2.Controls.Add(this.groupBox3);
+            this.tab_general2.Location = new System.Drawing.Point(4, 22);
+            this.tab_general2.Name = "tab_general2";
+            this.tab_general2.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_general2.Size = new System.Drawing.Size(391, 364);
+            this.tab_general2.TabIndex = 1;
+            this.tab_general2.Text = "General";
+            this.tab_general2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label42);
+            this.groupBox2.Controls.Add(this.txt_titletemplate);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.cbx_shorten_video);
+            this.groupBox2.Controls.Add(this.ckb_clipboard);
+            this.groupBox2.Location = new System.Drawing.Point(3, 239);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(382, 119);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Video Title Settings";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(8, 77);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(104, 13);
+            this.label42.TabIndex = 24;
+            this.label42.Text = "Video Title Template";
+            // 
+            // txt_titletemplate
+            // 
+            this.txt_titletemplate.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_titletemplate.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_titletemplate.Location = new System.Drawing.Point(8, 93);
+            this.txt_titletemplate.Name = "txt_titletemplate";
+            this.txt_titletemplate.Size = new System.Drawing.Size(368, 20);
+            this.txt_titletemplate.TabIndex = 23;
+            this.txt_titletemplate.TextChanged += new System.EventHandler(this.Txt_titletemplate_TextChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 39);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(102, 13);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "Shorten Video Titles";
+            // 
+            // cbx_shorten_video
+            // 
+            this.cbx_shorten_video.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbx_shorten_video.FormattingEnabled = true;
+            this.cbx_shorten_video.Items.AddRange(new object[] {
+            "Never Shorten",
+            "Always Shorten",
+            "Only Shorten for Doubles"});
+            this.cbx_shorten_video.Location = new System.Drawing.Point(9, 55);
+            this.cbx_shorten_video.Name = "cbx_shorten_video";
+            this.cbx_shorten_video.Size = new System.Drawing.Size(237, 21);
+            this.cbx_shorten_video.TabIndex = 4;
+            // 
+            // ckb_clipboard
+            // 
+            this.ckb_clipboard.AutoSize = true;
+            this.ckb_clipboard.Location = new System.Drawing.Point(6, 19);
+            this.ckb_clipboard.Name = "ckb_clipboard";
+            this.ckb_clipboard.Size = new System.Drawing.Size(313, 17);
+            this.ckb_clipboard.TabIndex = 3;
+            this.ckb_clipboard.Text = "Copy Video Title to Clipboard  When Generating a Thumbnail";
+            this.ckb_clipboard.UseVisualStyleBackColor = true;
+            this.ckb_clipboard.CheckedChanged += new System.EventHandler(this.ckb_clipboard_CheckedChanged);
+            // 
+            // ckb_thumbnails
+            // 
+            this.ckb_thumbnails.AutoSize = true;
+            this.ckb_thumbnails.Location = new System.Drawing.Point(13, 216);
+            this.ckb_thumbnails.Name = "ckb_thumbnails";
+            this.ckb_thumbnails.Size = new System.Drawing.Size(166, 17);
+            this.ckb_thumbnails.TabIndex = 2;
+            this.ckb_thumbnails.Text = "Enable Thumbnail Generation";
+            this.ckb_thumbnails.UseVisualStyleBackColor = true;
+            this.ckb_thumbnails.CheckedChanged += new System.EventHandler(this.ckb_thumbnails_CheckedChanged);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.groupBox5);
+            this.groupBox4.Controls.Add(this.ckb_scoreboad);
+            this.groupBox4.Controls.Add(this.groupBox10);
+            this.groupBox4.Location = new System.Drawing.Point(3, 56);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(385, 154);
+            this.groupBox4.TabIndex = 1;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Image Scoreboard";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.btn_score2_image3);
+            this.groupBox5.Controls.Add(this.btn_score2_image2);
+            this.groupBox5.Controls.Add(this.btn_score2_image1);
+            this.groupBox5.Controls.Add(this.pic_score2_image3);
+            this.groupBox5.Controls.Add(this.pic_score2_image2);
+            this.groupBox5.Controls.Add(this.pic_score2_image1);
+            this.groupBox5.Location = new System.Drawing.Point(196, 40);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(186, 109);
+            this.groupBox5.TabIndex = 2;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Player 2 Score Images";
+            // 
+            // btn_score2_image3
+            // 
+            this.btn_score2_image3.Enabled = false;
+            this.btn_score2_image3.Location = new System.Drawing.Point(126, 19);
+            this.btn_score2_image3.Name = "btn_score2_image3";
+            this.btn_score2_image3.Size = new System.Drawing.Size(54, 39);
+            this.btn_score2_image3.TabIndex = 2;
+            this.btn_score2_image3.Text = "Point 3 Image";
+            this.btn_score2_image3.UseVisualStyleBackColor = true;
+            this.btn_score2_image3.Click += new System.EventHandler(this.score_button_Click);
+            // 
+            // btn_score2_image2
+            // 
+            this.btn_score2_image2.Enabled = false;
+            this.btn_score2_image2.Location = new System.Drawing.Point(66, 19);
+            this.btn_score2_image2.Name = "btn_score2_image2";
+            this.btn_score2_image2.Size = new System.Drawing.Size(54, 39);
+            this.btn_score2_image2.TabIndex = 1;
+            this.btn_score2_image2.Text = "Point 2 Image";
+            this.btn_score2_image2.UseVisualStyleBackColor = true;
+            this.btn_score2_image2.Click += new System.EventHandler(this.score_button_Click);
+            // 
+            // btn_score2_image1
+            // 
+            this.btn_score2_image1.Enabled = false;
+            this.btn_score2_image1.Location = new System.Drawing.Point(6, 19);
+            this.btn_score2_image1.Name = "btn_score2_image1";
+            this.btn_score2_image1.Size = new System.Drawing.Size(54, 39);
+            this.btn_score2_image1.TabIndex = 0;
+            this.btn_score2_image1.Text = "Point 1 Image";
+            this.btn_score2_image1.UseVisualStyleBackColor = true;
+            this.btn_score2_image1.Click += new System.EventHandler(this.score_button_Click);
+            // 
+            // pic_score2_image3
+            // 
+            this.pic_score2_image3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pic_score2_image3.Location = new System.Drawing.Point(126, 64);
+            this.pic_score2_image3.Name = "pic_score2_image3";
+            this.pic_score2_image3.Size = new System.Drawing.Size(54, 39);
+            this.pic_score2_image3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_score2_image3.TabIndex = 2;
+            this.pic_score2_image3.TabStop = false;
+            // 
+            // pic_score2_image2
+            // 
+            this.pic_score2_image2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pic_score2_image2.Location = new System.Drawing.Point(66, 64);
+            this.pic_score2_image2.Name = "pic_score2_image2";
+            this.pic_score2_image2.Size = new System.Drawing.Size(54, 39);
+            this.pic_score2_image2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_score2_image2.TabIndex = 1;
+            this.pic_score2_image2.TabStop = false;
+            // 
+            // pic_score2_image1
+            // 
+            this.pic_score2_image1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pic_score2_image1.Location = new System.Drawing.Point(6, 64);
+            this.pic_score2_image1.Name = "pic_score2_image1";
+            this.pic_score2_image1.Size = new System.Drawing.Size(54, 39);
+            this.pic_score2_image1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_score2_image1.TabIndex = 0;
+            this.pic_score2_image1.TabStop = false;
+            // 
+            // ckb_scoreboad
+            // 
+            this.ckb_scoreboad.AutoSize = true;
+            this.ckb_scoreboad.Location = new System.Drawing.Point(6, 19);
+            this.ckb_scoreboad.Name = "ckb_scoreboad";
+            this.ckb_scoreboad.Size = new System.Drawing.Size(149, 17);
+            this.ckb_scoreboad.TabIndex = 0;
+            this.ckb_scoreboad.Text = "Enable Image Scoreboard";
+            this.ckb_scoreboad.UseVisualStyleBackColor = true;
+            this.ckb_scoreboad.CheckedChanged += new System.EventHandler(this.ckb_scoreboad_CheckedChanged);
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.btn_score1_image3);
+            this.groupBox10.Controls.Add(this.btn_score1_image2);
+            this.groupBox10.Controls.Add(this.btn_score1_image1);
+            this.groupBox10.Controls.Add(this.pic_score1_image3);
+            this.groupBox10.Controls.Add(this.pic_score1_image2);
+            this.groupBox10.Controls.Add(this.pic_score1_image1);
+            this.groupBox10.Location = new System.Drawing.Point(4, 40);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(186, 109);
+            this.groupBox10.TabIndex = 1;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Player 1 Score Images";
+            // 
+            // btn_score1_image3
+            // 
+            this.btn_score1_image3.Enabled = false;
+            this.btn_score1_image3.Location = new System.Drawing.Point(126, 19);
+            this.btn_score1_image3.Name = "btn_score1_image3";
+            this.btn_score1_image3.Size = new System.Drawing.Size(54, 39);
+            this.btn_score1_image3.TabIndex = 2;
+            this.btn_score1_image3.Text = "Point 3 Image";
+            this.btn_score1_image3.UseVisualStyleBackColor = true;
+            this.btn_score1_image3.Click += new System.EventHandler(this.score_button_Click);
+            // 
+            // btn_score1_image2
+            // 
+            this.btn_score1_image2.Enabled = false;
+            this.btn_score1_image2.Location = new System.Drawing.Point(66, 19);
+            this.btn_score1_image2.Name = "btn_score1_image2";
+            this.btn_score1_image2.Size = new System.Drawing.Size(54, 39);
+            this.btn_score1_image2.TabIndex = 1;
+            this.btn_score1_image2.Text = "Point 2 Image";
+            this.btn_score1_image2.UseVisualStyleBackColor = true;
+            this.btn_score1_image2.Click += new System.EventHandler(this.score_button_Click);
+            // 
+            // btn_score1_image1
+            // 
+            this.btn_score1_image1.Enabled = false;
+            this.btn_score1_image1.Location = new System.Drawing.Point(6, 19);
+            this.btn_score1_image1.Name = "btn_score1_image1";
+            this.btn_score1_image1.Size = new System.Drawing.Size(54, 39);
+            this.btn_score1_image1.TabIndex = 0;
+            this.btn_score1_image1.Text = "Point 1 Image";
+            this.btn_score1_image1.UseVisualStyleBackColor = true;
+            this.btn_score1_image1.Click += new System.EventHandler(this.score_button_Click);
+            // 
+            // pic_score1_image3
+            // 
+            this.pic_score1_image3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pic_score1_image3.Location = new System.Drawing.Point(126, 64);
+            this.pic_score1_image3.Name = "pic_score1_image3";
+            this.pic_score1_image3.Size = new System.Drawing.Size(54, 39);
+            this.pic_score1_image3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_score1_image3.TabIndex = 2;
+            this.pic_score1_image3.TabStop = false;
+            // 
+            // pic_score1_image2
+            // 
+            this.pic_score1_image2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pic_score1_image2.Location = new System.Drawing.Point(66, 64);
+            this.pic_score1_image2.Name = "pic_score1_image2";
+            this.pic_score1_image2.Size = new System.Drawing.Size(54, 39);
+            this.pic_score1_image2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_score1_image2.TabIndex = 1;
+            this.pic_score1_image2.TabStop = false;
+            // 
+            // pic_score1_image1
+            // 
+            this.pic_score1_image1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pic_score1_image1.Location = new System.Drawing.Point(6, 64);
+            this.pic_score1_image1.Name = "pic_score1_image1";
+            this.pic_score1_image1.Size = new System.Drawing.Size(54, 39);
+            this.pic_score1_image1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_score1_image1.TabIndex = 0;
+            this.pic_score1_image1.TabStop = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.rdb_manual);
+            this.groupBox3.Controls.Add(this.rdb_automatic);
+            this.groupBox3.Location = new System.Drawing.Point(3, 6);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(385, 44);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Stream File Updating";
+            // 
+            // rdb_manual
+            // 
+            this.rdb_manual.AutoSize = true;
+            this.rdb_manual.Location = new System.Drawing.Point(231, 19);
+            this.rdb_manual.Name = "rdb_manual";
+            this.rdb_manual.Size = new System.Drawing.Size(103, 17);
+            this.rdb_manual.TabIndex = 1;
+            this.rdb_manual.Text = "Manual Updates";
+            this.rdb_manual.UseVisualStyleBackColor = true;
+            // 
+            // rdb_automatic
+            // 
+            this.rdb_automatic.AutoSize = true;
+            this.rdb_automatic.Checked = true;
+            this.rdb_automatic.Location = new System.Drawing.Point(63, 19);
+            this.rdb_automatic.Name = "rdb_automatic";
+            this.rdb_automatic.Size = new System.Drawing.Size(115, 17);
+            this.rdb_automatic.TabIndex = 0;
+            this.rdb_automatic.TabStop = true;
+            this.rdb_automatic.Text = "Automatic Updates";
+            this.rdb_automatic.UseVisualStyleBackColor = true;
+            this.rdb_automatic.CheckedChanged += new System.EventHandler(this.rdb_automatic_CheckedChanged);
+            // 
+            // tab_directories
+            // 
+            this.tab_directories.Controls.Add(this.lbl_directories);
+            this.tab_directories.Controls.Add(this.ckb_regions);
+            this.tab_directories.Controls.Add(this.ckb_sponsors);
+            this.tab_directories.Controls.Add(this.label9);
+            this.tab_directories.Controls.Add(this.txt_regions);
+            this.tab_directories.Controls.Add(this.btn_regions);
+            this.tab_directories.Controls.Add(this.label8);
+            this.tab_directories.Controls.Add(this.txt_sponsors);
+            this.tab_directories.Controls.Add(this.btn_sponsors);
+            this.tab_directories.Controls.Add(this.label6);
+            this.tab_directories.Controls.Add(this.txt_vods);
+            this.tab_directories.Controls.Add(this.btn_vods);
+            this.tab_directories.Controls.Add(this.label5);
+            this.tab_directories.Controls.Add(this.txt_thumbnails);
+            this.tab_directories.Controls.Add(this.btn_thumbnails);
+            this.tab_directories.Controls.Add(this.label4);
+            this.tab_directories.Controls.Add(this.txt_streamfiles);
+            this.tab_directories.Controls.Add(this.btn_streamfiles);
+            this.tab_directories.Location = new System.Drawing.Point(4, 22);
+            this.tab_directories.Name = "tab_directories";
+            this.tab_directories.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_directories.Size = new System.Drawing.Size(391, 364);
+            this.tab_directories.TabIndex = 0;
+            this.tab_directories.Text = "Directories";
+            this.tab_directories.UseVisualStyleBackColor = true;
+            // 
+            // lbl_directories
+            // 
+            this.lbl_directories.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_directories.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lbl_directories.Location = new System.Drawing.Point(6, 314);
+            this.lbl_directories.Name = "lbl_directories";
+            this.lbl_directories.Size = new System.Drawing.Size(379, 47);
+            this.lbl_directories.TabIndex = 41;
+            this.lbl_directories.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // ckb_regions
+            // 
+            this.ckb_regions.AutoSize = true;
+            this.ckb_regions.Location = new System.Drawing.Point(6, 214);
+            this.ckb_regions.Name = "ckb_regions";
+            this.ckb_regions.Size = new System.Drawing.Size(133, 17);
+            this.ckb_regions.TabIndex = 11;
+            this.ckb_regions.Text = "Enable Region Images";
+            this.ckb_regions.UseVisualStyleBackColor = true;
+            this.ckb_regions.CheckedChanged += new System.EventHandler(this.ckb_regions_CheckedChanged);
+            // 
+            // ckb_sponsors
+            // 
+            this.ckb_sponsors.AutoSize = true;
+            this.ckb_sponsors.Location = new System.Drawing.Point(6, 152);
+            this.ckb_sponsors.Name = "ckb_sponsors";
+            this.ckb_sponsors.Size = new System.Drawing.Size(138, 17);
+            this.ckb_sponsors.TabIndex = 8;
+            this.ckb_sponsors.Text = "Enable Sponsor Images";
+            this.ckb_sponsors.UseVisualStyleBackColor = true;
+            this.ckb_sponsors.CheckedChanged += new System.EventHandler(this.ckb_sponsors_CheckedChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 234);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(118, 13);
+            this.label9.TabIndex = 37;
+            this.label9.Text = "Region Image Directory";
+            // 
+            // txt_regions
+            // 
+            this.txt_regions.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_regions.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_regions.Location = new System.Drawing.Point(6, 250);
+            this.txt_regions.Name = "txt_regions";
+            this.txt_regions.Size = new System.Drawing.Size(299, 20);
+            this.txt_regions.TabIndex = 12;
+            this.txt_regions.TextChanged += new System.EventHandler(this.txt_regions_TextChanged);
+            // 
+            // btn_regions
+            // 
+            this.btn_regions.Location = new System.Drawing.Point(311, 249);
+            this.btn_regions.Name = "btn_regions";
+            this.btn_regions.Size = new System.Drawing.Size(74, 21);
+            this.btn_regions.TabIndex = 13;
+            this.btn_regions.Text = "Browse";
+            this.btn_regions.UseVisualStyleBackColor = true;
+            this.btn_regions.Click += new System.EventHandler(this.btn_regions_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 172);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(123, 13);
+            this.label8.TabIndex = 34;
+            this.label8.Text = "Sponsor Image Directory";
+            // 
+            // txt_sponsors
+            // 
+            this.txt_sponsors.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_sponsors.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_sponsors.Location = new System.Drawing.Point(6, 188);
+            this.txt_sponsors.Name = "txt_sponsors";
+            this.txt_sponsors.Size = new System.Drawing.Size(299, 20);
+            this.txt_sponsors.TabIndex = 9;
+            this.txt_sponsors.TextChanged += new System.EventHandler(this.txt_sponsors_TextChanged);
+            // 
+            // btn_sponsors
+            // 
+            this.btn_sponsors.Location = new System.Drawing.Point(311, 187);
+            this.btn_sponsors.Name = "btn_sponsors";
+            this.btn_sponsors.Size = new System.Drawing.Size(74, 21);
+            this.btn_sponsors.TabIndex = 10;
+            this.btn_sponsors.Text = "Browse";
+            this.btn_sponsors.UseVisualStyleBackColor = true;
+            this.btn_sponsors.Click += new System.EventHandler(this.btn_sponsors_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 81);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(73, 13);
+            this.label6.TabIndex = 28;
+            this.label6.Text = "VoD Directory";
+            // 
+            // txt_vods
+            // 
+            this.txt_vods.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_vods.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_vods.Location = new System.Drawing.Point(6, 97);
+            this.txt_vods.Name = "txt_vods";
+            this.txt_vods.Size = new System.Drawing.Size(299, 20);
+            this.txt_vods.TabIndex = 4;
+            this.txt_vods.TextChanged += new System.EventHandler(this.txt_vods_TextChanged);
+            // 
+            // btn_vods
+            // 
+            this.btn_vods.Location = new System.Drawing.Point(311, 96);
+            this.btn_vods.Name = "btn_vods";
+            this.btn_vods.Size = new System.Drawing.Size(74, 21);
+            this.btn_vods.TabIndex = 5;
+            this.btn_vods.Text = "Browse";
+            this.btn_vods.UseVisualStyleBackColor = true;
+            this.btn_vods.Click += new System.EventHandler(this.btn_vods_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 42);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(101, 13);
+            this.label5.TabIndex = 25;
+            this.label5.Text = "Thumbnail Directory";
+            // 
+            // txt_thumbnails
+            // 
+            this.txt_thumbnails.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_thumbnails.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_thumbnails.Location = new System.Drawing.Point(6, 58);
+            this.txt_thumbnails.Name = "txt_thumbnails";
+            this.txt_thumbnails.Size = new System.Drawing.Size(299, 20);
+            this.txt_thumbnails.TabIndex = 2;
+            this.txt_thumbnails.TextChanged += new System.EventHandler(this.txt_thumbnails_TextChanged);
+            // 
+            // btn_thumbnails
+            // 
+            this.btn_thumbnails.Location = new System.Drawing.Point(311, 57);
+            this.btn_thumbnails.Name = "btn_thumbnails";
+            this.btn_thumbnails.Size = new System.Drawing.Size(74, 21);
+            this.btn_thumbnails.TabIndex = 3;
+            this.btn_thumbnails.Text = "Browse";
+            this.btn_thumbnails.UseVisualStyleBackColor = true;
+            this.btn_thumbnails.Click += new System.EventHandler(this.btn_thumbnails_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(109, 13);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Stream Files Directory";
+            // 
+            // txt_streamfiles
+            // 
+            this.txt_streamfiles.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_streamfiles.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_streamfiles.Location = new System.Drawing.Point(6, 19);
+            this.txt_streamfiles.Name = "txt_streamfiles";
+            this.txt_streamfiles.Size = new System.Drawing.Size(299, 20);
+            this.txt_streamfiles.TabIndex = 0;
+            this.txt_streamfiles.TextChanged += new System.EventHandler(this.txt_streamfiles_TextChanged);
+            // 
+            // btn_streamfiles
+            // 
+            this.btn_streamfiles.Location = new System.Drawing.Point(311, 18);
+            this.btn_streamfiles.Name = "btn_streamfiles";
+            this.btn_streamfiles.Size = new System.Drawing.Size(74, 21);
+            this.btn_streamfiles.TabIndex = 1;
+            this.btn_streamfiles.Text = "Browse";
+            this.btn_streamfiles.UseVisualStyleBackColor = true;
+            this.btn_streamfiles.Click += new System.EventHandler(this.btn_streamfiles_Click);
+            // 
+            // tab_youtube
+            // 
+            this.tab_youtube.Controls.Add(this.tabControl2);
+            this.tab_youtube.Controls.Add(this.ckb_vod_uploads);
+            this.tab_youtube.Controls.Add(this.label13);
+            this.tab_youtube.Controls.Add(this.btn_playlist);
+            this.tab_youtube.Controls.Add(this.groupBox8);
+            this.tab_youtube.Controls.Add(this.txt_playlist);
+            this.tab_youtube.Location = new System.Drawing.Point(4, 22);
+            this.tab_youtube.Name = "tab_youtube";
+            this.tab_youtube.Size = new System.Drawing.Size(391, 364);
+            this.tab_youtube.TabIndex = 2;
+            this.tab_youtube.Text = "YouTube Settings";
+            this.tab_youtube.UseVisualStyleBackColor = true;
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Controls.Add(this.tabPage1);
+            this.tabControl2.Controls.Add(this.tabPage2);
+            this.tabControl2.Location = new System.Drawing.Point(3, 115);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(385, 205);
+            this.tabControl2.TabIndex = 43;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.txt_description);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(377, 179);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Default Video Description";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // txt_description
+            // 
+            this.txt_description.AcceptsReturn = true;
+            this.txt_description.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_description.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_description.Enabled = false;
+            this.txt_description.Location = new System.Drawing.Point(2, 3);
+            this.txt_description.Multiline = true;
+            this.txt_description.Name = "txt_description";
+            this.txt_description.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txt_description.Size = new System.Drawing.Size(372, 170);
+            this.txt_description.TabIndex = 7;
+            this.txt_description.TextChanged += new System.EventHandler(this.txt_description_TextChanged);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.txt_tags);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(377, 179);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Video Tags";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // txt_tags
+            // 
+            this.txt_tags.AcceptsReturn = true;
+            this.txt_tags.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_tags.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_tags.Enabled = false;
+            this.txt_tags.Location = new System.Drawing.Point(2, 3);
+            this.txt_tags.Multiline = true;
+            this.txt_tags.Name = "txt_tags";
+            this.txt_tags.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txt_tags.Size = new System.Drawing.Size(372, 170);
+            this.txt_tags.TabIndex = 8;
+            // 
+            // ckb_vod_uploads
+            // 
+            this.ckb_vod_uploads.AutoSize = true;
+            this.ckb_vod_uploads.Location = new System.Drawing.Point(3, 12);
+            this.ckb_vod_uploads.Name = "ckb_vod_uploads";
+            this.ckb_vod_uploads.Size = new System.Drawing.Size(222, 17);
+            this.ckb_vod_uploads.TabIndex = 0;
+            this.ckb_vod_uploads.Text = "Enable Automatic YouTube VoD Uploads";
+            this.ckb_vod_uploads.UseVisualStyleBackColor = true;
+            this.ckb_vod_uploads.CheckedChanged += new System.EventHandler(this.ckb_vod_uploads_CheckedChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(4, 32);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(236, 13);
+            this.label13.TabIndex = 36;
+            this.label13.Text = "YouTube Playlist Name (Leave Blank to Disable)";
+            // 
+            // btn_playlist
+            // 
+            this.btn_playlist.Enabled = false;
+            this.btn_playlist.Location = new System.Drawing.Point(327, 48);
+            this.btn_playlist.Name = "btn_playlist";
+            this.btn_playlist.Size = new System.Drawing.Size(65, 22);
+            this.btn_playlist.TabIndex = 6;
+            this.btn_playlist.Text = "Update";
+            this.btn_playlist.UseVisualStyleBackColor = true;
+            this.btn_playlist.Click += new System.EventHandler(this.btn_playlist_Click);
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.rdb_obs);
+            this.groupBox8.Controls.Add(this.rdb_xsplit);
+            this.groupBox8.Location = new System.Drawing.Point(2, 326);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(386, 35);
+            this.groupBox8.TabIndex = 8;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Stream Software";
+            // 
+            // rdb_obs
+            // 
+            this.rdb_obs.AutoSize = true;
+            this.rdb_obs.Enabled = false;
+            this.rdb_obs.Location = new System.Drawing.Point(232, 12);
+            this.rdb_obs.Name = "rdb_obs";
+            this.rdb_obs.Size = new System.Drawing.Size(80, 17);
+            this.rdb_obs.TabIndex = 1;
+            this.rdb_obs.Text = "OBS Studio";
+            this.rdb_obs.UseVisualStyleBackColor = true;
+            this.rdb_obs.CheckedChanged += new System.EventHandler(this.rdb_obs_CheckedChanged);
+            // 
+            // rdb_xsplit
+            // 
+            this.rdb_xsplit.AutoSize = true;
+            this.rdb_xsplit.Checked = true;
+            this.rdb_xsplit.Enabled = false;
+            this.rdb_xsplit.Location = new System.Drawing.Point(83, 12);
+            this.rdb_xsplit.Name = "rdb_xsplit";
+            this.rdb_xsplit.Size = new System.Drawing.Size(52, 17);
+            this.rdb_xsplit.TabIndex = 0;
+            this.rdb_xsplit.TabStop = true;
+            this.rdb_xsplit.Text = "XSplit";
+            this.rdb_xsplit.UseVisualStyleBackColor = true;
+            this.rdb_xsplit.CheckedChanged += new System.EventHandler(this.rdb_xsplit_CheckedChanged);
+            // 
+            // txt_playlist
+            // 
+            this.txt_playlist.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_playlist.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_playlist.Enabled = false;
+            this.txt_playlist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_playlist.Location = new System.Drawing.Point(7, 48);
+            this.txt_playlist.Name = "txt_playlist";
+            this.txt_playlist.Size = new System.Drawing.Size(314, 22);
+            this.txt_playlist.TabIndex = 5;
+            this.txt_playlist.TextChanged += new System.EventHandler(this.txt_playlist_TextChanged);
+            // 
+            // tab_thumbnail
+            // 
+            this.tab_thumbnail.Controls.Add(this.btn_preview);
+            this.tab_thumbnail.Controls.Add(this.tabControl1);
+            this.tab_thumbnail.Controls.Add(this.pic_thumbnail);
+            this.tab_thumbnail.Location = new System.Drawing.Point(4, 22);
+            this.tab_thumbnail.Name = "tab_thumbnail";
+            this.tab_thumbnail.Size = new System.Drawing.Size(391, 364);
+            this.tab_thumbnail.TabIndex = 3;
+            this.tab_thumbnail.Text = "Thumbnails";
+            this.tab_thumbnail.UseVisualStyleBackColor = true;
+            // 
+            // btn_preview
+            // 
+            this.btn_preview.Enabled = false;
+            this.btn_preview.Location = new System.Drawing.Point(329, 75);
+            this.btn_preview.Name = "btn_preview";
+            this.btn_preview.Size = new System.Drawing.Size(59, 40);
+            this.btn_preview.TabIndex = 0;
+            this.btn_preview.Text = "Preview";
+            this.btn_preview.UseVisualStyleBackColor = true;
+            this.btn_preview.Click += new System.EventHandler(this.btn_preview_Click);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tab_templates);
+            this.tabControl1.Controls.Add(this.tab_characters);
+            this.tabControl1.Controls.Add(this.tab_names);
+            this.tabControl1.Controls.Add(this.tab_round);
+            this.tabControl1.Location = new System.Drawing.Point(3, 189);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(385, 172);
+            this.tabControl1.TabIndex = 1;
+            // 
+            // tab_templates
+            // 
+            this.tab_templates.Controls.Add(this.groupBox15);
+            this.tab_templates.Controls.Add(this.label11);
+            this.tab_templates.Controls.Add(this.txt_foreground);
+            this.tab_templates.Controls.Add(this.btn_foreground);
+            this.tab_templates.Controls.Add(this.label10);
+            this.tab_templates.Controls.Add(this.txt_background);
+            this.tab_templates.Controls.Add(this.btn_background);
+            this.tab_templates.Location = new System.Drawing.Point(4, 22);
+            this.tab_templates.Name = "tab_templates";
+            this.tab_templates.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_templates.Size = new System.Drawing.Size(377, 146);
+            this.tab_templates.TabIndex = 0;
+            this.tab_templates.Text = "Templates and Font";
+            this.tab_templates.UseVisualStyleBackColor = true;
+            // 
+            // groupBox15
+            // 
+            this.groupBox15.Controls.Add(this.lbl_font);
+            this.groupBox15.Controls.Add(this.btn_font);
+            this.groupBox15.Location = new System.Drawing.Point(6, 94);
+            this.groupBox15.Name = "groupBox15";
+            this.groupBox15.Size = new System.Drawing.Size(365, 46);
+            this.groupBox15.TabIndex = 4;
+            this.groupBox15.TabStop = false;
+            // 
+            // lbl_font
+            // 
+            this.lbl_font.Location = new System.Drawing.Point(6, 9);
+            this.lbl_font.Name = "lbl_font";
+            this.lbl_font.Size = new System.Drawing.Size(230, 34);
+            this.lbl_font.TabIndex = 38;
+            this.lbl_font.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btn_font
+            // 
+            this.btn_font.Location = new System.Drawing.Point(242, 9);
+            this.btn_font.Name = "btn_font";
+            this.btn_font.Size = new System.Drawing.Size(117, 31);
+            this.btn_font.TabIndex = 0;
+            this.btn_font.Text = "Choose Font";
+            this.btn_font.UseVisualStyleBackColor = true;
+            this.btn_font.Click += new System.EventHandler(this.btn_font_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Cursor = System.Windows.Forms.Cursors.Default;
+            this.label11.Location = new System.Drawing.Point(6, 42);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(123, 13);
+            this.label11.TabIndex = 36;
+            this.label11.Text = "Foreground Image (.png)";
+            // 
+            // txt_foreground
+            // 
+            this.txt_foreground.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_foreground.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_foreground.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txt_foreground.Location = new System.Drawing.Point(6, 58);
+            this.txt_foreground.Name = "txt_foreground";
+            this.txt_foreground.Size = new System.Drawing.Size(294, 20);
+            this.txt_foreground.TabIndex = 2;
+            this.txt_foreground.TabStop = false;
+            this.txt_foreground.TextChanged += new System.EventHandler(this.txt_foreground_TextChanged);
+            // 
+            // btn_foreground
+            // 
+            this.btn_foreground.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_foreground.Location = new System.Drawing.Point(306, 58);
+            this.btn_foreground.Name = "btn_foreground";
+            this.btn_foreground.Size = new System.Drawing.Size(65, 20);
+            this.btn_foreground.TabIndex = 3;
+            this.btn_foreground.Text = "Browse";
+            this.btn_foreground.UseVisualStyleBackColor = true;
+            this.btn_foreground.Click += new System.EventHandler(this.btn_foreground_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Cursor = System.Windows.Forms.Cursors.Default;
+            this.label10.Location = new System.Drawing.Point(6, 3);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(123, 13);
+            this.label10.TabIndex = 33;
+            this.label10.Text = "Background Image (.jpg)";
+            // 
+            // txt_background
+            // 
+            this.txt_background.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_background.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_background.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txt_background.Location = new System.Drawing.Point(6, 19);
+            this.txt_background.Name = "txt_background";
+            this.txt_background.Size = new System.Drawing.Size(294, 20);
+            this.txt_background.TabIndex = 0;
+            this.txt_background.TabStop = false;
+            this.txt_background.TextChanged += new System.EventHandler(this.txt_background_TextChanged);
+            // 
+            // btn_background
+            // 
+            this.btn_background.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_background.Location = new System.Drawing.Point(306, 19);
+            this.btn_background.Name = "btn_background";
+            this.btn_background.Size = new System.Drawing.Size(65, 20);
+            this.btn_background.TabIndex = 1;
+            this.btn_background.Text = "Browse";
+            this.btn_background.UseVisualStyleBackColor = true;
+            this.btn_background.Click += new System.EventHandler(this.btn_background_Click);
+            // 
+            // tab_characters
+            // 
+            this.tab_characters.Controls.Add(this.groupBox7);
+            this.tab_characters.Controls.Add(this.groupBox6);
+            this.tab_characters.Location = new System.Drawing.Point(4, 22);
+            this.tab_characters.Name = "tab_characters";
+            this.tab_characters.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_characters.Size = new System.Drawing.Size(377, 146);
+            this.tab_characters.TabIndex = 1;
+            this.tab_characters.Text = "Characters";
+            this.tab_characters.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.cbx_char2);
+            this.groupBox7.Controls.Add(this.label18);
+            this.groupBox7.Controls.Add(this.txt_char2_yoffset);
+            this.groupBox7.Controls.Add(this.label19);
+            this.groupBox7.Controls.Add(this.txt_char2_xoffset);
+            this.groupBox7.Controls.Add(this.label20);
+            this.groupBox7.Location = new System.Drawing.Point(191, 6);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(180, 137);
+            this.groupBox7.TabIndex = 1;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Character 2";
+            // 
+            // cbx_char2
+            // 
+            this.cbx_char2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbx_char2.FormattingEnabled = true;
+            this.cbx_char2.Location = new System.Drawing.Point(6, 110);
+            this.cbx_char2.Name = "cbx_char2";
+            this.cbx_char2.Size = new System.Drawing.Size(168, 21);
+            this.cbx_char2.TabIndex = 2;
+            this.cbx_char2.SelectedIndexChanged += new System.EventHandler(this.cbx_char2_SelectedIndexChanged);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(7, 94);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(91, 13);
+            this.label18.TabIndex = 4;
+            this.label18.Text = "Sample Character";
+            // 
+            // txt_char2_yoffset
+            // 
+            this.txt_char2_yoffset.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_char2_yoffset.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_char2_yoffset.Location = new System.Drawing.Point(58, 45);
+            this.txt_char2_yoffset.Name = "txt_char2_yoffset";
+            this.txt_char2_yoffset.Size = new System.Drawing.Size(57, 20);
+            this.txt_char2_yoffset.TabIndex = 1;
+            this.txt_char2_yoffset.Text = "0";
+            this.txt_char2_yoffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(7, 48);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(45, 13);
+            this.label19.TabIndex = 1;
+            this.label19.Text = "Y Offset";
+            // 
+            // txt_char2_xoffset
+            // 
+            this.txt_char2_xoffset.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_char2_xoffset.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_char2_xoffset.Location = new System.Drawing.Point(58, 19);
+            this.txt_char2_xoffset.Name = "txt_char2_xoffset";
+            this.txt_char2_xoffset.Size = new System.Drawing.Size(57, 20);
+            this.txt_char2_xoffset.TabIndex = 0;
+            this.txt_char2_xoffset.Text = "0";
+            this.txt_char2_xoffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(7, 22);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(45, 13);
+            this.label20.TabIndex = 0;
+            this.label20.Text = "X Offset";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.cbx_char1);
+            this.groupBox6.Controls.Add(this.label17);
+            this.groupBox6.Controls.Add(this.txt_char1_yoffset);
+            this.groupBox6.Controls.Add(this.label16);
+            this.groupBox6.Controls.Add(this.txt_char1_xoffset);
+            this.groupBox6.Controls.Add(this.label12);
+            this.groupBox6.Location = new System.Drawing.Point(5, 6);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(180, 137);
+            this.groupBox6.TabIndex = 0;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Character 1";
+            // 
+            // cbx_char1
+            // 
+            this.cbx_char1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbx_char1.FormattingEnabled = true;
+            this.cbx_char1.Location = new System.Drawing.Point(6, 110);
+            this.cbx_char1.Name = "cbx_char1";
+            this.cbx_char1.Size = new System.Drawing.Size(168, 21);
+            this.cbx_char1.TabIndex = 2;
+            this.cbx_char1.SelectedIndexChanged += new System.EventHandler(this.cbx_char1_SelectedIndexChanged);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(7, 94);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(91, 13);
+            this.label17.TabIndex = 4;
+            this.label17.Text = "Sample Character";
+            // 
+            // txt_char1_yoffset
+            // 
+            this.txt_char1_yoffset.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_char1_yoffset.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_char1_yoffset.Location = new System.Drawing.Point(58, 45);
+            this.txt_char1_yoffset.Name = "txt_char1_yoffset";
+            this.txt_char1_yoffset.Size = new System.Drawing.Size(57, 20);
+            this.txt_char1_yoffset.TabIndex = 1;
+            this.txt_char1_yoffset.Text = "0";
+            this.txt_char1_yoffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(7, 48);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(45, 13);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "Y Offset";
+            // 
+            // txt_char1_xoffset
+            // 
+            this.txt_char1_xoffset.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_char1_xoffset.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_char1_xoffset.Location = new System.Drawing.Point(58, 19);
+            this.txt_char1_xoffset.Name = "txt_char1_xoffset";
+            this.txt_char1_xoffset.Size = new System.Drawing.Size(57, 20);
+            this.txt_char1_xoffset.TabIndex = 0;
+            this.txt_char1_xoffset.Text = "0";
+            this.txt_char1_xoffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(7, 22);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(45, 13);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "X Offset";
+            // 
+            // tab_names
+            // 
+            this.tab_names.Controls.Add(this.groupBox9);
+            this.tab_names.Controls.Add(this.groupBox11);
+            this.tab_names.Location = new System.Drawing.Point(4, 22);
+            this.tab_names.Name = "tab_names";
+            this.tab_names.Size = new System.Drawing.Size(377, 146);
+            this.tab_names.TabIndex = 2;
+            this.tab_names.Text = "Names";
+            this.tab_names.UseVisualStyleBackColor = true;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.txt_name2_size);
+            this.groupBox9.Controls.Add(this.label34);
+            this.groupBox9.Controls.Add(this.txt_name2);
+            this.groupBox9.Controls.Add(this.label21);
+            this.groupBox9.Controls.Add(this.txt_name2_yoffset);
+            this.groupBox9.Controls.Add(this.label22);
+            this.groupBox9.Controls.Add(this.txt_name2_xoffset);
+            this.groupBox9.Controls.Add(this.label23);
+            this.groupBox9.Location = new System.Drawing.Point(191, 6);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(180, 137);
+            this.groupBox9.TabIndex = 1;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Name 2";
+            // 
+            // txt_name2_size
+            // 
+            this.txt_name2_size.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_name2_size.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_name2_size.Location = new System.Drawing.Point(58, 71);
+            this.txt_name2_size.Name = "txt_name2_size";
+            this.txt_name2_size.Size = new System.Drawing.Size(57, 20);
+            this.txt_name2_size.TabIndex = 2;
+            this.txt_name2_size.Text = "100";
+            this.txt_name2_size.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(1, 74);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(51, 13);
+            this.label34.TabIndex = 8;
+            this.label34.Text = "Font Size";
+            // 
+            // txt_name2
+            // 
+            this.txt_name2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_name2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_name2.Location = new System.Drawing.Point(6, 111);
+            this.txt_name2.Name = "txt_name2";
+            this.txt_name2.Size = new System.Drawing.Size(168, 20);
+            this.txt_name2.TabIndex = 3;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(7, 95);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(73, 13);
+            this.label21.TabIndex = 4;
+            this.label21.Text = "Sample Name";
+            // 
+            // txt_name2_yoffset
+            // 
+            this.txt_name2_yoffset.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_name2_yoffset.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_name2_yoffset.Location = new System.Drawing.Point(58, 45);
+            this.txt_name2_yoffset.Name = "txt_name2_yoffset";
+            this.txt_name2_yoffset.Size = new System.Drawing.Size(57, 20);
+            this.txt_name2_yoffset.TabIndex = 1;
+            this.txt_name2_yoffset.Text = "0";
+            this.txt_name2_yoffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(7, 48);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(45, 13);
+            this.label22.TabIndex = 2;
+            this.label22.Text = "Y Offset";
+            // 
+            // txt_name2_xoffset
+            // 
+            this.txt_name2_xoffset.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_name2_xoffset.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_name2_xoffset.Location = new System.Drawing.Point(58, 19);
+            this.txt_name2_xoffset.Name = "txt_name2_xoffset";
+            this.txt_name2_xoffset.Size = new System.Drawing.Size(57, 20);
+            this.txt_name2_xoffset.TabIndex = 0;
+            this.txt_name2_xoffset.Text = "0";
+            this.txt_name2_xoffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(7, 22);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(45, 13);
+            this.label23.TabIndex = 0;
+            this.label23.Text = "X Offset";
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.txt_name1_size);
+            this.groupBox11.Controls.Add(this.label33);
+            this.groupBox11.Controls.Add(this.txt_name1);
+            this.groupBox11.Controls.Add(this.label24);
+            this.groupBox11.Controls.Add(this.txt_name1_yoffset);
+            this.groupBox11.Controls.Add(this.label25);
+            this.groupBox11.Controls.Add(this.txt_name1_xoffset);
+            this.groupBox11.Controls.Add(this.label26);
+            this.groupBox11.Location = new System.Drawing.Point(5, 6);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(180, 137);
+            this.groupBox11.TabIndex = 0;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "Name 1";
+            // 
+            // txt_name1_size
+            // 
+            this.txt_name1_size.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_name1_size.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_name1_size.Location = new System.Drawing.Point(58, 71);
+            this.txt_name1_size.Name = "txt_name1_size";
+            this.txt_name1_size.Size = new System.Drawing.Size(57, 20);
+            this.txt_name1_size.TabIndex = 2;
+            this.txt_name1_size.Text = "100";
+            this.txt_name1_size.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(1, 74);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(51, 13);
+            this.label33.TabIndex = 6;
+            this.label33.Text = "Font Size";
+            // 
+            // txt_name1
+            // 
+            this.txt_name1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_name1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_name1.Location = new System.Drawing.Point(6, 111);
+            this.txt_name1.Name = "txt_name1";
+            this.txt_name1.Size = new System.Drawing.Size(168, 20);
+            this.txt_name1.TabIndex = 3;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(7, 95);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(73, 13);
+            this.label24.TabIndex = 4;
+            this.label24.Text = "Sample Name";
+            // 
+            // txt_name1_yoffset
+            // 
+            this.txt_name1_yoffset.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_name1_yoffset.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_name1_yoffset.Location = new System.Drawing.Point(58, 45);
+            this.txt_name1_yoffset.Name = "txt_name1_yoffset";
+            this.txt_name1_yoffset.Size = new System.Drawing.Size(57, 20);
+            this.txt_name1_yoffset.TabIndex = 1;
+            this.txt_name1_yoffset.Text = "0";
+            this.txt_name1_yoffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(7, 48);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(45, 13);
+            this.label25.TabIndex = 2;
+            this.label25.Text = "Y Offset";
+            // 
+            // txt_name1_xoffset
+            // 
+            this.txt_name1_xoffset.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_name1_xoffset.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_name1_xoffset.Location = new System.Drawing.Point(58, 19);
+            this.txt_name1_xoffset.Name = "txt_name1_xoffset";
+            this.txt_name1_xoffset.Size = new System.Drawing.Size(57, 20);
+            this.txt_name1_xoffset.TabIndex = 0;
+            this.txt_name1_xoffset.Text = "0";
+            this.txt_name1_xoffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(7, 22);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(45, 13);
+            this.label26.TabIndex = 0;
+            this.label26.Text = "X Offset";
+            // 
+            // tab_round
+            // 
+            this.tab_round.Controls.Add(this.groupBox14);
+            this.tab_round.Controls.Add(this.groupBox13);
+            this.tab_round.Controls.Add(this.groupBox12);
+            this.tab_round.Location = new System.Drawing.Point(4, 22);
+            this.tab_round.Name = "tab_round";
+            this.tab_round.Size = new System.Drawing.Size(377, 146);
+            this.tab_round.TabIndex = 3;
+            this.tab_round.Text = "Round, Date, and Patch";
+            this.tab_round.UseVisualStyleBackColor = true;
+            // 
+            // groupBox14
+            // 
+            this.groupBox14.Controls.Add(this.txt_version);
+            this.groupBox14.Controls.Add(this.label39);
+            this.groupBox14.Controls.Add(this.txt_patch_size);
+            this.groupBox14.Controls.Add(this.label37);
+            this.groupBox14.Controls.Add(this.txt_patch_yoffset);
+            this.groupBox14.Controls.Add(this.label31);
+            this.groupBox14.Controls.Add(this.txt_patch_xoffset);
+            this.groupBox14.Controls.Add(this.label32);
+            this.groupBox14.Location = new System.Drawing.Point(253, 9);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Size = new System.Drawing.Size(119, 134);
+            this.groupBox14.TabIndex = 2;
+            this.groupBox14.TabStop = false;
+            this.groupBox14.Text = "Patch";
+            // 
+            // txt_version
+            // 
+            this.txt_version.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_version.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_version.Location = new System.Drawing.Point(57, 24);
+            this.txt_version.Name = "txt_version";
+            this.txt_version.Size = new System.Drawing.Size(57, 20);
+            this.txt_version.TabIndex = 12;
+            this.txt_version.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_version_KeyPress);
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(6, 27);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(42, 13);
+            this.label39.TabIndex = 11;
+            this.label39.Text = "Version";
+            // 
+            // txt_patch_size
+            // 
+            this.txt_patch_size.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_patch_size.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_patch_size.Location = new System.Drawing.Point(57, 108);
+            this.txt_patch_size.Name = "txt_patch_size";
+            this.txt_patch_size.Size = new System.Drawing.Size(57, 20);
+            this.txt_patch_size.TabIndex = 3;
+            this.txt_patch_size.Text = "60";
+            this.txt_patch_size.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(0, 111);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(51, 13);
+            this.label37.TabIndex = 10;
+            this.label37.Text = "Font Size";
+            // 
+            // txt_patch_yoffset
+            // 
+            this.txt_patch_yoffset.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_patch_yoffset.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_patch_yoffset.Location = new System.Drawing.Point(57, 83);
+            this.txt_patch_yoffset.Name = "txt_patch_yoffset";
+            this.txt_patch_yoffset.Size = new System.Drawing.Size(57, 20);
+            this.txt_patch_yoffset.TabIndex = 2;
+            this.txt_patch_yoffset.Text = "0";
+            this.txt_patch_yoffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(6, 86);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(45, 13);
+            this.label31.TabIndex = 2;
+            this.label31.Text = "Y Offset";
+            // 
+            // txt_patch_xoffset
+            // 
+            this.txt_patch_xoffset.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_patch_xoffset.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_patch_xoffset.Location = new System.Drawing.Point(57, 57);
+            this.txt_patch_xoffset.Name = "txt_patch_xoffset";
+            this.txt_patch_xoffset.Size = new System.Drawing.Size(57, 20);
+            this.txt_patch_xoffset.TabIndex = 1;
+            this.txt_patch_xoffset.Text = "0";
+            this.txt_patch_xoffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(6, 60);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(45, 13);
+            this.label32.TabIndex = 0;
+            this.label32.Text = "X Offset";
+            // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.txt_date_size);
+            this.groupBox13.Controls.Add(this.label36);
+            this.groupBox13.Controls.Add(this.ckb_date);
+            this.groupBox13.Controls.Add(this.txt_date_yoffset);
+            this.groupBox13.Controls.Add(this.label27);
+            this.groupBox13.Controls.Add(this.txt_date_xoffset);
+            this.groupBox13.Controls.Add(this.label30);
+            this.groupBox13.Location = new System.Drawing.Point(128, 9);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(119, 134);
+            this.groupBox13.TabIndex = 1;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "Date";
+            // 
+            // txt_date_size
+            // 
+            this.txt_date_size.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_date_size.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_date_size.Location = new System.Drawing.Point(57, 108);
+            this.txt_date_size.Name = "txt_date_size";
+            this.txt_date_size.Size = new System.Drawing.Size(57, 20);
+            this.txt_date_size.TabIndex = 3;
+            this.txt_date_size.Text = "60";
+            this.txt_date_size.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(0, 111);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(51, 13);
+            this.label36.TabIndex = 8;
+            this.label36.Text = "Font Size";
+            // 
+            // ckb_date
+            // 
+            this.ckb_date.AutoSize = true;
+            this.ckb_date.Location = new System.Drawing.Point(6, 19);
+            this.ckb_date.Name = "ckb_date";
+            this.ckb_date.Size = new System.Drawing.Size(87, 30);
+            this.ckb_date.TabIndex = 0;
+            this.ckb_date.Text = "Include Date\r\nin thumbnail";
+            this.ckb_date.UseVisualStyleBackColor = true;
+            this.ckb_date.CheckedChanged += new System.EventHandler(this.checkbox_Changed);
+            // 
+            // txt_date_yoffset
+            // 
+            this.txt_date_yoffset.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_date_yoffset.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_date_yoffset.Location = new System.Drawing.Point(57, 83);
+            this.txt_date_yoffset.Name = "txt_date_yoffset";
+            this.txt_date_yoffset.Size = new System.Drawing.Size(57, 20);
+            this.txt_date_yoffset.TabIndex = 2;
+            this.txt_date_yoffset.Text = "0";
+            this.txt_date_yoffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(6, 86);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(45, 13);
+            this.label27.TabIndex = 2;
+            this.label27.Text = "Y Offset";
+            // 
+            // txt_date_xoffset
+            // 
+            this.txt_date_xoffset.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_date_xoffset.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_date_xoffset.Location = new System.Drawing.Point(57, 57);
+            this.txt_date_xoffset.Name = "txt_date_xoffset";
+            this.txt_date_xoffset.Size = new System.Drawing.Size(57, 20);
+            this.txt_date_xoffset.TabIndex = 1;
+            this.txt_date_xoffset.Text = "0";
+            this.txt_date_xoffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(6, 60);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(45, 13);
+            this.label30.TabIndex = 0;
+            this.label30.Text = "X Offset";
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.txt_round_size);
+            this.groupBox12.Controls.Add(this.label35);
+            this.groupBox12.Controls.Add(this.txt_round_yoffset);
+            this.groupBox12.Controls.Add(this.label28);
+            this.groupBox12.Controls.Add(this.txt_round_xoffset);
+            this.groupBox12.Controls.Add(this.label29);
+            this.groupBox12.Location = new System.Drawing.Point(3, 9);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(119, 134);
+            this.groupBox12.TabIndex = 0;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "Round";
+            // 
+            // txt_round_size
+            // 
+            this.txt_round_size.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_round_size.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_round_size.Location = new System.Drawing.Point(57, 108);
+            this.txt_round_size.Name = "txt_round_size";
+            this.txt_round_size.Size = new System.Drawing.Size(57, 20);
+            this.txt_round_size.TabIndex = 2;
+            this.txt_round_size.Text = "60";
+            this.txt_round_size.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(0, 111);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(51, 13);
+            this.label35.TabIndex = 8;
+            this.label35.Text = "Font Size";
+            // 
+            // txt_round_yoffset
+            // 
+            this.txt_round_yoffset.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_round_yoffset.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_round_yoffset.Location = new System.Drawing.Point(57, 83);
+            this.txt_round_yoffset.Name = "txt_round_yoffset";
+            this.txt_round_yoffset.Size = new System.Drawing.Size(57, 20);
+            this.txt_round_yoffset.TabIndex = 1;
+            this.txt_round_yoffset.Text = "0";
+            this.txt_round_yoffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(6, 86);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(45, 13);
+            this.label28.TabIndex = 2;
+            this.label28.Text = "Y Offset";
+            // 
+            // txt_round_xoffset
+            // 
+            this.txt_round_xoffset.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_round_xoffset.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txt_round_xoffset.Location = new System.Drawing.Point(57, 57);
+            this.txt_round_xoffset.Name = "txt_round_xoffset";
+            this.txt_round_xoffset.Size = new System.Drawing.Size(57, 20);
+            this.txt_round_xoffset.TabIndex = 0;
+            this.txt_round_xoffset.Text = "0";
+            this.txt_round_xoffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numeric_KeyPress);
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(6, 60);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(45, 13);
+            this.label29.TabIndex = 0;
+            this.label29.Text = "X Offset";
+            // 
+            // pic_thumbnail
+            // 
+            this.pic_thumbnail.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pic_thumbnail.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pic_thumbnail.Location = new System.Drawing.Point(3, 3);
+            this.pic_thumbnail.Name = "pic_thumbnail";
+            this.pic_thumbnail.Size = new System.Drawing.Size(320, 180);
+            this.pic_thumbnail.TabIndex = 6;
+            this.pic_thumbnail.TabStop = false;
+            // 
+            // tab_bracket
+            // 
+            this.tab_bracket.Location = new System.Drawing.Point(4, 22);
+            this.tab_bracket.Name = "tab_bracket";
+            this.tab_bracket.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_bracket.Size = new System.Drawing.Size(405, 398);
+            this.tab_bracket.TabIndex = 2;
+            this.tab_bracket.Text = "Bracket Assistant";
+            this.tab_bracket.UseVisualStyleBackColor = true;
+            // 
+            // btn_apply
+            // 
+            this.btn_apply.Enabled = false;
+            this.btn_apply.Location = new System.Drawing.Point(328, 431);
+            this.btn_apply.Name = "btn_apply";
+            this.btn_apply.Size = new System.Drawing.Size(75, 23);
+            this.btn_apply.TabIndex = 3;
+            this.btn_apply.Text = "Apply";
+            this.btn_apply.UseVisualStyleBackColor = true;
+            this.btn_apply.Click += new System.EventHandler(this.btn_apply_Click);
+            // 
+            // btn_cancel
+            // 
+            this.btn_cancel.Location = new System.Drawing.Point(247, 431);
+            this.btn_cancel.Name = "btn_cancel";
+            this.btn_cancel.Size = new System.Drawing.Size(75, 23);
+            this.btn_cancel.TabIndex = 2;
+            this.btn_cancel.Text = "Cancel";
+            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            // 
+            // btn_ok
+            // 
+            this.btn_ok.Location = new System.Drawing.Point(166, 431);
+            this.btn_ok.Name = "btn_ok";
+            this.btn_ok.Size = new System.Drawing.Size(75, 23);
+            this.btn_ok.TabIndex = 1;
+            this.btn_ok.Text = "OK";
+            this.btn_ok.UseVisualStyleBackColor = true;
+            this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
+            // 
+            // ofd_jpg
+            // 
+            this.ofd_jpg.Filter = "JPEG Files | *.jpg";
+            // 
+            // ofd_png
+            // 
+            this.ofd_png.Filter = "PNG Image Files|*.png";
+            // 
+            // ofd_json
+            // 
+            this.ofd_json.Filter = ".json Files|*.json";
+            // 
+            // ofd_txt
+            // 
+            this.ofd_txt.Filter = ".txt Files|*.txt";
+            // 
+            // frm_settings
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(415, 461);
+            this.Controls.Add(this.btn_ok);
+            this.Controls.Add(this.btn_cancel);
+            this.Controls.Add(this.btn_apply);
+            this.Controls.Add(this.tab_settings);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.Name = "frm_settings";
+            this.Text = "Master Orders Settings";
+            this.tab_settings.ResumeLayout(false);
+            this.tab_general.ResumeLayout(false);
+            this.tab_general.PerformLayout();
+            this.groupBox16.ResumeLayout(false);
+            this.groupBox16.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.tab_stream.ResumeLayout(false);
+            this.tab_stream_tabs.ResumeLayout(false);
+            this.tab_general2.ResumeLayout(false);
+            this.tab_general2.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score2_image3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score2_image2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score2_image1)).EndInit();
+            this.groupBox10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_score1_image1)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.tab_directories.ResumeLayout(false);
+            this.tab_directories.PerformLayout();
+            this.tab_youtube.ResumeLayout(false);
+            this.tab_youtube.PerformLayout();
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.tab_thumbnail.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tab_templates.ResumeLayout(false);
+            this.tab_templates.PerformLayout();
+            this.groupBox15.ResumeLayout(false);
+            this.tab_characters.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.tab_names.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox11.PerformLayout();
+            this.tab_round.ResumeLayout(false);
+            this.groupBox14.ResumeLayout(false);
+            this.groupBox14.PerformLayout();
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox13.PerformLayout();
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_thumbnail)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        public System.Windows.Forms.TabControl tab_settings;
+        public System.Windows.Forms.TabPage tab_general;
+        public System.Windows.Forms.TabPage tab_stream;
+        public System.Windows.Forms.TabPage tab_bracket;
+        public System.Windows.Forms.Button btn_apply;
+        public System.Windows.Forms.Button btn_cancel;
+        public System.Windows.Forms.Button btn_ok;
+        public System.Windows.Forms.Button btn_characters;
+        public System.Windows.Forms.Label label1;
+        public System.Windows.Forms.TextBox txt_characters;
+        public System.Windows.Forms.ComboBox cbx_characters;
+        public System.Windows.Forms.Label label2;
+        public System.Windows.Forms.GroupBox groupBox1;
+        public System.Windows.Forms.Label label3;
+        public System.Windows.Forms.ComboBox cbx_queues;
+        public System.Windows.Forms.TabControl tab_stream_tabs;
+        public System.Windows.Forms.TabPage tab_directories;
+        public System.Windows.Forms.Label label9;
+        public System.Windows.Forms.TextBox txt_regions;
+        public System.Windows.Forms.Button btn_regions;
+        public System.Windows.Forms.Label label8;
+        public System.Windows.Forms.TextBox txt_sponsors;
+        public System.Windows.Forms.Button btn_sponsors;
+        public System.Windows.Forms.Label label6;
+        public System.Windows.Forms.TextBox txt_vods;
+        public System.Windows.Forms.Button btn_vods;
+        public System.Windows.Forms.Label label5;
+        public System.Windows.Forms.TextBox txt_thumbnails;
+        public System.Windows.Forms.Button btn_thumbnails;
+        public System.Windows.Forms.Label label4;
+        public System.Windows.Forms.TextBox txt_streamfiles;
+        public System.Windows.Forms.Button btn_streamfiles;
+        public System.Windows.Forms.TabPage tab_general2;
+        public System.Windows.Forms.CheckBox ckb_regions;
+        public System.Windows.Forms.CheckBox ckb_sponsors;
+        public System.Windows.Forms.GroupBox groupBox3;
+        public System.Windows.Forms.RadioButton rdb_manual;
+        public System.Windows.Forms.RadioButton rdb_automatic;
+        public System.Windows.Forms.GroupBox groupBox4;
+        public System.Windows.Forms.GroupBox groupBox5;
+        public System.Windows.Forms.Button btn_score2_image3;
+        public System.Windows.Forms.Button btn_score2_image2;
+        public System.Windows.Forms.Button btn_score2_image1;
+        public System.Windows.Forms.PictureBox pic_score2_image3;
+        public System.Windows.Forms.PictureBox pic_score2_image2;
+        public System.Windows.Forms.PictureBox pic_score2_image1;
+        public System.Windows.Forms.CheckBox ckb_scoreboad;
+        public System.Windows.Forms.GroupBox groupBox10;
+        public System.Windows.Forms.Button btn_score1_image3;
+        public System.Windows.Forms.Button btn_score1_image2;
+        public System.Windows.Forms.Button btn_score1_image1;
+        public System.Windows.Forms.PictureBox pic_score1_image3;
+        public System.Windows.Forms.PictureBox pic_score1_image2;
+        public System.Windows.Forms.PictureBox pic_score1_image1;
+        public System.Windows.Forms.TabPage tab_youtube;
+        public System.Windows.Forms.CheckBox ckb_vod_uploads;
+        public System.Windows.Forms.Label label13;
+        public System.Windows.Forms.Button btn_playlist;
+        public System.Windows.Forms.TextBox txt_description;
+        public System.Windows.Forms.GroupBox groupBox8;
+        public System.Windows.Forms.RadioButton rdb_obs;
+        public System.Windows.Forms.RadioButton rdb_xsplit;
+        public System.Windows.Forms.TextBox txt_playlist;
+        public System.Windows.Forms.TabPage tab_thumbnail;
+        public System.Windows.Forms.TabControl tabControl1;
+        public System.Windows.Forms.TabPage tab_templates;
+        public System.Windows.Forms.Label label11;
+        public System.Windows.Forms.TextBox txt_foreground;
+        public System.Windows.Forms.Button btn_foreground;
+        public System.Windows.Forms.Label label10;
+        public System.Windows.Forms.TextBox txt_background;
+        public System.Windows.Forms.Button btn_background;
+        public System.Windows.Forms.TabPage tab_characters;
+        public System.Windows.Forms.GroupBox groupBox7;
+        public System.Windows.Forms.ComboBox cbx_char2;
+        public System.Windows.Forms.Label label18;
+        public System.Windows.Forms.TextBox txt_char2_yoffset;
+        public System.Windows.Forms.Label label19;
+        public System.Windows.Forms.TextBox txt_char2_xoffset;
+        public System.Windows.Forms.Label label20;
+        public System.Windows.Forms.GroupBox groupBox6;
+        public System.Windows.Forms.ComboBox cbx_char1;
+        public System.Windows.Forms.Label label17;
+        public System.Windows.Forms.TextBox txt_char1_yoffset;
+        public System.Windows.Forms.Label label16;
+        public System.Windows.Forms.TextBox txt_char1_xoffset;
+        public System.Windows.Forms.Label label12;
+        public System.Windows.Forms.TabPage tab_names;
+        public System.Windows.Forms.GroupBox groupBox9;
+        public System.Windows.Forms.TextBox txt_name2;
+        public System.Windows.Forms.Label label21;
+        public System.Windows.Forms.TextBox txt_name2_yoffset;
+        public System.Windows.Forms.Label label22;
+        public System.Windows.Forms.TextBox txt_name2_xoffset;
+        public System.Windows.Forms.Label label23;
+        public System.Windows.Forms.GroupBox groupBox11;
+        public System.Windows.Forms.TextBox txt_name1;
+        public System.Windows.Forms.Label label24;
+        public System.Windows.Forms.TextBox txt_name1_yoffset;
+        public System.Windows.Forms.Label label25;
+        public System.Windows.Forms.TextBox txt_name1_xoffset;
+        public System.Windows.Forms.Label label26;
+        public System.Windows.Forms.TabPage tab_round;
+        public System.Windows.Forms.PictureBox pic_thumbnail;
+        public System.Windows.Forms.CheckBox ckb_clipboard;
+        public System.Windows.Forms.Label lbl_font;
+        public System.Windows.Forms.Button btn_font;
+        public System.Windows.Forms.FontDialog ftd_thumbnail;
+        public System.Windows.Forms.GroupBox groupBox14;
+        public System.Windows.Forms.TextBox txt_patch_yoffset;
+        public System.Windows.Forms.Label label31;
+        public System.Windows.Forms.TextBox txt_patch_xoffset;
+        public System.Windows.Forms.Label label32;
+        public System.Windows.Forms.GroupBox groupBox13;
+        public System.Windows.Forms.CheckBox ckb_date;
+        public System.Windows.Forms.TextBox txt_date_yoffset;
+        public System.Windows.Forms.Label label27;
+        public System.Windows.Forms.TextBox txt_date_xoffset;
+        public System.Windows.Forms.Label label30;
+        public System.Windows.Forms.GroupBox groupBox12;
+        public System.Windows.Forms.TextBox txt_round_yoffset;
+        public System.Windows.Forms.Label label28;
+        public System.Windows.Forms.TextBox txt_round_xoffset;
+        public System.Windows.Forms.Label label29;
+        public System.Windows.Forms.GroupBox groupBox15;
+        public System.Windows.Forms.FolderBrowserDialog fbd_directory;
+        public System.Windows.Forms.OpenFileDialog ofd_jpg;
+        public System.Windows.Forms.OpenFileDialog ofd_png;
+        public System.Windows.Forms.OpenFileDialog ofd_json;
+        public System.Windows.Forms.Label lbl_characters;
+        public System.Windows.Forms.Label lbl_directories;
+        public System.Windows.Forms.TextBox txt_name2_size;
+        public System.Windows.Forms.Label label34;
+        public System.Windows.Forms.TextBox txt_name1_size;
+        public System.Windows.Forms.Label label33;
+        public System.Windows.Forms.TextBox txt_patch_size;
+        public System.Windows.Forms.Label label37;
+        public System.Windows.Forms.TextBox txt_date_size;
+        public System.Windows.Forms.Label label36;
+        public System.Windows.Forms.TextBox txt_round_size;
+        public System.Windows.Forms.Label label35;
+        public System.Windows.Forms.Button btn_preview;
+        public System.Windows.Forms.CheckBox ckb_thumbnails;
+        public System.Windows.Forms.ComboBox cbx_format;
+        public System.Windows.Forms.Label label38;
+        public System.Windows.Forms.TabControl tabControl2;
+        public System.Windows.Forms.TabPage tabPage1;
+        public System.Windows.Forms.TabPage tabPage2;
+        public System.Windows.Forms.TextBox txt_tags;
+        public System.Windows.Forms.GroupBox groupBox2;
+        public System.Windows.Forms.Label label14;
+        public System.Windows.Forms.ComboBox cbx_shorten_video;
+        public System.Windows.Forms.CheckBox ckb_ontop;
+        public System.Windows.Forms.TextBox txt_version;
+        public System.Windows.Forms.Label label39;
+        public System.Windows.Forms.Button btn_queue_rename;
+        public System.Windows.Forms.GroupBox groupBox16;
+        public System.Windows.Forms.Label label7;
+        public System.Windows.Forms.ComboBox cbx_queuegame;
+        public System.Windows.Forms.Button btn_reassign;
+        public System.Windows.Forms.Label label41;
+        public System.Windows.Forms.TextBox txt_seperator;
+        public System.Windows.Forms.Label label40;
+        public System.Windows.Forms.TextBox txt_bracketrounds;
+        public System.Windows.Forms.Button btn_bracketrounds;
+        public System.Windows.Forms.OpenFileDialog ofd_txt;
+        public System.Windows.Forms.Label label42;
+        public System.Windows.Forms.TextBox txt_titletemplate;
+    }
+}

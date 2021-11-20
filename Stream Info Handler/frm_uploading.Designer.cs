@@ -57,10 +57,12 @@
             // 
             // txt_videotitle
             // 
+            this.txt_videotitle.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_videotitle.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txt_videotitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_videotitle.Location = new System.Drawing.Point(11, 25);
             this.txt_videotitle.Name = "txt_videotitle";
-            this.txt_videotitle.Size = new System.Drawing.Size(493, 22);
+            this.txt_videotitle.Size = new System.Drawing.Size(510, 22);
             this.txt_videotitle.TabIndex = 0;
             // 
             // lbl_videotitle
@@ -83,15 +85,18 @@
             // 
             // txt_description
             // 
+            this.txt_description.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_description.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txt_description.Location = new System.Drawing.Point(257, 107);
             this.txt_description.Multiline = true;
             this.txt_description.Name = "txt_description";
-            this.txt_description.Size = new System.Drawing.Size(247, 122);
+            this.txt_description.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txt_description.Size = new System.Drawing.Size(264, 122);
             this.txt_description.TabIndex = 3;
             // 
             // btn_upload_cancel
             // 
-            this.btn_upload_cancel.Location = new System.Drawing.Point(406, 235);
+            this.btn_upload_cancel.Location = new System.Drawing.Point(423, 257);
             this.btn_upload_cancel.Name = "btn_upload_cancel";
             this.btn_upload_cancel.Size = new System.Drawing.Size(98, 40);
             this.btn_upload_cancel.TabIndex = 5;
@@ -102,7 +107,7 @@
             // btn_upload_video
             // 
             this.btn_upload_video.Enabled = false;
-            this.btn_upload_video.Location = new System.Drawing.Point(302, 235);
+            this.btn_upload_video.Location = new System.Drawing.Point(319, 257);
             this.btn_upload_video.Name = "btn_upload_video";
             this.btn_upload_video.Size = new System.Drawing.Size(98, 40);
             this.btn_upload_video.TabIndex = 4;
@@ -112,10 +117,12 @@
             // 
             // txt_videofile
             // 
+            this.txt_videofile.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_videofile.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txt_videofile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_videofile.Location = new System.Drawing.Point(11, 66);
             this.txt_videofile.Name = "txt_videofile";
-            this.txt_videofile.Size = new System.Drawing.Size(409, 22);
+            this.txt_videofile.Size = new System.Drawing.Size(425, 22);
             this.txt_videofile.TabIndex = 2;
             this.txt_videofile.TextChanged += new System.EventHandler(this.txt_videofile_TextChanged);
             // 
@@ -130,7 +137,7 @@
             // 
             // btn_videofile
             // 
-            this.btn_videofile.Location = new System.Drawing.Point(426, 66);
+            this.btn_videofile.Location = new System.Drawing.Point(442, 66);
             this.btn_videofile.Name = "btn_videofile";
             this.btn_videofile.Size = new System.Drawing.Size(79, 22);
             this.btn_videofile.TabIndex = 1;
@@ -145,9 +152,9 @@
             // 
             // pgb_upload
             // 
-            this.pgb_upload.Location = new System.Drawing.Point(11, 251);
+            this.pgb_upload.Location = new System.Drawing.Point(11, 273);
             this.pgb_upload.Name = "pgb_upload";
-            this.pgb_upload.Size = new System.Drawing.Size(285, 20);
+            this.pgb_upload.Size = new System.Drawing.Size(302, 20);
             this.pgb_upload.TabIndex = 10;
             // 
             // lbl_progress
@@ -155,14 +162,14 @@
             this.lbl_progress.Location = new System.Drawing.Point(12, 232);
             this.lbl_progress.Name = "lbl_progress";
             this.lbl_progress.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lbl_progress.Size = new System.Drawing.Size(284, 16);
+            this.lbl_progress.Size = new System.Drawing.Size(284, 38);
             this.lbl_progress.TabIndex = 11;
             // 
             // frm_uploading
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(517, 282);
+            this.ClientSize = new System.Drawing.Size(533, 309);
             this.Controls.Add(this.lbl_progress);
             this.Controls.Add(this.pgb_upload);
             this.Controls.Add(this.btn_videofile);

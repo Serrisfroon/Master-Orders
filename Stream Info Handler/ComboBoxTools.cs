@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 
@@ -20,7 +15,7 @@ namespace Stream_Info_Handler
         #region Display Images
 
         // Set up the ComboBox to display images.
-        public static void DisplayImages(this ComboBox cbo, Image[] images)
+        public static void DisplayImages(this ComboBox cbo, Image[] images, int sizing)
         {
             // Make the ComboBox owner-drawn.
             cbo.DrawMode = DrawMode.OwnerDrawVariable;
@@ -29,7 +24,7 @@ namespace Stream_Info_Handler
             cbo.Items.Clear();
             foreach (Image image in images)
             {
-                Image update_image = ResizeImage(image, 82, 82);
+                Image update_image = ResizeImage(image, sizing, sizing);
                 cbo.Items.Add(update_image);
             }
 

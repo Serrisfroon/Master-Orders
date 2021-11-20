@@ -1,0 +1,24 @@
+Grand Finals
+Winners Finals
+Winners Semifinals
+Winners Quarters
+Losers Finals
+Losers Semifinals
+Losers Quarters
+Losers Top 8
+Winners Round 1
+Winners Round 2
+Winners Round 3
+Winners Round 4
+Losers Round 1
+Losers Round 2
+Losers Round 3
+Losers Round 4
+Winners Top 16
+Winners Top 24
+Winners Top 32
+Winners Top 48
+Losers Top 16
+Losers Top 24
+Losers Top 32
+Losers Top 48

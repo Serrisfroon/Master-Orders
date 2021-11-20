@@ -46,6 +46,8 @@
             // 
             // txt_tag
             // 
+            this.txt_tag.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txt_tag.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txt_tag.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_tag.Location = new System.Drawing.Point(15, 25);
             this.txt_tag.Name = "txt_tag";

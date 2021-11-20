@@ -1,9 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stream Info Handler", "Stream Info Handler\Stream Info Handler.csproj", "{46ADBBC4-F9D0-4DF9-BF09-BDC59A3B7639}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OutputManagementLibrary", "OutputManagementLibrary\OutputManagementLibrary.csproj", "{473BD5B7-08E7-4CBF-97B8-48F5C49B8E1B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeLibrary", "YoutubeLibrary\YoutubeLibrary.csproj", "{9298759F-3FC0-4251-A198-A5715D7E5425}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlDatabaseLibrary", "SqlDatabaseLibrary\SqlDatabaseLibrary.csproj", "{F38D9057-45E8-4F38-92FC-C90D33A30BCD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharacterLibrary", "CharacterLibrary\CharacterLibrary.csproj", "{04A72C74-4826-4896-9278-092114CFA3F6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphicsLibrary", "GraphicsLibrary\GraphicsLibrary.csproj", "{E62DA89D-04C7-4E0E-BB47-11400C57022F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwitterLibrary", "TwitterLibrary\TwitterLibrary.csproj", "{FACFA84C-3394-4169-A17F-8A0B128D49CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwitchLibrary", "TwitchLibrary\TwitchLibrary.csproj", "{54489DB3-0F53-4C74-9218-ABDD182AD389}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +29,34 @@ Global
 		{46ADBBC4-F9D0-4DF9-BF09-BDC59A3B7639}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46ADBBC4-F9D0-4DF9-BF09-BDC59A3B7639}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46ADBBC4-F9D0-4DF9-BF09-BDC59A3B7639}.Release|Any CPU.Build.0 = Release|Any CPU
+		{473BD5B7-08E7-4CBF-97B8-48F5C49B8E1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{473BD5B7-08E7-4CBF-97B8-48F5C49B8E1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{473BD5B7-08E7-4CBF-97B8-48F5C49B8E1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{473BD5B7-08E7-4CBF-97B8-48F5C49B8E1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9298759F-3FC0-4251-A198-A5715D7E5425}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9298759F-3FC0-4251-A198-A5715D7E5425}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9298759F-3FC0-4251-A198-A5715D7E5425}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9298759F-3FC0-4251-A198-A5715D7E5425}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F38D9057-45E8-4F38-92FC-C90D33A30BCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F38D9057-45E8-4F38-92FC-C90D33A30BCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F38D9057-45E8-4F38-92FC-C90D33A30BCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F38D9057-45E8-4F38-92FC-C90D33A30BCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04A72C74-4826-4896-9278-092114CFA3F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04A72C74-4826-4896-9278-092114CFA3F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04A72C74-4826-4896-9278-092114CFA3F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04A72C74-4826-4896-9278-092114CFA3F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E62DA89D-04C7-4E0E-BB47-11400C57022F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E62DA89D-04C7-4E0E-BB47-11400C57022F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E62DA89D-04C7-4E0E-BB47-11400C57022F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E62DA89D-04C7-4E0E-BB47-11400C57022F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FACFA84C-3394-4169-A17F-8A0B128D49CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FACFA84C-3394-4169-A17F-8A0B128D49CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FACFA84C-3394-4169-A17F-8A0B128D49CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FACFA84C-3394-4169-A17F-8A0B128D49CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54489DB3-0F53-4C74-9218-ABDD182AD389}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54489DB3-0F53-4C74-9218-ABDD182AD389}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54489DB3-0F53-4C74-9218-ABDD182AD389}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54489DB3-0F53-4C74-9218-ABDD182AD389}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
