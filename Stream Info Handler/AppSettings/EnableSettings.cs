@@ -21,15 +21,14 @@ namespace Stream_Info_Handler.AppSettings
 
             GlobalSettings.keepWindowsOnTop = (bool)xml.Root.Element("general").Element("keep-on-top");
             string loadGameName = (string)xml.Root.Element("database").Element("game-id");
-            DirectoryManagement.characterRostersDirectory = (string)xml.Root.Element("directories").Element("character-directory");
-            string checkGameName = DirectoryManagement.VerifyGameDirectory(loadGameName, DirectoryManagement.characterRostersDirectory);
-            if (checkGameName == "")
+            DirectoryManagement.gamesDirectory = (string)xml.Root.Element("directories").Element("character-directory");
+            if (DirectoryManagement.VerifyGameDirectory(loadGameName) == false)
             {
-                errorMessages.Add($"{ loadGameName } and its directory did not load correctly. Directory: \n{ DirectoryManagement.characterRostersDirectory }");
+                errorMessages.Add($"{ loadGameName } and its directory did not load correctly. Directory: \n{ DirectoryManagement.gamesDirectory }");
             }
             else
             {
-                GlobalSettings.selectedGame = checkGameName;
+                GlobalSettings.selectedGame = loadGameName;
             }
             return errorMessages;
         }
@@ -59,7 +58,6 @@ namespace Stream_Info_Handler.AppSettings
             YoutubeController.titleTemplate = (string)xml.Root.Element("youtube").Element("title-template");
             YoutubeController.copyVideoTitle = (bool)xml.Root.Element("general").Element("copy-title");
             DirectoryManagement.vodsDirectory = (string)xml.Root.Element("directories").Element("vods-directory");
-            DirectoryManagement.thumbnailDirectory = (string)xml.Root.Element("directories").Element("thumbnail-directory");
             YoutubeController.playlistName = (string)xml.Root.Element("youtube").Element("playlist-name");
             YoutubeController.playlistId = (string)xml.Root.Element("youtube").Element("playlist-id");
             string backgroundImage = (string)xml.Root.Element("thumbnail-layout").Element("background-image");

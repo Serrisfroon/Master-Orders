@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wYbb2X4Xj8Y5TBizRHYAKnMgt4jtnY5w2AM16kRHrQoQfjlsy2pf+NM5MeAovM5/OI1N06jpoRlsZLrAHH/P1w==",
+  "dgSpecHash": "rPqIaU3fsPMqoJkPFPvUz+STx98XSZguy0xnQhQeN3TCiBdZM6YeFHkFhjVs0NguFJKK0BZXp5r/U3C+jeXdXg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\serri\\Google Drive\\Master-Orders\\TwitchLibrary\\TwitchLibrary.csproj",
+  "projectFilePath": "C:\\Users\\serri\\My Drive\\Master-Orders\\TwitchLibrary\\TwitchLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\serri\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\serri\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.5\\microsoft.extensions.logging.abstractions.3.1.5.nupkg.sha512",

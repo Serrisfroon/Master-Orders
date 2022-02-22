@@ -106,6 +106,7 @@ namespace Stream_Info_Handler.AppSettings
                     string rawGameDirectories = (string)xml.Root.Element("database").Element("roster-directories");
                     xml.Root.Element("directories").Add(new XElement("roster-directories", rawGameDirectories));
                     xml.Root.Element("database").Element("roster-directories").Remove();
+                    xml.Root.Element("directories").Element("thumbnail-directory").Remove();
                     goto case 0;
                 case 0:
                     //Update version
@@ -149,7 +150,6 @@ namespace Stream_Info_Handler.AppSettings
                      new XElement("roster-directories", InitializeRosterDirectories()),
                      new XElement("roster-selection", ""),
                      new XElement("stream-directory", ""),
-                     new XElement("thumbnail-directory", ""),
                      new XElement("vods-directory", ""),
                      new XElement("uldata-directory", ""),
                      new XElement("enable-sponsor", false),

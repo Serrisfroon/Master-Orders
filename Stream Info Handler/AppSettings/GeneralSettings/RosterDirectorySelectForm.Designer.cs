@@ -1,6 +1,6 @@
 ﻿namespace Stream_Info_Handler
 {
-    partial class frm_tables
+    partial class RosterDirectorySelectForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_tables));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RosterDirectorySelectForm));
             this.lbl_text = new System.Windows.Forms.Label();
             this.cbx_tables = new System.Windows.Forms.ComboBox();
             this.btn_okay = new System.Windows.Forms.Button();

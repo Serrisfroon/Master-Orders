@@ -27,7 +27,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
     {
         public EditableSettings editableSettings = new EditableSettings();
 
-        string[] characters;
+        string[] characterNames;
         string playlist_id;
         string stream_software;
         string[] score_image = { "", "", "", "", "", "" };
@@ -52,438 +52,286 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             LoadSettingsFormControls.LoadStreamQueues(cbx_queues, StreamQueue.queueList);
 
             //Load the character rosters
-            LoadSettingsFormControls.LoadGameTitles(cbx_characters, GlobalSettings.availableGames, "(Select a Game)");
+            LoadSettingsFormControls.LoadGameTitles(cbxCharacterRosters, GlobalSettings.availableGames, "(Select a Game)");
             LoadSettingsFormControls.LoadGameTitles(cbx_queuegame, GlobalSettings.availableGames, "(Not Assigned)");
 
             //Load the settings
             LoadSettingsFormControls.LoadSettingsFields();
-
-            {
-
-                #region Tooltips
-                /*
-                 *             //Set tooltips for the Settings tab
-            //
-            //Set the tooltips for the Directories subtab
-            /*
-            ttp_tooltip.SetToolTip(txt_roster_directory,
-                "Set the directory to the Character Roster.");
-            ttp_tooltip.SetToolTip(btn_browse_roster,
-                "Choose the directory to the Character Roster.");
-            ttp_tooltip.SetToolTip(txt_stream_directory,
-                "Set the output directory for the stream\n" +
-                "information files.");
-            ttp_tooltip.SetToolTip(btn_output,
-                "Choose the output directory for the stream\n" +
-                "information files.");
-            ttp_tooltip.SetToolTip(txt_vods,
-                "Set the directory where VoDs will be created by\n" +
-                "the streaming program. The directory will be\n" +
-                "monitored to populate the most recently added VoD\n" +
-                "for uploading to YouTube.");
-            ttp_tooltip.SetToolTip(btn_vods,
-                "Choose the directory where VoDs will be created by\n" +
-                "the streaming program. The directory will be\n" +
-                "monitored to populate the most recently added VoD\n" +
-                "for uploading to YouTube.");
-            //
-            //Set the tooltips for the Scoreboard subtab
-            ttp_tooltip.SetToolTip(rdb_automatic,
-                "Use automatic stream file updating. Changes to\n" +
-                "player and tournament information will automatically\n" +
-                "be pushed to the Stream Files Directory.");
-            ttp_tooltip.SetToolTip(rdb_manual,
-                "Use manual stream file updating. Changes to player\n" +
-                "and tournament information will only be pushed to\n" +
-                "the Stream Files Directory when clicking Update.");
-            ttp_tooltip.SetToolTip(ckb_scoreboad,
-                "Toggle the use of image scoreboard. Enabling it\n" +
-                "limits the max score to 3 but updates images in the\n" +
-                "Stream File Directory to reflect each player's score.");
-            ttp_tooltip.SetToolTip(btn_score1_image1,
-                "Change the image for Player 1's score at 1 point.");
-            ttp_tooltip.SetToolTip(btn_score1_image2,
-                "Change the image for Player 1's score at 2 points.");
-            ttp_tooltip.SetToolTip(btn_score1_image3,
-                "Change the image for Player 1's score at 3 points.");
-            ttp_tooltip.SetToolTip(btn_score2_image1,
-                "Change the image for Player 2's score at 1 point.");
-            ttp_tooltip.SetToolTip(btn_score2_image2,
-                "Change the image for Player 2's score at 2 points.");
-            ttp_tooltip.SetToolTip(btn_score2_image3,
-                "Change the image for Player 2's score at 3 points.");
-            //
-            //Set the tooltips for Google Integrations subtab
-            ttp_tooltip.SetToolTip(txt_json,
-                "Set the path to the .json file used for YouTube\n" +
-                "uploads. This file is obtained through the Google\n" +
-                "Developer Console.");
-            ttp_tooltip.SetToolTip(btn_browse_json,
-                "Select the path to the .json file used for YouTube\n" +
-                "uploads. This file is obtained through the Google\n" +
-                "Developer Console.");
-            ttp_tooltip.SetToolTip(ckb_youtube,
-                "Enable YouTube VoD uploading. See the YouTube tab for\n" +
-                "related settings.");
-            ttp_tooltip.SetToolTip(ckb_sheets,
-                "Enable the importing of data from Google Sheets. See\n" +
-                "the Google Sheets tab for further required setup and\n" +
-                "settings.");
-            ttp_tooltip.SetToolTip(ckb_clipboard,
-                "Copy the YouTube title to the clipboard whenever a\n" +
-                "thumbnail is created.");
-            //
-            //Set the tooltips for the YouTube subtab
-            ttp_tooltip.SetToolTip(txt_playlist,
-                "Enter the name of the YouTube playlist. Leave this\n" +
-                "empty to disable playlists.");
-            ttp_tooltip.SetToolTip(btn_playlist,
-                "Update the YouTube playlist to the entered playlist name.");
-            ttp_tooltip.SetToolTip(txt_description,
-                "Set the default description for uploaded YouTube VoDs.\n" +
-                "You can use the following keywords to insert data from\n" +
-                "Master Orders:\n" +
-                "INFO_TOURNAMENT INFO_DATE INFO_BRACKET INFO_ROUND\n" +
-                "INFO_PLAYER1 INFO_PLAYER2 INFO_CHARACTER1 INFO_CHARACTER2\n" +
-                "INFO_TWITTER1 INFO_TWITTER2");
-            ttp_tooltip.SetToolTip(rdb_xsplit,
-                "Set the streaming application to XSplit.");
-            ttp_tooltip.SetToolTip(rdb_obs,
-                "Set the streaming application to OBS Studio.");
-            //
-            //Set the tooltips for the Google Sheets subtab
-            ttp_tooltip.SetToolTip(txt_sheets,
-                "Enter the Google Sheet ID of the desired Sheet. In the\n" +
-                "website URL, this is the string of characters after:\n" +
-                "https://docs.google.com/spreadsheets/d/\n" +
-                "and before /edit");
-            ttp_tooltip.SetToolTip(btn_test_sheet,
-                "Test the above entered Sheet ID. This will verify\n" +
-                "that the associated sheet is formatted for use with\n" +
-                "Master Orders and will determine the type of information\n" +
-                "it contains.");
-            ttp_tooltip.SetToolTip(rdb_fullsheet,
-                "Set Master Orders to load both player information and\n" +
-                "the stream queue from the Google Sheet.");
-            ttp_tooltip.SetToolTip(rdb_infoonly,
-                "Set Master Orders to load only player information from\n" +
-                "the Google Sheet.");
-            //
-            //Set the tooltips for the Other Tools tab
-            ttp_tooltip.SetToolTip(btn_top8,
-                "Open a new window to create a Top 8 graphic.");
-            ttp_tooltip.SetToolTip(btn_thumbnail,
-                "Create a thumbnail image based on the current\n" +
-                "player and tournament information.");
-
-            ttp_tooltip.SetToolTip(btn_dashboard,
-                "Open the Stream Queue Dashboard. The Google Sheets\n" +
-                "integration must be enabled and set to use Info and\n" +
-                "Queue to use this.");
-            ttp_tooltip.SetToolTip(btn_addplayer,
-                "Add a new player to the Google Sheet database. The\n" +
-                "Google Sheets integration must be enabled to use this.");
-              */
-                #endregion Tooltips
-            }
-
+            LoadToolTips.Initialize(this);
         }
 
-        private void btn_font_Click(object sender, EventArgs e)
-        {
-            btn_apply.Enabled = true;
+        #region General
 
-            DialogResult newfont = ftd_thumbnail.ShowDialog();
-            if (newfont == DialogResult.OK)
-            {
-                editableSettings.thumbnailFont = ftd_thumbnail.Font;
-                lbl_font.Text = editableSettings.thumbnailFont.Name + " " + editableSettings.thumbnailFont.SizeInPoints + "pt " + editableSettings.thumbnailFont.Style.ToString();
-            }
-        }
-
-        private void txt_characters_TextChanged(object sender, EventArgs e)
+        private void txtCharacterDatabasesDirectory_TextChanged(object sender, EventArgs e)
         {
             //Reset errors
-            lbl_characters.Text = "";
-            txt_characters.BackColor = Color.White;
-            cbx_characters.Enabled = true;
-            btn_apply.Enabled = true;
+            lblCharacterErrors.Text = "";
+            txtCharacterDatabasesDirectory.BackColor = Color.White;
+            cbxCharacterRosters.Enabled = true;
+            btnApplyChanges.Enabled = true;
 
             //Verify that a directory has been provided
 
-            if (txt_characters.Text != "")
+            if (txtCharacterDatabasesDirectory.Text != "")
             {
-                if (Directory.Exists(txt_characters.Text))
+                if (Directory.Exists(txtCharacterDatabasesDirectory.Text))
                 {
-                    string[] folders;
+                    string[] gameFolders;
                     try
                     {
-                        folders = Directory.GetDirectories(txt_characters.Text);
+                        gameFolders = Directory.GetDirectories(txtCharacterDatabasesDirectory.Text);
                     }
                     catch (UnauthorizedAccessException)
                     {
-                        lbl_characters.Text = "You do not have access to this folder's contents.";
-                        txt_characters.BackColor = EditableSettings.warningColor;
-                        cbx_characters.Enabled = false;
+                        editableSettings.DisplaySettingsError("You do not have access to this folder's contents.", lblCharacterErrors, txtCharacterDatabasesDirectory, EditableSettings.ErrorType.characterError, cbxCharacterRosters);
                         return;
                     }
                     editableSettings.gameRosterDirectories = new List<string>();
-                    foreach (string folder in folders)
+                    foreach (string gameFolder in gameFolders)
                     {
-                        editableSettings.gameRosterDirectories.Add(folder);
+                        editableSettings.gameRosterDirectories.Add(gameFolder);
                     }
                 }
                 else
                 {
-                    lbl_characters.Text = "This directory does not exist.";
-                    txt_characters.BackColor = EditableSettings.warningColor;
-                    cbx_characters.Enabled = false;
+                    editableSettings.DisplaySettingsError("This directory does not exist.", lblCharacterErrors, txtCharacterDatabasesDirectory, EditableSettings.ErrorType.characterError, cbxCharacterRosters);
                     return;
                 }
             }
             else
             {
-                //If a directory has not been provided, mark the field for an error and switch tabs to show it
-                txt_characters.BackColor = EditableSettings.warningColor;
-                cbx_characters.Enabled = false;
+                editableSettings.DisplaySettingsError("A directory must be provided for Character Databases.", lblCharacterErrors, txtCharacterDatabasesDirectory, EditableSettings.ErrorType.characterError, cbxCharacterRosters);
             }
         }
-
-        private void btn_characters_Click(object sender, EventArgs e)
+        private void btnBrowseCharacterRostersDirectory_Click(object sender, EventArgs e)
         {
-            //Ask the user to select the folder containing the character roster
-            if (fbd_directory.ShowDialog() == DialogResult.OK)
-            {
-                txt_characters.Text = fbd_directory.SelectedPath;                            //Update the setting text
-            }
+            editableSettings.SelectDirectory(fbdBrowserForDirectory, txtCharacterDatabasesDirectory);
         }
-
-        private void cbx_characters_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbxCharacterRosters_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Directory.Exists(txt_characters.Text))
+            if (Directory.Exists(txtCharacterDatabasesDirectory.Text))
             {
-                btn_reassign.Enabled = false;
-                string checkGameDirectory = DirectoryManagement.VerifyGameDirectory(cbx_characters.Text, txt_characters.Text);
-                if (checkGameDirectory != "")
+                btnReassignCharacterDirectory.Enabled = false;
+                if (DirectoryManagement.VerifyGameDirectory(cbxCharacterRosters.Text))
                 {
-                    btn_reassign.Enabled = true;
-                    characters = DirectoryManagement.GetCharactersFromDirectory(DirectoryManagement.GetGameDirectory());
-                    btn_apply.Enabled = true;
+                    btnReassignCharacterDirectory.Enabled = true;
+                    btnApplyChanges.Enabled = true;
+                    btn_preview.Enabled = VerifyPreviewIsReady();
 
-                    if (txt_background.Text != "" && txt_foreground.Text != "" &&
-                        txt_background.BackColor != EditableSettings.warningColor && txt_foreground.BackColor != EditableSettings.warningColor)
-                        btn_preview.Enabled = true;
+                    characterNames = DirectoryManagement.GetCharactersFromDirectory(DirectoryManagement.GetGameDirectory());
 
-                    cbx_char1.BeginUpdate();                                      //Begin
-                    cbx_char1.Items.Clear();                                      //Empty the item list
-                    cbx_char2.BeginUpdate();                                      //Begin
-                    cbx_char2.Items.Clear();                                      //Empty the item list     
-                    int character_count = characters.Length;                //Store the number of characters
-                                                                            //Loop through every character
-                    for (int x = 0; x < character_count; x++)
-                    {
-                        cbx_char1.Items.Add(characters[x]);         //Add the character's name to the combobox
-                        cbx_char2.Items.Add(characters[x]);         //Add the character's name to the combobox
-                    }
-                    cbx_char1.EndUpdate();                                        //End
-                    cbx_char1.SelectedIndex = 0;                                  //Set the combobox index to 0
-                    cbx_char2.EndUpdate();                                        //End
-                    cbx_char2.SelectedIndex = 0;                                  //Set the combobox index to 0
-                }
-            }
-        }
-
-        private void txt_streamfiles_TextChanged(object sender, EventArgs e)
-        {
-            lbl_directories.Text = "";
-            btn_apply.Enabled = true;
-
-            if (txt_streamfiles.Text != @"")
-            {
-                if (Directory.Exists(txt_streamfiles.Text))
-                {
-                    txt_streamfiles.BackColor = Color.White;
+                    editableSettings.UpdateCharacterComboBox(cbx_char1, characterNames);
+                    editableSettings.UpdateCharacterComboBox(cbx_char2, characterNames);
                 }
                 else
                 {
-                    txt_streamfiles.BackColor = EditableSettings.warningColor;
-                    lbl_directories.Text = "The directory enterred for Stream Files does not exist.";
+                    cbxCharacterRosters.SelectedIndex = -1;
+                }
+            }
+        }
+
+        #endregion General
+
+        #region Stream Assistant
+
+        #region General
+
+        private void txtStreamFilesDirectory_TextChanged(object sender, EventArgs e)
+        {
+            lblDirectoryErrors.Text = "";
+            btnApplyChanges.Enabled = true;
+
+            if (txtStreamFilesDirectory.Text != @"")
+            {
+                if (Directory.Exists(txtStreamFilesDirectory.Text))
+                {
+                    txtStreamFilesDirectory.BackColor = Color.White;
+                }
+                else
+                {
+                    txtStreamFilesDirectory.BackColor = EditableSettings.warningColor;
+                    lblDirectoryErrors.Text = "The directory enterred for Stream Files does not exist.";
                 }
             }
             else
             {
-                txt_streamfiles.BackColor = EditableSettings.warningColor;
-                lbl_directories.Text = "Please provide a directory for Stream Files.";
+                txtStreamFilesDirectory.BackColor = EditableSettings.warningColor;
+                lblDirectoryErrors.Text = "Please provide a directory for Stream Files.";
             }
         }
 
-        private void btn_streamfiles_Click(object sender, EventArgs e)
+        private void btnBrowseStreamFilesDirectory_Click(object sender, EventArgs e)
         {
             //Ask the user to select the folder to store stream files in
-            if (fbd_directory.ShowDialog() == DialogResult.OK)
+            if (fbdBrowserForDirectory.ShowDialog() == DialogResult.OK)
             {
-                txt_streamfiles.Text = fbd_directory.SelectedPath;                 //Update the global value with the new directory
+                txtStreamFilesDirectory.Text = fbdBrowserForDirectory.SelectedPath;                 //Update the global value with the new directory
             }
         }
 
-        private void txt_thumbnails_TextChanged(object sender, EventArgs e)
+        #endregion General
+
+        #region YouTube Uploads
+        private void ckbEnableVodUploads_CheckedChanged(object sender, EventArgs e)
         {
-            lbl_directories.Text = "";
-            btn_apply.Enabled = true;
-
-            if (txt_thumbnails.Text != @"")
-            {
-                if (Directory.Exists(txt_thumbnails.Text))
-                {
-                    txt_thumbnails.BackColor = Color.White;
-                }
-                else
-                {
-                    txt_thumbnails.BackColor = EditableSettings.warningColor;
-                    lbl_directories.Text = "The directory enterred for Thumbnails does not exist.";
-
-                }
-            }
-            else
-            {
-                txt_thumbnails.BackColor = EditableSettings.warningColor;
-                lbl_directories.Text = "Please provide a directory for Thumbnails.";
-            }
+            btnApplyChanges.Enabled = true;
         }
-
-        private void btn_thumbnails_Click(object sender, EventArgs e)
+        private void txtVodsDirectory_TextChanged(object sender, EventArgs e)
         {
-            //Ask the user to select the folder to store thumbnail images in
-            if (fbd_directory.ShowDialog() == DialogResult.OK)
-            {
-                txt_thumbnails.Text = fbd_directory.SelectedPath;                   //Update the setting with the new information
-            }
-        }
+            lblDirectoryErrors.Text = "";
+            btnApplyChanges.Enabled = true;
 
-        private void txt_vods_TextChanged(object sender, EventArgs e)
-        {
-            lbl_directories.Text = "";
-            btn_apply.Enabled = true;
-
-            if (txt_vods.Text != @"")
+            if (txtVodsDirectory.Text != @"")
             {
-                if (Directory.Exists(txt_vods.Text))
+                if (Directory.Exists(txtVodsDirectory.Text))
                 {
-                    if (txt_vods.Text != DirectoryManagement.GetGameDirectory() &&
-                    txt_vods.Text != txt_streamfiles.Text &&
-                    txt_vods.Text != txt_thumbnails.Text &&
-                    txt_vods.Text != txt_regions.Text &&
-                    txt_vods.Text != txt_sponsors.Text)
+                    if (txtVodsDirectory.Text != DirectoryManagement.GetGameDirectory() &&
+                    txtVodsDirectory.Text != txtStreamFilesDirectory.Text &&
+                    txtVodsDirectory.Text != txtRegionImagesDirectory.Text &&
+                    txtVodsDirectory.Text != txtSponsorImagesDirectory.Text)
                     {
-                        txt_vods.BackColor = Color.White;
+                        txtVodsDirectory.BackColor = Color.White;
                     }
                     else
                     {
-                        txt_vods.BackColor = EditableSettings.warningColor;
-                        lbl_directories.Text = "The VoD directory cannot be the same as any other directory used by Master Orders. Choose a new directory.";
+                        txtVodsDirectory.BackColor = EditableSettings.warningColor;
+                        lblDirectoryErrors.Text = "The VoD directory cannot be the same as any other directory used by Master Orders. Choose a new directory.";
                     }
                 }
                 else
                 {
-                    txt_vods.BackColor = EditableSettings.warningColor;
-                    lbl_directories.Text = "The directory enterred for VoDs does not exist.";
+                    txtVodsDirectory.BackColor = EditableSettings.warningColor;
+                    lblDirectoryErrors.Text = "The directory enterred for VoDs does not exist.";
                 }
             }
             else
             {
-                txt_vods.BackColor = EditableSettings.warningColor;
-                lbl_directories.Text = "Please provide a directory for VoDs.";
+                txtVodsDirectory.BackColor = EditableSettings.warningColor;
+                lblDirectoryErrors.Text = "Please provide a directory for VoDs.";
             }
         }
 
-        private void btn_vods_Click(object sender, EventArgs e)
+        private void btnBrowseVodsDirectory_Click(object sender, EventArgs e)
         {
-            if (fbd_directory.ShowDialog() == DialogResult.OK)
+            if (fbdBrowserForDirectory.ShowDialog() == DialogResult.OK)
             {
-                txt_vods.Text = fbd_directory.SelectedPath;
+                txtVodsDirectory.Text = fbdBrowserForDirectory.SelectedPath;
             }
         }
 
-        private void txt_sponsors_TextChanged(object sender, EventArgs e)
-        {
-            lbl_directories.Text = "";
-            btn_apply.Enabled = true;
+        #endregion YouTube Uploads
 
-            if (txt_sponsors.Text != @"")
+        #region Images
+
+        private void txtSponsorImagesDirectory_TextChanged(object sender, EventArgs e)
+        {
+            lblDirectoryErrors.Text = "";
+            btnApplyChanges.Enabled = true;
+
+            if (txtSponsorImagesDirectory.Text != @"")
             {
-                if (Directory.Exists(txt_sponsors.Text))
+                if (Directory.Exists(txtSponsorImagesDirectory.Text))
                 {
-                    txt_sponsors.BackColor = Color.White;
+                    txtSponsorImagesDirectory.BackColor = Color.White;
                 }
                 else
                 {
-                    txt_sponsors.BackColor = EditableSettings.warningColor;
-                    lbl_directories.Text = "The directory enterred for Sponsor images does not exist.";
+                    txtSponsorImagesDirectory.BackColor = EditableSettings.warningColor;
+                    lblDirectoryErrors.Text = "The directory enterred for Sponsor images does not exist.";
 
                 }
             }
             else
             {
-                txt_sponsors.BackColor = EditableSettings.warningColor;
-                lbl_directories.Text = "Please provide a directory for Sponsor images.";
+                txtSponsorImagesDirectory.BackColor = EditableSettings.warningColor;
+                lblDirectoryErrors.Text = "Please provide a directory for Sponsor images.";
             }
         }
 
-        private void btn_sponsors_Click(object sender, EventArgs e)
+        private void btnBrowserSponsorImagesDirectory_Click(object sender, EventArgs e)
         {
-            if (fbd_directory.ShowDialog() == DialogResult.OK)
+            if (fbdBrowserForDirectory.ShowDialog() == DialogResult.OK)
             {
-                txt_sponsors.Text = fbd_directory.SelectedPath;
+                txtSponsorImagesDirectory.Text = fbdBrowserForDirectory.SelectedPath;
             }
         }
 
-        private void txt_regions_TextChanged(object sender, EventArgs e)
+        private void txtRegionImagesDirectory_TextChanged(object sender, EventArgs e)
         {
-            lbl_directories.Text = "";
-            btn_apply.Enabled = true;
+            lblDirectoryErrors.Text = "";
+            btnApplyChanges.Enabled = true;
 
-            if (txt_regions.Text != @"")
+            if (txtRegionImagesDirectory.Text != @"")
             {
-                if (Directory.Exists(txt_regions.Text))
+                if (Directory.Exists(txtRegionImagesDirectory.Text))
                 {
-                    txt_regions.BackColor = Color.White;
+                    txtRegionImagesDirectory.BackColor = Color.White;
                 }
                 else
                 {
-                    txt_regions.BackColor = EditableSettings.warningColor;
-                    lbl_directories.Text = "The directory enterred for Region images does not exist.";
+                    txtRegionImagesDirectory.BackColor = EditableSettings.warningColor;
+                    lblDirectoryErrors.Text = "The directory enterred for Region images does not exist.";
 
                 }
             }
             else
             {
-                txt_regions.BackColor = EditableSettings.warningColor;
-                lbl_directories.Text = "Please provide a directory for Region images.";
+                txtRegionImagesDirectory.BackColor = EditableSettings.warningColor;
+                lblDirectoryErrors.Text = "Please provide a directory for Region images.";
             }
         }
 
-        private void btn_regions_Click(object sender, EventArgs e)
+        private void btnBrowseRegionImagesDirectory_Click(object sender, EventArgs e)
         {
-            if (fbd_directory.ShowDialog() == DialogResult.OK)
+            if (fbdBrowserForDirectory.ShowDialog() == DialogResult.OK)
             {
-                txt_regions.Text = fbd_directory.SelectedPath;
+                txtRegionImagesDirectory.Text = fbdBrowserForDirectory.SelectedPath;
             }
         }
 
-        private void ckb_sponsors_CheckedChanged(object sender, EventArgs e)
+        private void ckbEnableSponsorImages_CheckedChanged(object sender, EventArgs e)
         {
-            btn_apply.Enabled = true;
+            btnApplyChanges.Enabled = true;
         }
 
-        private void ckb_regions_CheckedChanged(object sender, EventArgs e)
+        private void ckbEnableRegionImages_CheckedChanged(object sender, EventArgs e)
         {
-            btn_apply.Enabled = true;
+            btnApplyChanges.Enabled = true;
         }
 
-        private void ckb_vod_uploads_CheckedChanged(object sender, EventArgs e)
+        #endregion Images
+
+        #region Thumbnails
+        private bool VerifyPreviewIsReady()
         {
-            btn_apply.Enabled = true;
+            if (txtThumbnailBackground.Text != "" && txtThumbnailForeground.Text != "" &&
+                txtThumbnailBackground.BackColor != EditableSettings.warningColor && txtThumbnailForeground.BackColor != EditableSettings.warningColor)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+        private void btnSelectThumbnailFont_Click(object sender, EventArgs e)
+        {
+            btnApplyChanges.Enabled = true;
+
+            DialogResult newfont = ftdPromptForFont.ShowDialog();
+            if (newfont == DialogResult.OK)
+            {
+                editableSettings.thumbnailFont = ftdPromptForFont.Font;
+                lblThumnailFont.Text = editableSettings.thumbnailFont.Name + " " + editableSettings.thumbnailFont.SizeInPoints + "pt " + editableSettings.thumbnailFont.Style.ToString();
+            }
+        }
+
+        #endregion Thumbnails
+
+        #endregion Stream Assistant
+
+
+
 
         public void btn_oauth_Click(object sender, EventArgs e)
         {
@@ -564,7 +412,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
         {
             btn_playlist.Enabled = false;
             txt_playlist.Enabled = false;
-            btn_apply.Enabled = true;
+            btnApplyChanges.Enabled = true;
             try
             {
                 Thread thead = new Thread(() =>
@@ -696,24 +544,24 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
 
         private void rdb_xsplit_CheckedChanged(object sender, EventArgs e)
         {
-            btn_apply.Enabled = true;
+            btnApplyChanges.Enabled = true;
             stream_software = @"XSplit";
         }
 
         private void rdb_obs_CheckedChanged(object sender, EventArgs e)
         {
-            btn_apply.Enabled = true;
+            btnApplyChanges.Enabled = true;
             stream_software = @"OBS";
         }
 
         private void rdb_automatic_CheckedChanged(object sender, EventArgs e)
         {
-            btn_apply.Enabled = true;
+            btnApplyChanges.Enabled = true;
         }
 
         private void ckb_scoreboad_CheckedChanged(object sender, EventArgs e)
         {
-            btn_apply.Enabled = true;
+            btnApplyChanges.Enabled = true;
             btn_score1_image1.Enabled = ckb_scoreboad.Checked;
             btn_score1_image2.Enabled = ckb_scoreboad.Checked;
             btn_score1_image3.Enabled = ckb_scoreboad.Checked;
@@ -727,7 +575,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             Button clickedImageButton = (Button)sender;
             if (ofd_png.ShowDialog() == DialogResult.OK)
             {
-                btn_apply.Enabled = true;
+                btnApplyChanges.Enabled = true;
                 int scoreControlIndex = (int)(clickedImageButton.Tag);
                 editableSettings.scoreControls[scoreControlIndex].UpdateImage(ofd_png.FileName);
             }
@@ -742,28 +590,28 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
 
         private void txt_background_TextChanged(object sender, EventArgs e)
         {
-            txt_background.BackColor = EditableSettings.warningColor;
+            txtThumbnailBackground.BackColor = EditableSettings.warningColor;
             btn_preview.Enabled = false;
-            if (txt_background.Text != @"")
+            if (txtThumbnailBackground.Text != @"")
             {
-                if (File.Exists(txt_background.Text))
+                if (File.Exists(txtThumbnailBackground.Text))
                 {
-                    if (Path.GetExtension(txt_background.Text) == ".jpg")
+                    if (Path.GetExtension(txtThumbnailBackground.Text) == ".jpg")
                     {
-                        btn_apply.Enabled = true;
-                        txt_background.BackColor = Color.White;
-                        if (txt_foreground.Text != "" && txt_foreground.BackColor != EditableSettings.warningColor &&
-                            cbx_characters.BackColor != EditableSettings.warningColor && cbx_characters.Text != "")
+                        btnApplyChanges.Enabled = true;
+                        txtThumbnailBackground.BackColor = Color.White;
+                        if (txtThumbnailForeground.Text != "" && txtThumbnailForeground.BackColor != EditableSettings.warningColor &&
+                            cbxCharacterRosters.BackColor != EditableSettings.warningColor && cbxCharacterRosters.Text != "")
                             btn_preview.Enabled = true;
                     }
                     else
                     {
-                        txt_background.BackColor = EditableSettings.warningColor;
+                        txtThumbnailBackground.BackColor = EditableSettings.warningColor;
                     }
                 }
                 else
                 {
-                    txt_background.BackColor = EditableSettings.warningColor;
+                    txtThumbnailBackground.BackColor = EditableSettings.warningColor;
                 }
             }
         }
@@ -772,35 +620,35 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
         {
             if (ofd_jpg.ShowDialog() == DialogResult.OK)
             {
-                txt_background.Text = ofd_jpg.FileName;
+                txtThumbnailBackground.Text = ofd_jpg.FileName;
             }
         }
 
         private void txt_foreground_TextChanged(object sender, EventArgs e)
         {
-            txt_foreground.BackColor = EditableSettings.warningColor;
+            txtThumbnailForeground.BackColor = EditableSettings.warningColor;
             btn_preview.Enabled = false;
 
-            if (txt_foreground.Text != @"")
+            if (txtThumbnailForeground.Text != @"")
             {
-                if (File.Exists(txt_foreground.Text))
+                if (File.Exists(txtThumbnailForeground.Text))
                 {
-                    if (Path.GetExtension(txt_foreground.Text) == ".png")
+                    if (Path.GetExtension(txtThumbnailForeground.Text) == ".png")
                     {
-                        btn_apply.Enabled = true;
-                        txt_foreground.BackColor = Color.White;
-                        if (txt_background.Text != "" && txt_background.BackColor != EditableSettings.warningColor &&
-                            cbx_characters.BackColor != EditableSettings.warningColor && cbx_characters.Text != "")
+                        btnApplyChanges.Enabled = true;
+                        txtThumbnailForeground.BackColor = Color.White;
+                        if (txtThumbnailBackground.Text != "" && txtThumbnailBackground.BackColor != EditableSettings.warningColor &&
+                            cbxCharacterRosters.BackColor != EditableSettings.warningColor && cbxCharacterRosters.Text != "")
                             btn_preview.Enabled = true;
                     }
                     else
                     {
-                        txt_foreground.BackColor = EditableSettings.warningColor;
+                        txtThumbnailForeground.BackColor = EditableSettings.warningColor;
                     }
                 }
                 else
                 {
-                    txt_foreground.BackColor = EditableSettings.warningColor;
+                    txtThumbnailForeground.BackColor = EditableSettings.warningColor;
                 }
             }
         }
@@ -809,7 +657,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
         {
             if (ofd_png.ShowDialog() == DialogResult.OK)
             {
-                txt_foreground.Text = ofd_png.FileName;
+                txtThumbnailForeground.Text = ofd_png.FileName;
             }
         }
 
@@ -829,7 +677,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 return;
             }
 
-            btn_apply.Enabled = true;
+            btnApplyChanges.Enabled = true;
         }
 
         private void numeric_FocusLeave(object sender, KeyPressEventArgs e)
@@ -855,8 +703,8 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             drawing.CompositingQuality = CompositingQuality.HighQuality;
 
             //Create an image resource for the background and overlay of the tumbnail
-            Image background = Image.FromFile(txt_background.Text);
-            Image foreground = Image.FromFile(txt_foreground.Text);
+            Image background = Image.FromFile(txtThumbnailBackground.Text);
+            Image foreground = Image.FromFile(txtThumbnailForeground.Text);
 
             //Create an image resource for each player's character        
             Image left_character = Image.FromFile(image_directory1 + @"\1080.png");
@@ -1012,28 +860,28 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
 
         private void checkbox_Changed(object sender, EventArgs e)
         {
-            btn_apply.Enabled = true;
+            btnApplyChanges.Enabled = true;
         }
 
         private void ckb_thumbnails_CheckedChanged(object sender, EventArgs e)
         {
-            btn_apply.Enabled = true;
+            btnApplyChanges.Enabled = true;
         }
 
         private void ckb_clipboard_CheckedChanged(object sender, EventArgs e)
         {
-            btn_apply.Enabled = true;
+            btnApplyChanges.Enabled = true;
         }
 
         private void txt_description_TextChanged(object sender, EventArgs e)
         {
-            btn_apply.Enabled = true;
+            btnApplyChanges.Enabled = true;
         }
 
         private void btn_apply_Click(object sender, EventArgs e)
         {
             if (save_settings() == true)
-                btn_apply.Enabled = false;
+                btnApplyChanges.Enabled = false;
         }
 
         private void btn_ok_Click(object sender, EventArgs e)
@@ -1054,8 +902,8 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
         {
             //Check all settings to ensure there are no conflicts, and ensure all needed fields are provided
             {
-                if (txt_characters.BackColor == EditableSettings.warningColor ||
-                    txt_characters.Text == "")
+                if (txtCharacterDatabasesDirectory.BackColor == EditableSettings.warningColor ||
+                    txtCharacterDatabasesDirectory.Text == "")
                 {
                     MessageBox.Show("The provided directory for Character Databases is incorrect. Please correct this under the General settings.", "Invalid Directory Provided", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
@@ -1072,8 +920,8 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                         return false;
                 }
                 if (ckb_thumbnails.Checked == true &&
-                    (!(File.Exists(txt_background.Text) &&
-                    File.Exists(txt_foreground.Text))))
+                    (!(File.Exists(txtThumbnailBackground.Text) &&
+                    File.Exists(txtThumbnailForeground.Text))))
 
                 {
                     if (MessageBox.Show("Thumbnail Generation is enabled, but a working path to a background and/or foreground image has not been provided. Click OK to disable Thumbnail Generation, or click Cancel to cancel saving changes and add a working path to a background and/or foreground image.", "Invalid Directory Provided", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
@@ -1082,27 +930,27 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                     else
                         return false;
                 }
-                if (ckb_sponsors.Checked == true && (
-                    txt_sponsors.Text == "" ||
-                    txt_sponsors.BackColor == EditableSettings.warningColor))
+                if (ckbEnableSponsorImages.Checked == true && (
+                    txtSponsorImagesDirectory.Text == "" ||
+                    txtSponsorImagesDirectory.BackColor == EditableSettings.warningColor))
                 {
                     if (MessageBox.Show("Sponsor Images are enabled, but a working directory has not been provided. Click OK to disable Sponsor Images, or click Cancel to cancel saving changes and add a working directory.", "Invalid Directory Provided", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
                         == DialogResult.OK)
-                        ckb_sponsors.Checked = false;
+                        ckbEnableSponsorImages.Checked = false;
                     else
                         return false;
                 }
-                if (ckb_regions.Checked == true && (
-                    txt_regions.Text == "" ||
-                    txt_regions.BackColor == EditableSettings.warningColor))
+                if (ckbEnableRegionImages.Checked == true && (
+                    txtRegionImagesDirectory.Text == "" ||
+                    txtRegionImagesDirectory.BackColor == EditableSettings.warningColor))
                 {
                     if (MessageBox.Show("Region Images are enabled, but a working directory has not been provided. Click OK to disable Region Images, or click Cancel to cancel saving changes and add a working directory.", "Invalid Directory Provided", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
                         == DialogResult.OK)
-                        ckb_regions.Checked = false;
+                        ckbEnableRegionImages.Checked = false;
                     else
                         return false;
                 }
-                if (txt_vods.BackColor == EditableSettings.warningColor)
+                if (txtVodsDirectory.BackColor == EditableSettings.warningColor)
                 {
                     MessageBox.Show("The provided directory for VoDs is invalid. Please correct this under the Stream Assistant settings' Directories tab. Keep in mind that the VoDs directory cannot be the same as any other directory used by Master Orders.", "Invalid Directory Provided", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
@@ -1111,22 +959,15 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 //DID THIS RECENTLY LOL
                 ////if (save_checking == 1)
                 {
-                    if (txt_streamfiles.BackColor == EditableSettings.warningColor ||
-                        txt_streamfiles.Text == "")
+                    if (txtStreamFilesDirectory.BackColor == EditableSettings.warningColor ||
+                        txtStreamFilesDirectory.Text == "")
                     {
                         MessageBox.Show("The provided directory for Stream Files is invalid. Please correct this under the Stream Assistant settings' Directories tab.", "Invalid Directory Provided", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
-                    if (txt_thumbnails.BackColor == EditableSettings.warningColor ||
-                        txt_thumbnails.Text == "")
-                    {
-                        MessageBox.Show("The provided directory for Thumbnails is invalid. Please correct this under the Stream Assistant settings' Directories tab.", "Invalid Directory Provided", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
-
                 }
 
-                if(cbx_queuegame.Text != cbx_characters.Text && cbx_queues.Text != "None")
+                if(cbx_queuegame.Text != cbxCharacterRosters.Text && cbx_queues.Text != "None")
                 {
                     if (MessageBox.Show("The selected character roster does not match the game that the selected queue is set to use. Master Orders will need to match the queue's game to the selected roster. Okay to Proceed?", "Roster Game Mismatch", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
                        == DialogResult.OK)
@@ -1139,14 +980,14 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                                 queueidd = i;
                             }
                         }
-                        if (database_tools.regame_queue(cbx_queues.Text, cbx_characters.Text, queueidd) == false)
+                        if (database_tools.regame_queue(cbx_queues.Text, cbxCharacterRosters.Text, queueidd) == false)
                             return false;
                     }
                     else
                         return false;
                 }
 
-                if (txt_streamfiles.BackColor == EditableSettings.warningColor)
+                if (txtStreamFilesDirectory.BackColor == EditableSettings.warningColor)
                 {
                     MessageBox.Show("The provided Bracket Rounds File is invalid. Select a valid file or clear the textbox to use the default rounds.", "Invalid File Provided", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
@@ -1168,18 +1009,18 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
 
 
                 xml.Root.Element("database").Element("queue-id").ReplaceWith(new XElement("queue-id", queueid));
-                xml.Root.Element("database").Element("game-id").ReplaceWith(new XElement("game-id", cbx_characters.Text));
+                xml.Root.Element("database").Element("game-id").ReplaceWith(new XElement("game-id", cbxCharacterRosters.Text));
 
-                xml.Root.Element("directories").Element("character-directory").ReplaceWith(new XElement("character-directory", txt_characters.Text));
-                xml.Root.Element("directories").Element("stream-directory").ReplaceWith(new XElement("stream-directory", txt_streamfiles.Text));
+                xml.Root.Element("directories").Element("character-directory").ReplaceWith(new XElement("character-directory", txtCharacterDatabasesDirectory.Text));
+                xml.Root.Element("directories").Element("stream-directory").ReplaceWith(new XElement("stream-directory", txtStreamFilesDirectory.Text));
                 xml.Root.Element("directories").Element("thumbnail-directory").ReplaceWith(new XElement("thumbnail-directory", txt_thumbnails.Text));
-                xml.Root.Element("directories").Element("vods-directory").ReplaceWith(new XElement("vods-directory", txt_vods.Text));
-                xml.Root.Element("directories").Element("enable-sponsor").ReplaceWith(new XElement("enable-sponsor", ckb_sponsors.Checked));
-                xml.Root.Element("directories").Element("enable-region").ReplaceWith(new XElement("enable-region", ckb_regions.Checked));
-                xml.Root.Element("directories").Element("sponsor-directory").ReplaceWith(new XElement("sponsor-directory", txt_sponsors.Text));
-                xml.Root.Element("directories").Element("region-directory").ReplaceWith(new XElement("region-directory", txt_regions.Text));
+                xml.Root.Element("directories").Element("vods-directory").ReplaceWith(new XElement("vods-directory", txtVodsDirectory.Text));
+                xml.Root.Element("directories").Element("enable-sponsor").ReplaceWith(new XElement("enable-sponsor", ckbEnableSponsorImages.Checked));
+                xml.Root.Element("directories").Element("enable-region").ReplaceWith(new XElement("enable-region", ckbEnableRegionImages.Checked));
+                xml.Root.Element("directories").Element("sponsor-directory").ReplaceWith(new XElement("sponsor-directory", txtSponsorImagesDirectory.Text));
+                xml.Root.Element("directories").Element("region-directory").ReplaceWith(new XElement("region-directory", txtRegionImagesDirectory.Text));
 
-                xml.Root.Element("youtube").Element("enable-youtube").ReplaceWith(new XElement("enable-youtube", ckb_vod_uploads.Checked));
+                xml.Root.Element("youtube").Element("enable-youtube").ReplaceWith(new XElement("enable-youtube", ckbEnableVodUploads.Checked));
                 xml.Root.Element("youtube").Element("playlist-name").ReplaceWith(new XElement("playlist-name", txt_playlist.Text));
                 xml.Root.Element("youtube").Element("playlist-id").ReplaceWith(new XElement("playlist-id", playlist_id));
                 xml.Root.Element("youtube").Element("default-description").ReplaceWith(new XElement("default-description", txt_description.Text));
@@ -1194,8 +1035,8 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 xml.Root.Element("image-scoring").Element("player2-2").ReplaceWith(new XElement("player2-2", score_image[4]));
                 xml.Root.Element("image-scoring").Element("player2-3").ReplaceWith(new XElement("player2-3", score_image[5]));
 
-                xml.Root.Element("thumbnail-layout").Element("background-image").ReplaceWith(new XElement("background-image", txt_background.Text));
-                xml.Root.Element("thumbnail-layout").Element("foreground-image").ReplaceWith(new XElement("foreground-image", txt_foreground.Text));
+                xml.Root.Element("thumbnail-layout").Element("background-image").ReplaceWith(new XElement("background-image", txtThumbnailBackground.Text));
+                xml.Root.Element("thumbnail-layout").Element("foreground-image").ReplaceWith(new XElement("foreground-image", txtThumbnailForeground.Text));
                 xml.Root.Element("thumbnail-layout").Element("font").ReplaceWith(new XElement("font", editableSettings.thumbnailFont.Name));
                 xml.Root.Element("thumbnail-layout").Element("character-1-xoffset").ReplaceWith(new XElement("character-1-xoffset", txt_char1_xoffset.Text));
                 xml.Root.Element("thumbnail-layout").Element("character-1-yoffset").ReplaceWith(new XElement("character-1-yoffset", txt_char1_yoffset.Text));
@@ -1235,11 +1076,11 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
 
             //Apply all changes to the global values
             {
-                ImageManagement.enableRegionImages = ckb_regions.Checked;
-                DirectoryManagement.regionDirectory = txt_regions.Text;
-                ImageManagement.enableSponsorImages = ckb_sponsors.Checked;
-                DirectoryManagement.sponsorDirectory = txt_sponsors.Text; ;
-                YoutubeLibrary.YoutubeController.enableYoutubeFunctions = ckb_vod_uploads.Checked;
+                ImageManagement.enableRegionImages = ckbEnableRegionImages.Checked;
+                DirectoryManagement.regionDirectory = txtRegionImagesDirectory.Text;
+                ImageManagement.enableSponsorImages = ckbEnableSponsorImages.Checked;
+                DirectoryManagement.sponsorDirectory = txtSponsorImagesDirectory.Text; ;
+                YoutubeLibrary.YoutubeController.enableYoutubeFunctions = ckbEnableVodUploads.Checked;
                 YoutubeController.enableVideoThumbnails = ckb_thumbnails.Checked;
                 YoutubeController.copyVideoTitle = ckb_clipboard.Checked;
                 YoutubeLibrary.YoutubeController.streamSoftware = stream_software;
@@ -1250,14 +1091,13 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 ImageManagement.scoreboardImages[1, 0] = score_image[3];
                 ImageManagement.scoreboardImages[1, 1] = score_image[4];
                 ImageManagement.scoreboardImages[1, 2] = score_image[5];
-                DirectoryManagement.outputDirectory = txt_streamfiles.Text;
-                DirectoryManagement.thumbnailDirectory = txt_thumbnails.Text;
-                DirectoryManagement.vodsDirectory = txt_vods.Text;
+                DirectoryManagement.outputDirectory = txtStreamFilesDirectory.Text;
+                DirectoryManagement.vodsDirectory = txtVodsDirectory.Text;
                 DataOutputCaller.automaticUpdates = rdb_automatic.Checked;
                 YoutubeController.playlistName = txt_playlist.Text;
                 YoutubeController.playlistId = playlist_id;
                 global_values.queue_id = queueid;
-                GlobalSettings.selectedGame = cbx_characters.Text;
+                GlobalSettings.selectedGame = cbxCharacterRosters.Text;
             }
 
             return true;
@@ -1265,7 +1105,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
 
         private void cbx_queues_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btn_apply.Enabled = true;
+            btnApplyChanges.Enabled = true;
             string queuename = "";
             for (int i = 0; i < StreamQueue.queueList.Count; i++)
             {
@@ -1300,7 +1140,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
 
         private void txt_version_KeyPress(object sender, KeyPressEventArgs e)
         {
-            btn_apply.Enabled = true;
+            btnApplyChanges.Enabled = true;
         }
 
         private void btn_queue_rename_Click(object sender, EventArgs e)
@@ -1329,21 +1169,21 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
 
         private void btn_reassign_Click(object sender, EventArgs e)
         {
-            if (cbx_characters.Text == "")
+            if (cbxCharacterRosters.Text == "")
             {
                 SystemSounds.Beep.Play();
                 return;
             }
 
             //Find the ID of the selected game
-            string selectedGameName = cbx_characters.Text;
-            string[] character_directories = Directory.GetDirectories(txt_characters.Text);
+            string selectedGameName = cbxCharacterRosters.Text;
+            string[] character_directories = Directory.GetDirectories(txtCharacterDatabasesDirectory.Text);
 
             //Determine the selected game's directory
             string selected_directory = DirectoryManagement.gameDirectories[selectedGameName];
 
             //Show a window to select a new directory
-            frm_tables selection = new frm_tables(character_directories, cbx_characters.Text);
+            RosterDirectorySelectForm selection = new RosterDirectorySelectForm(character_directories, cbxCharacterRosters.Text);
             //Return fail if a new directory is not selected
             if (selection.ShowDialog() != DialogResult.OK)
                 return;
@@ -1358,7 +1198,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             {
                 //If the characters are not verified, have the user choose a new directory
                 MessageBox.Show("The selected directory does not have correct character information for the selected game. Please choose a new directory for " + selectedGameName);
-                frm_tables selectioncheck = new frm_tables(character_directories, selectedGameName);
+                RosterDirectorySelectForm selectioncheck = new RosterDirectorySelectForm(character_directories, selectedGameName);
                 //Return fail if a new directory is not selected
                 if (selectioncheck.ShowDialog() != DialogResult.OK)
                     return;
@@ -1397,7 +1237,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
  
         private void txt_seperator_TextChanged(object sender, EventArgs e)
         {
-            btn_apply.Enabled = true;
+            btnApplyChanges.Enabled = true;
         }
 
         private void btn_bracketrounds_Click(object sender, EventArgs e)
@@ -1436,7 +1276,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
 
         private void Txt_titletemplate_TextChanged(object sender, EventArgs e)
         {
-            btn_apply.Enabled = true;
+            btnApplyChanges.Enabled = true;
         }
     }
 }

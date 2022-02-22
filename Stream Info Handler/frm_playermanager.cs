@@ -102,26 +102,30 @@ namespace Stream_Info_Handler
         {
             this.lvw_players.ListViewItemSorter = null;
             string[] folders = DirectoryManagement.GetCharactersFromDirectory(character_path);
-            XDocument xml = XDocument.Load(SettingsFile.settingsFile);
-            string CheckGameName = DirectoryManagement.VerifyGameDirectory(cbx_character_roster.Text, (string)xml.Root.Element("directories").Element("character-directory"));
-
-            player_roster = database_tools.load_players(CheckGameName, ref player_id);
-
-            lvw_players.BeginUpdate();
-            lvw_players.Items.Clear();
-            for (int i = 0; i < player_roster.Count(); i++)
+            if (DirectoryManagement.VerifyGameDirectory(cbx_character_roster.Text))
             {
-                ListViewItem add_item = new ListViewItem(player_roster[i].elo.ToString());
-                add_item.SubItems.Add(player_roster[i].tag);
-                add_item.SubItems.Add(player_roster[i].sponsor);
-                add_item.SubItems.Add(player_roster[i].twitter);
-                add_item.SubItems.Add(player_roster[i].fullname);
-                add_item.SubItems.Add(player_roster[i].region);
-                add_item.SubItems.Add(player_roster[i].character[0]);
-                add_item.SubItems.Add(player_roster[i].misc);
-                lvw_players.Items.Add(add_item);
+                player_roster = database_tools.load_players(cbx_character_roster.Text,, ref player_id);
+
+                lvw_players.BeginUpdate();
+                lvw_players.Items.Clear();
+                for (int i = 0; i < player_roster.Count(); i++)
+                {
+                    ListViewItem add_item = new ListViewItem(player_roster[i].elo.ToString());
+                    add_item.SubItems.Add(player_roster[i].tag);
+                    add_item.SubItems.Add(player_roster[i].sponsor);
+                    add_item.SubItems.Add(player_roster[i].twitter);
+                    add_item.SubItems.Add(player_roster[i].fullName);
+                    add_item.SubItems.Add(player_roster[i].region);
+                    add_item.SubItems.Add(player_roster[i].characterName);
+                    add_item.SubItems.Add(player_roster[i].misc);
+                    lvw_players.Items.Add(add_item);
+                }
+                lvw_players.EndUpdate();
             }
-            lvw_players.EndUpdate();
+            else
+            {
+                cbx_character_roster.SelectedIndex = -1;
+            }
         }
 
 

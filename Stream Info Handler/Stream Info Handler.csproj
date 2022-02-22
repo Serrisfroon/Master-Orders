@@ -226,7 +226,13 @@
     <Compile Include="AppSettings\DirectoryManagement.cs" />
     <Compile Include="AppSettings\GeneralSettings\EditableSettings.cs" />
     <Compile Include="AppSettings\GeneralSettings\LoadSettingsFormControls.cs" />
+    <Compile Include="AppSettings\GeneralSettings\LoadToolTips.cs" />
     <Compile Include="AppSettings\GeneralSettings\ScoreControlModel.cs" />
+    <Compile Include="AppSettings\GeneralSettings\SettingsGroups\GeneralGroup.cs" />
+    <Compile Include="AppSettings\GeneralSettings\SettingsGroups\StreamGeneralGroup.cs" />
+    <Compile Include="AppSettings\GeneralSettings\SettingsGroups\StreamImagesGroup.cs" />
+    <Compile Include="AppSettings\GeneralSettings\SettingsGroups\StreamTumbnailsGroup.cs" />
+    <Compile Include="AppSettings\GeneralSettings\SettingsGroups\StreamYouTubeGroup.cs" />
     <Compile Include="AppSettings\GlobalSettings.cs" />
     <Compile Include="AppSettings\EnableSettings.cs" />
     <Compile Include="CharacterSelect\CharacterSelect.cs">
@@ -332,11 +338,11 @@
     <Compile Include="StreamAssistant\StreamAssistantForm.Designer.cs">
       <DependentUpon>StreamAssistantForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AppSettings\GeneralSettings\frm_tables.cs">
+    <Compile Include="AppSettings\GeneralSettings\RosterDirectorySelectForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AppSettings\GeneralSettings\frm_tables.Designer.cs">
-      <DependentUpon>frm_tables.cs</DependentUpon>
+    <Compile Include="AppSettings\GeneralSettings\RosterDirectorySelectForm.Designer.cs">
+      <DependentUpon>RosterDirectorySelectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_playermanager.cs">
       <SubType>Form</SubType>
@@ -445,8 +451,8 @@
     <EmbeddedResource Include="StreamAssistant\StreamAssistantForm.resx">
       <DependentUpon>StreamAssistantForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AppSettings\GeneralSettings\frm_tables.resx">
-      <DependentUpon>frm_tables.cs</DependentUpon>
+    <EmbeddedResource Include="AppSettings\GeneralSettings\RosterDirectorySelectForm.resx">
+      <DependentUpon>RosterDirectorySelectForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_playermanager.resx">
       <DependentUpon>frm_playermanager.cs</DependentUpon>

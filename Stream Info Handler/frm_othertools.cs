@@ -634,37 +634,41 @@ namespace Stream_Info_Handler
             {
                 character_names.Add(folder);
             }
-            XDocument xml = XDocument.Load(SettingsFile.settingsFile);
-            string selectedGameName = DirectoryManagement.VerifyGameDirectory(cbx_character_roster.Text, (string)xml.Root.Element("directories").Element("character-directory"));
-
-            player_roster = database_tools.load_players(selectedGameName, ref player_id);
-
-            cbx_tag1.BeginUpdate();
-            cbx_tag1.Items.Clear();
-            foreach (PlayerRecordModel player in player_roster)
+            if (DirectoryManagement.VerifyGameDirectory(cbx_character_roster.Text))
             {
-                if(player != null)
-                    cbx_tag1.Items.Add(player.unique_tag);
-            }
-            cbx_tag1.EndUpdate();
-            for (int ii = 0; ii < 4; ii++)
-            {
-                player_boxes[0].character_image[ii] = "";
-                player_boxes[0].characterButtons[ii].BackgroundImage = null;
-                player_boxes[0].characterButtons[ii].Text = "Add Character";
-            }
-            player_names = cbx_tag1.Items;
+                player_roster = database_tools.load_players(cbx_character_roster.Text, ref player_id);
 
-            for (int i = 1; i < player_number; i++)
-            {
-                player_boxes[i].tag.Items.Clear();
-                player_boxes[i].tag.Items.AddRange(player_names.Cast<Object>().ToArray());
+                cbx_tag1.BeginUpdate();
+                cbx_tag1.Items.Clear();
+                foreach (PlayerRecordModel player in player_roster)
+                {
+                    if (player != null)
+                        cbx_tag1.Items.Add(player.uniqueTag);
+                }
+                cbx_tag1.EndUpdate();
                 for (int ii = 0; ii < 4; ii++)
                 {
-                    player_boxes[i].character_image[ii] = "";
-                    player_boxes[i].characterButtons[ii].BackgroundImage = null;
-                    player_boxes[i].characterButtons[ii].Text = "Add Character";
+                    player_boxes[0].character_image[ii] = "";
+                    player_boxes[0].characterButtons[ii].BackgroundImage = null;
+                    player_boxes[0].characterButtons[ii].Text = "Add Character";
                 }
+                player_names = cbx_tag1.Items;
+
+                for (int i = 1; i < player_number; i++)
+                {
+                    player_boxes[i].tag.Items.Clear();
+                    player_boxes[i].tag.Items.AddRange(player_names.Cast<Object>().ToArray());
+                    for (int ii = 0; ii < 4; ii++)
+                    {
+                        player_boxes[i].character_image[ii] = "";
+                        player_boxes[i].characterButtons[ii].BackgroundImage = null;
+                        player_boxes[i].characterButtons[ii].Text = "Add Character";
+                    }
+                }
+            }
+            else 
+            {
+                cbx_character_roster.SelectedIndex = -1;
             }
         }
 

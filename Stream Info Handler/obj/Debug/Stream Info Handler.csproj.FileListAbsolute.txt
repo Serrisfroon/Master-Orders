@@ -530,3 +530,5 @@ C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info 
 C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CoreCompileInputs.cache
 C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.exe
 C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.pdb
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.AppSettings.GeneralSettings.GeneralSettingsForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.RosterDirectorySelectForm.resources

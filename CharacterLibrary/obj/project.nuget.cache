@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5Kg1FmfW413rCB1Z9oaNnNXtJ5pNb7H10qZP84Y2vm9mwp/b107e9u6s4ihKHKS3KEAAFJv70509KnuNtjmBlA==",
+  "dgSpecHash": "Wd5t1899CaUxSR9cYMi8ljNPGKz0zqwU4ynec8OuGmA07c3kPNPt703Jyfu8+IE/LFrXKntgecyviFJs/lchfA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\serri\\Google Drive\\Master-Orders\\CharacterLibrary\\CharacterLibrary.csproj",
+  "projectFilePath": "C:\\Users\\serri\\My Drive\\Master-Orders\\CharacterLibrary\\CharacterLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\serri\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\serri\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",

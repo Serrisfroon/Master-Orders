@@ -12,11 +12,27 @@ namespace Stream_Info_Handler.AppSettings
     public static class DirectoryManagement
     {
         public static string vodsDirectory { get; set; }
-        public static string thumbnailDirectory { get; set; }
         public static string sponsorDirectory { get; set; }
         public static string regionDirectory { get; set; }
-        public static string characterRostersDirectory { get; set; }
-        public static string outputDirectory { get; set; }
+        public static string gamesDirectory { get; set; }
+
+        private static string _outputDirectory;
+        public static string outputDirectory 
+        {
+            get { return _outputDirectory; }
+            set 
+            { 
+                _outputDirectory = value;
+                _thumbnailDirectory = value + @"\Thumbnails\";
+            } 
+        }
+
+        private static string _thumbnailDirectory;
+        public static string thumbnailDirectory 
+        {
+            get { return _thumbnailDirectory; }
+        }
+
         /// <summary>
         /// A dictionary that associates each game name with the directory where its character information is held
         /// </summary>
@@ -40,27 +56,26 @@ namespace Stream_Info_Handler.AppSettings
         /// Checks a specific game name and directory to make sure it exists and is formatted correctly
         /// </summary>
         /// <param name="selectedGameName">The name of the game to check</param>
-        /// <param name="gameRostersDirectory">The directory to check</param>
-        /// <returns></returns>
-        public static string VerifyGameDirectory(string selectedGameName, string gameRostersDirectory)
+        /// <returns>True is the directory has been successfully verified</returns>
+        public static bool VerifyGameDirectory(string selectedGameName)
         {
             //Return fail if the game directory doesn't exist
-            if (!Directory.Exists(gameRostersDirectory))
+            if (!Directory.Exists(gamesDirectory))
             {
-                return "";
+                return false;
             }
 
             //Return fail if the game name is not listed as an available game
             string tryFindGameName = Array.Find(GlobalSettings.availableGames, element => element == selectedGameName);
             if (tryFindGameName is null || tryFindGameName == "")
             {
-                return "";
+                return false;
             }
 
             //Check the settings file for the rosters directory
             XDocument xml = XDocument.Load(SettingsFile.settingsFile);
-            //Get an array of the character roster directories
-            string[] characterDirectories = Directory.GetDirectories(gameRostersDirectory);
+            //Get an array of the individual game directories from the games directory
+            string[] characterDirectories = Directory.GetDirectories(gamesDirectory);
 
             //Determine the selected game's directory
             string selectedGameDirectory = gameDirectories[selectedGameName];
@@ -68,7 +83,7 @@ namespace Stream_Info_Handler.AppSettings
             if (!Directory.Exists(selectedGameDirectory))
             {
                 //Show a window to select a new directory
-                frm_tables selectNewDirectory = new frm_tables(characterDirectories, selectedGameName);
+                RosterDirectorySelectForm selectNewDirectory = new RosterDirectorySelectForm(characterDirectories, selectedGameName);
                 //Return fail if a new directory is not selected
                 if (selectNewDirectory.ShowDialog() == DialogResult.OK)
                 {
@@ -76,7 +91,7 @@ namespace Stream_Info_Handler.AppSettings
                 }
                 else
                 {
-                    return "";
+                    return false;
                 }
             }
 
@@ -86,8 +101,8 @@ namespace Stream_Info_Handler.AppSettings
             while (!CheckCharacterDirectories(selectedGameDirectory))
             {
                 //If the characters are not verified, have the user choose a new directory
-                MessageBox.Show("The selected directory does not have correct character information for the selected game. Please choose a new directory for " + selectedGameName);
-                frm_tables selectNewDirectory = new frm_tables(characterDirectories, selectedGameName);
+                MessageBox.Show($"The selected directory does not have correct character information for the selected game. Please choose a new directory for { selectedGameName }, or re-select the same directory after correcting outstanding issues.");
+                RosterDirectorySelectForm selectNewDirectory = new RosterDirectorySelectForm(characterDirectories, selectedGameName);
                 //Return fail if a new directory is not selected
                 if (selectNewDirectory.ShowDialog() == DialogResult.OK)
                 {
@@ -95,7 +110,7 @@ namespace Stream_Info_Handler.AppSettings
                 }
                 else
                 {
-                    return "";
+                    return false;
                 }
                 //Update the character list before checking again
                 characters = GetCharactersFromDirectory(selectedGameDirectory);
@@ -106,7 +121,7 @@ namespace Stream_Info_Handler.AppSettings
             SettingsFile.UpdateGameDirectories();
 
             //Return the game ID
-            return selectedGameName;
+            return true;
         }
 
         /// <summary>
@@ -173,36 +188,36 @@ namespace Stream_Info_Handler.AppSettings
             foreach (string character in characters)
             {
                 //Pull all subdirectories. Each oene is an alt color.
-                string[] colors = Directory.GetDirectories(character);
+                string[] characterColors = Directory.GetDirectories(character);
 
                 //Get the current character's name.
-                int dir_length = gameRosterDirectory.Length + 1;
-                string character_name = character.Substring(dir_length, character.Length - dir_length);
+                int directoryLength = gameRosterDirectory.Length + 1;
+                string characterName = character.Substring(directoryLength, character.Length - directoryLength);
 
                 //Verify that there is at least one color
-                if (colors.Length == 0)
+                if (characterColors.Length == 0)
                 {
-                    errorMessages.Add("A character included in the selected character roster directory does not have any colors in their directory. Please add the colors as subdirectories and try again. \nCharacter Affected: " + character_name + "\nCharacter Directory: " + character);
+                    errorMessages.Add("A character included in the selected character roster directory does not have any colors in their directory. Please add the colors as subdirectories and try again. \nCharacter Affected: " + characterName + "\nCharacter Directory: " + character);
                     characterDirectoryCheckPassed = false;
                 }
 
                 //Loop through each color
-                foreach (string color in colors)
+                foreach (string color in characterColors)
                 {
                     //Verify that the color directory contains all 3 necessary images
                     if (!File.Exists(color + @"\1080.png"))
                     {
-                        errorMessages.Add("A file is missing from a character's color directory. Please ensure that each color directory has all needed image files. \nFile Missing: 1080.png \nCharacter Affected: " + character_name + "\nColor Directory: " + color);
+                        errorMessages.Add("A file is missing from a character's color directory. Please ensure that each color directory has all needed image files. \nFile Missing: 1080.png \nCharacter Affected: " + characterName + "\nColor Directory: " + color);
                         characterDirectoryCheckPassed = false;
                     }
                     if (!File.Exists(color + @"\stamp.png"))
                     {
-                        errorMessages.Add("A file is missing from a character's color directory. Please ensure that each color directory has all needed image files. \nFile Missing: stamp.png \nCharacter Affected: " + character_name + "\nColor Directory: " + color);
+                        errorMessages.Add("A file is missing from a character's color directory. Please ensure that each color directory has all needed image files. \nFile Missing: stamp.png \nCharacter Affected: " + characterName + "\nColor Directory: " + color);
                         characterDirectoryCheckPassed = false;
                     }
                     if (!File.Exists(color + @"\stock.png"))
                     {
-                        errorMessages.Add("A file is missing from a character's color directory. Please ensure that each color directory has all needed image files. \nFile Missing: stock.png \nCharacter Affected: " + character_name + "\nColor Directory: " + color);
+                        errorMessages.Add("A file is missing from a character's color directory. Please ensure that each color directory has all needed image files. \nFile Missing: stock.png \nCharacter Affected: " + characterName + "\nColor Directory: " + color);
                         characterDirectoryCheckPassed = false;
                     }
                 }

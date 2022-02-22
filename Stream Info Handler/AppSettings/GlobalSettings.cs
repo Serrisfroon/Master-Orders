@@ -17,7 +17,11 @@ namespace Stream_Info_Handler.AppSettings
             "Super Smash Bros for Wii U",
             "Super Smash Bros for Ultimate",
             "Project Plus",
-            "Rivals of Aether"
+            "Rivals of Aether",
+            "Nickelodeon All-Star Brawl",
+            "Guilty Gear -Strive-",
+            "UNDER NIGHT IN-BIRTH Exe:Late[cl-r]",
+            "Melty Blood: Type Lumina"
         };
         /// <summary>
         /// The current game selected to pull characters and players for

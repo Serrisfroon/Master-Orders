@@ -58,25 +58,12 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             SettingsFile.LoadSettings(Startup.FormManagement.FormNames.Settings);
             XDocument xml = XDocument.Load(SettingsFile.settingsFile);
 
-            settingsForm.txt_characters.Text = DirectoryManagement.characterRostersDirectory;
-            if (settingsForm.txt_characters.Text != "" && Directory.Exists(settingsForm.txt_characters.Text))
+            settingsForm.txtCharacterDatabasesDirectory.Text = DirectoryManagement.gamesDirectory;
+            if (settingsForm.txtCharacterDatabasesDirectory.Text != "" && Directory.Exists(settingsForm.txtCharacterDatabasesDirectory.Text))
             {
-                //This method should not load directly from the settings file
-                //Use SettingsFile.LoadSettings to read the setting file and just save it to the appropriate values
-                //DONE FINALLY LOL
-
-                //Read those values and adjust the fields to the form here.
-                //THIS IS DONE NOW TOO
-
-                //create/update the method to verify that a selected directory holds all appropriate information
-                //DirectoryManagement.VerifyGameDirectory
-                //DO NOT FORGET TO DO THIS
-                //Check all references to see what they are doing and ensure the method is performing proper checks
-
-                //Do the tooptips function next
                 if (Directory.Exists(DirectoryManagement.GetGameDirectory()))
                 {
-                    settingsForm.cbx_characters.SelectedIndex = settingsForm.cbx_characters.FindStringExact(GlobalSettings.selectedGame);
+                    settingsForm.cbxCharacterRosters.SelectedIndex = settingsForm.cbxCharacterRosters.FindStringExact(GlobalSettings.selectedGame);
                 }
             }
             if (StreamQueue.queueId == -1)
@@ -84,15 +71,15 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             else
                 settingsForm.cbx_queues.SelectedIndex = StreamQueue.queueId;
 
-            settingsForm.txt_streamfiles.Text = DirectoryManagement.outputDirectory;
+            settingsForm.txtStreamFilesDirectory.Text = DirectoryManagement.outputDirectory;
             settingsForm.txt_thumbnails.Text = DirectoryManagement.thumbnailDirectory;
-            settingsForm.ckb_sponsors.Checked = ImageManagement.enableSponsorImages;
-            settingsForm.ckb_regions.Checked = ImageManagement.enableRegionImages;
-            settingsForm.txt_sponsors.Text = DirectoryManagement.sponsorDirectory;
-            settingsForm.txt_regions.Text = DirectoryManagement.regionDirectory;
-            settingsForm.txt_vods.Text = DirectoryManagement.vodsDirectory;
+            settingsForm.ckbEnableSponsorImages.Checked = ImageManagement.enableSponsorImages;
+            settingsForm.ckbEnableRegionImages.Checked = ImageManagement.enableRegionImages;
+            settingsForm.txtSponsorImagesDirectory.Text = DirectoryManagement.sponsorDirectory;
+            settingsForm.txtRegionImagesDirectory.Text = DirectoryManagement.regionDirectory;
+            settingsForm.txtVodsDirectory.Text = DirectoryManagement.vodsDirectory;
 
-            settingsForm.ckb_vod_uploads.Checked = YoutubeController.enableYoutubeFunctions;
+            settingsForm.ckbEnableVodUploads.Checked = YoutubeController.enableYoutubeFunctions;
             settingsForm.editableSettings.playlistId = YoutubeController.playlistId;
             settingsForm.txt_description.Text = YoutubeController.videoDescription.Replace("\n", "\r\n");
             settingsForm.txt_tags.Text = YoutubeController.videoTags.Replace("\n", "\r\n");
@@ -114,8 +101,8 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 }
             }
 
-            settingsForm.txt_background.Text = ImageManagement.thumbnailConfiguration.backgroundImage;
-            settingsForm.txt_foreground.Text = ImageManagement.thumbnailConfiguration.foregroundImage;
+            settingsForm.txtThumbnailBackground.Text = ImageManagement.thumbnailConfiguration.backgroundImage;
+            settingsForm.txtThumbnailForeground.Text = ImageManagement.thumbnailConfiguration.foregroundImage;
             settingsForm.editableSettings.thumbnailFont = new Font(ImageManagement.thumbnailConfiguration.thumbnailFont, 12, FontStyle.Regular);
             settingsForm.txt_char1_xoffset.Text = ImageManagement.thumbnailConfiguration.characterXOffset[0].ToString();
             settingsForm.txt_char1_yoffset.Text = ImageManagement.thumbnailConfiguration.characterYOffset[0].ToString();
@@ -151,46 +138,45 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             settingsForm.txt_bracketrounds.Text = GlobalSettings.bracketRounds;
             settingsForm.txt_seperator.Text = TextFileManagement.sponsorSeperator;
 
-            settingsForm.btn_apply.Enabled = false;
+            settingsForm.btnApplyChanges.Enabled = false;
 
-            if (settingsForm.txt_characters.Text == "")
+            if (settingsForm.txtCharacterDatabasesDirectory.Text == "")
                 InitialImportSettings();
         }
 
-        public static void LoadToolTips()
-        {
-
-        }
-
+        /// <summary>
+        /// Attempts to help the user import settings when there is no games directory selected.
+        /// Typically this means it's the user's first time opening settings
+        /// </summary>
         private static void InitialImportSettings()
         {
             if (MessageBox.Show("Do you want to import settings from a folder?", "Import Settings", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 return;
-            if (settingsForm.fbd_directory.ShowDialog() != DialogResult.OK)
+            if (settingsForm.fbdBrowserForDirectory.ShowDialog() != DialogResult.OK)
                 return;
 
-            string settings_dir = settingsForm.fbd_directory.SelectedPath + @"\";
+            string settings_dir = settingsForm.fbdBrowserForDirectory.SelectedPath + @"\";
 
             XDocument xml = XDocument.Load(settings_dir + @"configure_settings.xml");
 
             if (xml.Root.Element("characters").IsEmpty == false)
-                settingsForm.txt_characters.Text = settings_dir + (string)xml.Root.Element("characters");
+                settingsForm.txtCharacterDatabasesDirectory.Text = settings_dir + (string)xml.Root.Element("characters");
             if (xml.Root.Element("stream").IsEmpty == false)
-                settingsForm.txt_streamfiles.Text = settings_dir + (string)xml.Root.Element("stream");
+                settingsForm.txtStreamFilesDirectory.Text = settings_dir + (string)xml.Root.Element("stream");
             if (xml.Root.Element("thumbnails").IsEmpty == false)
                 settingsForm.txt_thumbnails.Text = settings_dir + (string)xml.Root.Element("thumbnails");
             if (xml.Root.Element("sponsors").IsEmpty == false)
-                settingsForm.txt_sponsors.Text = settings_dir + (string)xml.Root.Element("sponsors");
+                settingsForm.txtSponsorImagesDirectory.Text = settings_dir + (string)xml.Root.Element("sponsors");
             if (xml.Root.Element("regions").IsEmpty == false)
-                settingsForm.txt_regions.Text = settings_dir + (string)xml.Root.Element("regions");
+                settingsForm.txtRegionImagesDirectory.Text = settings_dir + (string)xml.Root.Element("regions");
             if (xml.Root.Element("vods").IsEmpty == false)
-                settingsForm.txt_vods.Text = settings_dir + (string)xml.Root.Element("vods");
+                settingsForm.txtVodsDirectory.Text = settings_dir + (string)xml.Root.Element("vods");
             if (xml.Root.Element("json").IsEmpty == false)
-                settingsForm.ckb_vod_uploads.Checked = true;
+                settingsForm.ckbEnableVodUploads.Checked = true;
             if (xml.Root.Element("foreground").IsEmpty == false)
-                settingsForm.txt_foreground.Text = settings_dir + (string)xml.Root.Element("foreground");
+                settingsForm.txtThumbnailForeground.Text = settings_dir + (string)xml.Root.Element("foreground");
             if (xml.Root.Element("background").IsEmpty == false)
-                settingsForm.txt_background.Text = settings_dir + (string)xml.Root.Element("background");
+                settingsForm.txtThumbnailBackground.Text = settings_dir + (string)xml.Root.Element("background");
             if (xml.Root.Element("patch").IsEmpty == false)
                 settingsForm.txt_version.Text = settings_dir + (string)xml.Root.Element("patch");
 
