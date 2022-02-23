@@ -18,10 +18,10 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
 
             //
             //Set the tooltips for the YouTube subtab
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.txt_playlist,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.txtPlaylistName,
             "Enter the name of the YouTube playlist. Leave this\n" +
             "empty to disable playlists.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btn_playlist,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btnUpdatePlaylistName,
             "Update the YouTube playlist to the entered playlist name.");
             settingsForm.ttp_tooltip.SetToolTip(settingsForm.txt_description,
             "Set the default description for uploaded YouTube VoDs.\n" +
@@ -30,9 +30,9 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             "INFO_TOURNAMENT INFO_DATE INFO_BRACKET INFO_ROUND\n" +
             "INFO_PLAYER1 INFO_PLAYER2 INFO_CHARACTER1 INFO_CHARACTER2\n" +
             "INFO_TWITTER1 INFO_TWITTER2");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.rdb_xsplit,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.rdbStreamSoftwareXsplit,
             "Set the streaming application to XSplit.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.rdb_obs,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.rdbStreamSoftwareObs,
             "Set the streaming application to OBS Studio.");
         }
 
@@ -133,12 +133,12 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             "Title Template, and description will be generated based on the Default\n" +
             "Video Description, tags will be added based on Video Tags, and, if enabled,\n" +
             "a thumbnail will be generated based on the settings in the Thumbnails tab.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.txt_playlist,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.txtPlaylistName,
             "Enter the name of the YouTube Playlist to add new VoD uploads to. Remember\n" +
             "to click the Update button after to process the change. If needed, the\n" +
             "playlist will be created. Leaving this field empty will cause VoD uploads\n" +
             "to not be assigned to any playlist.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btn_playlist,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btnUpdatePlaylistName,
             "Click to commit to any playlist changes.");
             settingsForm.ttp_tooltip.SetToolTip(settingsForm.txtVodsDirectory,
             "Set the directory for the Stream Assitant to look to for any VoD changes.\n" +
@@ -150,12 +150,12 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             "Configuring this setting correctly, along with selecting the appropriate\n" +
             "stream software, will cause the Stream Assistant to automatically pull\n" +
             "in the most recent local recording when uploading a VoD to Youtube.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.rdb_xsplit,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.rdbStreamSoftwareXsplit,
             "Select the stream software you are using to record VoDs.\n" +
             "Configuring this setting correctly, along with selecting the appropriate\n" +
             "stream software, will cause the Stream Assistant to automatically pull\n" +
             "in the most recent local recording when uploading a VoD to Youtube.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.rdb_obs,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.rdbStreamSoftwareObs,
             "Select the stream software you are using to record VoDs.\n" +
             "Configuring this setting correctly, along with selecting the appropriate\n" +
             "stream software, will cause the Stream Assistant to automatically pull\n" +

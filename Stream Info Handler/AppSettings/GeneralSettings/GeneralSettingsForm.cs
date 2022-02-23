@@ -28,8 +28,8 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
         public EditableSettings editableSettings = new EditableSettings();
 
         string[] characterNames;
-        string playlist_id;
-        string stream_software;
+        string playlistId;
+        string selectedStreamSoftware;
         string[] score_image = { "", "", "", "", "", "" };
 
         string image_directory1;
@@ -37,8 +37,8 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
 
 
         //Initialize the variables containing YouTube Playlist information
-        List<string> playlist_items = new List<string>();
-        List<string> playlist_names = new List<string>();
+        List<string> playerlistItems = new List<string>();
+        List<string> playlistNames = new List<string>();
 
         public GeneralSettingsForm(FormManagement.FormNames originForm)
         {
@@ -219,6 +219,154 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             }
         }
 
+        private void txtPlaylistName_TextChanged(object sender, EventArgs e)
+        {
+            btnUpdatePlaylistName.Enabled = true;
+        }
+
+        private void btnUpdatePlaylistName_Click(object sender, EventArgs e)
+        {
+            btnUpdatePlaylistName.Enabled = false;
+            txtPlaylistName.Enabled = false;
+            btnApplyChanges.Enabled = true;
+            try
+            {
+                Thread thread = new Thread(() =>
+                {
+                    GetPlaylistNames(txtPlaylistName.Text).Wait();
+                });
+                thread.IsBackground = true;
+                thread.Start();
+
+            }
+            catch (AggregateException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private async Task GetPlaylistNames(string providedPlaylistName)
+        {
+            playerlistItems = new List<string>();
+            playlistNames = new List<string>();
+            await get_credential();
+
+
+            var youtubeService = new YouTubeService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = global_values.youtubeCredential,
+                ApplicationName = this.GetType().ToString()
+            });
+
+            // var channelsListRequest = youtubeService.Channels.List("contentDetails");
+            var playlistListRequest = youtubeService.Playlists.List("snippet");
+            playlistListRequest.Mine = true;
+
+            // Retrieve the contentDetails part of the channel resource for the authenticated user's channel.
+            var playlistListResponse = await playlistListRequest.ExecuteAsync();
+
+            foreach (var playlist in playlistListResponse.Items)
+            {
+                // From the API response, extract the playlist ID that identifies the list
+                // of videos uploaded to the authenticated user's channel.
+                var playlistListId = playlist.Id;
+                playerlistItems.Add(playlistListId);
+                playlistNames.Add(playlist.Snippet.Title);
+            }
+
+            CheckPlaylistNameExists(providedPlaylistName);
+        }
+
+        delegate void CheckPlaylistNameExists_callback(string providedPlaylistName);
+
+        private void CheckPlaylistNameExists(string providedPlaylistName)
+        {
+            // InvokeRequired required compares the thread ID of the
+            // calling thread to the thread ID of the creating thread.
+            // If these threads are different, it returns true.
+            if (this.txtPlaylistName.InvokeRequired)
+            {
+                CheckPlaylistNameExists_callback callbackCheck = new CheckPlaylistNameExists_callback(CheckPlaylistNameExists);
+                this.Invoke(callbackCheck, new object[] { providedPlaylistName });
+            }
+            else
+            {
+                if (playlistNames.Contains(providedPlaylistName))
+                {
+                    playlistId = playerlistItems[playlistNames.IndexOf(providedPlaylistName)];
+                    MessageBox.Show("The playlist has been set to " + providedPlaylistName + ". \n" +
+                                    "The playlist ID is " + playlistId);
+                    txtPlaylistName.Enabled = true;
+                }
+                else
+                {
+                    if (txtPlaylistName.Text == "")
+                    {
+                        MessageBox.Show("Playlist usage has been disabled.");
+
+                        playlistId = "";
+                    }
+                    else
+                    {
+                        if (MessageBox.Show("A playlist with the name '" + providedPlaylistName + "' has not been found. Create a new playlist?", "No Playlist Found", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            try
+                            {
+                                Thread thread = new Thread(() =>
+                                {
+                                    AddNewPlaylist(providedPlaylistName).ContinueWith(task => GetPlaylistNames(providedPlaylistName));
+                                });
+                                thread.IsBackground = true;
+                                thread.Start();
+
+                            }
+                            catch (AggregateException ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                        }
+                        else
+                        {
+                            btnUpdatePlaylistName.Enabled = true;
+                            txtPlaylistName.Enabled = true;
+                        }
+                    }
+                }
+
+            }
+
+        }
+        private async Task AddNewPlaylist(string new_playlist)
+        {
+            await get_credential();
+
+            var youtubeService = new YouTubeService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = global_values.youtubeCredential,
+                ApplicationName = this.GetType().ToString()
+            });
+
+            // Create a new, private playlist in the authorized user's channel.
+            var newPlaylist = new Playlist();
+            newPlaylist.Snippet = new PlaylistSnippet();
+            newPlaylist.Snippet.Title = new_playlist;
+            newPlaylist.Snippet.Description = "";
+            newPlaylist.Status = new PlaylistStatus();
+            newPlaylist.Status.PrivacyStatus = "public";
+
+            newPlaylist = await youtubeService.Playlists.Insert(newPlaylist, "snippet,status").ExecuteAsync();
+        }
+        private void rdbStreamSoftwareXsplit_CheckedChanged(object sender, EventArgs e)
+        {
+            btnApplyChanges.Enabled = true;
+            selectedStreamSoftware = @"XSplit";
+        }
+        private void rdbStreamSoftwareObs_CheckedChanged(object sender, EventArgs e)
+        {
+            btnApplyChanges.Enabled = true;
+            selectedStreamSoftware = @"OBS";
+        }
+
         #endregion YouTube Uploads
 
         #region Images
@@ -330,229 +478,6 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
 
         #endregion Stream Assistant
 
-
-
-
-        public void btn_oauth_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Thread thead = new Thread(() =>
-                {
-                    authorize().Wait();
-                });
-                thead.IsBackground = true;
-                thead.Start();
-
-            }
-            catch (TokenResponseException ex)
-            {
-                MessageBox.Show("There was an error refreshing the token. Try again, or try revoking the token. \r\n Detals: \r\n" + ex.Message);
-            }
-            catch (AggregateException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private async Task authorize()
-        {
-            XDocument xml = XDocument.Load(SettingsFile.settingsFile);
-            string old_json = (string)xml.Root.Element("youtube").Element("json-file");
-
-            await get_credential();
-
-
-            await global_values.youtubeCredential.RefreshTokenAsync(CancellationToken.None);
-            //await credential.RevokeTokenAsync(CancellationToken.None);
-
-        }
-
-        private void btn_revoke_oauth_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Thread thead = new Thread(() =>
-                {
-                    revoke().Wait();
-                });
-                thead.IsBackground = true;
-                thead.Start();
-
-            }
-            catch (TokenResponseException ex)
-            {
-                MessageBox.Show("There was an error revoking the token. Try again, or there may be an issue with the credentials in the JSON file. \r\n Detals: \r\n" + ex.Message);
-            }
-            catch (AggregateException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private async Task revoke()
-        {
-            await get_credential();
-
-
-            await global_values.youtubeCredential.RefreshTokenAsync(CancellationToken.None);
-
-            await global_values.youtubeCredential.RevokeTokenAsync(CancellationToken.None);
-
-            global_values.youtubeCredential = null;
-
-        }
-
-        private void txt_playlist_TextChanged(object sender, EventArgs e)
-        {
-            btn_playlist.Enabled = true;           
-        }
-
-        private void btn_playlist_Click(object sender, EventArgs e)
-        {
-            btn_playlist.Enabled = false;
-            txt_playlist.Enabled = false;
-            btnApplyChanges.Enabled = true;
-            try
-            {
-                Thread thead = new Thread(() =>
-                {
-                    get_playlists().Wait();
-                });
-                thead.IsBackground = true;
-                thead.Start();
-
-            }
-            catch (AggregateException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private async Task get_playlists()
-        {
-            playlist_items = new List<string>();
-            playlist_names = new List<string>();
-            await get_credential();
-
-
-            var youtubeService = new YouTubeService(new BaseClientService.Initializer()
-            {
-                HttpClientInitializer = global_values.youtubeCredential,
-                ApplicationName = this.GetType().ToString()
-            });
-
-            // var channelsListRequest = youtubeService.Channels.List("contentDetails");
-            var playlistListRequest = youtubeService.Playlists.List("snippet");
-            playlistListRequest.Mine = true;
-
-            // Retrieve the contentDetails part of the channel resource for the authenticated user's channel.
-            var playlistListResponse = await playlistListRequest.ExecuteAsync();
-
-            foreach (var playlist in playlistListResponse.Items)
-            {
-                // From the API response, extract the playlist ID that identifies the list
-                // of videos uploaded to the authenticated user's channel.
-                var playlistListId = playlist.Id;
-                playlist_items.Add(playlistListId);
-                playlist_names.Add(playlist.Snippet.Title);
-            }
-
-            check_playlists();
-        }
-
-        delegate void check_playlists_callback();
-
-        private void check_playlists()
-        {
-            // InvokeRequired required compares the thread ID of the
-            // calling thread to the thread ID of the creating thread.
-            // If these threads are different, it returns true.
-            if (this.txt_playlist.InvokeRequired)
-            {
-                check_playlists_callback d = new check_playlists_callback(check_playlists);
-                this.Invoke(d, new object[] { });
-            }
-            else
-            {
-                if (playlist_names.Contains(txt_playlist.Text))
-                {
-                    playlist_id = playlist_items[playlist_names.IndexOf(txt_playlist.Text)];
-                    MessageBox.Show("The playlist has been set to " + txt_playlist.Text + ". \n" +
-                                    "The playlist ID is " + playlist_id);
-                    txt_playlist.Enabled = true;
-                }
-                else
-                {
-                    if (txt_playlist.Text == "")
-                    {
-                        MessageBox.Show("Playlist usage has been disabled.");
-
-                        playlist_id = "";
-                    }
-                    else
-                    {
-                        if (MessageBox.Show("A playlist with the name '" + txt_playlist.Text + "' has not been found. Create a new playlist?", "No Playlist Found", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                        {
-                            try
-                            {
-                                Thread thead = new Thread(() =>
-                                {
-                                    add_playlist(txt_playlist.Text).ContinueWith(task => get_playlists());
-                                });
-                                thead.IsBackground = true;
-                                thead.Start();
-
-                            }
-                            catch (AggregateException ex)
-                            {
-                                MessageBox.Show(ex.Message);
-                            }
-                        }
-                        else
-                        {
-                            btn_playlist.Enabled = true;
-                            txt_playlist.Enabled = true;
-                        }
-                    }
-                }
-
-            }
-
-        }
-
-        private async Task add_playlist(string new_playlist)
-        {
-            await get_credential();
-
-            var youtubeService = new YouTubeService(new BaseClientService.Initializer()
-            {
-                HttpClientInitializer = global_values.youtubeCredential,
-                ApplicationName = this.GetType().ToString()
-            });
-
-            // Create a new, private playlist in the authorized user's channel.
-            var newPlaylist = new Playlist();
-            newPlaylist.Snippet = new PlaylistSnippet();
-            newPlaylist.Snippet.Title = new_playlist;
-            newPlaylist.Snippet.Description = "";
-            newPlaylist.Status = new PlaylistStatus();
-            newPlaylist.Status.PrivacyStatus = "public";
-
-            newPlaylist = await youtubeService.Playlists.Insert(newPlaylist, "snippet,status").ExecuteAsync();
-        }
-
-        private void rdb_xsplit_CheckedChanged(object sender, EventArgs e)
-        {
-            btnApplyChanges.Enabled = true;
-            stream_software = @"XSplit";
-        }
-
-        private void rdb_obs_CheckedChanged(object sender, EventArgs e)
-        {
-            btnApplyChanges.Enabled = true;
-            stream_software = @"OBS";
-        }
 
         private void rdb_automatic_CheckedChanged(object sender, EventArgs e)
         {
@@ -1021,8 +946,8 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 xml.Root.Element("directories").Element("region-directory").ReplaceWith(new XElement("region-directory", txtRegionImagesDirectory.Text));
 
                 xml.Root.Element("youtube").Element("enable-youtube").ReplaceWith(new XElement("enable-youtube", ckbEnableVodUploads.Checked));
-                xml.Root.Element("youtube").Element("playlist-name").ReplaceWith(new XElement("playlist-name", txt_playlist.Text));
-                xml.Root.Element("youtube").Element("playlist-id").ReplaceWith(new XElement("playlist-id", playlist_id));
+                xml.Root.Element("youtube").Element("playlist-name").ReplaceWith(new XElement("playlist-name", txtPlaylistName.Text));
+                xml.Root.Element("youtube").Element("playlist-id").ReplaceWith(new XElement("playlist-id", playlistId));
                 xml.Root.Element("youtube").Element("default-description").ReplaceWith(new XElement("default-description", txt_description.Text));
                 xml.Root.Element("youtube").Element("tags").ReplaceWith(new XElement("tags", txt_tags.Text));
                 xml.Root.Element("youtube").Element("title-template").ReplaceWith(new XElement("title-template", txt_titletemplate.Text));
@@ -1061,7 +986,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 xml.Root.Element("thumbnail-layout").Element("patch-size").ReplaceWith(new XElement("patch-size", txt_patch_size.Text));
 
                 xml.Root.Element("general").Element("automatic-updates").ReplaceWith(new XElement("automatic-updates", rdb_automatic.Checked));
-                xml.Root.Element("general").Element("stream-software").ReplaceWith(new XElement("stream-software", stream_software));
+                xml.Root.Element("general").Element("stream-software").ReplaceWith(new XElement("stream-software", selectedStreamSoftware));
                 xml.Root.Element("general").Element("enable-thumbnails").ReplaceWith(new XElement("enable-thumbnails", ckb_thumbnails.Checked));
                 xml.Root.Element("general").Element("copy-title").ReplaceWith(new XElement("copy-title", ckb_clipboard.Checked));
                 xml.Root.Element("general").Element("shorten-title").ReplaceWith(new XElement("shorten-title", cbx_shorten_video.SelectedIndex));
@@ -1083,7 +1008,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 YoutubeLibrary.YoutubeController.enableYoutubeFunctions = ckbEnableVodUploads.Checked;
                 YoutubeController.enableVideoThumbnails = ckb_thumbnails.Checked;
                 YoutubeController.copyVideoTitle = ckb_clipboard.Checked;
-                YoutubeLibrary.YoutubeController.streamSoftware = stream_software;
+                YoutubeLibrary.YoutubeController.streamSoftware = selectedStreamSoftware;
                 ImageManagement.enableImageScoreboard = ckb_scoreboad.Checked;
                 ImageManagement.scoreboardImages[0, 0] = score_image[0];
                 ImageManagement.scoreboardImages[0, 1] = score_image[1];
@@ -1094,8 +1019,8 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 DirectoryManagement.outputDirectory = txtStreamFilesDirectory.Text;
                 DirectoryManagement.vodsDirectory = txtVodsDirectory.Text;
                 DataOutputCaller.automaticUpdates = rdb_automatic.Checked;
-                YoutubeController.playlistName = txt_playlist.Text;
-                YoutubeController.playlistId = playlist_id;
+                YoutubeController.playlistName = txtPlaylistName.Text;
+                YoutubeController.playlistId = playlistId;
                 global_values.queue_id = queueid;
                 GlobalSettings.selectedGame = cbxCharacterRosters.Text;
             }

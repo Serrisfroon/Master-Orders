@@ -83,8 +83,8 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             settingsForm.editableSettings.playlistId = YoutubeController.playlistId;
             settingsForm.txt_description.Text = YoutubeController.videoDescription.Replace("\n", "\r\n");
             settingsForm.txt_tags.Text = YoutubeController.videoTags.Replace("\n", "\r\n");
-            settingsForm.txt_playlist.Text = YoutubeController.playlistName;
-            settingsForm.btn_playlist.Enabled = false;
+            settingsForm.txtPlaylistName.Text = YoutubeController.playlistName;
+            settingsForm.btnUpdatePlaylistName.Enabled = false;
             settingsForm.txt_titletemplate.Text = YoutubeController.titleTemplate;
 
             settingsForm.ckb_scoreboad.Checked = ImageManagement.enableImageScoreboard;
@@ -130,7 +130,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             settingsForm.ckb_ontop.Checked = GlobalSettings.keepWindowsOnTop;
 
             if (YoutubeController.streamSoftware == "OBS")
-                settingsForm.rdb_obs.Checked = true;
+                settingsForm.rdbStreamSoftwareObs.Checked = true;
             settingsForm.ckb_thumbnails.Checked = YoutubeController.enableVideoThumbnails;
             settingsForm.ckb_clipboard.Checked = YoutubeController.copyVideoTitle;
             settingsForm.cbx_shorten_video.SelectedIndex = (int)YoutubeController.enableVideoTitleShortening;
@@ -200,8 +200,6 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 }
             }
             MessageBox.Show((string)xml.Root.Element("message"));
-
-            settingsForm.btn_oauth_Click(new object(), new EventArgs());
         }
 
     }

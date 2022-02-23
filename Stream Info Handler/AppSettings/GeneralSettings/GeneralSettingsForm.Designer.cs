@@ -77,13 +77,13 @@
             this.txt_tags = new System.Windows.Forms.TextBox();
             this.ckbEnableVodUploads = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.btn_playlist = new System.Windows.Forms.Button();
+            this.btnUpdatePlaylistName = new System.Windows.Forms.Button();
             this.btnBrowseVodsDirectory = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.rdb_obs = new System.Windows.Forms.RadioButton();
-            this.rdb_xsplit = new System.Windows.Forms.RadioButton();
+            this.rdbStreamSoftwareObs = new System.Windows.Forms.RadioButton();
+            this.rdbStreamSoftwareXsplit = new System.Windows.Forms.RadioButton();
             this.txtVodsDirectory = new System.Windows.Forms.TextBox();
-            this.txt_playlist = new System.Windows.Forms.TextBox();
+            this.txtPlaylistName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tab_directories = new System.Windows.Forms.TabPage();
             this.lblDirectoryErrors = new System.Windows.Forms.Label();
@@ -670,11 +670,11 @@
             this.tab_youtube.Controls.Add(this.tabControl2);
             this.tab_youtube.Controls.Add(this.ckbEnableVodUploads);
             this.tab_youtube.Controls.Add(this.label13);
-            this.tab_youtube.Controls.Add(this.btn_playlist);
+            this.tab_youtube.Controls.Add(this.btnUpdatePlaylistName);
             this.tab_youtube.Controls.Add(this.btnBrowseVodsDirectory);
             this.tab_youtube.Controls.Add(this.groupBox8);
             this.tab_youtube.Controls.Add(this.txtVodsDirectory);
-            this.tab_youtube.Controls.Add(this.txt_playlist);
+            this.tab_youtube.Controls.Add(this.txtPlaylistName);
             this.tab_youtube.Controls.Add(this.label6);
             this.tab_youtube.Location = new System.Drawing.Point(4, 22);
             this.tab_youtube.Name = "tab_youtube";
@@ -762,16 +762,16 @@
             this.label13.TabIndex = 36;
             this.label13.Text = "YouTube Playlist Name (Leave Blank to Disable)";
             // 
-            // btn_playlist
+            // btnUpdatePlaylistName
             // 
-            this.btn_playlist.Enabled = false;
-            this.btn_playlist.Location = new System.Drawing.Point(311, 48);
-            this.btn_playlist.Name = "btn_playlist";
-            this.btn_playlist.Size = new System.Drawing.Size(74, 22);
-            this.btn_playlist.TabIndex = 6;
-            this.btn_playlist.Text = "Update";
-            this.btn_playlist.UseVisualStyleBackColor = true;
-            this.btn_playlist.Click += new System.EventHandler(this.btn_playlist_Click);
+            this.btnUpdatePlaylistName.Enabled = false;
+            this.btnUpdatePlaylistName.Location = new System.Drawing.Point(311, 48);
+            this.btnUpdatePlaylistName.Name = "btnUpdatePlaylistName";
+            this.btnUpdatePlaylistName.Size = new System.Drawing.Size(74, 22);
+            this.btnUpdatePlaylistName.TabIndex = 6;
+            this.btnUpdatePlaylistName.Text = "Update";
+            this.btnUpdatePlaylistName.UseVisualStyleBackColor = true;
+            this.btnUpdatePlaylistName.Click += new System.EventHandler(this.btnUpdatePlaylistName_Click);
             // 
             // btnBrowseVodsDirectory
             // 
@@ -785,8 +785,8 @@
             // 
             // groupBox8
             // 
-            this.groupBox8.Controls.Add(this.rdb_obs);
-            this.groupBox8.Controls.Add(this.rdb_xsplit);
+            this.groupBox8.Controls.Add(this.rdbStreamSoftwareObs);
+            this.groupBox8.Controls.Add(this.rdbStreamSoftwareXsplit);
             this.groupBox8.Location = new System.Drawing.Point(2, 115);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(386, 35);
@@ -794,31 +794,31 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Stream Software";
             // 
-            // rdb_obs
+            // rdbStreamSoftwareObs
             // 
-            this.rdb_obs.AutoSize = true;
-            this.rdb_obs.Enabled = false;
-            this.rdb_obs.Location = new System.Drawing.Point(232, 12);
-            this.rdb_obs.Name = "rdb_obs";
-            this.rdb_obs.Size = new System.Drawing.Size(80, 17);
-            this.rdb_obs.TabIndex = 1;
-            this.rdb_obs.Text = "OBS Studio";
-            this.rdb_obs.UseVisualStyleBackColor = true;
-            this.rdb_obs.CheckedChanged += new System.EventHandler(this.rdb_obs_CheckedChanged);
+            this.rdbStreamSoftwareObs.AutoSize = true;
+            this.rdbStreamSoftwareObs.Enabled = false;
+            this.rdbStreamSoftwareObs.Location = new System.Drawing.Point(232, 12);
+            this.rdbStreamSoftwareObs.Name = "rdbStreamSoftwareObs";
+            this.rdbStreamSoftwareObs.Size = new System.Drawing.Size(80, 17);
+            this.rdbStreamSoftwareObs.TabIndex = 1;
+            this.rdbStreamSoftwareObs.Text = "OBS Studio";
+            this.rdbStreamSoftwareObs.UseVisualStyleBackColor = true;
+            this.rdbStreamSoftwareObs.CheckedChanged += new System.EventHandler(this.rdbStreamSoftwareObs_CheckedChanged);
             // 
-            // rdb_xsplit
+            // rdbStreamSoftwareXsplit
             // 
-            this.rdb_xsplit.AutoSize = true;
-            this.rdb_xsplit.Checked = true;
-            this.rdb_xsplit.Enabled = false;
-            this.rdb_xsplit.Location = new System.Drawing.Point(83, 12);
-            this.rdb_xsplit.Name = "rdb_xsplit";
-            this.rdb_xsplit.Size = new System.Drawing.Size(52, 17);
-            this.rdb_xsplit.TabIndex = 0;
-            this.rdb_xsplit.TabStop = true;
-            this.rdb_xsplit.Text = "XSplit";
-            this.rdb_xsplit.UseVisualStyleBackColor = true;
-            this.rdb_xsplit.CheckedChanged += new System.EventHandler(this.rdb_xsplit_CheckedChanged);
+            this.rdbStreamSoftwareXsplit.AutoSize = true;
+            this.rdbStreamSoftwareXsplit.Checked = true;
+            this.rdbStreamSoftwareXsplit.Enabled = false;
+            this.rdbStreamSoftwareXsplit.Location = new System.Drawing.Point(83, 12);
+            this.rdbStreamSoftwareXsplit.Name = "rdbStreamSoftwareXsplit";
+            this.rdbStreamSoftwareXsplit.Size = new System.Drawing.Size(52, 17);
+            this.rdbStreamSoftwareXsplit.TabIndex = 0;
+            this.rdbStreamSoftwareXsplit.TabStop = true;
+            this.rdbStreamSoftwareXsplit.Text = "XSplit";
+            this.rdbStreamSoftwareXsplit.UseVisualStyleBackColor = true;
+            this.rdbStreamSoftwareXsplit.CheckedChanged += new System.EventHandler(this.rdbStreamSoftwareXsplit_CheckedChanged);
             // 
             // txtVodsDirectory
             // 
@@ -830,17 +830,17 @@
             this.txtVodsDirectory.TabIndex = 4;
             this.txtVodsDirectory.TextChanged += new System.EventHandler(this.txtVodsDirectory_TextChanged);
             // 
-            // txt_playlist
+            // txtPlaylistName
             // 
-            this.txt_playlist.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txt_playlist.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txt_playlist.Enabled = false;
-            this.txt_playlist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_playlist.Location = new System.Drawing.Point(7, 48);
-            this.txt_playlist.Name = "txt_playlist";
-            this.txt_playlist.Size = new System.Drawing.Size(298, 22);
-            this.txt_playlist.TabIndex = 5;
-            this.txt_playlist.TextChanged += new System.EventHandler(this.txt_playlist_TextChanged);
+            this.txtPlaylistName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtPlaylistName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtPlaylistName.Enabled = false;
+            this.txtPlaylistName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPlaylistName.Location = new System.Drawing.Point(7, 48);
+            this.txtPlaylistName.Name = "txtPlaylistName";
+            this.txtPlaylistName.Size = new System.Drawing.Size(298, 22);
+            this.txtPlaylistName.TabIndex = 5;
+            this.txtPlaylistName.TextChanged += new System.EventHandler(this.txtPlaylistName_TextChanged);
             // 
             // label6
             // 
@@ -2136,12 +2136,12 @@
         public System.Windows.Forms.TabPage tab_youtube;
         public System.Windows.Forms.CheckBox ckbEnableVodUploads;
         public System.Windows.Forms.Label label13;
-        public System.Windows.Forms.Button btn_playlist;
+        public System.Windows.Forms.Button btnUpdatePlaylistName;
         public System.Windows.Forms.TextBox txt_description;
         public System.Windows.Forms.GroupBox groupBox8;
-        public System.Windows.Forms.RadioButton rdb_obs;
-        public System.Windows.Forms.RadioButton rdb_xsplit;
-        public System.Windows.Forms.TextBox txt_playlist;
+        public System.Windows.Forms.RadioButton rdbStreamSoftwareObs;
+        public System.Windows.Forms.RadioButton rdbStreamSoftwareXsplit;
+        public System.Windows.Forms.TextBox txtPlaylistName;
         public System.Windows.Forms.TabPage tab_thumbnail;
         public System.Windows.Forms.TabControl tabControl1;
         public System.Windows.Forms.TabPage tab_templates;
