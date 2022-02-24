@@ -20,12 +20,12 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
         public static GeneralSettingsForm settingsForm;
         public static void InitializeImageScoreControls()
         {
-            settingsForm.editableSettings.scoreControls.Add(new ScoreControlModel(0, settingsForm.btn_score1_image1, settingsForm.pic_score1_image1));
-            settingsForm.editableSettings.scoreControls.Add(new ScoreControlModel(1, settingsForm.btn_score1_image2, settingsForm.pic_score1_image2));
-            settingsForm.editableSettings.scoreControls.Add(new ScoreControlModel(2, settingsForm.btn_score1_image3, settingsForm.pic_score1_image3));
-            settingsForm.editableSettings.scoreControls.Add(new ScoreControlModel(3, settingsForm.btn_score2_image1, settingsForm.pic_score2_image1));
-            settingsForm.editableSettings.scoreControls.Add(new ScoreControlModel(4, settingsForm.btn_score2_image2, settingsForm.pic_score2_image2));
-            settingsForm.editableSettings.scoreControls.Add(new ScoreControlModel(5, settingsForm.btn_score2_image3, settingsForm.pic_score2_image3));
+            settingsForm.editableSettings.scoreControls.Add(new ScoreControlModel(0, settingsForm.btnScoreboardPlayer1Image1, settingsForm.pic_score1_image1));
+            settingsForm.editableSettings.scoreControls.Add(new ScoreControlModel(1, settingsForm.btnScoreboardPlayer1Image2, settingsForm.pic_score1_image2));
+            settingsForm.editableSettings.scoreControls.Add(new ScoreControlModel(2, settingsForm.btnScoreboardPlayer1Image3, settingsForm.pic_score1_image3));
+            settingsForm.editableSettings.scoreControls.Add(new ScoreControlModel(3, settingsForm.btnScoreboardPlayer2Image1, settingsForm.pic_score2_image1));
+            settingsForm.editableSettings.scoreControls.Add(new ScoreControlModel(4, settingsForm.btnScoreboardPlayer2Image2, settingsForm.pic_score2_image2));
+            settingsForm.editableSettings.scoreControls.Add(new ScoreControlModel(5, settingsForm.btnScoreboardPlayer2Image3, settingsForm.pic_score2_image3));
         }
         public static void LoadStreamQueues(ComboBox queueComboBox, List<StreamQueueModel> streamQueues)
         {
@@ -87,7 +87,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             settingsForm.btnUpdatePlaylistName.Enabled = false;
             settingsForm.txt_titletemplate.Text = YoutubeController.titleTemplate;
 
-            settingsForm.ckb_scoreboad.Checked = ImageManagement.enableImageScoreboard;
+            settingsForm.ckbEnableImageScoreboard.Checked = ImageManagement.enableImageScoreboard;
             
             for (int i = 0; i < 2; i++)
             {
@@ -126,7 +126,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             settingsForm.txt_patch_yoffset.Text = ImageManagement.thumbnailConfiguration.patchYOffset.ToString();
             settingsForm.txt_patch_size.Text = ImageManagement.thumbnailConfiguration.patchSize.ToString();
 
-            settingsForm.rdb_automatic.Checked = DataOutputCaller.automaticUpdates;
+            settingsForm.rdbAutomaticStreamUpdates.Checked = DataOutputCaller.automaticUpdates;
             settingsForm.ckb_ontop.Checked = GlobalSettings.keepWindowsOnTop;
 
             if (YoutubeController.streamSoftware == "OBS")

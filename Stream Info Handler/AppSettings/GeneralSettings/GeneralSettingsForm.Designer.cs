@@ -64,8 +64,8 @@
             this.cbx_shorten_video = new System.Windows.Forms.ComboBox();
             this.ckb_clipboard = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.rdb_manual = new System.Windows.Forms.RadioButton();
-            this.rdb_automatic = new System.Windows.Forms.RadioButton();
+            this.rdbManualStreamUpdates = new System.Windows.Forms.RadioButton();
+            this.rdbAutomaticStreamUpdates = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
             this.txtStreamFilesDirectory = new System.Windows.Forms.TextBox();
             this.btnBrowseStreamFilesDirectory = new System.Windows.Forms.Button();
@@ -90,17 +90,17 @@
             this.ckbEnableRegionImages = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.btn_score2_image3 = new System.Windows.Forms.Button();
-            this.btn_score2_image2 = new System.Windows.Forms.Button();
-            this.btn_score2_image1 = new System.Windows.Forms.Button();
+            this.btnScoreboardPlayer2Image3 = new System.Windows.Forms.Button();
+            this.btnScoreboardPlayer2Image2 = new System.Windows.Forms.Button();
+            this.btnScoreboardPlayer2Image1 = new System.Windows.Forms.Button();
             this.pic_score2_image3 = new System.Windows.Forms.PictureBox();
             this.pic_score2_image2 = new System.Windows.Forms.PictureBox();
             this.pic_score2_image1 = new System.Windows.Forms.PictureBox();
-            this.ckb_scoreboad = new System.Windows.Forms.CheckBox();
+            this.ckbEnableImageScoreboard = new System.Windows.Forms.CheckBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.btn_score1_image3 = new System.Windows.Forms.Button();
-            this.btn_score1_image2 = new System.Windows.Forms.Button();
-            this.btn_score1_image1 = new System.Windows.Forms.Button();
+            this.btnScoreboardPlayer1Image3 = new System.Windows.Forms.Button();
+            this.btnScoreboardPlayer1Image2 = new System.Windows.Forms.Button();
+            this.btnScoreboardPlayer1Image1 = new System.Windows.Forms.Button();
             this.pic_score1_image3 = new System.Windows.Forms.PictureBox();
             this.pic_score1_image2 = new System.Windows.Forms.PictureBox();
             this.pic_score1_image1 = new System.Windows.Forms.PictureBox();
@@ -192,7 +192,7 @@
             this.ftdPromptForFont = new System.Windows.Forms.FontDialog();
             this.fbdBrowserForDirectory = new System.Windows.Forms.FolderBrowserDialog();
             this.ofd_jpg = new System.Windows.Forms.OpenFileDialog();
-            this.ofd_png = new System.Windows.Forms.OpenFileDialog();
+            this.ofdBrowseForPng = new System.Windows.Forms.OpenFileDialog();
             this.ofd_json = new System.Windows.Forms.OpenFileDialog();
             this.ofd_txt = new System.Windows.Forms.OpenFileDialog();
             this.ttp_tooltip = new System.Windows.Forms.ToolTip(this.components);
@@ -285,7 +285,7 @@
             this.txt_seperator.Name = "txt_seperator";
             this.txt_seperator.Size = new System.Drawing.Size(67, 20);
             this.txt_seperator.TabIndex = 15;
-            this.txt_seperator.TextChanged += new System.EventHandler(this.txt_seperator_TextChanged);
+            this.txt_seperator.TextChanged += new System.EventHandler(this.SettingFieldChanged);
             // 
             // label40
             // 
@@ -519,7 +519,6 @@
             this.tab_stream_tabs.SelectedIndex = 0;
             this.tab_stream_tabs.Size = new System.Drawing.Size(399, 390);
             this.tab_stream_tabs.TabIndex = 0;
-            this.tab_stream_tabs.SelectedIndexChanged += new System.EventHandler(this.tab_stream_tabs_SelectedIndexChanged);
             // 
             // tab_general2
             // 
@@ -567,7 +566,7 @@
             this.txt_titletemplate.Name = "txt_titletemplate";
             this.txt_titletemplate.Size = new System.Drawing.Size(368, 20);
             this.txt_titletemplate.TabIndex = 23;
-            this.txt_titletemplate.TextChanged += new System.EventHandler(this.Txt_titletemplate_TextChanged);
+            this.txt_titletemplate.TextChanged += new System.EventHandler(this.SettingFieldChanged);
             // 
             // label14
             // 
@@ -600,12 +599,12 @@
             this.ckb_clipboard.TabIndex = 3;
             this.ckb_clipboard.Text = "Copy Video Title to Clipboard  When Generating a Thumbnail";
             this.ckb_clipboard.UseVisualStyleBackColor = true;
-            this.ckb_clipboard.CheckedChanged += new System.EventHandler(this.ckb_clipboard_CheckedChanged);
+            this.ckb_clipboard.CheckedChanged += new System.EventHandler(this.SettingFieldChanged);
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.rdb_manual);
-            this.groupBox3.Controls.Add(this.rdb_automatic);
+            this.groupBox3.Controls.Add(this.rdbManualStreamUpdates);
+            this.groupBox3.Controls.Add(this.rdbAutomaticStreamUpdates);
             this.groupBox3.Location = new System.Drawing.Point(3, 45);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(385, 44);
@@ -613,28 +612,28 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Stream File Updating";
             // 
-            // rdb_manual
+            // rdbManualStreamUpdates
             // 
-            this.rdb_manual.AutoSize = true;
-            this.rdb_manual.Location = new System.Drawing.Point(231, 19);
-            this.rdb_manual.Name = "rdb_manual";
-            this.rdb_manual.Size = new System.Drawing.Size(103, 17);
-            this.rdb_manual.TabIndex = 1;
-            this.rdb_manual.Text = "Manual Updates";
-            this.rdb_manual.UseVisualStyleBackColor = true;
+            this.rdbManualStreamUpdates.AutoSize = true;
+            this.rdbManualStreamUpdates.Location = new System.Drawing.Point(231, 19);
+            this.rdbManualStreamUpdates.Name = "rdbManualStreamUpdates";
+            this.rdbManualStreamUpdates.Size = new System.Drawing.Size(103, 17);
+            this.rdbManualStreamUpdates.TabIndex = 1;
+            this.rdbManualStreamUpdates.Text = "Manual Updates";
+            this.rdbManualStreamUpdates.UseVisualStyleBackColor = true;
             // 
-            // rdb_automatic
+            // rdbAutomaticStreamUpdates
             // 
-            this.rdb_automatic.AutoSize = true;
-            this.rdb_automatic.Checked = true;
-            this.rdb_automatic.Location = new System.Drawing.Point(63, 19);
-            this.rdb_automatic.Name = "rdb_automatic";
-            this.rdb_automatic.Size = new System.Drawing.Size(115, 17);
-            this.rdb_automatic.TabIndex = 0;
-            this.rdb_automatic.TabStop = true;
-            this.rdb_automatic.Text = "Automatic Updates";
-            this.rdb_automatic.UseVisualStyleBackColor = true;
-            this.rdb_automatic.CheckedChanged += new System.EventHandler(this.rdb_automatic_CheckedChanged);
+            this.rdbAutomaticStreamUpdates.AutoSize = true;
+            this.rdbAutomaticStreamUpdates.Checked = true;
+            this.rdbAutomaticStreamUpdates.Location = new System.Drawing.Point(63, 19);
+            this.rdbAutomaticStreamUpdates.Name = "rdbAutomaticStreamUpdates";
+            this.rdbAutomaticStreamUpdates.Size = new System.Drawing.Size(115, 17);
+            this.rdbAutomaticStreamUpdates.TabIndex = 0;
+            this.rdbAutomaticStreamUpdates.TabStop = true;
+            this.rdbAutomaticStreamUpdates.Text = "Automatic Updates";
+            this.rdbAutomaticStreamUpdates.UseVisualStyleBackColor = true;
+            this.rdbAutomaticStreamUpdates.CheckedChanged += new System.EventHandler(this.SettingFieldChanged);
             // 
             // label4
             // 
@@ -716,7 +715,7 @@
             this.txt_description.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt_description.Size = new System.Drawing.Size(372, 170);
             this.txt_description.TabIndex = 7;
-            this.txt_description.TextChanged += new System.EventHandler(this.txt_description_TextChanged);
+            this.txt_description.TextChanged += new System.EventHandler(this.SettingFieldChanged);
             // 
             // tabPage2
             // 
@@ -751,7 +750,7 @@
             this.ckbEnableVodUploads.TabIndex = 0;
             this.ckbEnableVodUploads.Text = "Enable Automatic YouTube VoD Uploads";
             this.ckbEnableVodUploads.UseVisualStyleBackColor = true;
-            this.ckbEnableVodUploads.CheckedChanged += new System.EventHandler(this.ckbEnableVodUploads_CheckedChanged);
+            this.ckbEnableVodUploads.CheckedChanged += new System.EventHandler(this.SettingFieldChanged);
             // 
             // label13
             // 
@@ -895,7 +894,7 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.groupBox5);
-            this.groupBox4.Controls.Add(this.ckb_scoreboad);
+            this.groupBox4.Controls.Add(this.ckbEnableImageScoreboard);
             this.groupBox4.Controls.Add(this.groupBox10);
             this.groupBox4.Location = new System.Drawing.Point(0, 6);
             this.groupBox4.Name = "groupBox4";
@@ -906,9 +905,9 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.btn_score2_image3);
-            this.groupBox5.Controls.Add(this.btn_score2_image2);
-            this.groupBox5.Controls.Add(this.btn_score2_image1);
+            this.groupBox5.Controls.Add(this.btnScoreboardPlayer2Image3);
+            this.groupBox5.Controls.Add(this.btnScoreboardPlayer2Image2);
+            this.groupBox5.Controls.Add(this.btnScoreboardPlayer2Image1);
             this.groupBox5.Controls.Add(this.pic_score2_image3);
             this.groupBox5.Controls.Add(this.pic_score2_image2);
             this.groupBox5.Controls.Add(this.pic_score2_image1);
@@ -919,38 +918,38 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Player 2 Score Images";
             // 
-            // btn_score2_image3
+            // btnScoreboardPlayer2Image3
             // 
-            this.btn_score2_image3.Enabled = false;
-            this.btn_score2_image3.Location = new System.Drawing.Point(126, 19);
-            this.btn_score2_image3.Name = "btn_score2_image3";
-            this.btn_score2_image3.Size = new System.Drawing.Size(54, 39);
-            this.btn_score2_image3.TabIndex = 2;
-            this.btn_score2_image3.Text = "Point 3 Image";
-            this.btn_score2_image3.UseVisualStyleBackColor = true;
-            this.btn_score2_image3.Click += new System.EventHandler(this.score_button_Click);
+            this.btnScoreboardPlayer2Image3.Enabled = false;
+            this.btnScoreboardPlayer2Image3.Location = new System.Drawing.Point(126, 19);
+            this.btnScoreboardPlayer2Image3.Name = "btnScoreboardPlayer2Image3";
+            this.btnScoreboardPlayer2Image3.Size = new System.Drawing.Size(54, 39);
+            this.btnScoreboardPlayer2Image3.TabIndex = 2;
+            this.btnScoreboardPlayer2Image3.Text = "Point 3 Image";
+            this.btnScoreboardPlayer2Image3.UseVisualStyleBackColor = true;
+            this.btnScoreboardPlayer2Image3.Click += new System.EventHandler(this.ImageScoreBoardButton_Click);
             // 
-            // btn_score2_image2
+            // btnScoreboardPlayer2Image2
             // 
-            this.btn_score2_image2.Enabled = false;
-            this.btn_score2_image2.Location = new System.Drawing.Point(66, 19);
-            this.btn_score2_image2.Name = "btn_score2_image2";
-            this.btn_score2_image2.Size = new System.Drawing.Size(54, 39);
-            this.btn_score2_image2.TabIndex = 1;
-            this.btn_score2_image2.Text = "Point 2 Image";
-            this.btn_score2_image2.UseVisualStyleBackColor = true;
-            this.btn_score2_image2.Click += new System.EventHandler(this.score_button_Click);
+            this.btnScoreboardPlayer2Image2.Enabled = false;
+            this.btnScoreboardPlayer2Image2.Location = new System.Drawing.Point(66, 19);
+            this.btnScoreboardPlayer2Image2.Name = "btnScoreboardPlayer2Image2";
+            this.btnScoreboardPlayer2Image2.Size = new System.Drawing.Size(54, 39);
+            this.btnScoreboardPlayer2Image2.TabIndex = 1;
+            this.btnScoreboardPlayer2Image2.Text = "Point 2 Image";
+            this.btnScoreboardPlayer2Image2.UseVisualStyleBackColor = true;
+            this.btnScoreboardPlayer2Image2.Click += new System.EventHandler(this.ImageScoreBoardButton_Click);
             // 
-            // btn_score2_image1
+            // btnScoreboardPlayer2Image1
             // 
-            this.btn_score2_image1.Enabled = false;
-            this.btn_score2_image1.Location = new System.Drawing.Point(6, 19);
-            this.btn_score2_image1.Name = "btn_score2_image1";
-            this.btn_score2_image1.Size = new System.Drawing.Size(54, 39);
-            this.btn_score2_image1.TabIndex = 0;
-            this.btn_score2_image1.Text = "Point 1 Image";
-            this.btn_score2_image1.UseVisualStyleBackColor = true;
-            this.btn_score2_image1.Click += new System.EventHandler(this.score_button_Click);
+            this.btnScoreboardPlayer2Image1.Enabled = false;
+            this.btnScoreboardPlayer2Image1.Location = new System.Drawing.Point(6, 19);
+            this.btnScoreboardPlayer2Image1.Name = "btnScoreboardPlayer2Image1";
+            this.btnScoreboardPlayer2Image1.Size = new System.Drawing.Size(54, 39);
+            this.btnScoreboardPlayer2Image1.TabIndex = 0;
+            this.btnScoreboardPlayer2Image1.Text = "Point 1 Image";
+            this.btnScoreboardPlayer2Image1.UseVisualStyleBackColor = true;
+            this.btnScoreboardPlayer2Image1.Click += new System.EventHandler(this.ImageScoreBoardButton_Click);
             // 
             // pic_score2_image3
             // 
@@ -982,22 +981,22 @@
             this.pic_score2_image1.TabIndex = 0;
             this.pic_score2_image1.TabStop = false;
             // 
-            // ckb_scoreboad
+            // ckbEnableImageScoreboard
             // 
-            this.ckb_scoreboad.AutoSize = true;
-            this.ckb_scoreboad.Location = new System.Drawing.Point(6, 19);
-            this.ckb_scoreboad.Name = "ckb_scoreboad";
-            this.ckb_scoreboad.Size = new System.Drawing.Size(149, 17);
-            this.ckb_scoreboad.TabIndex = 0;
-            this.ckb_scoreboad.Text = "Enable Image Scoreboard";
-            this.ckb_scoreboad.UseVisualStyleBackColor = true;
-            this.ckb_scoreboad.CheckedChanged += new System.EventHandler(this.ckb_scoreboad_CheckedChanged);
+            this.ckbEnableImageScoreboard.AutoSize = true;
+            this.ckbEnableImageScoreboard.Location = new System.Drawing.Point(6, 19);
+            this.ckbEnableImageScoreboard.Name = "ckbEnableImageScoreboard";
+            this.ckbEnableImageScoreboard.Size = new System.Drawing.Size(149, 17);
+            this.ckbEnableImageScoreboard.TabIndex = 0;
+            this.ckbEnableImageScoreboard.Text = "Enable Image Scoreboard";
+            this.ckbEnableImageScoreboard.UseVisualStyleBackColor = true;
+            this.ckbEnableImageScoreboard.CheckedChanged += new System.EventHandler(this.ckbEnableImageScoreboard_CheckedChanged);
             // 
             // groupBox10
             // 
-            this.groupBox10.Controls.Add(this.btn_score1_image3);
-            this.groupBox10.Controls.Add(this.btn_score1_image2);
-            this.groupBox10.Controls.Add(this.btn_score1_image1);
+            this.groupBox10.Controls.Add(this.btnScoreboardPlayer1Image3);
+            this.groupBox10.Controls.Add(this.btnScoreboardPlayer1Image2);
+            this.groupBox10.Controls.Add(this.btnScoreboardPlayer1Image1);
             this.groupBox10.Controls.Add(this.pic_score1_image3);
             this.groupBox10.Controls.Add(this.pic_score1_image2);
             this.groupBox10.Controls.Add(this.pic_score1_image1);
@@ -1008,38 +1007,38 @@
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Player 1 Score Images";
             // 
-            // btn_score1_image3
+            // btnScoreboardPlayer1Image3
             // 
-            this.btn_score1_image3.Enabled = false;
-            this.btn_score1_image3.Location = new System.Drawing.Point(126, 19);
-            this.btn_score1_image3.Name = "btn_score1_image3";
-            this.btn_score1_image3.Size = new System.Drawing.Size(54, 39);
-            this.btn_score1_image3.TabIndex = 2;
-            this.btn_score1_image3.Text = "Point 3 Image";
-            this.btn_score1_image3.UseVisualStyleBackColor = true;
-            this.btn_score1_image3.Click += new System.EventHandler(this.score_button_Click);
+            this.btnScoreboardPlayer1Image3.Enabled = false;
+            this.btnScoreboardPlayer1Image3.Location = new System.Drawing.Point(126, 19);
+            this.btnScoreboardPlayer1Image3.Name = "btnScoreboardPlayer1Image3";
+            this.btnScoreboardPlayer1Image3.Size = new System.Drawing.Size(54, 39);
+            this.btnScoreboardPlayer1Image3.TabIndex = 2;
+            this.btnScoreboardPlayer1Image3.Text = "Point 3 Image";
+            this.btnScoreboardPlayer1Image3.UseVisualStyleBackColor = true;
+            this.btnScoreboardPlayer1Image3.Click += new System.EventHandler(this.ImageScoreBoardButton_Click);
             // 
-            // btn_score1_image2
+            // btnScoreboardPlayer1Image2
             // 
-            this.btn_score1_image2.Enabled = false;
-            this.btn_score1_image2.Location = new System.Drawing.Point(66, 19);
-            this.btn_score1_image2.Name = "btn_score1_image2";
-            this.btn_score1_image2.Size = new System.Drawing.Size(54, 39);
-            this.btn_score1_image2.TabIndex = 1;
-            this.btn_score1_image2.Text = "Point 2 Image";
-            this.btn_score1_image2.UseVisualStyleBackColor = true;
-            this.btn_score1_image2.Click += new System.EventHandler(this.score_button_Click);
+            this.btnScoreboardPlayer1Image2.Enabled = false;
+            this.btnScoreboardPlayer1Image2.Location = new System.Drawing.Point(66, 19);
+            this.btnScoreboardPlayer1Image2.Name = "btnScoreboardPlayer1Image2";
+            this.btnScoreboardPlayer1Image2.Size = new System.Drawing.Size(54, 39);
+            this.btnScoreboardPlayer1Image2.TabIndex = 1;
+            this.btnScoreboardPlayer1Image2.Text = "Point 2 Image";
+            this.btnScoreboardPlayer1Image2.UseVisualStyleBackColor = true;
+            this.btnScoreboardPlayer1Image2.Click += new System.EventHandler(this.ImageScoreBoardButton_Click);
             // 
-            // btn_score1_image1
+            // btnScoreboardPlayer1Image1
             // 
-            this.btn_score1_image1.Enabled = false;
-            this.btn_score1_image1.Location = new System.Drawing.Point(6, 19);
-            this.btn_score1_image1.Name = "btn_score1_image1";
-            this.btn_score1_image1.Size = new System.Drawing.Size(54, 39);
-            this.btn_score1_image1.TabIndex = 0;
-            this.btn_score1_image1.Text = "Point 1 Image";
-            this.btn_score1_image1.UseVisualStyleBackColor = true;
-            this.btn_score1_image1.Click += new System.EventHandler(this.score_button_Click);
+            this.btnScoreboardPlayer1Image1.Enabled = false;
+            this.btnScoreboardPlayer1Image1.Location = new System.Drawing.Point(6, 19);
+            this.btnScoreboardPlayer1Image1.Name = "btnScoreboardPlayer1Image1";
+            this.btnScoreboardPlayer1Image1.Size = new System.Drawing.Size(54, 39);
+            this.btnScoreboardPlayer1Image1.TabIndex = 0;
+            this.btnScoreboardPlayer1Image1.Text = "Point 1 Image";
+            this.btnScoreboardPlayer1Image1.UseVisualStyleBackColor = true;
+            this.btnScoreboardPlayer1Image1.Click += new System.EventHandler(this.ImageScoreBoardButton_Click);
             // 
             // pic_score1_image3
             // 
@@ -1173,7 +1172,7 @@
             this.ckb_thumbnails.TabIndex = 2;
             this.ckb_thumbnails.Text = "Enable Thumbnail Generation";
             this.ckb_thumbnails.UseVisualStyleBackColor = true;
-            this.ckb_thumbnails.CheckedChanged += new System.EventHandler(this.ckb_thumbnails_CheckedChanged);
+            this.ckb_thumbnails.CheckedChanged += new System.EventHandler(this.SettingFieldChanged);
             // 
             // tabControl1
             // 
@@ -1696,7 +1695,7 @@
             this.txt_version.Name = "txt_version";
             this.txt_version.Size = new System.Drawing.Size(57, 20);
             this.txt_version.TabIndex = 12;
-            this.txt_version.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_version_KeyPress);
+            this.txt_version.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SettingFieldChanged);
             // 
             // label39
             // 
@@ -1812,7 +1811,7 @@
             this.ckb_date.TabIndex = 0;
             this.ckb_date.Text = "Include Date\r\nin thumbnail";
             this.ckb_date.UseVisualStyleBackColor = true;
-            this.ckb_date.CheckedChanged += new System.EventHandler(this.checkbox_Changed);
+            this.ckb_date.CheckedChanged += new System.EventHandler(this.SettingFieldChanged);
             // 
             // txt_date_yoffset
             // 
@@ -1984,9 +1983,9 @@
             // 
             this.ofd_jpg.Filter = "JPEG Files | *.jpg";
             // 
-            // ofd_png
+            // ofdBrowseForPng
             // 
-            this.ofd_png.Filter = "PNG Image Files|*.png";
+            this.ofdBrowseForPng.Filter = "PNG Image Files|*.png";
             // 
             // ofd_json
             // 
@@ -2115,21 +2114,21 @@
         public System.Windows.Forms.CheckBox ckbEnableRegionImages;
         public System.Windows.Forms.CheckBox ckbEnableSponsorImages;
         public System.Windows.Forms.GroupBox groupBox3;
-        public System.Windows.Forms.RadioButton rdb_manual;
-        public System.Windows.Forms.RadioButton rdb_automatic;
+        public System.Windows.Forms.RadioButton rdbManualStreamUpdates;
+        public System.Windows.Forms.RadioButton rdbAutomaticStreamUpdates;
         public System.Windows.Forms.GroupBox groupBox4;
         public System.Windows.Forms.GroupBox groupBox5;
-        public System.Windows.Forms.Button btn_score2_image3;
-        public System.Windows.Forms.Button btn_score2_image2;
-        public System.Windows.Forms.Button btn_score2_image1;
+        public System.Windows.Forms.Button btnScoreboardPlayer2Image3;
+        public System.Windows.Forms.Button btnScoreboardPlayer2Image2;
+        public System.Windows.Forms.Button btnScoreboardPlayer2Image1;
         public System.Windows.Forms.PictureBox pic_score2_image3;
         public System.Windows.Forms.PictureBox pic_score2_image2;
         public System.Windows.Forms.PictureBox pic_score2_image1;
-        public System.Windows.Forms.CheckBox ckb_scoreboad;
+        public System.Windows.Forms.CheckBox ckbEnableImageScoreboard;
         public System.Windows.Forms.GroupBox groupBox10;
-        public System.Windows.Forms.Button btn_score1_image3;
-        public System.Windows.Forms.Button btn_score1_image2;
-        public System.Windows.Forms.Button btn_score1_image1;
+        public System.Windows.Forms.Button btnScoreboardPlayer1Image3;
+        public System.Windows.Forms.Button btnScoreboardPlayer1Image2;
+        public System.Windows.Forms.Button btnScoreboardPlayer1Image1;
         public System.Windows.Forms.PictureBox pic_score1_image3;
         public System.Windows.Forms.PictureBox pic_score1_image2;
         public System.Windows.Forms.PictureBox pic_score1_image1;
@@ -2206,7 +2205,7 @@
         public System.Windows.Forms.GroupBox groupBox15;
         public System.Windows.Forms.FolderBrowserDialog fbdBrowserForDirectory;
         public System.Windows.Forms.OpenFileDialog ofd_jpg;
-        public System.Windows.Forms.OpenFileDialog ofd_png;
+        public System.Windows.Forms.OpenFileDialog ofdBrowseForPng;
         public System.Windows.Forms.OpenFileDialog ofd_json;
         public System.Windows.Forms.Label lblCharacterErrors;
         public System.Windows.Forms.Label lblDirectoryErrors;

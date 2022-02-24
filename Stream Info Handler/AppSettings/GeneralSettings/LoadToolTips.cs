@@ -96,11 +96,11 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             "files exports for the match, players, and commentators.\n" +
             "An XML file containing all information will also be generated,\n" +
             "which can be used when creating dynamic overlays.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.rdb_automatic,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.rdbAutomaticStreamUpdates,
             "Use automatic stream file updating. Changes to\n" +
             "player and tournament information will automatically\n" +
             "be pushed to the Stream Files Directory.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.rdb_manual,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.rdbManualStreamUpdates,
             "Use manual stream file updating. Changes to player\n" +
             "and tournament information will only be pushed to\n" +
             "the Stream Files Directory when clicking Update.");
@@ -176,21 +176,21 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
         }
         public static void LoadStreamImagesToolTips(GeneralSettingsForm settingsForm)
         {
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.ckb_scoreboad,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.ckbEnableImageScoreboard,
             "Toggle the use of image scoreboard. Enabling it\n" +
             "limits the max score to 3 but updates images in the\n" +
             "Stream File Directory to reflect each player's score.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btn_score1_image1,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btnScoreboardPlayer1Image1,
             "Change the image for Player 1's score at 1 point.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btn_score1_image2,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btnScoreboardPlayer1Image2,
             "Change the image for Player 1's score at 2 points.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btn_score1_image3,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btnScoreboardPlayer1Image3,
             "Change the image for Player 1's score at 3 points.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btn_score2_image1,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btnScoreboardPlayer2Image1,
             "Change the image for Player 2's score at 1 point.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btn_score2_image2,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btnScoreboardPlayer2Image2,
             "Change the image for Player 2's score at 2 points.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btn_score2_image3,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btnScoreboardPlayer2Image3,
             "Change the image for Player 2's score at 3 points.");
             settingsForm.ttp_tooltip.SetToolTip(settingsForm.ckbEnableSponsorImages,
             "Toggle whether or not sponsor images should be added for players\n" +

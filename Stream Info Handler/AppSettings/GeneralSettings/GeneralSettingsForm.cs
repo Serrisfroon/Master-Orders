@@ -168,14 +168,9 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 txtStreamFilesDirectory.Text = fbdBrowserForDirectory.SelectedPath;                 //Update the global value with the new directory
             }
         }
-
         #endregion General
 
         #region YouTube Uploads
-        private void ckbEnableVodUploads_CheckedChanged(object sender, EventArgs e)
-        {
-            btnApplyChanges.Enabled = true;
-        }
         private void txtVodsDirectory_TextChanged(object sender, EventArgs e)
         {
             lblDirectoryErrors.Text = "";
@@ -370,7 +365,27 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
         #endregion YouTube Uploads
 
         #region Images
+        private void ckbEnableImageScoreboard_CheckedChanged(object sender, EventArgs e)
+        {
+            btnApplyChanges.Enabled = true;
+            btnScoreboardPlayer1Image1.Enabled = ckbEnableImageScoreboard.Checked;
+            btnScoreboardPlayer1Image2.Enabled = ckbEnableImageScoreboard.Checked;
+            btnScoreboardPlayer1Image3.Enabled = ckbEnableImageScoreboard.Checked;
+            btnScoreboardPlayer2Image1.Enabled = ckbEnableImageScoreboard.Checked;
+            btnScoreboardPlayer2Image2.Enabled = ckbEnableImageScoreboard.Checked;
+            btnScoreboardPlayer2Image3.Enabled = ckbEnableImageScoreboard.Checked;
+        }
 
+        private void ImageScoreBoardButton_Click(object sender, EventArgs e)
+        {
+            Button clickedImageButton = (Button)sender;
+            if (ofdBrowseForPng.ShowDialog() == DialogResult.OK)
+            {
+                btnApplyChanges.Enabled = true;
+                int scoreControlIndex = (int)(clickedImageButton.Tag);
+                editableSettings.scoreControls[scoreControlIndex].UpdateImage(ofdBrowseForPng.FileName);
+            }
+        }
         private void txtSponsorImagesDirectory_TextChanged(object sender, EventArgs e)
         {
             lblDirectoryErrors.Text = "";
@@ -477,40 +492,9 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
         #endregion Thumbnails
 
         #endregion Stream Assistant
-
-
-        private void rdb_automatic_CheckedChanged(object sender, EventArgs e)
+        private void SettingFieldChanged(object sender, EventArgs e)
         {
             btnApplyChanges.Enabled = true;
-        }
-
-        private void ckb_scoreboad_CheckedChanged(object sender, EventArgs e)
-        {
-            btnApplyChanges.Enabled = true;
-            btn_score1_image1.Enabled = ckb_scoreboad.Checked;
-            btn_score1_image2.Enabled = ckb_scoreboad.Checked;
-            btn_score1_image3.Enabled = ckb_scoreboad.Checked;
-            btn_score2_image1.Enabled = ckb_scoreboad.Checked;
-            btn_score2_image2.Enabled = ckb_scoreboad.Checked;
-            btn_score2_image3.Enabled = ckb_scoreboad.Checked;
-        }
-
-        private void score_button_Click(object sender, EventArgs e)
-        {
-            Button clickedImageButton = (Button)sender;
-            if (ofd_png.ShowDialog() == DialogResult.OK)
-            {
-                btnApplyChanges.Enabled = true;
-                int scoreControlIndex = (int)(clickedImageButton.Tag);
-                editableSettings.scoreControls[scoreControlIndex].UpdateImage(ofd_png.FileName);
-            }
-        }
-
-        private void tab_stream_tabs_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tab_stream_tabs.SelectedIndex != 3)
-                return;
-
         }
 
         private void txt_background_TextChanged(object sender, EventArgs e)
@@ -580,9 +564,9 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
 
         private void btn_foreground_Click(object sender, EventArgs e)
         {
-            if (ofd_png.ShowDialog() == DialogResult.OK)
+            if (ofdBrowseForPng.ShowDialog() == DialogResult.OK)
             {
-                txtThumbnailForeground.Text = ofd_png.FileName;
+                txtThumbnailForeground.Text = ofdBrowseForPng.FileName;
             }
         }
 
@@ -782,27 +766,6 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
         {
             create_thumbnail();
         }
-
-        private void checkbox_Changed(object sender, EventArgs e)
-        {
-            btnApplyChanges.Enabled = true;
-        }
-
-        private void ckb_thumbnails_CheckedChanged(object sender, EventArgs e)
-        {
-            btnApplyChanges.Enabled = true;
-        }
-
-        private void ckb_clipboard_CheckedChanged(object sender, EventArgs e)
-        {
-            btnApplyChanges.Enabled = true;
-        }
-
-        private void txt_description_TextChanged(object sender, EventArgs e)
-        {
-            btnApplyChanges.Enabled = true;
-        }
-
         private void btn_apply_Click(object sender, EventArgs e)
         {
             if (save_settings() == true)
@@ -833,14 +796,14 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                     MessageBox.Show("The provided directory for Character Databases is incorrect. Please correct this under the General settings.", "Invalid Directory Provided", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
-                if (ckb_scoreboad.Checked == true && (
+                if (ckbEnableImageScoreboard.Checked == true && (
                     score_image[0] == "" || score_image[1] == "" ||
                     score_image[2] == "" || score_image[3] == "" ||
                     score_image[4] == "" || score_image[5] == ""))
                 {
                     if (MessageBox.Show("Image Scoreboard is enabled, but not all images have been provided. Click OK to disable Image Scoreboard, or click Cancel to cancel saving changes and add the needed images.", "Image Files Missing", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
                         == DialogResult.OK)
-                        ckb_scoreboad.Checked = false;
+                        ckbEnableImageScoreboard.Checked = false;
                     else
                         return false;
                 }
@@ -952,7 +915,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 xml.Root.Element("youtube").Element("tags").ReplaceWith(new XElement("tags", txt_tags.Text));
                 xml.Root.Element("youtube").Element("title-template").ReplaceWith(new XElement("title-template", txt_titletemplate.Text));
 
-                xml.Root.Element("image-scoring").Element("enable-image-scoring").ReplaceWith(new XElement("enable-image-scoring", ckb_scoreboad.Checked));
+                xml.Root.Element("image-scoring").Element("enable-image-scoring").ReplaceWith(new XElement("enable-image-scoring", ckbEnableImageScoreboard.Checked));
                 xml.Root.Element("image-scoring").Element("player1-1").ReplaceWith(new XElement("player1-1", score_image[0]));
                 xml.Root.Element("image-scoring").Element("player1-2").ReplaceWith(new XElement("player1-2", score_image[1]));
                 xml.Root.Element("image-scoring").Element("player1-3").ReplaceWith(new XElement("player1-3", score_image[2]));
@@ -985,7 +948,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 xml.Root.Element("thumbnail-layout").Element("patch-yoffset").ReplaceWith(new XElement("patch-yoffset", txt_patch_yoffset.Text));
                 xml.Root.Element("thumbnail-layout").Element("patch-size").ReplaceWith(new XElement("patch-size", txt_patch_size.Text));
 
-                xml.Root.Element("general").Element("automatic-updates").ReplaceWith(new XElement("automatic-updates", rdb_automatic.Checked));
+                xml.Root.Element("general").Element("automatic-updates").ReplaceWith(new XElement("automatic-updates", rdbAutomaticStreamUpdates.Checked));
                 xml.Root.Element("general").Element("stream-software").ReplaceWith(new XElement("stream-software", selectedStreamSoftware));
                 xml.Root.Element("general").Element("enable-thumbnails").ReplaceWith(new XElement("enable-thumbnails", ckb_thumbnails.Checked));
                 xml.Root.Element("general").Element("copy-title").ReplaceWith(new XElement("copy-title", ckb_clipboard.Checked));
@@ -1009,7 +972,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 YoutubeController.enableVideoThumbnails = ckb_thumbnails.Checked;
                 YoutubeController.copyVideoTitle = ckb_clipboard.Checked;
                 YoutubeLibrary.YoutubeController.streamSoftware = selectedStreamSoftware;
-                ImageManagement.enableImageScoreboard = ckb_scoreboad.Checked;
+                ImageManagement.enableImageScoreboard = ckbEnableImageScoreboard.Checked;
                 ImageManagement.scoreboardImages[0, 0] = score_image[0];
                 ImageManagement.scoreboardImages[0, 1] = score_image[1];
                 ImageManagement.scoreboardImages[0, 2] = score_image[2];
@@ -1018,7 +981,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 ImageManagement.scoreboardImages[1, 2] = score_image[5];
                 DirectoryManagement.outputDirectory = txtStreamFilesDirectory.Text;
                 DirectoryManagement.vodsDirectory = txtVodsDirectory.Text;
-                DataOutputCaller.automaticUpdates = rdb_automatic.Checked;
+                DataOutputCaller.automaticUpdates = rdbAutomaticStreamUpdates.Checked;
                 YoutubeController.playlistName = txtPlaylistName.Text;
                 YoutubeController.playlistId = playlistId;
                 global_values.queue_id = queueid;
@@ -1062,12 +1025,6 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
         {
             this.TopMost = ((CheckBox)sender).Checked;
         }
-
-        private void txt_version_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            btnApplyChanges.Enabled = true;
-        }
-
         private void btn_queue_rename_Click(object sender, EventArgs e)
         {
             int holdindex = cbx_queues.SelectedIndex;
@@ -1159,12 +1116,6 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             }
         }
 
- 
-        private void txt_seperator_TextChanged(object sender, EventArgs e)
-        {
-            btnApplyChanges.Enabled = true;
-        }
-
         private void btn_bracketrounds_Click(object sender, EventArgs e)
         {
             //Ask the user to select the folder containing the character roster
@@ -1197,11 +1148,6 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             }
             else
                 txt_bracketrounds.BackColor = Color.White;
-        }
-
-        private void Txt_titletemplate_TextChanged(object sender, EventArgs e)
-        {
-            btnApplyChanges.Enabled = true;
         }
     }
 }
