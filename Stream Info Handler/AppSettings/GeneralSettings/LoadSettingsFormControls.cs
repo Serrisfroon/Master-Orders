@@ -67,9 +67,9 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 }
             }
             if (StreamQueue.queueId == -1)
-                settingsForm.cbx_queues.SelectedIndex = 0;
+                settingsForm.cbxStreamQueues.SelectedIndex = 0;
             else
-                settingsForm.cbx_queues.SelectedIndex = StreamQueue.queueId;
+                settingsForm.cbxStreamQueues.SelectedIndex = StreamQueue.queueId;
 
             settingsForm.txtStreamFilesDirectory.Text = DirectoryManagement.outputDirectory;
             settingsForm.txt_thumbnails.Text = DirectoryManagement.thumbnailDirectory;
@@ -127,7 +127,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             settingsForm.txt_patch_size.Text = ImageManagement.thumbnailConfiguration.patchSize.ToString();
 
             settingsForm.rdbAutomaticStreamUpdates.Checked = DataOutputCaller.automaticUpdates;
-            settingsForm.ckb_ontop.Checked = GlobalSettings.keepWindowsOnTop;
+            settingsForm.ckbKeepWindowOnTop.Checked = GlobalSettings.keepWindowsOnTop;
 
             if (YoutubeController.streamSoftware == "OBS")
                 settingsForm.rdbStreamSoftwareObs.Checked = true;
@@ -135,7 +135,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             settingsForm.ckb_clipboard.Checked = YoutubeController.copyVideoTitle;
             settingsForm.cbx_shorten_video.SelectedIndex = (int)YoutubeController.enableVideoTitleShortening;
             settingsForm.cbx_format.Text = GlobalSettings.bracketFormat;
-            settingsForm.txt_bracketrounds.Text = GlobalSettings.bracketRounds;
+            settingsForm.txtBracketRoundsFile.Text = GlobalSettings.bracketRounds;
             settingsForm.txt_seperator.Text = TextFileManagement.sponsorSeperator;
 
             settingsForm.btnApplyChanges.Enabled = false;

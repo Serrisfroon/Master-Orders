@@ -37,13 +37,13 @@
             this.label40 = new System.Windows.Forms.Label();
             this.groupBox16 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.cbx_queuegame = new System.Windows.Forms.ComboBox();
+            this.cbxAssignedStreamQueueGame = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.btn_queue_rename = new System.Windows.Forms.Button();
-            this.cbx_queues = new System.Windows.Forms.ComboBox();
-            this.txt_bracketrounds = new System.Windows.Forms.TextBox();
+            this.btnRenameStreamQueue = new System.Windows.Forms.Button();
+            this.cbxStreamQueues = new System.Windows.Forms.ComboBox();
+            this.txtBracketRoundsFile = new System.Windows.Forms.TextBox();
             this.btn_bracketrounds = new System.Windows.Forms.Button();
-            this.ckb_ontop = new System.Windows.Forms.CheckBox();
+            this.ckbKeepWindowOnTop = new System.Windows.Forms.CheckBox();
             this.cbx_format = new System.Windows.Forms.ComboBox();
             this.label38 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -112,7 +112,7 @@
             this.txtSponsorImagesDirectory = new System.Windows.Forms.TextBox();
             this.btnBrowseSponsorImagesDirectory = new System.Windows.Forms.Button();
             this.tab_thumbnail = new System.Windows.Forms.TabPage();
-            this.btn_preview = new System.Windows.Forms.Button();
+            this.btnPreviewThumbnail = new System.Windows.Forms.Button();
             this.ckb_thumbnails = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tab_templates = new System.Windows.Forms.TabPage();
@@ -121,20 +121,20 @@
             this.btnSelectThumbnailFont = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.txtThumbnailForeground = new System.Windows.Forms.TextBox();
-            this.btn_foreground = new System.Windows.Forms.Button();
+            this.btnThumbnailForeground = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.txtThumbnailBackground = new System.Windows.Forms.TextBox();
-            this.btn_background = new System.Windows.Forms.Button();
+            this.btnThumbnailBackground = new System.Windows.Forms.Button();
             this.tab_characters = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.cbx_char2 = new System.Windows.Forms.ComboBox();
+            this.cbxThumbnailPreviewCharacter2 = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.txt_char2_yoffset = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.txt_char2_xoffset = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.cbx_char1 = new System.Windows.Forms.ComboBox();
+            this.cbxThumbnailPreviewCharacter1 = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.txt_char1_yoffset = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -187,14 +187,14 @@
             this.pic_thumbnail = new System.Windows.Forms.PictureBox();
             this.tab_bracket = new System.Windows.Forms.TabPage();
             this.btnApplyChanges = new System.Windows.Forms.Button();
-            this.btn_cancel = new System.Windows.Forms.Button();
-            this.btn_ok = new System.Windows.Forms.Button();
+            this.btnCancelChanges = new System.Windows.Forms.Button();
+            this.btnOkConfirmChanges = new System.Windows.Forms.Button();
             this.ftdPromptForFont = new System.Windows.Forms.FontDialog();
             this.fbdBrowserForDirectory = new System.Windows.Forms.FolderBrowserDialog();
-            this.ofd_jpg = new System.Windows.Forms.OpenFileDialog();
+            this.ofdBrowseForJpg = new System.Windows.Forms.OpenFileDialog();
             this.ofdBrowseForPng = new System.Windows.Forms.OpenFileDialog();
             this.ofd_json = new System.Windows.Forms.OpenFileDialog();
-            this.ofd_txt = new System.Windows.Forms.OpenFileDialog();
+            this.ofdBrowseForTxt = new System.Windows.Forms.OpenFileDialog();
             this.ttp_tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.tab_settings.SuspendLayout();
             this.tab_general.SuspendLayout();
@@ -254,9 +254,9 @@
             this.tab_general.Controls.Add(this.txt_seperator);
             this.tab_general.Controls.Add(this.label40);
             this.tab_general.Controls.Add(this.groupBox16);
-            this.tab_general.Controls.Add(this.txt_bracketrounds);
+            this.tab_general.Controls.Add(this.txtBracketRoundsFile);
             this.tab_general.Controls.Add(this.btn_bracketrounds);
-            this.tab_general.Controls.Add(this.ckb_ontop);
+            this.tab_general.Controls.Add(this.ckbKeepWindowOnTop);
             this.tab_general.Controls.Add(this.cbx_format);
             this.tab_general.Controls.Add(this.label38);
             this.tab_general.Controls.Add(this.groupBox1);
@@ -299,10 +299,10 @@
             // groupBox16
             // 
             this.groupBox16.Controls.Add(this.label7);
-            this.groupBox16.Controls.Add(this.cbx_queuegame);
+            this.groupBox16.Controls.Add(this.cbxAssignedStreamQueueGame);
             this.groupBox16.Controls.Add(this.label3);
-            this.groupBox16.Controls.Add(this.btn_queue_rename);
-            this.groupBox16.Controls.Add(this.cbx_queues);
+            this.groupBox16.Controls.Add(this.btnRenameStreamQueue);
+            this.groupBox16.Controls.Add(this.cbxStreamQueues);
             this.groupBox16.Location = new System.Drawing.Point(3, 157);
             this.groupBox16.Name = "groupBox16";
             this.groupBox16.Size = new System.Drawing.Size(399, 103);
@@ -319,15 +319,15 @@
             this.label7.TabIndex = 10;
             this.label7.Text = "Stream Queue Game:";
             // 
-            // cbx_queuegame
+            // cbxAssignedStreamQueueGame
             // 
-            this.cbx_queuegame.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbx_queuegame.FormattingEnabled = true;
-            this.cbx_queuegame.Location = new System.Drawing.Point(6, 75);
-            this.cbx_queuegame.Name = "cbx_queuegame";
-            this.cbx_queuegame.Size = new System.Drawing.Size(190, 21);
-            this.cbx_queuegame.TabIndex = 9;
-            this.cbx_queuegame.SelectedIndexChanged += new System.EventHandler(this.cbx_queuegame_SelectedIndexChanged);
+            this.cbxAssignedStreamQueueGame.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxAssignedStreamQueueGame.FormattingEnabled = true;
+            this.cbxAssignedStreamQueueGame.Location = new System.Drawing.Point(6, 75);
+            this.cbxAssignedStreamQueueGame.Name = "cbxAssignedStreamQueueGame";
+            this.cbxAssignedStreamQueueGame.Size = new System.Drawing.Size(190, 21);
+            this.cbxAssignedStreamQueueGame.TabIndex = 9;
+            this.cbxAssignedStreamQueueGame.SelectedIndexChanged += new System.EventHandler(this.cbxAssignedStreamQueueGame_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -338,35 +338,35 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Use the following Stream Queue:";
             // 
-            // btn_queue_rename
+            // btnRenameStreamQueue
             // 
-            this.btn_queue_rename.Location = new System.Drawing.Point(212, 35);
-            this.btn_queue_rename.Name = "btn_queue_rename";
-            this.btn_queue_rename.Size = new System.Drawing.Size(117, 21);
-            this.btn_queue_rename.TabIndex = 8;
-            this.btn_queue_rename.Text = "Rename Queue";
-            this.btn_queue_rename.UseVisualStyleBackColor = true;
-            this.btn_queue_rename.Click += new System.EventHandler(this.btn_queue_rename_Click);
+            this.btnRenameStreamQueue.Location = new System.Drawing.Point(212, 35);
+            this.btnRenameStreamQueue.Name = "btnRenameStreamQueue";
+            this.btnRenameStreamQueue.Size = new System.Drawing.Size(117, 21);
+            this.btnRenameStreamQueue.TabIndex = 8;
+            this.btnRenameStreamQueue.Text = "Rename Queue";
+            this.btnRenameStreamQueue.UseVisualStyleBackColor = true;
+            this.btnRenameStreamQueue.Click += new System.EventHandler(this.btnRenameStreamQueue_Click);
             // 
-            // cbx_queues
+            // cbxStreamQueues
             // 
-            this.cbx_queues.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbx_queues.FormattingEnabled = true;
-            this.cbx_queues.Location = new System.Drawing.Point(6, 35);
-            this.cbx_queues.Name = "cbx_queues";
-            this.cbx_queues.Size = new System.Drawing.Size(190, 21);
-            this.cbx_queues.TabIndex = 2;
-            this.cbx_queues.SelectedIndexChanged += new System.EventHandler(this.cbx_queues_SelectedIndexChanged);
+            this.cbxStreamQueues.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxStreamQueues.FormattingEnabled = true;
+            this.cbxStreamQueues.Location = new System.Drawing.Point(6, 35);
+            this.cbxStreamQueues.Name = "cbxStreamQueues";
+            this.cbxStreamQueues.Size = new System.Drawing.Size(190, 21);
+            this.cbxStreamQueues.TabIndex = 2;
+            this.cbxStreamQueues.SelectedIndexChanged += new System.EventHandler(this.cbxStreamQueues_SelectedIndexChanged);
             // 
-            // txt_bracketrounds
+            // txtBracketRoundsFile
             // 
-            this.txt_bracketrounds.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txt_bracketrounds.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txt_bracketrounds.Location = new System.Drawing.Point(9, 320);
-            this.txt_bracketrounds.Name = "txt_bracketrounds";
-            this.txt_bracketrounds.Size = new System.Drawing.Size(310, 20);
-            this.txt_bracketrounds.TabIndex = 12;
-            this.txt_bracketrounds.TextChanged += new System.EventHandler(this.txt_bracketrounds_TextChanged);
+            this.txtBracketRoundsFile.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtBracketRoundsFile.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtBracketRoundsFile.Location = new System.Drawing.Point(9, 320);
+            this.txtBracketRoundsFile.Name = "txtBracketRoundsFile";
+            this.txtBracketRoundsFile.Size = new System.Drawing.Size(310, 20);
+            this.txtBracketRoundsFile.TabIndex = 12;
+            this.txtBracketRoundsFile.TextChanged += new System.EventHandler(this.txtBracketRoundsFile_TextChanged);
             // 
             // btn_bracketrounds
             // 
@@ -376,18 +376,18 @@
             this.btn_bracketrounds.TabIndex = 14;
             this.btn_bracketrounds.Text = "Browse";
             this.btn_bracketrounds.UseVisualStyleBackColor = true;
-            this.btn_bracketrounds.Click += new System.EventHandler(this.btn_bracketrounds_Click);
+            this.btn_bracketrounds.Click += new System.EventHandler(this.btnBracketRoundsFile_Click);
             // 
-            // ckb_ontop
+            // ckbKeepWindowOnTop
             // 
-            this.ckb_ontop.AutoSize = true;
-            this.ckb_ontop.Location = new System.Drawing.Point(9, 375);
-            this.ckb_ontop.Name = "ckb_ontop";
-            this.ckb_ontop.Size = new System.Drawing.Size(204, 17);
-            this.ckb_ontop.TabIndex = 7;
-            this.ckb_ontop.Text = "Keep Master Orders Windows on Top";
-            this.ckb_ontop.UseVisualStyleBackColor = true;
-            this.ckb_ontop.CheckedChanged += new System.EventHandler(this.ckb_ontop_CheckedChanged);
+            this.ckbKeepWindowOnTop.AutoSize = true;
+            this.ckbKeepWindowOnTop.Location = new System.Drawing.Point(9, 375);
+            this.ckbKeepWindowOnTop.Name = "ckbKeepWindowOnTop";
+            this.ckbKeepWindowOnTop.Size = new System.Drawing.Size(204, 17);
+            this.ckbKeepWindowOnTop.TabIndex = 7;
+            this.ckbKeepWindowOnTop.Text = "Keep Master Orders Windows on Top";
+            this.ckbKeepWindowOnTop.UseVisualStyleBackColor = true;
+            this.ckbKeepWindowOnTop.CheckedChanged += new System.EventHandler(this.ckbKeepWindowOnTop_CheckedChanged);
             // 
             // cbx_format
             // 
@@ -400,7 +400,7 @@
             this.cbx_format.Name = "cbx_format";
             this.cbx_format.Size = new System.Drawing.Size(190, 21);
             this.cbx_format.TabIndex = 6;
-            this.cbx_format.SelectedIndexChanged += new System.EventHandler(this.cbx_queues_SelectedIndexChanged);
+            this.cbx_format.SelectedIndexChanged += new System.EventHandler(this.cbxStreamQueues_SelectedIndexChanged);
             // 
             // label38
             // 
@@ -436,7 +436,7 @@
             this.btnReassignCharacterDirectory.TabIndex = 11;
             this.btnReassignCharacterDirectory.Text = "Reassign Directory";
             this.btnReassignCharacterDirectory.UseVisualStyleBackColor = true;
-            this.btnReassignCharacterDirectory.Click += new System.EventHandler(this.btn_reassign_Click);
+            this.btnReassignCharacterDirectory.Click += new System.EventHandler(this.btnReassignCharacterDirectory_Click);
             // 
             // lblCharacterErrors
             // 
@@ -1141,7 +1141,7 @@
             // 
             // tab_thumbnail
             // 
-            this.tab_thumbnail.Controls.Add(this.btn_preview);
+            this.tab_thumbnail.Controls.Add(this.btnPreviewThumbnail);
             this.tab_thumbnail.Controls.Add(this.ckb_thumbnails);
             this.tab_thumbnail.Controls.Add(this.tabControl1);
             this.tab_thumbnail.Controls.Add(this.pic_thumbnail);
@@ -1152,16 +1152,16 @@
             this.tab_thumbnail.Text = "Thumbnails";
             this.tab_thumbnail.UseVisualStyleBackColor = true;
             // 
-            // btn_preview
+            // btnPreviewThumbnail
             // 
-            this.btn_preview.Enabled = false;
-            this.btn_preview.Location = new System.Drawing.Point(315, 75);
-            this.btn_preview.Name = "btn_preview";
-            this.btn_preview.Size = new System.Drawing.Size(73, 55);
-            this.btn_preview.TabIndex = 0;
-            this.btn_preview.Text = "Preview";
-            this.btn_preview.UseVisualStyleBackColor = true;
-            this.btn_preview.Click += new System.EventHandler(this.btn_preview_Click);
+            this.btnPreviewThumbnail.Enabled = false;
+            this.btnPreviewThumbnail.Location = new System.Drawing.Point(315, 75);
+            this.btnPreviewThumbnail.Name = "btnPreviewThumbnail";
+            this.btnPreviewThumbnail.Size = new System.Drawing.Size(73, 55);
+            this.btnPreviewThumbnail.TabIndex = 0;
+            this.btnPreviewThumbnail.Text = "Preview";
+            this.btnPreviewThumbnail.UseVisualStyleBackColor = true;
+            this.btnPreviewThumbnail.Click += new System.EventHandler(this.btnPreviewThumbnail_Click);
             // 
             // ckb_thumbnails
             // 
@@ -1191,10 +1191,10 @@
             this.tab_templates.Controls.Add(this.groupBox15);
             this.tab_templates.Controls.Add(this.label11);
             this.tab_templates.Controls.Add(this.txtThumbnailForeground);
-            this.tab_templates.Controls.Add(this.btn_foreground);
+            this.tab_templates.Controls.Add(this.btnThumbnailForeground);
             this.tab_templates.Controls.Add(this.label10);
             this.tab_templates.Controls.Add(this.txtThumbnailBackground);
-            this.tab_templates.Controls.Add(this.btn_background);
+            this.tab_templates.Controls.Add(this.btnThumbnailBackground);
             this.tab_templates.Location = new System.Drawing.Point(4, 22);
             this.tab_templates.Name = "tab_templates";
             this.tab_templates.Padding = new System.Windows.Forms.Padding(3);
@@ -1251,18 +1251,18 @@
             this.txtThumbnailForeground.Size = new System.Drawing.Size(294, 20);
             this.txtThumbnailForeground.TabIndex = 2;
             this.txtThumbnailForeground.TabStop = false;
-            this.txtThumbnailForeground.TextChanged += new System.EventHandler(this.txt_foreground_TextChanged);
+            this.txtThumbnailForeground.TextChanged += new System.EventHandler(this.txtThumbnailForeground_TextChanged);
             // 
-            // btn_foreground
+            // btnThumbnailForeground
             // 
-            this.btn_foreground.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_foreground.Location = new System.Drawing.Point(306, 58);
-            this.btn_foreground.Name = "btn_foreground";
-            this.btn_foreground.Size = new System.Drawing.Size(65, 20);
-            this.btn_foreground.TabIndex = 3;
-            this.btn_foreground.Text = "Browse";
-            this.btn_foreground.UseVisualStyleBackColor = true;
-            this.btn_foreground.Click += new System.EventHandler(this.btn_foreground_Click);
+            this.btnThumbnailForeground.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnThumbnailForeground.Location = new System.Drawing.Point(306, 58);
+            this.btnThumbnailForeground.Name = "btnThumbnailForeground";
+            this.btnThumbnailForeground.Size = new System.Drawing.Size(65, 20);
+            this.btnThumbnailForeground.TabIndex = 3;
+            this.btnThumbnailForeground.Text = "Browse";
+            this.btnThumbnailForeground.UseVisualStyleBackColor = true;
+            this.btnThumbnailForeground.Click += new System.EventHandler(this.btnThumbnailForeground_Click);
             // 
             // label10
             // 
@@ -1284,18 +1284,18 @@
             this.txtThumbnailBackground.Size = new System.Drawing.Size(294, 20);
             this.txtThumbnailBackground.TabIndex = 0;
             this.txtThumbnailBackground.TabStop = false;
-            this.txtThumbnailBackground.TextChanged += new System.EventHandler(this.txt_background_TextChanged);
+            this.txtThumbnailBackground.TextChanged += new System.EventHandler(this.txtThumbnailBackground_TextChanged);
             // 
-            // btn_background
+            // btnThumbnailBackground
             // 
-            this.btn_background.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_background.Location = new System.Drawing.Point(306, 19);
-            this.btn_background.Name = "btn_background";
-            this.btn_background.Size = new System.Drawing.Size(65, 20);
-            this.btn_background.TabIndex = 1;
-            this.btn_background.Text = "Browse";
-            this.btn_background.UseVisualStyleBackColor = true;
-            this.btn_background.Click += new System.EventHandler(this.btn_background_Click);
+            this.btnThumbnailBackground.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnThumbnailBackground.Location = new System.Drawing.Point(306, 19);
+            this.btnThumbnailBackground.Name = "btnThumbnailBackground";
+            this.btnThumbnailBackground.Size = new System.Drawing.Size(65, 20);
+            this.btnThumbnailBackground.TabIndex = 1;
+            this.btnThumbnailBackground.Text = "Browse";
+            this.btnThumbnailBackground.UseVisualStyleBackColor = true;
+            this.btnThumbnailBackground.Click += new System.EventHandler(this.btnThumbnailBackground_Click);
             // 
             // tab_characters
             // 
@@ -1311,7 +1311,7 @@
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.cbx_char2);
+            this.groupBox7.Controls.Add(this.cbxThumbnailPreviewCharacter2);
             this.groupBox7.Controls.Add(this.label18);
             this.groupBox7.Controls.Add(this.txt_char2_yoffset);
             this.groupBox7.Controls.Add(this.label19);
@@ -1324,15 +1324,15 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Character 2";
             // 
-            // cbx_char2
+            // cbxThumbnailPreviewCharacter2
             // 
-            this.cbx_char2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbx_char2.FormattingEnabled = true;
-            this.cbx_char2.Location = new System.Drawing.Point(6, 110);
-            this.cbx_char2.Name = "cbx_char2";
-            this.cbx_char2.Size = new System.Drawing.Size(168, 21);
-            this.cbx_char2.TabIndex = 2;
-            this.cbx_char2.SelectedIndexChanged += new System.EventHandler(this.cbx_char2_SelectedIndexChanged);
+            this.cbxThumbnailPreviewCharacter2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxThumbnailPreviewCharacter2.FormattingEnabled = true;
+            this.cbxThumbnailPreviewCharacter2.Location = new System.Drawing.Point(6, 110);
+            this.cbxThumbnailPreviewCharacter2.Name = "cbxThumbnailPreviewCharacter2";
+            this.cbxThumbnailPreviewCharacter2.Size = new System.Drawing.Size(168, 21);
+            this.cbxThumbnailPreviewCharacter2.TabIndex = 2;
+            this.cbxThumbnailPreviewCharacter2.SelectedIndexChanged += new System.EventHandler(this.cbxThumbnailPreviewCharacter2_SelectedIndexChanged);
             // 
             // label18
             // 
@@ -1385,7 +1385,7 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.cbx_char1);
+            this.groupBox6.Controls.Add(this.cbxThumbnailPreviewCharacter1);
             this.groupBox6.Controls.Add(this.label17);
             this.groupBox6.Controls.Add(this.txt_char1_yoffset);
             this.groupBox6.Controls.Add(this.label16);
@@ -1398,15 +1398,15 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Character 1";
             // 
-            // cbx_char1
+            // cbxThumbnailPreviewCharacter1
             // 
-            this.cbx_char1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbx_char1.FormattingEnabled = true;
-            this.cbx_char1.Location = new System.Drawing.Point(6, 110);
-            this.cbx_char1.Name = "cbx_char1";
-            this.cbx_char1.Size = new System.Drawing.Size(168, 21);
-            this.cbx_char1.TabIndex = 2;
-            this.cbx_char1.SelectedIndexChanged += new System.EventHandler(this.cbx_char1_SelectedIndexChanged);
+            this.cbxThumbnailPreviewCharacter1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxThumbnailPreviewCharacter1.FormattingEnabled = true;
+            this.cbxThumbnailPreviewCharacter1.Location = new System.Drawing.Point(6, 110);
+            this.cbxThumbnailPreviewCharacter1.Name = "cbxThumbnailPreviewCharacter1";
+            this.cbxThumbnailPreviewCharacter1.Size = new System.Drawing.Size(168, 21);
+            this.cbxThumbnailPreviewCharacter1.TabIndex = 2;
+            this.cbxThumbnailPreviewCharacter1.SelectedIndexChanged += new System.EventHandler(this.cbxThumbnailPreviewCharacter1_SelectedIndexChanged);
             // 
             // label17
             // 
@@ -1957,31 +1957,31 @@
             this.btnApplyChanges.TabIndex = 3;
             this.btnApplyChanges.Text = "Apply";
             this.btnApplyChanges.UseVisualStyleBackColor = true;
-            this.btnApplyChanges.Click += new System.EventHandler(this.btn_apply_Click);
+            this.btnApplyChanges.Click += new System.EventHandler(this.btnApplyChanges_Click);
             // 
-            // btn_cancel
+            // btnCancelChanges
             // 
-            this.btn_cancel.Location = new System.Drawing.Point(247, 431);
-            this.btn_cancel.Name = "btn_cancel";
-            this.btn_cancel.Size = new System.Drawing.Size(75, 23);
-            this.btn_cancel.TabIndex = 2;
-            this.btn_cancel.Text = "Cancel";
-            this.btn_cancel.UseVisualStyleBackColor = true;
-            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            this.btnCancelChanges.Location = new System.Drawing.Point(247, 431);
+            this.btnCancelChanges.Name = "btnCancelChanges";
+            this.btnCancelChanges.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelChanges.TabIndex = 2;
+            this.btnCancelChanges.Text = "Cancel";
+            this.btnCancelChanges.UseVisualStyleBackColor = true;
+            this.btnCancelChanges.Click += new System.EventHandler(this.btnCancelChanges_Click);
             // 
-            // btn_ok
+            // btnOkConfirmChanges
             // 
-            this.btn_ok.Location = new System.Drawing.Point(166, 431);
-            this.btn_ok.Name = "btn_ok";
-            this.btn_ok.Size = new System.Drawing.Size(75, 23);
-            this.btn_ok.TabIndex = 1;
-            this.btn_ok.Text = "OK";
-            this.btn_ok.UseVisualStyleBackColor = true;
-            this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
+            this.btnOkConfirmChanges.Location = new System.Drawing.Point(166, 431);
+            this.btnOkConfirmChanges.Name = "btnOkConfirmChanges";
+            this.btnOkConfirmChanges.Size = new System.Drawing.Size(75, 23);
+            this.btnOkConfirmChanges.TabIndex = 1;
+            this.btnOkConfirmChanges.Text = "OK";
+            this.btnOkConfirmChanges.UseVisualStyleBackColor = true;
+            this.btnOkConfirmChanges.Click += new System.EventHandler(this.btnOkConfirmChanges_Click);
             // 
-            // ofd_jpg
+            // ofdBrowseForJpg
             // 
-            this.ofd_jpg.Filter = "JPEG Files | *.jpg";
+            this.ofdBrowseForJpg.Filter = "JPEG Files | *.jpg";
             // 
             // ofdBrowseForPng
             // 
@@ -1991,9 +1991,9 @@
             // 
             this.ofd_json.Filter = ".json Files|*.json";
             // 
-            // ofd_txt
+            // ofdBrowseForTxt
             // 
-            this.ofd_txt.Filter = ".txt Files|*.txt";
+            this.ofdBrowseForTxt.Filter = ".txt Files|*.txt";
             // 
             // ttp_tooltip
             // 
@@ -2006,8 +2006,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(415, 514);
-            this.Controls.Add(this.btn_ok);
-            this.Controls.Add(this.btn_cancel);
+            this.Controls.Add(this.btnOkConfirmChanges);
+            this.Controls.Add(this.btnCancelChanges);
             this.Controls.Add(this.btnApplyChanges);
             this.Controls.Add(this.tab_settings);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -2086,8 +2086,8 @@
         public System.Windows.Forms.TabPage tab_stream;
         public System.Windows.Forms.TabPage tab_bracket;
         public System.Windows.Forms.Button btnApplyChanges;
-        public System.Windows.Forms.Button btn_cancel;
-        public System.Windows.Forms.Button btn_ok;
+        public System.Windows.Forms.Button btnCancelChanges;
+        public System.Windows.Forms.Button btnOkConfirmChanges;
         public System.Windows.Forms.Button btnBrowseCharacterRostersDirectory;
         public System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox txtCharacterDatabasesDirectory;
@@ -2095,7 +2095,7 @@
         public System.Windows.Forms.Label label2;
         public System.Windows.Forms.GroupBox groupBox1;
         public System.Windows.Forms.Label label3;
-        public System.Windows.Forms.ComboBox cbx_queues;
+        public System.Windows.Forms.ComboBox cbxStreamQueues;
         public System.Windows.Forms.TabControl tab_stream_tabs;
         public System.Windows.Forms.TabPage tab_directories;
         public System.Windows.Forms.Label label9;
@@ -2146,20 +2146,20 @@
         public System.Windows.Forms.TabPage tab_templates;
         public System.Windows.Forms.Label label11;
         public System.Windows.Forms.TextBox txtThumbnailForeground;
-        public System.Windows.Forms.Button btn_foreground;
+        public System.Windows.Forms.Button btnThumbnailForeground;
         public System.Windows.Forms.Label label10;
         public System.Windows.Forms.TextBox txtThumbnailBackground;
-        public System.Windows.Forms.Button btn_background;
+        public System.Windows.Forms.Button btnThumbnailBackground;
         public System.Windows.Forms.TabPage tab_characters;
         public System.Windows.Forms.GroupBox groupBox7;
-        public System.Windows.Forms.ComboBox cbx_char2;
+        public System.Windows.Forms.ComboBox cbxThumbnailPreviewCharacter2;
         public System.Windows.Forms.Label label18;
         public System.Windows.Forms.TextBox txt_char2_yoffset;
         public System.Windows.Forms.Label label19;
         public System.Windows.Forms.TextBox txt_char2_xoffset;
         public System.Windows.Forms.Label label20;
         public System.Windows.Forms.GroupBox groupBox6;
-        public System.Windows.Forms.ComboBox cbx_char1;
+        public System.Windows.Forms.ComboBox cbxThumbnailPreviewCharacter1;
         public System.Windows.Forms.Label label17;
         public System.Windows.Forms.TextBox txt_char1_yoffset;
         public System.Windows.Forms.Label label16;
@@ -2204,7 +2204,7 @@
         public System.Windows.Forms.Label label29;
         public System.Windows.Forms.GroupBox groupBox15;
         public System.Windows.Forms.FolderBrowserDialog fbdBrowserForDirectory;
-        public System.Windows.Forms.OpenFileDialog ofd_jpg;
+        public System.Windows.Forms.OpenFileDialog ofdBrowseForJpg;
         public System.Windows.Forms.OpenFileDialog ofdBrowseForPng;
         public System.Windows.Forms.OpenFileDialog ofd_json;
         public System.Windows.Forms.Label lblCharacterErrors;
@@ -2219,7 +2219,7 @@
         public System.Windows.Forms.Label label36;
         public System.Windows.Forms.TextBox txt_round_size;
         public System.Windows.Forms.Label label35;
-        public System.Windows.Forms.Button btn_preview;
+        public System.Windows.Forms.Button btnPreviewThumbnail;
         public System.Windows.Forms.CheckBox ckb_thumbnails;
         public System.Windows.Forms.ComboBox cbx_format;
         public System.Windows.Forms.Label label38;
@@ -2230,20 +2230,20 @@
         public System.Windows.Forms.GroupBox groupBox2;
         public System.Windows.Forms.Label label14;
         public System.Windows.Forms.ComboBox cbx_shorten_video;
-        public System.Windows.Forms.CheckBox ckb_ontop;
+        public System.Windows.Forms.CheckBox ckbKeepWindowOnTop;
         public System.Windows.Forms.TextBox txt_version;
         public System.Windows.Forms.Label label39;
-        public System.Windows.Forms.Button btn_queue_rename;
+        public System.Windows.Forms.Button btnRenameStreamQueue;
         public System.Windows.Forms.GroupBox groupBox16;
         public System.Windows.Forms.Label label7;
-        public System.Windows.Forms.ComboBox cbx_queuegame;
+        public System.Windows.Forms.ComboBox cbxAssignedStreamQueueGame;
         public System.Windows.Forms.Button btnReassignCharacterDirectory;
         public System.Windows.Forms.Label label41;
         public System.Windows.Forms.TextBox txt_seperator;
         public System.Windows.Forms.Label label40;
-        public System.Windows.Forms.TextBox txt_bracketrounds;
+        public System.Windows.Forms.TextBox txtBracketRoundsFile;
         public System.Windows.Forms.Button btn_bracketrounds;
-        public System.Windows.Forms.OpenFileDialog ofd_txt;
+        public System.Windows.Forms.OpenFileDialog ofdBrowseForTxt;
         public System.Windows.Forms.Label label42;
         public System.Windows.Forms.TextBox txt_titletemplate;
         public System.Windows.Forms.ToolTip ttp_tooltip;

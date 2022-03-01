@@ -53,19 +53,19 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             settingsForm.ttp_tooltip.SetToolTip(settingsForm.btnReassignCharacterDirectory,
             "Reassign the directory containing the character roster\n" +
             "for this game.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.cbx_queues,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.cbxStreamQueues,
             "Set the stream queue to use for the Stream and Bracket\n" +
             "Assistants.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btn_queue_rename,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btnRenameStreamQueue,
             "Rename the currently selected queue. Only used identify\n" +
             "each queue.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.cbx_queuegame,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.cbxAssignedStreamQueueGame,
             "Set the game that's assigned to this queue. Changing this\n" +
             "requires the queue to be reset.");
             settingsForm.ttp_tooltip.SetToolTip(settingsForm.cbx_format,
             "Set the current tournament format. Stream and Bracket\n" +
             "Assistants will change to accomodate the format.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.txt_bracketrounds,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.txtBracketRoundsFile,
             "Set the text file to read bracket rounds from. You can\n" +
             "create your own using notepad and creating a .txt file\n" +
             "with one bracket round name per line.");
@@ -78,7 +78,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             "their tag. Can be any number of characters, but it's\n" +
             "suggested to use a single character with a space on\n" +
             "each side (ex: ' | ').");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.ckb_ontop,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.ckbKeepWindowOnTop,
             "Enable this to prevent any other windows from overlapping\n" +
             "Master Orders windows.");
         }
@@ -227,7 +227,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             "Stream Files directory. If Automatic YouTube VoD Uploads is\n" +
             "enabled, thumbnails will be generated and added to the uploads\n" +
             "automatically.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btn_preview,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btnPreviewThumbnail,
             "Generate a sample thumbnail based on the current settings.");
 
             //Templates and Font
@@ -235,7 +235,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             "Set the image file(.JPG or .PNG) to use for the thumbnail\n" +
             "background. 1920x1080 is the recommended size. All other\n" +
             "images and text appear over this image.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btn_background,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btnThumbnailBackground,
             "Choose the image file(.JPG or .PNG) to use for the thumbnail\n" +
             "background. 1920x1080 is the recommended size. All other\n" +
             "images and text appear over this image.");
@@ -244,7 +244,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             "1920x1080 is the recommended size. The thumbnail background and\n" +
             "character images appear below it, but all other information\n" +
             "appears over this image.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btn_foreground,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.btnThumbnailForeground,
             "Choose the image file(.PNG) to use for the thumbnail foreground.\n" +
             "1920x1080 is the recommended size. The thumbnail background and\n" +
             "character images appear below it, but all other information\n" +
@@ -260,7 +260,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             settingsForm.ttp_tooltip.SetToolTip(settingsForm.txt_char1_yoffset,
             "Set the Y offset from the default position for player 1's character.\n" +
             "Negative moves up, positive moves down.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.cbx_char1,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.cbxThumbnailPreviewCharacter1,
             "Select a character to use for player 1 when previewing the thumbnail.");
             settingsForm.ttp_tooltip.SetToolTip(settingsForm.txt_char2_xoffset,
             "Set the X offset from the default position for player 2's character.\n" +
@@ -268,7 +268,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             settingsForm.ttp_tooltip.SetToolTip(settingsForm.txt_char2_yoffset,
             "Set the Y offset from the default position for player 1's character.\n" +
             "Negative moves up, positive moves down.");
-            settingsForm.ttp_tooltip.SetToolTip(settingsForm.cbx_char2,
+            settingsForm.ttp_tooltip.SetToolTip(settingsForm.cbxThumbnailPreviewCharacter2,
             "Select a character to use for player 2 when previewing the thumbnail.");
 
             //Names

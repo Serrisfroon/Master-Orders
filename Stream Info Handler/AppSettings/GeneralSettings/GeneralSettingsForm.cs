@@ -49,11 +49,11 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             //Load stream queues from the database and add them to the combobox
             LoadSettingsFormControls.InitializeImageScoreControls();
             LoadSettingsFormControls.settingsForm = this;
-            LoadSettingsFormControls.LoadStreamQueues(cbx_queues, StreamQueue.queueList);
+            LoadSettingsFormControls.LoadStreamQueues(cbxStreamQueues, StreamQueue.queueList);
 
             //Load the character rosters
             LoadSettingsFormControls.LoadGameTitles(cbxCharacterRosters, GlobalSettings.availableGames, "(Select a Game)");
-            LoadSettingsFormControls.LoadGameTitles(cbx_queuegame, GlobalSettings.availableGames, "(Not Assigned)");
+            LoadSettingsFormControls.LoadGameTitles(cbxAssignedStreamQueueGame, GlobalSettings.availableGames, "(Not Assigned)");
 
             //Load the settings
             LoadSettingsFormControls.LoadSettingsFields();
@@ -116,12 +116,12 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 {
                     btnReassignCharacterDirectory.Enabled = true;
                     btnApplyChanges.Enabled = true;
-                    btn_preview.Enabled = VerifyPreviewIsReady();
+                    btnPreviewThumbnail.Enabled = VerifyPreviewIsReady();
 
                     characterNames = DirectoryManagement.GetCharactersFromDirectory(DirectoryManagement.GetGameDirectory());
 
-                    editableSettings.UpdateCharacterComboBox(cbx_char1, characterNames);
-                    editableSettings.UpdateCharacterComboBox(cbx_char2, characterNames);
+                    editableSettings.UpdateCharacterComboBox(cbxThumbnailPreviewCharacter1, characterNames);
+                    editableSettings.UpdateCharacterComboBox(cbxThumbnailPreviewCharacter2, characterNames);
                 }
                 else
                 {
@@ -129,7 +129,144 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 }
             }
         }
+        private void cbxAssignedStreamQueueGame_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string queueGame = "";
+            int queueId = -1;
+            for (int i = 0; i < StreamQueue.queueList.Count; i++)
+            {
+                if (StreamQueue.queueList[i].queueName == cbxStreamQueues.Text)
+                {
+                    queueGame = StreamQueue.queueList[i].queueGame;
+                    queueId = i;
+                }
+            }
+            //Only update the queue if this is a new game
+            if (cbxAssignedStreamQueueGame.Text != queueGame)
+            {
+                if (database_tools.regame_queue(cbxStreamQueues.Text, cbxAssignedStreamQueueGame.Text, queueId) == false)
+                    cbxAssignedStreamQueueGame.SelectedIndex = cbxAssignedStreamQueueGame.FindStringExact(queueGame);
+            }
+        }
 
+        private void btnBracketRoundsFile_Click(object sender, EventArgs e)
+        {
+            //Ask the user to select the folder containing the character roster
+            if (ofdBrowseForTxt.ShowDialog() == DialogResult.OK)
+            {
+                txtBracketRoundsFile.Text = ofdBrowseForTxt.FileName;
+            }
+        }
+
+        private void txtBracketRoundsFile_TextChanged(object sender, EventArgs e)
+        {
+            txtBracketRoundsFile.BackColor = EditableSettings.warningColor;
+            if (txtBracketRoundsFile.Text != @"")
+            {
+                if (File.Exists(txtBracketRoundsFile.Text))
+                {
+                    if (Path.GetExtension(txtBracketRoundsFile.Text) == ".txt")
+                    {
+                        txtBracketRoundsFile.BackColor = Color.White;
+                    }
+                    else
+                    {
+                        txtBracketRoundsFile.BackColor = EditableSettings.warningColor;
+                    }
+                }
+                else
+                {
+                    txtBracketRoundsFile.BackColor = EditableSettings.warningColor;
+                }
+            }
+            else
+                txtBracketRoundsFile.BackColor = Color.White;
+        }
+        private void ckbKeepWindowOnTop_CheckedChanged(object sender, EventArgs e)
+        {
+            this.TopMost = ((CheckBox)sender).Checked;
+        }
+        private void btnRenameStreamQueue_Click(object sender, EventArgs e)
+        {
+            int holdindex = cbxStreamQueues.SelectedIndex;
+            if (holdindex == 0)
+            {
+                SystemSounds.Beep.Play();
+                return;
+            }
+
+            frm_rename_queue rename = new frm_rename_queue(cbxStreamQueues.SelectedIndex, this.TopMost);
+            if (rename.ShowDialog() == DialogResult.OK)
+            {
+                cbxStreamQueues.BeginUpdate();
+                cbxStreamQueues.Items.Clear();                                            //Empty the item list
+                cbxStreamQueues.Items.Add("None");
+                for (int i = 0; i < StreamQueue.queueList.Count; i++)
+                {
+                    cbxStreamQueues.Items.Add(StreamQueue.queueList[i].queueName);
+                }
+                cbxStreamQueues.EndUpdate();
+            }
+            cbxStreamQueues.SelectedIndex = holdindex;
+        }
+
+        private void btnReassignCharacterDirectory_Click(object sender, EventArgs e)
+        {
+            if (cbxCharacterRosters.Text == "")
+            {
+                SystemSounds.Beep.Play();
+                return;
+            }
+
+            //Find the ID of the selected game
+            string selectedGameName = cbxCharacterRosters.Text;
+            string[] character_directories = Directory.GetDirectories(txtCharacterDatabasesDirectory.Text);
+
+            //Determine the selected game's directory
+            string selected_directory = DirectoryManagement.gameDirectories[selectedGameName];
+
+            //Show a window to select a new directory
+            RosterDirectorySelectForm selection = new RosterDirectorySelectForm(character_directories, cbxCharacterRosters.Text);
+            //Return fail if a new directory is not selected
+            if (selection.ShowDialog() != DialogResult.OK)
+                return;
+            //Update the game directory
+            selected_directory = database_tools.pass_directory;
+
+
+            //Verify the directory has correct character data
+            string[] characters = DirectoryManagement.GetCharactersFromDirectory(selected_directory);
+            //Continually check to verify the character
+            while (!DirectoryManagement.CheckCharacterDirectories(selected_directory))
+            {
+                //If the characters are not verified, have the user choose a new directory
+                MessageBox.Show("The selected directory does not have correct character information for the selected game. Please choose a new directory for " + selectedGameName);
+                RosterDirectorySelectForm selectioncheck = new RosterDirectorySelectForm(character_directories, selectedGameName);
+                //Return fail if a new directory is not selected
+                if (selectioncheck.ShowDialog() != DialogResult.OK)
+                    return;
+                //Update the game directory
+                selected_directory = database_tools.pass_directory;
+                //Update the character list before checking again
+                characters = DirectoryManagement.GetCharactersFromDirectory(selected_directory);
+            }
+
+            DirectoryManagement.gameDirectories[selectedGameName] = selected_directory;
+
+            //Update the settings to include the new directory
+            SettingsFile.UpdateGameDirectories();
+        }
+        private void cbxStreamQueues_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnApplyChanges.Enabled = true;
+            string queuename = "";
+            for (int i = 0; i < StreamQueue.queueList.Count; i++)
+            {
+                if (StreamQueue.queueList[i].queueName == cbxStreamQueues.Text)
+                    queuename = StreamQueue.queueList[i].queueGame;
+            }
+            cbxAssignedStreamQueueGame.SelectedIndex = cbxAssignedStreamQueueGame.FindStringExact(queuename);
+        }
         #endregion General
 
         #region Stream Assistant
@@ -489,18 +626,10 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             }
         }
 
-        #endregion Thumbnails
-
-        #endregion Stream Assistant
-        private void SettingFieldChanged(object sender, EventArgs e)
-        {
-            btnApplyChanges.Enabled = true;
-        }
-
-        private void txt_background_TextChanged(object sender, EventArgs e)
+        private void txtThumbnailBackground_TextChanged(object sender, EventArgs e)
         {
             txtThumbnailBackground.BackColor = EditableSettings.warningColor;
-            btn_preview.Enabled = false;
+            btnPreviewThumbnail.Enabled = false;
             if (txtThumbnailBackground.Text != @"")
             {
                 if (File.Exists(txtThumbnailBackground.Text))
@@ -511,7 +640,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                         txtThumbnailBackground.BackColor = Color.White;
                         if (txtThumbnailForeground.Text != "" && txtThumbnailForeground.BackColor != EditableSettings.warningColor &&
                             cbxCharacterRosters.BackColor != EditableSettings.warningColor && cbxCharacterRosters.Text != "")
-                            btn_preview.Enabled = true;
+                            btnPreviewThumbnail.Enabled = true;
                     }
                     else
                     {
@@ -525,18 +654,18 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             }
         }
 
-        private void btn_background_Click(object sender, EventArgs e)
+        private void btnThumbnailBackground_Click(object sender, EventArgs e)
         {
-            if (ofd_jpg.ShowDialog() == DialogResult.OK)
+            if (ofdBrowseForJpg.ShowDialog() == DialogResult.OK)
             {
-                txtThumbnailBackground.Text = ofd_jpg.FileName;
+                txtThumbnailBackground.Text = ofdBrowseForJpg.FileName;
             }
         }
 
-        private void txt_foreground_TextChanged(object sender, EventArgs e)
+        private void txtThumbnailForeground_TextChanged(object sender, EventArgs e)
         {
             txtThumbnailForeground.BackColor = EditableSettings.warningColor;
-            btn_preview.Enabled = false;
+            btnPreviewThumbnail.Enabled = false;
 
             if (txtThumbnailForeground.Text != @"")
             {
@@ -548,7 +677,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                         txtThumbnailForeground.BackColor = Color.White;
                         if (txtThumbnailBackground.Text != "" && txtThumbnailBackground.BackColor != EditableSettings.warningColor &&
                             cbxCharacterRosters.BackColor != EditableSettings.warningColor && cbxCharacterRosters.Text != "")
-                            btn_preview.Enabled = true;
+                            btnPreviewThumbnail.Enabled = true;
                     }
                     else
                     {
@@ -562,12 +691,20 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             }
         }
 
-        private void btn_foreground_Click(object sender, EventArgs e)
+        private void btnThumbnailForeground_Click(object sender, EventArgs e)
         {
             if (ofdBrowseForPng.ShowDialog() == DialogResult.OK)
             {
                 txtThumbnailForeground.Text = ofdBrowseForPng.FileName;
             }
+        }
+
+        #endregion Thumbnails
+
+        #endregion Stream Assistant
+        private void SettingFieldChanged(object sender, EventArgs e)
+        {
+            btnApplyChanges.Enabled = true;
         }
 
         private void numeric_KeyPress(object sender, KeyPressEventArgs e)
@@ -752,27 +889,27 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             pic_thumbnail.BackgroundImage = thumbnail_bmp;
         }
 
-        private void cbx_char1_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbxThumbnailPreviewCharacter1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            image_directory1 = DirectoryManagement.GetGameDirectory() + @"\" + cbx_char1.Text + @"\1\";
+            image_directory1 = DirectoryManagement.GetGameDirectory() + @"\" + cbxThumbnailPreviewCharacter1.Text + @"\1\";
         }
 
-        private void cbx_char2_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbxThumbnailPreviewCharacter2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            image_directory2 = DirectoryManagement.GetGameDirectory() + @"\" + cbx_char2.Text + @"\1\";
+            image_directory2 = DirectoryManagement.GetGameDirectory() + @"\" + cbxThumbnailPreviewCharacter2.Text + @"\1\";
         }
 
-        private void btn_preview_Click(object sender, EventArgs e)
+        private void btnPreviewThumbnail_Click(object sender, EventArgs e)
         {
             create_thumbnail();
         }
-        private void btn_apply_Click(object sender, EventArgs e)
+        private void btnApplyChanges_Click(object sender, EventArgs e)
         {
             if (save_settings() == true)
                 btnApplyChanges.Enabled = false;
         }
 
-        private void btn_ok_Click(object sender, EventArgs e)
+        private void btnOkConfirmChanges_Click(object sender, EventArgs e)
         {
             if (save_settings() == true)
             {
@@ -781,7 +918,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             }
         }
 
-        private void btn_cancel_Click(object sender, EventArgs e)
+        private void btnCancelChanges_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -855,7 +992,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                     }
                 }
 
-                if(cbx_queuegame.Text != cbxCharacterRosters.Text && cbx_queues.Text != "None")
+                if(cbxAssignedStreamQueueGame.Text != cbxCharacterRosters.Text && cbxStreamQueues.Text != "None")
                 {
                     if (MessageBox.Show("The selected character roster does not match the game that the selected queue is set to use. Master Orders will need to match the queue's game to the selected roster. Okay to Proceed?", "Roster Game Mismatch", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
                        == DialogResult.OK)
@@ -863,12 +1000,12 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                         int queueidd = -1;
                         for (int i = 0; i < StreamQueue.queueList.Count; i++)
                         {
-                            if (StreamQueue.queueList[i].name == cbx_queues.Text)
+                            if (StreamQueue.queueList[i].queueName == cbxStreamQueues.Text)
                             {
                                 queueidd = i;
                             }
                         }
-                        if (database_tools.regame_queue(cbx_queues.Text, cbxCharacterRosters.Text, queueidd) == false)
+                        if (database_tools.regame_queue(cbxStreamQueues.Text, cbxCharacterRosters.Text, queueidd) == false)
                             return false;
                     }
                     else
@@ -885,7 +1022,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             int queueid = -1;
             for (int i = 0; i < StreamQueue.queueList.Count; i++)
             {
-                if (StreamQueue.queueList[i].name == cbx_queues.Text)
+                if (StreamQueue.queueList[i].queueName == cbxStreamQueues.Text)
                 {
                     queueid = i;
                 }
@@ -901,7 +1038,6 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
 
                 xml.Root.Element("directories").Element("character-directory").ReplaceWith(new XElement("character-directory", txtCharacterDatabasesDirectory.Text));
                 xml.Root.Element("directories").Element("stream-directory").ReplaceWith(new XElement("stream-directory", txtStreamFilesDirectory.Text));
-                xml.Root.Element("directories").Element("thumbnail-directory").ReplaceWith(new XElement("thumbnail-directory", txt_thumbnails.Text));
                 xml.Root.Element("directories").Element("vods-directory").ReplaceWith(new XElement("vods-directory", txtVodsDirectory.Text));
                 xml.Root.Element("directories").Element("enable-sponsor").ReplaceWith(new XElement("enable-sponsor", ckbEnableSponsorImages.Checked));
                 xml.Root.Element("directories").Element("enable-region").ReplaceWith(new XElement("enable-region", ckbEnableRegionImages.Checked));
@@ -954,8 +1090,8 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 xml.Root.Element("general").Element("copy-title").ReplaceWith(new XElement("copy-title", ckb_clipboard.Checked));
                 xml.Root.Element("general").Element("shorten-title").ReplaceWith(new XElement("shorten-title", cbx_shorten_video.SelectedIndex));
                 xml.Root.Element("general").Element("format").ReplaceWith(new XElement("format", cbx_format.Text));
-                xml.Root.Element("general").Element("keep-on-top").ReplaceWith(new XElement("keep-on-top", ckb_ontop.Checked));
-                xml.Root.Element("general").Element("rounds-file").ReplaceWith(new XElement("rounds-file", txt_bracketrounds.Text));
+                xml.Root.Element("general").Element("keep-on-top").ReplaceWith(new XElement("keep-on-top", ckbKeepWindowOnTop.Checked));
+                xml.Root.Element("general").Element("rounds-file").ReplaceWith(new XElement("rounds-file", txtBracketRoundsFile.Text));
                 xml.Root.Element("general").Element("sponsor-seperator").ReplaceWith(new XElement("sponsor-seperator", txt_seperator.Text));
 
 
@@ -990,19 +1126,6 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
 
             return true;
         }
-
-        private void cbx_queues_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            btnApplyChanges.Enabled = true;
-            string queuename = "";
-            for (int i = 0; i < StreamQueue.queueList.Count; i++)
-            {
-                if (StreamQueue.queueList[i].name == cbx_queues.Text)
-                    queuename = StreamQueue.queueList[i].game;
-            }
-            cbx_queuegame.SelectedIndex = cbx_queuegame.FindStringExact(queuename);
-        }
-
         private async Task get_credential()
         {
             if (global_values.youtubeCredential == null)
@@ -1019,135 +1142,6 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                         global_values.store
                     );
                 }
-        }
-
-        private void ckb_ontop_CheckedChanged(object sender, EventArgs e)
-        {
-            this.TopMost = ((CheckBox)sender).Checked;
-        }
-        private void btn_queue_rename_Click(object sender, EventArgs e)
-        {
-            int holdindex = cbx_queues.SelectedIndex;
-            if (holdindex == 0)
-            {
-                SystemSounds.Beep.Play();
-                return;
-            }
-
-            frm_rename_queue rename = new frm_rename_queue(cbx_queues.SelectedIndex, this.TopMost);
-            if (rename.ShowDialog() == DialogResult.OK)
-            {
-                cbx_queues.BeginUpdate();
-                cbx_queues.Items.Clear();                                            //Empty the item list
-                cbx_queues.Items.Add("None");
-                for (int i = 0; i < StreamQueue.queueList.Count; i++)
-                {
-                    cbx_queues.Items.Add(StreamQueue.queueList[i].name);
-                }
-                cbx_queues.EndUpdate();
-            }
-            cbx_queues.SelectedIndex = holdindex;
-        }
-
-        private void btn_reassign_Click(object sender, EventArgs e)
-        {
-            if (cbxCharacterRosters.Text == "")
-            {
-                SystemSounds.Beep.Play();
-                return;
-            }
-
-            //Find the ID of the selected game
-            string selectedGameName = cbxCharacterRosters.Text;
-            string[] character_directories = Directory.GetDirectories(txtCharacterDatabasesDirectory.Text);
-
-            //Determine the selected game's directory
-            string selected_directory = DirectoryManagement.gameDirectories[selectedGameName];
-
-            //Show a window to select a new directory
-            RosterDirectorySelectForm selection = new RosterDirectorySelectForm(character_directories, cbxCharacterRosters.Text);
-            //Return fail if a new directory is not selected
-            if (selection.ShowDialog() != DialogResult.OK)
-                return;
-            //Update the game directory
-            selected_directory = database_tools.pass_directory;
-
-
-            //Verify the directory has correct character data
-            string[] characters = DirectoryManagement.GetCharactersFromDirectory(selected_directory);
-            //Continually check to verify the character
-            while (!DirectoryManagement.CheckCharacterDirectories(selected_directory))
-            {
-                //If the characters are not verified, have the user choose a new directory
-                MessageBox.Show("The selected directory does not have correct character information for the selected game. Please choose a new directory for " + selectedGameName);
-                RosterDirectorySelectForm selectioncheck = new RosterDirectorySelectForm(character_directories, selectedGameName);
-                //Return fail if a new directory is not selected
-                if (selectioncheck.ShowDialog() != DialogResult.OK)
-                    return;
-                //Update the game directory
-                selected_directory = database_tools.pass_directory;
-                //Update the character list before checking again
-                characters = DirectoryManagement.GetCharactersFromDirectory(selected_directory);
-            }
-
-            DirectoryManagement.gameDirectories[selectedGameName] = selected_directory;
-
-            //Update the settings to include the new directory
-            SettingsFile.UpdateGameDirectories();
-        }
-
-        private void cbx_queuegame_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string queuegame = "";
-            int queueid = -1;
-            for (int i = 0; i < StreamQueue.queueList.Count; i++)
-            {
-                if (StreamQueue.queueList[i].name == cbx_queues.Text)
-                {
-                    queuegame = StreamQueue.queueList[i].game;
-                    queueid = i;
-                }
-            }
-            //Only update the queue if this is a new game
-            if (cbx_queuegame.Text != queuegame)
-            {
-                if (database_tools.regame_queue(cbx_queues.Text, cbx_queuegame.Text, queueid) == false)
-                    cbx_queuegame.SelectedIndex = cbx_queuegame.FindStringExact(queuegame);
-            }
-        }
-
-        private void btn_bracketrounds_Click(object sender, EventArgs e)
-        {
-            //Ask the user to select the folder containing the character roster
-            if (ofd_txt.ShowDialog() == DialogResult.OK)
-            {
-                txt_bracketrounds.Text = ofd_txt.FileName;            
-            }
-        }
-
-        private void txt_bracketrounds_TextChanged(object sender, EventArgs e)
-        {
-            txt_bracketrounds.BackColor = EditableSettings.warningColor;
-            if (txt_bracketrounds.Text != @"")
-            {
-                if (File.Exists(txt_bracketrounds.Text))
-                {
-                    if (Path.GetExtension(txt_bracketrounds.Text) == ".txt")
-                    {
-                        txt_bracketrounds.BackColor = Color.White;
-                    }
-                    else
-                    {
-                        txt_bracketrounds.BackColor = EditableSettings.warningColor;
-                    }
-                }
-                else
-                {
-                    txt_bracketrounds.BackColor = EditableSettings.warningColor;
-                }
-            }
-            else
-                txt_bracketrounds.BackColor = Color.White;
         }
     }
 }
