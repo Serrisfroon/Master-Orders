@@ -18,7 +18,7 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
 
         public static string[,] scoreboardImages = new string[2, 3] { { "", "", "" }, { "", "", "" } };
 
-        public static ThumbnailConfiguration thumbnailConfiguration = new ThumbnailConfiguration();
+        public static ThumbnailConfigurationModel thumbnailConfiguration = new ThumbnailConfigurationModel();
 
         /// <summary>
         /// Resets all images in the output directory to a blank placeholder image.
@@ -51,8 +51,7 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
         /// <param name="match_date">The date of the match</param>
         /// <param name="characterImages">An array containing image file paths for the characters used</param>
         /// <returns></returns>
-        public static string CreateThumbnailImage(int player_count,
-            string player_name1, string player_name2, string round_text, string match_date, string[] characterImages)
+        public static string CreateThumbnailImage(ThumbnailDataModel thumbnailData, ThumbnailConfigurationModel thumbnailConfiguration)
         {
             //Create a new bitmap image
             Image thumbnail_bmp = new Bitmap(1920, 1080);

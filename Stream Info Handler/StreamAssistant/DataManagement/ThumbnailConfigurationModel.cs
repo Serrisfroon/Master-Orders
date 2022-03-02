@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace Stream_Info_Handler.StreamAssistant.DataManagement
 {
-    public class ThumbnailConfiguration
+    public class ThumbnailConfigurationModel
     {
+        const int maxPlayerNamecount = 4;
+        
+        const int maxCharactersPerPlayer = 4;
         public string backgroundImage { get; set; }
         public string foregroundImage { get; set; }
         public string thumbnailFont { get; set; }
-        public int[] characterXOffset { get; set; }
-        public int[] characterYOffset { get; set; }
+        public int[,] characterXOffset { get; set; }
+        public int[,] characterYOffset { get; set; }
         public int[] playerNameXOffset { get; set; }
         public int[] playerNameYOffset { get; set; }
         public int[] playerNameSize { get; set; }
@@ -28,16 +31,15 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
         public int patchXOffset { get; set; }
         public int patchYOffset { get; set; }
         public int patchSize { get; set; }
-        
-        public ThumbnailConfiguration()
+        public int playerNameCount { get; set; }
+        public int charactersPerPlayer { get; set; }
+        public ThumbnailConfigurationModel()
         {
-            int playerNameCount = 2;
-            int characterCount = 2;
-            characterXOffset = new int[characterCount];
-            characterYOffset = new int[characterCount];
-            playerNameXOffset = new int[playerNameCount];
-            playerNameYOffset = new int[playerNameCount];
-            playerNameSize = new int[playerNameCount];
+            characterXOffset = new int[maxPlayerNamecount, maxCharactersPerPlayer];
+            characterYOffset = new int[maxPlayerNamecount, maxCharactersPerPlayer];
+            playerNameXOffset = new int[maxPlayerNamecount];
+            playerNameYOffset = new int[maxPlayerNamecount];
+            playerNameSize = new int[maxPlayerNamecount];
         }
     }
 }

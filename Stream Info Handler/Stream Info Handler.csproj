@@ -251,7 +251,8 @@
     <Compile Include="CharacterSelect\GenerateColors.cs" />
     <Compile Include="Startup\FormManagement.cs" />
     <Compile Include="StreamAssistant\DataManagement\TextFileManagement.cs" />
-    <Compile Include="StreamAssistant\DataManagement\ThumbnailConfiguration.cs" />
+    <Compile Include="StreamAssistant\DataManagement\ThumbnailConfigurationModel.cs" />
+    <Compile Include="StreamAssistant\DataManagement\ThumbnailDataModel.cs" />
     <Compile Include="StreamAssistant\StreamAssistantControlUpdates.cs" />
     <Compile Include="StreamAssistant\DataManagement\DataOutputCaller.cs" />
     <Compile Include="StreamAssistant\DataManagement\ImageManagement.cs" />
