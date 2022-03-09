@@ -1,12 +1,10 @@
-﻿using System.IO;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using Stream_Info_Handler.AppSettings;
 
 namespace Stream_Info_Handler.StreamAssistant.DataManagement
 {
@@ -54,20 +52,21 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
         public static string CreateThumbnailImage(ThumbnailDataModel thumbnailData, ThumbnailConfigurationModel thumbnailConfiguration)
         {
             //Create a new bitmap image
-            Image thumbnail_bmp = new Bitmap(1920, 1080);
+            Image thumbnailImage = new Bitmap(1920, 1080);
             //Create a new drawing surface from the bitmap
-            Graphics drawing = Graphics.FromImage(thumbnail_bmp);
+            Graphics thumbnailDrawingSpace = Graphics.FromImage(thumbnailImage);
             //Configure the surface to be higher quality
-            drawing.InterpolationMode = InterpolationMode.High;
-            drawing.SmoothingMode = SmoothingMode.HighQuality;
-            drawing.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-            drawing.CompositingQuality = CompositingQuality.HighQuality;
+            thumbnailDrawingSpace.InterpolationMode = InterpolationMode.High;
+            thumbnailDrawingSpace.SmoothingMode = SmoothingMode.HighQuality;
+            thumbnailDrawingSpace.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+            thumbnailDrawingSpace.CompositingQuality = CompositingQuality.HighQuality;
 
-            //Create an image resource for the background and overlay of the tumbnail
-            Image background = Image.FromFile(thumbnailConfiguration.backgroundImage);
-            Image foreground = Image.FromFile(thumbnailConfiguration.foregroundImage);
+            //Create an image resource for the background and overlay of the thumbnail
+            Image thumbnailBackground = Image.FromFile(thumbnailConfiguration.backgroundImage);
+            Image thumbnailForeground = Image.FromFile(thumbnailConfiguration.foregroundImage);
 
             //Create an image resource for each player's character
+            Image[,] characterImages = new Image[]
             Image left_character;
             Image right_character;
             Image left_character2;
@@ -79,14 +78,14 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
                     left_character = Image.FromFile(characterImages[0]);
                     right_character = Image.FromFile(characterImages[1]);
                     right_character.RotateFlip(RotateFlipType.RotateNoneFlipX);
-                    drawing.Clear(Color.White);                                         //Clear the surface of all data
+                    thumbnailDrawingSpace.Clear(Color.White);                                         //Clear the surface of all data
 
-                    drawing.DrawImage(background, 0, 0, 1920, 1080);                    //Draw the background
+                    thumbnailDrawingSpace.DrawImage(thumbnailBackground, 0, 0, 1920, 1080);                    //Draw the background
 
-                    drawing.DrawImage(left_character, thumbnailConfiguration.characterXOffset[0], thumbnailConfiguration.characterYOffset[0], 1920, 1080);                //Draw Player 1's character
-                    drawing.DrawImage(right_character, thumbnailConfiguration.characterXOffset[1], thumbnailConfiguration.characterYOffset[1], 1920, 1080);               //Draw Player 2's character
+                    thumbnailDrawingSpace.DrawImage(left_character, thumbnailConfiguration.characterXOffset[0], thumbnailConfiguration.characterYOffset[0], 1920, 1080);                //Draw Player 1's character
+                    thumbnailDrawingSpace.DrawImage(right_character, thumbnailConfiguration.characterXOffset[1], thumbnailConfiguration.characterYOffset[1], 1920, 1080);               //Draw Player 2's character
 
-                    drawing.DrawImage(foreground, 0, 0, 1920, 1080);                    //Draw the overlay over the characters
+                    thumbnailDrawingSpace.DrawImage(thumbnailForeground, 0, 0, 1920, 1080);                    //Draw the overlay over the characters
                     break;
                 case 4:
                     left_character = Image.FromFile(characterImages[0]);
@@ -95,17 +94,17 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
                     left_character2 = Image.FromFile(characterImages[2]);
                     right_character2 = Image.FromFile(characterImages[3]);
                     right_character2.RotateFlip(RotateFlipType.RotateNoneFlipX);
-                    drawing.Clear(Color.White);                                         //Clear the surface of all data
+                    thumbnailDrawingSpace.Clear(Color.White);                                         //Clear the surface of all data
 
-                    drawing.DrawImage(background, 0, 0, 1920, 1080);                    //Draw the background
+                    thumbnailDrawingSpace.DrawImage(thumbnailBackground, 0, 0, 1920, 1080);                    //Draw the background
 
-                    drawing.DrawImage(left_character2, thumbnailConfiguration.characterXOffset[0] - 100, thumbnailConfiguration.characterYOffset[0], 1920, 1080);                //Draw Player 3's character
-                    drawing.DrawImage(right_character2, thumbnailConfiguration.characterXOffset[1] + 100, thumbnailConfiguration.characterYOffset[1], 1920, 1080);               //Draw Player 4's character
+                    thumbnailDrawingSpace.DrawImage(left_character2, thumbnailConfiguration.characterXOffset[0] - 100, thumbnailConfiguration.characterYOffset[0], 1920, 1080);                //Draw Player 3's character
+                    thumbnailDrawingSpace.DrawImage(right_character2, thumbnailConfiguration.characterXOffset[1] + 100, thumbnailConfiguration.characterYOffset[1], 1920, 1080);               //Draw Player 4's character
 
-                    drawing.DrawImage(left_character, thumbnailConfiguration.characterXOffset[0], thumbnailConfiguration.characterYOffset[0] + 200, 1920, 1080);                //Draw Player 1's character
-                    drawing.DrawImage(right_character, thumbnailConfiguration.characterXOffset[1], thumbnailConfiguration.characterXOffset[1] + 200, 1920, 1080);               //Draw Player 2's character
+                    thumbnailDrawingSpace.DrawImage(left_character, thumbnailConfiguration.characterXOffset[0], thumbnailConfiguration.characterYOffset[0] + 200, 1920, 1080);                //Draw Player 1's character
+                    thumbnailDrawingSpace.DrawImage(right_character, thumbnailConfiguration.characterXOffset[1], thumbnailConfiguration.characterXOffset[1] + 200, 1920, 1080);               //Draw Player 2's character
 
-                    drawing.DrawImage(foreground, 0, 0, 1920, 1080);                    //Draw the overlay over the characters
+                    thumbnailDrawingSpace.DrawImage(thumbnailForeground, 0, 0, 1920, 1080);                    //Draw the overlay over the characters
 
                     break;
             }
@@ -157,8 +156,8 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
                 new Point(420 + thumbnailConfiguration.playerNameXOffset[0], 160 + thumbnailConfiguration.playerNameYOffset[0]),          //110                                  //drawing location 480
                 text_center);                                                   //text alignment
             //Draw the outline and filling in the appropriate colors
-            drawing.DrawPath(black_stroke, draw_name1);
-            drawing.FillPath(white_text, draw_name1);
+            thumbnailDrawingSpace.DrawPath(black_stroke, draw_name1);
+            thumbnailDrawingSpace.FillPath(white_text, draw_name1);
 
             font_size = thumbnailConfiguration.playerNameSize[1] + 5;                      //115                                      //Reset the font size
             //Start a loop
@@ -180,8 +179,8 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
                 new Point(1500 + thumbnailConfiguration.playerNameXOffset[1], 160 + thumbnailConfiguration.playerNameYOffset[1]), //110                                          //drawing location 1440
                 text_center);                                                   //text alignment                                        // text to draw
             //Draw the outline and filling in the appropriate colors
-            drawing.DrawPath(black_stroke, draw_name2);
-            drawing.FillPath(white_text, draw_name2);
+            thumbnailDrawingSpace.DrawPath(black_stroke, draw_name2);
+            thumbnailDrawingSpace.FillPath(white_text, draw_name2);
 
             //Add the round in bracket to its drawing path
             draw_round.AddString(
@@ -192,8 +191,8 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
                 new Point(960 + thumbnailConfiguration.roundXOffset, 720 + thumbnailConfiguration.roundYOffset), //620                                           //drawing location
                 text_center);                                                   //text alignment     
             //Draw the outline and filling in the appropriate colors
-            drawing.DrawPath(light_stroke, draw_round);
-            drawing.FillPath(white_text, draw_round);
+            thumbnailDrawingSpace.DrawPath(light_stroke, draw_round);
+            thumbnailDrawingSpace.FillPath(white_text, draw_round);
 
             if (thumbnailConfiguration.showDateOnThumbnail == true)
             {
@@ -206,8 +205,8 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
                     new Point(300 + thumbnailConfiguration.dateXOffset, 940 + thumbnailConfiguration.dateYOffset),              //drawing location
                     text_center);                                                   //text alignment
                                                                                     //Set the outline and filling to the appropriate colors
-                drawing.DrawPath(black_stroke, draw_date);
-                drawing.FillPath(white_text, draw_date);
+                thumbnailDrawingSpace.DrawPath(black_stroke, draw_date);
+                thumbnailDrawingSpace.FillPath(white_text, draw_date);
             }
 
             draw_patch.AddString(
@@ -218,13 +217,13 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
                 new Point(300 + thumbnailConfiguration.patchXOffset, 1020 + thumbnailConfiguration.patchYOffset), //620       //drawing location
                 text_center);                                                     //text alignment     
                                                                                   //Draw the outline and filling in the appropriate colors
-            drawing.DrawPath(light_stroke, draw_patch);
-            drawing.FillPath(white_text, draw_patch);
+            thumbnailDrawingSpace.DrawPath(light_stroke, draw_patch);
+            thumbnailDrawingSpace.FillPath(white_text, draw_patch);
 
             //Save the drawing surface back to the bitmap image
-            drawing.Save();
+            thumbnailDrawingSpace.Save();
             //Dispose the drawing surface
-            drawing.Dispose();
+            thumbnailDrawingSpace.Dispose();
 
             DateTime date = DateTime.Now;                                       //Find the current date and time
             string thumbnail_time = date.ToString("MMddyyyyHHmmss");            //Format the date and time in a string
@@ -234,7 +233,7 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
 
             string thumbnail_image_name = round_text + @" " + player_name1 + @" Vs " + player_name2 + @" " + thumbnail_time + @".jpg";
             //Save the bitmap image as a JPG
-            thumbnail_bmp.Save(AppSettings.DirectoryManagement.thumbnailDirectory + @"\" + thumbnail_image_name, System.Drawing.Imaging.ImageFormat.Jpeg);
+            thumbnailImage.Save(AppSettings.DirectoryManagement.thumbnailDirectory + @"\" + thumbnail_image_name, System.Drawing.Imaging.ImageFormat.Jpeg);
             //Return the title of the image file
             return thumbnail_image_name;
         }
