@@ -24,6 +24,7 @@ namespace TournamentDataLibrary.Models.PlayerData
         public string fullName { get; set; }
         public string misc { get; set; }
         public string pronouns { get; set; }
+        public string smashggId { get; set; }
 
         public PlayerRecordModel()
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TournamentDataLibrary.Models.PlayerData
 {
-    public class PlayerDatabaseModel
+    public class PlayerPoolModel
     {
     }
 }

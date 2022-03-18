@@ -9,6 +9,7 @@ using TournamentDataLibrary.Models.PlayerData;
 
 namespace TournamentDataLibrary
 {
+
     static public class PlayerDatabaseManager
     {
         /// <summary>

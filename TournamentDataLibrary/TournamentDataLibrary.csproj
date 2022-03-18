@@ -56,7 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\PlayerData\PlayerDatabaseModel.cs" />
+    <Compile Include="Models\PlayerData\PlayerPoolModel.cs" />
     <Compile Include="Models\TournamentData\CharacterDataModel.cs" />
     <Compile Include="Models\TournamentData\ParticipantDataModel.cs" />
     <Compile Include="Models\TournamentData\MatchDataModel.cs" />

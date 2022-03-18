@@ -17,7 +17,7 @@ namespace TournamentDataLibrary.Models
         public bool recordMatchData { get; set; }
         public int totalMatches { get; set; }
         public List<MatchDataModel> tournamentMatches { get; set; }
-        public PlayerDatabaseModel playerPool { get; set; }
+        public PlayerPoolModel playerPool { get; set; }
 
 
         public MatchDataModel AddTournamentMatch(string newMatchID)
