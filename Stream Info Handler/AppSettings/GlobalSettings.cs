@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using TournamentDataLibrary.Models.StreamQueue;
 
 namespace Stream_Info_Handler.AppSettings
 {
@@ -18,10 +15,10 @@ namespace Stream_Info_Handler.AppSettings
             "Super Smash Bros for Ultimate",
             "Project Plus",
             "Rivals of Aether",
-            "Nickelodeon All-Star Brawl",
-            "Guilty Gear -Strive-",
-            "UNDER NIGHT IN-BIRTH Exe:Late[cl-r]",
-            "Melty Blood: Type Lumina"
+            "Nickelodeon All Star Brawl",
+            "Guilty Gear Strive",
+            "UNDER NIGHT IN BIRTH Exe Late cl r",
+            "Melty Blood Type Lumina"
         };
         /// <summary>
         /// The current game selected to pull characters and players for
@@ -39,7 +36,18 @@ namespace Stream_Info_Handler.AppSettings
         /// Doubles
         /// </summary>
         public static string bracketFormat { get; set; }
-
+        /// <summary>
+        /// The file path to the file containing the names of bracket rounds to load in
+        /// </summary>
         public static string bracketRounds { get; set; }
+
+        /// <summary>
+        /// Contains all stream queues and indentifying data for them
+        /// </summary>
+        public static List<StreamQueueModel> streamQueueList = new List<StreamQueueModel>();
+        /// <summary>
+        /// The numeric ID of the currently selected stream queue
+        /// </summary>
+        public static int streamQueueId { get; set; }
     }
 }

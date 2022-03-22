@@ -7,7 +7,7 @@ namespace TournamentDataLibrary.Models.StreamQueue
     public class StreamQueueModel
     {
         /// <summary>
-        /// The numeric ID of the queue. Used in database to pull correct games
+        /// The numeric ID of the queue. Used in database to pull correct queue entries
         /// </summary>
         public int queueId { get; set; }
         /// <summary>
@@ -18,7 +18,10 @@ namespace TournamentDataLibrary.Models.StreamQueue
         /// The game that the queue is using. Has to be assigned to a game to pull correct player data
         /// </summary>
         public string queueGame { get; set; }
-
+        /// <summary>
+        /// The actual list of matches in the queue
+        /// </summary>
+        public List<QueueEntryModel> queueEntries = new List<QueueEntryModel>();
 
         public StreamQueueModel(int toid, string toname, string togame)
         {

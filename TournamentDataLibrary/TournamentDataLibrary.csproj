@@ -63,13 +63,9 @@
     <Compile Include="Models\PlayerData\PlayerRecordModel.cs" />
     <Compile Include="Models\StreamQueue\QueueEntryModel.cs" />
     <Compile Include="Models\StreamQueue\StreamQueueModel.cs" />
-    <Compile Include="PlayerDatabaseManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlDatabaseConnection.cs" />
-    <Compile Include="StreamQueueManager.cs" />
     <Compile Include="Models\TournamentData\TeamDataModel.cs" />
     <Compile Include="Models\TournamentDataModel.cs" />
-    <Compile Include="UserSession.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

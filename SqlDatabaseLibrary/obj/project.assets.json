@@ -283,6 +283,15 @@
             "rid": "win"
           }
         }
+      },
+      "TournamentDataLibrary/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/TournamentDataLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TournamentDataLibrary.dll": {}
+        }
       }
     }
   },
@@ -1029,13 +1038,19 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "TournamentDataLibrary/1.0.0": {
+      "type": "project",
+      "path": "../TournamentDataLibrary/TournamentDataLibrary.csproj",
+      "msbuildProject": "../TournamentDataLibrary/TournamentDataLibrary.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
       "MySql.Data >= 8.0.13",
       "NETStandard.Library >= 2.0.3",
-      "System.Data.SqlClient >= 4.8.2"
+      "System.Data.SqlClient >= 4.8.2",
+      "TournamentDataLibrary >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1072,7 +1087,11 @@
       "frameworks": {
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\serri\\My Drive\\Master-Orders\\TournamentDataLibrary\\TournamentDataLibrary.csproj": {
+              "projectPath": "C:\\Users\\serri\\My Drive\\Master-Orders\\TournamentDataLibrary\\TournamentDataLibrary.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -578,6 +578,10 @@
       <Project>{f38d9057-45e8-4f38-92fc-c90d33a30bcd}</Project>
       <Name>SqlDatabaseLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TournamentDataLibrary\TournamentDataLibrary.csproj">
+      <Project>{B0298EB4-2517-42AE-A4AC-D928A33BEB6A}</Project>
+      <Name>TournamentDataLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TwitchLibrary\TwitchLibrary.csproj">
       <Project>{54489db3-0f53-4c74-9218-abdd182ad389}</Project>
       <Name>TwitchLibrary</Name>
