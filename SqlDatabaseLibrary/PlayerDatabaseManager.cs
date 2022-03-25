@@ -4,32 +4,16 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.IO;
 using System.Xml.Linq;
-using SqlDatabaseLibrary.Models;
+using TournamentDataLibrary.Models.PlayerData;
 
 
 namespace SqlDatabaseLibrary
 {
-    static public class PlayerDatabase
+    /// <summary>
+    /// Static class containing methods to interact with player records in the SQL database
+    /// </summary>
+    static public class PlayerDatabaseManager
     {
-        /// <summary>
-        /// The master list of players used by different tools.
-        /// </summary>
-        public static Dictionary<string, PlayerRecordModel> playerRecords { get; set; }
-        /// <summary>
-        /// A companion list to the above for quick reference to each player's Id
-        /// </summary>
-        public static Dictionary<string, PlayerRecordModel> playerIds { get; set; }
-
-        public static string GetUniqueTagFromId(string inputId)
-        {
-            bool playerFoundFromId = playerIds.TryGetValue(inputId, out PlayerRecordModel foundPlayerRecord);
-            //Set the tag of the player. Other fields will populate off of this
-            if (playerFoundFromId)
-                return foundPlayerRecord.uniqueTag;
-            else
-                return inputId;
-        }
-
         /// <summary>
         /// Add a new player to the Sql database, or update an existing player already in the database.
         /// </summary>
@@ -38,8 +22,8 @@ namespace SqlDatabaseLibrary
         public static void AddPlayer(PlayerRecordModel newPlayerRecord, bool createNewRecord)
         {
             //Adds a new player's information to the database set within the settings
-            var dbCon = SqlDatabaseConnection.Instance();
-            if (dbCon.IsConnect())
+            SqlDatabaseConnection databaseConnection = SqlDatabaseConnection.Instance();
+            if (databaseConnection.TryDatabaseConnection())
             {
                 List<MySqlParameter> playerParameters = new List<MySqlParameter>();
 
@@ -64,19 +48,19 @@ namespace SqlDatabaseLibrary
 
                 if (createNewRecord == true)
                 {
-                    dbCon.Insert("INSERT INTO PLAYERS (ID, ACTIVE, CHANGEDATE, OWNERID, LOCALCOPY, GAME, TAG, ELO, CHARACTER1, COLOR1, WIRELESS, " +
+                    databaseConnection.Insert("INSERT INTO PLAYERS (ID, ACTIVE, CHANGEDATE, OWNERID, LOCALCOPY, GAME, TAG, ELO, CHARACTER1, COLOR1, WIRELESS, " +
                         "TWITTER, REGION, SPONSORPREFIX, SPONSOR, FULLNAME, PRONOUNS MISC)" +
                         "VALUES(@id, 1, @date, @owningUserId, @duplicateRecord, @game, @tag, @elo, @characterName, @colorNumber, @usingWirelessController, " +
                         "@twitter, @region, @sponsor, @fullSponsor, @fullName, @pronouns, @misc)", playerParameters);
                 }
                 else
                 {
-                    dbCon.Insert("UPDATE PLAYERS SET CHANGEDATE=@date, OWNERID=@owningUserId, LOCALCOPY=@duplicateRecord, TAG=@tag, ELO=@elo, FULLNAME=@fullName," +
+                    databaseConnection.Insert("UPDATE PLAYERS SET CHANGEDATE=@date, OWNERID=@owningUserId, LOCALCOPY=@duplicateRecord, TAG=@tag, ELO=@elo, FULLNAME=@fullName," +
                         "TWITTER=@twitter, REGION=@region, SPONSOR=@fullSponsor, SPONSORPREFIX=@sponsor, MISC=@misc, WIRELESS=@usingWirelessController, " +
                         "CHARACTER1=@characterName, COLOR1=@colorNumber, PRONOUNS=@pronouns " +
                         "WHERE ID=@id", playerParameters);
                 }
-                dbCon.Close();
+                databaseConnection.Close();
             }
         }
 
@@ -87,81 +71,50 @@ namespace SqlDatabaseLibrary
         public static void RemovePlayer(PlayerRecordModel removePlayerRecord)
         {
             //Marks a player as inactive based on their ID
-            var dbCon = SqlDatabaseConnection.Instance();
-            if (dbCon.IsConnect())
+            SqlDatabaseConnection databaseConnection = SqlDatabaseConnection.Instance();
+            if (databaseConnection.TryDatabaseConnection())
             {
                 List<MySqlParameter> playerParameters = new List<MySqlParameter>();
 
                 playerParameters.Add(new MySqlParameter("@id", removePlayerRecord.id));
 
-                dbCon.Insert("UPDATE PLAYERS SET ACTIVE=0 WHERE ID=@id", playerParameters);
+                databaseConnection.Insert("UPDATE PLAYERS SET ACTIVE=0 WHERE ID=@id", playerParameters);
 
-                dbCon.Close();
+                databaseConnection.Close();
             }
         }
 
         /// <summary>
         /// Returns the next open Id to ensure a newly created player record will not use an existing Id.
+        /// Counts the number of existing records in the database associated with the current user and uses that as the new ID.
         /// </summary>
         /// <returns>The new record's Id</returns>
         public static string GetNewPlayerId()
         {
-            var dbCon = SqlDatabaseConnection.Instance();
+            SqlDatabaseConnection dbCon = SqlDatabaseConnection.Instance();
 
             int playerId = -1;
 
             //Select a connection
-            if (dbCon.IsConnect())
+            if (dbCon.TryDatabaseConnection())
             {
                 List<MySqlParameter> playerParameters = new List<MySqlParameter>();
 
                 playerParameters.Add(new MySqlParameter("@id", UserSession.userId));
 
                 string query = "SELECT count(ID) FROM PLAYERS WHERE OWNERID=@id";
-                var cmd = new MySqlCommand(query, dbCon.connection);
+                MySqlCommand sqlCommand = new MySqlCommand(query, dbCon.connection);
                 foreach (MySqlParameter param in playerParameters)
-                    cmd.Parameters.Add(param);
+                    sqlCommand.Parameters.Add(param);
 
-                var reader = cmd.ExecuteReader();
-                reader.Read();
-                int playerRecords = reader.GetInt32(0);
-                reader.Close();
+                MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+                sqlReader.Read();
+                int playerRecords = sqlReader.GetInt32(0);
+                sqlReader.Close();
                 playerId = (UserSession.userId * 1000000) + playerRecords;
                 dbCon.Close();
             }
             return playerId.ToString();
-        }
-
-        /// <summary>
-        /// Returns the name of a user based on the Id provided.
-        /// </summary>
-        /// <param name="ownerId">The Id to check the username of</param>
-        /// <returns>The Id's username</returns>
-        public static string GetOwnerName(string ownerId)
-        {
-            var dbCon = SqlDatabaseConnection.Instance();
-
-            string ownerName = "";
-
-            //Select a connection
-            if (dbCon.IsConnect())
-            {
-                List<MySqlParameter> playerParameters = new List<MySqlParameter>();
-
-                playerParameters.Add(new MySqlParameter("@id", ownerId));
-
-                string query = "SELECT USERNAME FROM Mastercore.USERS WHERE ID=@id";
-                var cmd = new MySqlCommand(query, dbCon.connection);
-                foreach (MySqlParameter param in playerParameters)
-                    cmd.Parameters.Add(param);
-
-                var reader = cmd.ExecuteReader();
-                reader.Read();
-                ownerName = reader.GetString(0);
-                reader.Close();
-                dbCon.Close();
-            }
-            return ownerName;
         }
 
         /// <summary>
@@ -173,9 +126,9 @@ namespace SqlDatabaseLibrary
         /// <returns>Returns true if the player already exists.</returns>
         public static bool PlayerExists(string playerTag, string playerName, string playerGame)
         {
-            var dbCon = SqlDatabaseConnection.Instance();
+            SqlDatabaseConnection databaseConnection = SqlDatabaseConnection.Instance();
 
-            if (dbCon.IsConnect())
+            if (databaseConnection.TryDatabaseConnection())
             {
                 List<MySqlParameter> playerParameters = new List<MySqlParameter>();
 
@@ -188,15 +141,15 @@ namespace SqlDatabaseLibrary
                 string query = "SELECT count(ID) " +
                                 "FROM PLAYERS WHERE GAME=@game AND ACTIVE=1 AND " +
                                 "TAG=@tag AND FULLNAME=@name";
-                var cmd = new MySqlCommand(query, dbCon.connection);
+                MySqlCommand sqlCommand = new MySqlCommand(query, databaseConnection.connection);
                 foreach (MySqlParameter param in playerParameters)
-                    cmd.Parameters.Add(param);
-                var reader = cmd.ExecuteReader();
-                reader.Read();
-                int result = reader.GetInt32(0);
+                    sqlCommand.Parameters.Add(param);
+                MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+                sqlReader.Read();
+                int result = sqlReader.GetInt32(0);
 
-                reader.Close();
-                dbCon.Close();
+                sqlReader.Close();
+                databaseConnection.Close();
 
                 if (result == 0)
                     return false;
@@ -210,14 +163,14 @@ namespace SqlDatabaseLibrary
         /// </summary>
         /// <param name="gameName">The game to load players for</param>
         /// <param name="rosterId">A list to write player Ids to</param>
-        /// <returns>A list of player records</returns>
-        public static void LoadPlayers(string gameName)
+        /// <returns>A PlayerPoolModel containing all records</returns>
+        public static PlayerPoolModel LoadAllPlayerRecords(string gameName)
         {
-            var dbCon = SqlDatabaseConnection.Instance();
-            Dictionary<string, PlayerRecordModel> loadedPlayers = new Dictionary<string, PlayerRecordModel>();
-            Dictionary<string, PlayerRecordModel> loadedPlayerIds = new Dictionary<string, PlayerRecordModel>();
+            SqlDatabaseConnection databaseConnection = SqlDatabaseConnection.Instance();
+            List<PlayerRecordModel> loadedPlayers = new List<PlayerRecordModel>();
+            Dictionary<string, PlayerRecordModel> loadedPlayerTagRecords = new Dictionary<string, PlayerRecordModel>();
 
-            if (dbCon.IsConnect())
+            if (databaseConnection.TryDatabaseConnection())
             {
                 List<MySqlParameter> playerParameters = new List<MySqlParameter>();
 
@@ -235,43 +188,43 @@ namespace SqlDatabaseLibrary
                                 " AND ID NOT IN (SELECT A.ID FROM PLAYERS A, PLAYERS B WHERE A.TAG = B.TAG AND" +
                                 " A.FULLNAME = B.FULLNAME AND A.GAME=@game AND B.GAME=@game))) " + //Dont pull any players with the same name and tag as ones that you have
                                 "ORDER BY TAG";
-                var cmd = new MySqlCommand(query, dbCon.connection);
+                MySqlCommand sqlCommand = new MySqlCommand(query, databaseConnection.connection);
                 foreach (MySqlParameter param in playerParameters)
-                    cmd.Parameters.Add(param);
-                var reader = cmd.ExecuteReader();
-                for (int i = 0; reader.Read(); i++)
+                    sqlCommand.Parameters.Add(param);
+                MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+                for (int i = 0; sqlReader.Read(); i++)
                 {
                     PlayerRecordModel newPlayer = new PlayerRecordModel();
 
-                    newPlayer.id = reader.GetString(0);
-                    newPlayer.owningUserId = reader.GetString(1);
-                    newPlayer.game = reader.GetString(2);
-                    newPlayer.duplicateRecord = reader.GetBoolean(3);
-                    newPlayer.tag = reader.GetString(4);
-                    newPlayer.elo = Int32.Parse(reader.GetString(5));
-                    newPlayer.fullName = reader.GetString(6);
-                    newPlayer.twitter = reader.GetString(7);
-                    newPlayer.region = reader.GetString(8);
-                    newPlayer.fullSponsor = reader.GetString(9);
-                    newPlayer.sponsor = reader.GetString(10);
-                    if (!reader.IsDBNull(11))
-                        newPlayer.misc = reader.GetString(11);
-                    newPlayer.usingWirelessController = reader.GetBoolean(12);
-                    newPlayer.characterName = reader.GetString(13);
-                    newPlayer.colorNumber = reader.GetInt32(14);
-                    newPlayer.pronouns = reader.GetString(15);
+                    newPlayer.id = sqlReader.GetString(0);
+                    newPlayer.owningUserId = sqlReader.GetString(1);
+                    newPlayer.game = sqlReader.GetString(2);
+                    newPlayer.duplicateRecord = sqlReader.GetBoolean(3);
+                    newPlayer.tag = sqlReader.GetString(4);
+                    newPlayer.elo = Int32.Parse(sqlReader.GetString(5));
+                    newPlayer.fullName = sqlReader.GetString(6);
+                    newPlayer.twitter = sqlReader.GetString(7);
+                    newPlayer.region = sqlReader.GetString(8);
+                    newPlayer.fullSponsor = sqlReader.GetString(9);
+                    newPlayer.sponsor = sqlReader.GetString(10);
+                    if (!sqlReader.IsDBNull(11))
+                        newPlayer.misc = sqlReader.GetString(11);
+                    newPlayer.usingWirelessController = sqlReader.GetBoolean(12);
+                    newPlayer.characterName = sqlReader.GetString(13);
+                    newPlayer.colorNumber = sqlReader.GetInt32(14);
+                    newPlayer.pronouns = sqlReader.GetString(15);
 
                     //Check if this is a duplicate tag
-                    if(loadedPlayers.ContainsKey(newPlayer.tag))
+                    if(loadedPlayerTagRecords.ContainsKey(newPlayer.tag))
                     {
                         //Add the player's name to the unqiue tag
                         newPlayer.uniqueTag = newPlayer.tag + "(" + newPlayer.fullName + ")";
                         PlayerRecordModel replacePlayer = new PlayerRecordModel();
-                        replacePlayer = loadedPlayers[newPlayer.tag];
-                        loadedPlayers.Remove(newPlayer.tag);
+                        replacePlayer = loadedPlayerTagRecords[newPlayer.tag];
+                        loadedPlayerTagRecords.Remove(newPlayer.tag);
 
                         replacePlayer.uniqueTag = replacePlayer.tag + "(" + replacePlayer.fullName + ")";
-                        loadedPlayers.Add(replacePlayer.uniqueTag, replacePlayer);
+                        loadedPlayerTagRecords.Add(replacePlayer.uniqueTag, replacePlayer);
 
                     }
                     else
@@ -280,15 +233,18 @@ namespace SqlDatabaseLibrary
                         newPlayer.uniqueTag = newPlayer.tag;
                     }
 
-                    loadedPlayers.Add(newPlayer.uniqueTag, newPlayer);
-                    loadedPlayerIds.Add(newPlayer.id, newPlayer);
+                    loadedPlayerTagRecords.Add(newPlayer.uniqueTag, newPlayer);
+                    loadedPlayers.Add(newPlayer);
                 }
-                reader.Close();
-                dbCon.Close();
+                sqlReader.Close();
+                databaseConnection.Close();
             }
 
-            playerRecords = loadedPlayers;
-            playerIds = loadedPlayerIds;
+            PlayerPoolModel outputPlayerPool = new PlayerPoolModel();
+            outputPlayerPool.playerTagsRecords = loadedPlayerTagRecords;
+            outputPlayerPool.playerRecords = loadedPlayers;
+
+            return outputPlayerPool;
         }
 
     }

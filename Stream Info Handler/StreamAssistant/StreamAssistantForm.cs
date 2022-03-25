@@ -78,7 +78,7 @@ namespace Stream_Info_Handler.StreamAssistant
 
 
             //Update the player names
-            PlayerDatabase.LoadPlayers(GlobalSettings.selectedGame);
+            PlayerDatabaseManager.LoadAllPlayerRecords(GlobalSettings.selectedGame);
 
             StreamAssistantControlUpdates.update_names(ref cbx_tag1);
             StreamAssistantControlUpdates.update_names(ref cbx_tag2);
@@ -638,7 +638,7 @@ namespace Stream_Info_Handler.StreamAssistant
             int originalColor = 1;
 
             //Check if a player in the roster has been selected from the combobox. 
-            playerBoxes[playerIndex].isPlayer = PlayerDatabase.playerRecords.TryGetValue(playerBoxes[playerIndex].tag.Text, out saveNewPlayerRecord);
+            playerBoxes[playerIndex].isPlayer = PlayerDatabaseManager.playerRecords.TryGetValue(playerBoxes[playerIndex].tag.Text, out saveNewPlayerRecord);
 
             //Character check. Perform only for players.
             if (playerBoxes[playerIndex].isPlayer == true)
@@ -660,7 +660,7 @@ namespace Stream_Info_Handler.StreamAssistant
             if (savePlayerForm.ShowDialog() == DialogResult.OK)
             {
                 database_tools.add_player(savePlayerForm.outputPlayer, savePlayerForm.outputIsNewPlayer);
-                PlayerDatabase.LoadPlayers(GlobalSettings.selectedGame);
+                PlayerDatabaseManager.LoadAllPlayerRecords(GlobalSettings.selectedGame);
 
                 for (int i = 0; i < 6; i++)
                 {
@@ -790,7 +790,7 @@ namespace Stream_Info_Handler.StreamAssistant
             }
 
             //Load the players
-            PlayerDatabase.LoadPlayers(GlobalSettings.selectedGame);
+            PlayerDatabaseManager.LoadAllPlayerRecords(GlobalSettings.selectedGame);
 
             if (global_values.format == "Singles")
             {
@@ -1191,7 +1191,7 @@ namespace Stream_Info_Handler.StreamAssistant
                         if ((ii < 2 && global_values.format == "Singles") ||
                             (ii > 1 && global_values.format == "Doubles"))
                         {
-                            playerBoxes[ii].tag.Text = PlayerDatabase.GetUniqueTagFromId(loaded_queue[new_match].player[i]);
+                            playerBoxes[ii].tag.Text = PlayerDatabaseManager.GetUniqueTagFromId(loaded_queue[new_match].player[i]);
                         }
                     }
                 }

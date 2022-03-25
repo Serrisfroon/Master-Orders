@@ -7,25 +7,28 @@ namespace SqlDatabaseLibrary
 {
     static public class UserSession
     {
+        /// <summary>
+        /// The user ID provided by the SQL database. Used to pull data associated to the user in shared spaces.
+        /// </summary>
         static public int userId;
 
         public static string LogIn(string table, string user, string pass)
         {
-            var dbCon = SqlDatabaseConnection.Instance();
-            dbCon.databaseName = table;
-            dbCon.databaseUserName = user;
-            dbCon.databasePassword = pass;
+            var databaseConnection = SqlDatabaseConnection.Instance();
+            databaseConnection.databaseName = table;
+            databaseConnection.databaseUserName = user;
+            databaseConnection.databasePassword = pass;
             try
             {
                 //Connect to the database. Fails if incorrect credentials
-                dbCon.IsConnect();
+                databaseConnection.TryDatabaseConnection();
 
                 List<MySqlParameter> playerparameters = new List<MySqlParameter>();
-                playerparameters.Add(new MySqlParameter("@user", dbCon.databaseUserName));
+                playerparameters.Add(new MySqlParameter("@user", databaseConnection.databaseUserName));
 
                 //Verify the user is active
                 string query = "SELECT ACTIVE, ID FROM Mastercore.USERS WHERE USERNAME=@user";
-                var cmd = new MySqlCommand(query, dbCon.connection);
+                var cmd = new MySqlCommand(query, databaseConnection.connection);
                 foreach (MySqlParameter param in playerparameters)
                     cmd.Parameters.Add(param);
 
@@ -34,12 +37,12 @@ namespace SqlDatabaseLibrary
                 bool activeUser = reader.GetInt32(0) != 0;
                 int readUserId = reader.GetInt32(1);
                 reader.Close();
-                dbCon.Close();
+                databaseConnection.Close();
 
                 //Return false if the user is inactive
                 if (activeUser == false)
                 {
-                    return $"{ dbCon.databaseUserName } is not currently an active Master Orders account. If you are the account owner, please contact Serris via twitter @serrisfroon";
+                    return $"{ databaseConnection.databaseUserName } is not currently an active Master Orders account. If you are the account owner, please contact Serris via twitter @serrisfroon";
                 }
                 userId = readUserId;
 
@@ -47,7 +50,7 @@ namespace SqlDatabaseLibrary
             }
             catch (Exception ex)
             {
-                dbCon.Close();
+                databaseConnection.Close();
                 return ex.ToString();
             }
         }

@@ -32,10 +32,10 @@ namespace Stream_Info_Handler
             cbx_player2.Items.AddRange(players.Cast<Object>().ToArray());
             cbx_player3.Items.AddRange(players.Cast<Object>().ToArray());
             cbx_player4.Items.AddRange(players.Cast<Object>().ToArray());
-            cbx_player1.SelectedIndex = cbx_player1.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.player[0]));
-            cbx_player2.SelectedIndex = cbx_player2.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.player[1]));
-            cbx_player3.SelectedIndex = cbx_player3.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.player[2]));
-            cbx_player4.SelectedIndex = cbx_player4.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.player[3]));
+            cbx_player1.SelectedIndex = cbx_player1.FindStringExact(PlayerDatabaseManager.GetUniqueTagFromId(match.player[0]));
+            cbx_player2.SelectedIndex = cbx_player2.FindStringExact(PlayerDatabaseManager.GetUniqueTagFromId(match.player[1]));
+            cbx_player3.SelectedIndex = cbx_player3.FindStringExact(PlayerDatabaseManager.GetUniqueTagFromId(match.player[2]));
+            cbx_player4.SelectedIndex = cbx_player4.FindStringExact(PlayerDatabaseManager.GetUniqueTagFromId(match.player[3]));
 
             if (global_values.format == "Singles")
             {

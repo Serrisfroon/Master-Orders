@@ -151,7 +151,7 @@ namespace Stream_Info_Handler
             string[] hold_player_name = { cbx_player1.Text, cbx_player2.Text, cbx_player3.Text, cbx_player4.Text };
 
 
-            PlayerDatabase.LoadPlayers(GlobalSettings.selectedGame);
+            PlayerDatabaseManager.LoadAllPlayerRecords(GlobalSettings.selectedGame);
 
             if (cbx_player1.Focused == false && cbx_player2.Focused == false
                 && cbx_player3.Focused == false && cbx_player4.Focused == false)
@@ -441,7 +441,7 @@ namespace Stream_Info_Handler
                 {
                     string playerBeingUpdated = loaded_queue[match_index].player[ii - 1];
                     PlayerRecordModel playerRecord = new PlayerRecordModel();
-                    if (PlayerDatabase.playerRecords.TryGetValue(playerBeingUpdated, out playerRecord))
+                    if (PlayerDatabaseManager.playerRecords.TryGetValue(playerBeingUpdated, out playerRecord))
                     {
                         update_info(ii, playerRecord);
                     }
@@ -561,7 +561,7 @@ namespace Stream_Info_Handler
         {
             //Find the index of the player
             PlayerRecordModel playerRecord = new PlayerRecordModel();
-            if (PlayerDatabase.playerRecords.TryGetValue(playerBeingUpdated, out playerRecord) == false)
+            if (PlayerDatabaseManager.playerRecords.TryGetValue(playerBeingUpdated, out playerRecord) == false)
             { 
                 return;
             }
@@ -576,7 +576,7 @@ namespace Stream_Info_Handler
                 PlayerRecordModel newPlayerRecord = savePlayerForm.outputPlayer;
 
                 if (savePlayerForm.outputIsNewPlayer == false)
-                    PlayerDatabase.playerRecords[playerBeingUpdated] = newPlayerRecord;
+                    PlayerDatabaseManager.playerRecords[playerBeingUpdated] = newPlayerRecord;
                 database_tools.add_player(savePlayerForm.outputPlayer, savePlayerForm.outputIsNewPlayer);
 
                 //Check all queued matches for the player
@@ -647,7 +647,7 @@ namespace Stream_Info_Handler
             for (int i = 0; i < numberOfPlayers; i++)
             {
                 if (checkPlayerNames[i] != "")
-                    update_info(i + 1, PlayerDatabase.playerRecords[checkPlayerNames[i]]);
+                    update_info(i + 1, PlayerDatabaseManager.playerRecords[checkPlayerNames[i]]);
                 else
                     update_info(i + 1, emptyPlayerRecord);
             }

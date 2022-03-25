@@ -22,6 +22,10 @@ namespace SqlDatabaseLibrary
         }
 
         private static SqlDatabaseConnection _instance = null;
+        /// <summary>
+        /// Initialize the singleton class on first run, return it on all subsequent runs
+        /// </summary>
+        /// <returns></returns>
         public static SqlDatabaseConnection Instance()
         {
             if (_instance == null) //remove this line if issues arise
@@ -29,7 +33,11 @@ namespace SqlDatabaseLibrary
             return _instance;
         }
 
-        public bool IsConnect()
+        /// <summary>
+        /// Attempts to connect to SQL using the credentials held by the singleton class
+        /// </summary>
+        /// <returns>True is successful, false if not</returns>
+        public bool TryDatabaseConnection()
         {
             if (connection == null)
             {
@@ -43,15 +51,23 @@ namespace SqlDatabaseLibrary
             return true;
         }
 
+        /// <summary>
+        /// Closes the active connection and removes it from the singleton class.
+        /// </summary>
         public void Close()
         {
             _connection.Close();
             _connection = null;
         }
 
+        /// <summary>
+        /// Runs an Insert command on the connected database
+        /// </summary>
+        /// <param name="strSQL">The SQL command</param>
+        /// <param name="paramslist">parameters to be used for the command</param>
         public void Insert(string strSQL, List<MySqlParameter> paramslist)
         {
-            if (IsConnect())
+            if (TryDatabaseConnection())
             {
                 MySqlCommand cmd = new MySqlCommand(strSQL, _connection);
                 foreach (MySqlParameter param in paramslist)
@@ -62,9 +78,15 @@ namespace SqlDatabaseLibrary
             }
         }
 
+        /// <summary>
+        /// Runs a Select command on the connected database
+        /// </summary>
+        /// <param name="strSQL">The SQL command</param>
+        /// <param name="paramslist">parameters to be used for the command</param>
+        /// <returns>The result of the select command</returns>
         public MySqlDataReader Select(string strSQL, List<MySqlParameter> paramslist)
         {
-            if (IsConnect())
+            if (TryDatabaseConnection())
             {
                 MySqlCommand cmd = new MySqlCommand(strSQL, _connection);
                 foreach (MySqlParameter param in paramslist)
