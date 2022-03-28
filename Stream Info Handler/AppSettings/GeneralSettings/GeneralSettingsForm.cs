@@ -49,7 +49,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             //Load stream queues from the database and add them to the combobox
             LoadSettingsFormControls.InitializeImageScoreControls();
             LoadSettingsFormControls.settingsForm = this;
-            LoadSettingsFormControls.LoadStreamQueues(cbxStreamQueues, StreamQueue.queueList);
+            LoadSettingsFormControls.LoadStreamQueues(cbxStreamQueues, StreamQueueManager.queueList);
 
             //Load the character rosters
             LoadSettingsFormControls.LoadGameTitles(cbxCharacterRosters, GlobalSettings.availableGames, "(Select a Game)");
@@ -133,11 +133,11 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
         {
             string queueGame = "";
             int queueId = -1;
-            for (int i = 0; i < StreamQueue.queueList.Count; i++)
+            for (int i = 0; i < StreamQueueManager.queueList.Count; i++)
             {
-                if (StreamQueue.queueList[i].queueName == cbxStreamQueues.Text)
+                if (StreamQueueManager.queueList[i].queueName == cbxStreamQueues.Text)
                 {
-                    queueGame = StreamQueue.queueList[i].queueGame;
+                    queueGame = StreamQueueManager.queueList[i].queueGame;
                     queueId = i;
                 }
             }
@@ -201,9 +201,9 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 cbxStreamQueues.BeginUpdate();
                 cbxStreamQueues.Items.Clear();                                            //Empty the item list
                 cbxStreamQueues.Items.Add("None");
-                for (int i = 0; i < StreamQueue.queueList.Count; i++)
+                for (int i = 0; i < StreamQueueManager.queueList.Count; i++)
                 {
-                    cbxStreamQueues.Items.Add(StreamQueue.queueList[i].queueName);
+                    cbxStreamQueues.Items.Add(StreamQueueManager.queueList[i].queueName);
                 }
                 cbxStreamQueues.EndUpdate();
             }
@@ -260,10 +260,10 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
         {
             btnApplyChanges.Enabled = true;
             string queuename = "";
-            for (int i = 0; i < StreamQueue.queueList.Count; i++)
+            for (int i = 0; i < StreamQueueManager.queueList.Count; i++)
             {
-                if (StreamQueue.queueList[i].queueName == cbxStreamQueues.Text)
-                    queuename = StreamQueue.queueList[i].queueGame;
+                if (StreamQueueManager.queueList[i].queueName == cbxStreamQueues.Text)
+                    queuename = StreamQueueManager.queueList[i].queueGame;
             }
             cbxAssignedStreamQueueGame.SelectedIndex = cbxAssignedStreamQueueGame.FindStringExact(queuename);
         }
@@ -998,9 +998,9 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                        == DialogResult.OK)
                     {
                         int queueidd = -1;
-                        for (int i = 0; i < StreamQueue.queueList.Count; i++)
+                        for (int i = 0; i < StreamQueueManager.queueList.Count; i++)
                         {
-                            if (StreamQueue.queueList[i].queueName == cbxStreamQueues.Text)
+                            if (StreamQueueManager.queueList[i].queueName == cbxStreamQueues.Text)
                             {
                                 queueidd = i;
                             }
@@ -1020,9 +1020,9 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             }
 
             int queueid = -1;
-            for (int i = 0; i < StreamQueue.queueList.Count; i++)
+            for (int i = 0; i < StreamQueueManager.queueList.Count; i++)
             {
-                if (StreamQueue.queueList[i].queueName == cbxStreamQueues.Text)
+                if (StreamQueueManager.queueList[i].queueName == cbxStreamQueues.Text)
                 {
                     queueid = i;
                 }

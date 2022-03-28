@@ -10,7 +10,7 @@ namespace TournamentDataLibrary.Models.StreamQueue
 
         public status matchStatus { get; set; }
         public string roundInBracket { get; set; }
-        public List<string> playerNames { get; set; }
+        public List<string> playerIds { get; set; }
 
         /// <summary>
         /// normalMatch = Normal status. Not the current match.
@@ -31,7 +31,7 @@ namespace TournamentDataLibrary.Models.StreamQueue
             positionInQueue = tonumber;
             matchStatus = tostatus;
             roundInBracket = toround;
-            playerNames = toNames;
+            playerIds = toNames;
         }
         public QueueEntryModel() 
         {

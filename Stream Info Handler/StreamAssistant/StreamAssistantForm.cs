@@ -1241,11 +1241,11 @@ namespace Stream_Info_Handler.StreamAssistant
             }
             else
             {
-                for (int i = 1; i < StreamQueue.queueList.Count; i++)
+                for (int i = 1; i < StreamQueueManager.queueList.Count; i++)
                 {
-                    if (StreamQueue.queueList[i].name == cbx_queues.Text)
+                    if (StreamQueueManager.queueList[i].name == cbx_queues.Text)
                     {
-                        queuegame = StreamQueue.queueList[i].game;
+                        queuegame = StreamQueueManager.queueList[i].game;
                         queueid = i;
                     }
                 }
@@ -1255,11 +1255,11 @@ namespace Stream_Info_Handler.StreamAssistant
                 //Compare the current queue's game to the new one. Update if there is a difference.
                 if (queueid != 0)
                 {
-                    if (StreamQueue.queueList[global_values.queue_id].game != queuegame)
+                    if (StreamQueueManager.queueList[global_values.queue_id].game != queuegame)
                     {
                         if (database_tools.regame_queue(cbx_queues.Text, queuegame, queueid) == false)
                         {
-                            cbx_queues.SelectedIndex = cbx_queues.FindStringExact(StreamQueue.queueList[global_values.queue_id].name);
+                            cbx_queues.SelectedIndex = cbx_queues.FindStringExact(StreamQueueManager.queueList[global_values.queue_id].name);
                             return;
                         }
                     }
@@ -1572,7 +1572,7 @@ namespace Stream_Info_Handler.StreamAssistant
             cbx_gamecount.SelectedIndex = 0;
 
             //Add Queues to the dropdown
-            StreamAssistantControlUpdates.UpdateQueues(cbx_queues, StreamQueue.queueList, global_values.queue_id);
+            StreamAssistantControlUpdates.UpdateQueues(cbx_queues, StreamQueueManager.queueList, global_values.queue_id);
 
             if (YoutubeController.enableYoutubeFunctions == true)
             {

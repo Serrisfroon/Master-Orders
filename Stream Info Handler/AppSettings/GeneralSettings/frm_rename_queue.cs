@@ -21,8 +21,8 @@ namespace Stream_Info_Handler
         {
             if(txt_rename.Text != "")
             {
-                StreamQueue.AdjustQueueSettings(queue, txt_rename.Text, "NAME");
-                StreamQueue.ImportStreamQueues();
+                StreamQueueManager.AdjustQueueSettings(queue, txt_rename.Text, "NAME");
+                StreamQueueManager.ImportStreamQueues();
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

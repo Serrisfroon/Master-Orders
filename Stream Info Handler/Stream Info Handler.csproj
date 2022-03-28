@@ -351,10 +351,10 @@
     <Compile Include="frm_playermanager.Designer.cs">
       <DependentUpon>frm_playermanager.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_rename_queue.cs">
+    <Compile Include="AppSettings\GeneralSettings\frm_rename_queue.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_rename_queue.Designer.cs">
+    <Compile Include="AppSettings\GeneralSettings\frm_rename_queue.Designer.cs">
       <DependentUpon>frm_rename_queue.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_top8_character.cs">
@@ -458,7 +458,7 @@
     <EmbeddedResource Include="frm_playermanager.resx">
       <DependentUpon>frm_playermanager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_rename_queue.resx">
+    <EmbeddedResource Include="AppSettings\GeneralSettings\frm_rename_queue.resx">
       <DependentUpon>frm_rename_queue.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_top8_character.resx">

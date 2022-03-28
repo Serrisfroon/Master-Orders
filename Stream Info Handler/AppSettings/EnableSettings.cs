@@ -38,7 +38,7 @@ namespace Stream_Info_Handler.AppSettings
             //Open the settings file
             XDocument xml = XDocument.Load(SettingsFile.settingsFile);
 
-            StreamQueue.queueId = (int)xml.Root.Element("database").Element("queue-id");
+            StreamQueueManager.queueId = (int)xml.Root.Element("database").Element("queue-id");
             GlobalSettings.bracketFormat = (string)xml.Root.Element("general").Element("format");
             GlobalSettings.bracketRounds = (string)xml.Root.Element("general").Element("rounds-file");
             return errorMessages;

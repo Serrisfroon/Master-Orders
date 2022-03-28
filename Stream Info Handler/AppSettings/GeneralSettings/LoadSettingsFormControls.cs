@@ -66,10 +66,10 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                     settingsForm.cbxCharacterRosters.SelectedIndex = settingsForm.cbxCharacterRosters.FindStringExact(GlobalSettings.selectedGame);
                 }
             }
-            if (StreamQueue.queueId == -1)
+            if (StreamQueueManager.queueId == -1)
                 settingsForm.cbxStreamQueues.SelectedIndex = 0;
             else
-                settingsForm.cbxStreamQueues.SelectedIndex = StreamQueue.queueId;
+                settingsForm.cbxStreamQueues.SelectedIndex = StreamQueueManager.queueId;
 
             settingsForm.txtStreamFilesDirectory.Text = DirectoryManagement.outputDirectory;
             settingsForm.txt_thumbnails.Text = DirectoryManagement.thumbnailDirectory;
