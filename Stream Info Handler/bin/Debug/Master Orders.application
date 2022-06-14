@@ -7,14 +7,14 @@
     <framework targetVersion="4.6.1" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Master Orders.exe.manifest" size="106086">
+    <dependentAssembly dependencyType="install" codebase="Master Orders.exe.manifest" size="104760">
       <assemblyIdentity name="Master Orders.exe" version="1.0.0.126" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ZiAMHa5+CteQYUtdL95cjd2E85PTn3m8XSDMLHePgno=</dsig:DigestValue>
+        <dsig:DigestValue>k6U8y0sFlI30cW8kVGebTGMocqSYTr5O1mkijvG12s4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

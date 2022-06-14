@@ -146,17 +146,17 @@ namespace Stream_Info_Handler.SavePlayer
 
             savePlayer.tag = txt_tag.Text;
             if (updateProcesses.needsUnique == true)
-                savePlayer.unique_tag = txt_tag.Text + "(" + txt_name.Text + ")";
+                savePlayer.uniqueTag = txt_tag.Text + "(" + txt_name.Text + ")";
             else
-                savePlayer.unique_tag = txt_tag.Text;
+                savePlayer.uniqueTag = txt_tag.Text;
             savePlayer.twitter = txt_twitter.Text;
             savePlayer.region = cbx_region.Text;
             savePlayer.sponsor = txt_sponsor.Text;
-            savePlayer.fullname = txt_name.Text;
-            savePlayer.fullsponsor = cbx_fullsponsor.Text;
+            savePlayer.fullName = txt_name.Text;
+            savePlayer.fullSponsor = cbx_fullsponsor.Text;
             savePlayer.elo = Int32.Parse(txt_elo.Text);
             savePlayer.misc = txt_misc.Text;
-            savePlayer.wireless_controller = ckb_wireless.Checked;
+            savePlayer.usingWirelessController = ckb_wireless.Checked;
 
             return savePlayer;
         }

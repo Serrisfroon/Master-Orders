@@ -221,14 +221,14 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
             //if (playerBox.roster_number != -1)
             for(int i = 0; i < global_values.roster.Count; i++)
             {
-                if (global_values.roster[i].unique_tag == playerBox.getTag())
+                if (global_values.roster[i].uniqueTag == playerBox.getTag())
                 {
                     newPlayerIndex = i;
                 }
             }
             if (newPlayerIndex >= 0)
             {
-                if (global_values.roster[newPlayerIndex].unique_tag == playerBox.getTag())
+                if (global_values.roster[newPlayerIndex].uniqueTag == playerBox.getTag())
                 {
                     //Update the Twitter ComboBox with this player data's twitter
                         playerBox.twitter.Text = global_values.roster[newPlayerIndex].twitter;
@@ -240,13 +240,13 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
                     if (playerBox.isPlayer == true)
                     {
                         Image updateCharacter = Image.FromFile(DirectoryManagement.GetGameDirectory() + @"\" +
-                                                                global_values.roster[newPlayerIndex].character[0] + @"\" +
-                                                                global_values.roster[newPlayerIndex].color[0].ToString() + @"\stamp.png");
+                                                                global_values.roster[newPlayerIndex].characterName + @"\" +
+                                                                global_values.roster[newPlayerIndex].colorNumber.ToString() + @"\stamp.png");
 
                         playerBox.character.BackgroundImage = updateCharacter;
                         playerBox.character.Text = "";
-                        playerBox.characterName = global_values.roster[newPlayerIndex].character[0];
-                        playerBox.colorNumber = global_values.roster[newPlayerIndex].color[0];
+                        playerBox.characterName = global_values.roster[newPlayerIndex].characterName;
+                        playerBox.colorNumber = global_values.roster[newPlayerIndex].colorNumber;
                         playerBox.image_directory = DirectoryManagement.GetGameDirectory() + @"\" +
                         playerBox.characterName + @"\" + playerBox.colorNumber.ToString();
                     }
@@ -315,13 +315,13 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
                     xml.Root.Element(xml_element).Element("tag").ReplaceWith(new XElement("tag", get_output_name(ref playerBox)));
                     xml.Root.Element(xml_element).Element("twitter").ReplaceWith(new XElement("twitter", update_player.twitter));
                     xml.Root.Element(xml_element).Element("base-tag").ReplaceWith(new XElement("base-tag", update_player.tag));
-                    xml.Root.Element(xml_element).Element("full-name").ReplaceWith(new XElement("full-name", update_player.fullname));
-                    xml.Root.Element(xml_element).Element("sponsor-full").ReplaceWith(new XElement("sponsor-full", update_player.fullsponsor));
+                    xml.Root.Element(xml_element).Element("full-name").ReplaceWith(new XElement("full-name", update_player.fullName));
+                    xml.Root.Element(xml_element).Element("sponsor-full").ReplaceWith(new XElement("sponsor-full", update_player.fullSponsor));
                     xml.Root.Element(xml_element).Element("sponsor-prefix").ReplaceWith(new XElement("sponsor-prefix", update_player.sponsor));
-                    xml.Root.Element(xml_element).Element("character-name").ReplaceWith(new XElement("character-name", update_player.character[0]));
+                    xml.Root.Element(xml_element).Element("character-name").ReplaceWith(new XElement("character-name", update_player.characterName));
                     xml.Root.Element(xml_element).Element("region-name").ReplaceWith(new XElement("region-name", update_player.region));
                     xml.Root.Element(xml_element).Element("character-icon").ReplaceWith(new XElement("character-icon",
-                        DirectoryManagement.GetGameDirectory() + @"\" + update_player.character[0] + @"\" + update_player.color[0].ToString() + @"\stock.png"));
+                        DirectoryManagement.GetGameDirectory() + @"\" + update_player.characterName + @"\" + update_player.colorNumber.ToString() + @"\stock.png"));
                     break;
                 case "commentator":
                     xml_element = "commentator-" + number.ToString();

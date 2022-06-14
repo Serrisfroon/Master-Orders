@@ -101,25 +101,25 @@ namespace Stream_Info_Handler.SavePlayer
             if (newPlayer == true)
                 playerId = database_tools.get_new_playerid();
             savePlayer.id = playerId;
-            savePlayer.ownerid = ownerId;
+            savePlayer.owningUserId = ownerId;
             //Check if this is being saved as a copy
             if (ownerId == global_values.user_id.ToString())
-                savePlayer.iscopy = false;
+                savePlayer.duplicateRecord = false;
             else
-                savePlayer.iscopy = true;
+                savePlayer.duplicateRecord = true;
 
 
             savePlayer.game = playerGame;
 
             if (updateCharacter)
             {
-                savePlayer.character[0] = saveCharacter;
-                savePlayer.color[0] = saveColor;
+                savePlayer.characterName = saveCharacter;
+                savePlayer.colorNumber = saveColor;
             }
             else
             {
-                savePlayer.character[0] = originalCharacter;
-                savePlayer.color[0] = originalColor;
+                savePlayer.characterName = originalCharacter;
+                savePlayer.colorNumber = originalColor;
             }
 
 

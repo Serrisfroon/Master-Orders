@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using Stream_Info_Handler.AppSettings;
 using SqlDatabaseLibrary.Models;
+using SqlDatabaseLibrary;
 
 namespace Stream_Info_Handler
 {
@@ -37,20 +38,21 @@ namespace Stream_Info_Handler
 
                 playerparams.Add(new MySqlParameter("@id", new_player.id));
                 playerparams.Add(new MySqlParameter("@date", DateTime.Today.ToString("yyyy-MM-dd")));
-                playerparams.Add(new MySqlParameter("@ownerid", new_player.ownerid));
+                playerparams.Add(new MySqlParameter("@ownerid", new_player.owningUserId));
                 playerparams.Add(new MySqlParameter("@game", new_player.game));
-                playerparams.Add(new MySqlParameter("@copy", new_player.iscopy));
+                playerparams.Add(new MySqlParameter("@copy", new_player.duplicateRecord));
                 playerparams.Add(new MySqlParameter("@tag", new_player.tag));
                 playerparams.Add(new MySqlParameter("@elo", new_player.elo));
-                playerparams.Add(new MySqlParameter("@fullname", new_player.fullname));
+                playerparams.Add(new MySqlParameter("@fullname", new_player.fullName));
                 playerparams.Add(new MySqlParameter("@twitter", new_player.twitter));
                 playerparams.Add(new MySqlParameter("@region", new_player.region));
-                playerparams.Add(new MySqlParameter("@sponsor", new_player.fullsponsor));
+                playerparams.Add(new MySqlParameter("@sponsor", new_player.fullSponsor));
                 playerparams.Add(new MySqlParameter("@sponsorprefix", new_player.sponsor));
                 playerparams.Add(new MySqlParameter("@misc", new_player.misc));
-                playerparams.Add(new MySqlParameter("@wireless", new_player.wireless_controller));
-                playerparams.Add(new MySqlParameter("@character1", new_player.character[0]));
-                playerparams.Add(new MySqlParameter("@color1", new_player.color[0]));
+                playerparams.Add(new MySqlParameter("@wireless", new_player.usingWirelessController));
+                playerparams.Add(new MySqlParameter("@character1", new_player.characterName));
+                playerparams.Add(new MySqlParameter("@color1", new_player.colorNumber));
+                playerparams.Add(new MySqlParameter("@pronouns", new_player.pronouns));
 
 
 
@@ -60,15 +62,15 @@ namespace Stream_Info_Handler
                 {
                     dbCon.Insert("INSERT INTO PLAYERS (ID, ACTIVE, CHANGEDATE, OWNERID, GAME, LOCALCOPY, TAG, ELO, FULLNAME, " +
                         "TWITTER, REGION, SPONSOR, SPONSORPREFIX, MISC, WIRELESS, " +
-                        "CHARACTER1, COLOR1) " +
+                        "CHARACTER1, COLOR1, PRONOUNS) " +
                         "VALUES(@id, 1, @date, @ownerid, @game, @copy, @tag, @elo, @fullname, @twitter, @region, @sponsor, @sponsorprefix, @misc, @wireless," +
-                        "@character1, @color1)", playerparams);
+                        "@character1, @color1, @pronouns)", playerparams);
                 }
                 else
                 {
                     dbCon.Insert("UPDATE PLAYERS SET CHANGEDATE=@date, OWNERID=@ownerid, LOCALCOPY=@copy, TAG=@tag, ELO=@elo, FULLNAME=@fullname," +
                         "TWITTER=@twitter, REGION=@region, SPONSOR=@sponsor, SPONSORPREFIX=@sponsorprefix, MISC=@misc, WIRELESS=@wireless, " +
-                        "CHARACTER1=@character1, COLOR1=@color1 " +
+                        "CHARACTER1=@character1, COLOR1=@color1, PRONOUNS=@pronouns " +
                         "WHERE ID=@id", playerparams);
                 }
                 dbCon.Close();
@@ -202,7 +204,7 @@ namespace Stream_Info_Handler
                 //Find all active Non-copies
                 string query = "SELECT ID, OWNERID, GAME, LOCALCOPY, TAG, ELO, FULLNAME, " +
                                 "TWITTER, REGION, SPONSOR, SPONSORPREFIX, MISC, WIRELESS, " +
-                                "CHARACTER1, COLOR1" +
+                                "CHARACTER1, COLOR1, PRONOUNS" +
                                 " FROM PLAYERS WHERE GAME=@game AND ACTIVE=1 AND" + //Load only active players for this game
                                 "(OWNERID=@ownerid OR LOCALCOPY=1 OR " +    //Load your own players and any local copies you've made
                                 "(LOCALCOPY=0 AND OWNERID<>@ownerid AND ID NOT IN (SELECT ID FROM PLAYERS WHERE LOCALCOPY=1)" + //Also load any players not owned by you that don't have a local copy
@@ -224,35 +226,36 @@ namespace Stream_Info_Handler
 
                     loaded_players[i].id = reader.GetString(0);
                     rosterid.Add(loaded_players[i].id);
-                    loaded_players[i].ownerid = reader.GetString(1);
+                    loaded_players[i].owningUserId = reader.GetString(1);
                     loaded_players[i].game = reader.GetString(2);
-                    loaded_players[i].iscopy = reader.GetBoolean(3);
+                    loaded_players[i].duplicateRecord = reader.GetBoolean(3);
                     loaded_players[i].tag = reader.GetString(4);
                     loaded_players[i].elo = Int32.Parse(reader.GetString(5));
-                    loaded_players[i].fullname = reader.GetString(6);
+                    loaded_players[i].fullName = reader.GetString(6);
                     loaded_players[i].twitter = reader.GetString(7);
                     loaded_players[i].region = reader.GetString(8);
-                    loaded_players[i].fullsponsor = reader.GetString(9);
+                    loaded_players[i].fullSponsor = reader.GetString(9);
                     loaded_players[i].sponsor = reader.GetString(10);
                     if (!reader.IsDBNull(11))
                         loaded_players[i].misc = reader.GetString(11);
-                    loaded_players[i].wireless_controller = reader.GetBoolean(12);
-                    loaded_players[i].character[0] = reader.GetString(13);
-                    loaded_players[i].color[0] = reader.GetInt32(14);
+                    loaded_players[i].usingWirelessController = reader.GetBoolean(12);
+                    loaded_players[i].characterName = reader.GetString(13);
+                    loaded_players[i].colorNumber = reader.GetInt32(14);
+                    loaded_players[i].pronouns = reader.GetString(15);
 
                     //Check if this is a duplicate tag
                     if (player_names.Contains(loaded_players[i].tag))
                     {
                         //Add the player's name to the unqiue tag
-                        loaded_players[i].unique_tag = loaded_players[i].tag + "(" + loaded_players[i].fullname + ")";
+                        loaded_players[i].uniqueTag = loaded_players[i].tag + "(" + loaded_players[i].fullName + ")";
                         int copy_tag = player_names.IndexOf(loaded_players[i].tag);
-                        loaded_players[copy_tag].unique_tag = loaded_players[copy_tag].tag + "(" + loaded_players[copy_tag].fullname + ")";
+                        loaded_players[copy_tag].uniqueTag = loaded_players[copy_tag].tag + "(" + loaded_players[copy_tag].fullName + ")";
                         player_names.Add("");
                     }
                     else
                     {
                         //The player's unique tag is the tag
-                        loaded_players[i].unique_tag = loaded_players[i].tag;
+                        loaded_players[i].uniqueTag = loaded_players[i].tag;
                         player_names.Add(loaded_players[i].tag);
                     }
                 }
@@ -273,13 +276,13 @@ namespace Stream_Info_Handler
                 List<MySqlParameter> playerparams = new List<MySqlParameter>();
 
                 playerparams.Add(new MySqlParameter("@queueid", global_values.queue_id));
-                playerparams.Add(new MySqlParameter("@number", new_match.number));
-                playerparams.Add(new MySqlParameter("@status", new_match.status));
-                playerparams.Add(new MySqlParameter("@round", new_match.round));
-                playerparams.Add(new MySqlParameter("@player1", new_match.player[0]));
-                playerparams.Add(new MySqlParameter("@player2", new_match.player[1]));
-                playerparams.Add(new MySqlParameter("@player3", new_match.player[2]));
-                playerparams.Add(new MySqlParameter("@player4", new_match.player[3]));
+                playerparams.Add(new MySqlParameter("@number", new_match.positionInQueue));
+                playerparams.Add(new MySqlParameter("@status", new_match.matchStatus));
+                playerparams.Add(new MySqlParameter("@round", new_match.roundInBracket));
+                playerparams.Add(new MySqlParameter("@player1", new_match.playerNames[0]));
+                playerparams.Add(new MySqlParameter("@player2", new_match.playerNames[1]));
+                playerparams.Add(new MySqlParameter("@player3", new_match.playerNames[2]));
+                playerparams.Add(new MySqlParameter("@player4", new_match.playerNames[3]));
 
                 if (new_entry == true)
                 {
@@ -339,13 +342,13 @@ namespace Stream_Info_Handler
                 for (int i = 0; reader.Read(); i++)
                 {
                     QueueEntryModel new_match = new QueueEntryModel();
-                    new_match.number = reader.GetInt32(0);
-                    new_match.status = reader.GetInt32(1);
-                    new_match.round = reader.GetString(2);
-                    new_match.player[0] = reader.GetString(3);
-                    new_match.player[1] = reader.GetString(4);
-                    new_match.player[2] = reader.GetString(5);
-                    new_match.player[3] = reader.GetString(6);
+                    new_match.positionInQueue = reader.GetInt32(0);
+                    new_match.matchStatus = (QueueEntryModel.status)reader.GetInt32(1);
+                    new_match.roundInBracket = reader.GetString(2);
+                    new_match.playerNames[0] = reader.GetString(3);
+                    new_match.playerNames[1] = reader.GetString(4);
+                    new_match.playerNames[2] = reader.GetString(5);
+                    new_match.playerNames[3] = reader.GetString(6);
                     loaded_queue.Add(new_match);
                 }
                 reader.Close();
@@ -397,7 +400,7 @@ namespace Stream_Info_Handler
 
                     dbCon.Close();
 
-                    StreamQueue.queueList[queueid].name = game_name;
+                    StreamQueue.queueList[queueid].queueName = game_name;
                     return true;
                 }
             }

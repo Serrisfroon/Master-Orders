@@ -143,7 +143,7 @@ namespace Stream_Info_Handler
             loaded_queue.CopyTo(order_queue);
             for (int i = 0; i < loaded_queue.Count; i++)
             {
-                int check_number = order_queue[i].number - 1;
+                int check_number = order_queue[i].positionInQueue - 1;
                 loaded_queue[check_number] = order_queue[i];
             }
 
@@ -160,7 +160,7 @@ namespace Stream_Info_Handler
                 cbx_player1.Items.Clear();                                            //Empty the item list
                 for (int i = 0; i < global_values.roster.Count; i++)
                 {
-                    cbx_player1.Items.Add(global_values.roster[i].unique_tag);
+                    cbx_player1.Items.Add(global_values.roster[i].uniqueTag);
                 }
                 cbx_player1.EndUpdate();                                              //End
                 object[] playerarray = cbx_player1.Items.Cast<Object>().ToArray();
@@ -196,21 +196,21 @@ namespace Stream_Info_Handler
             lvw_matches.Items.Clear();
             for (int i = loaded_queue.Count - 1; i >= 0; i--)
             {
-                ListViewItem add_item = new ListViewItem(loaded_queue[i].number.ToString());
-                add_item.SubItems.Add(loaded_queue[i].round);
-                foreach (string queueplayer in loaded_queue[i].player)
+                ListViewItem add_item = new ListViewItem(loaded_queue[i].positionInQueue.ToString());
+                add_item.SubItems.Add(loaded_queue[i].roundInBracket);
+                foreach (string queueplayer in loaded_queue[i].playerNames)
                 {
                     add_item.SubItems.Add(queueplayer);
                 }
-                switch (loaded_queue[i].status)
+                switch (loaded_queue[i].matchStatus)
                 {
-                    case 1:
+                    case QueueEntryModel.status.currentMatch:
                         add_item.BackColor = current_match_color;
                         break;
-                    case 2:
+                    case QueueEntryModel.status.nextMatch:
                         add_item.BackColor = next_match_color;
                         break;
-                    case 3:
+                    case QueueEntryModel.status.currentNextMatch:
                         add_item.BackColor = dual_match_color;
                         break;
                 }
@@ -282,7 +282,7 @@ namespace Stream_Info_Handler
             //Update the queue as a failsafe
             loaded_queue = database_tools.load_queue(global_values.queue_id, false);
             //Add the new match to the queue
-            QueueEntryModel new_match = new QueueEntryModel(loaded_queue.Count + 1, 0, new_round, new_player[0], new_player[1], new_player[2], new_player[3]);
+            QueueEntryModel new_match = new QueueEntryModel(loaded_queue.Count + 1, 0, new_round, new List<string>() { new_player[0], new_player[1], new_player[2], new_player[3] } );
             database_tools.add_match(new_match, true);
             //Reload the queue
             load_queue(0, false);
@@ -308,8 +308,8 @@ namespace Stream_Info_Handler
             int selected_index = loaded_queue.Count - 1 - lvw_matches.SelectedItems[0].Index;
 
             //Switch the round numbers in the queue
-            loaded_queue[selected_index].number -= 1;
-            loaded_queue[selected_index - 1].number += 1;
+            loaded_queue[selected_index].positionInQueue -= 1;
+            loaded_queue[selected_index - 1].positionInQueue += 1;
             //Write the switched rounds to the database
             database_tools.add_match(loaded_queue[selected_index], false);
             database_tools.add_match(loaded_queue[selected_index - 1], false);
@@ -337,8 +337,8 @@ namespace Stream_Info_Handler
             int selected_index = loaded_queue.Count - 1 - lvw_matches.SelectedItems[0].Index;
 
             //Switch the round numbers in the queue
-            loaded_queue[selected_index].number += 1;
-            loaded_queue[selected_index + 1].number -= 1;
+            loaded_queue[selected_index].positionInQueue += 1;
+            loaded_queue[selected_index + 1].positionInQueue -= 1;
             //Write the switched rounds to the database
             database_tools.add_match(loaded_queue[selected_index], false);
             database_tools.add_match(loaded_queue[selected_index + 1], false);
@@ -358,24 +358,24 @@ namespace Stream_Info_Handler
                 //Check if any match is currently queued as the next match
                 //Reset the match status if it is and end the loop
                 //Save the index of the match
-                if (loaded_queue[i].status == 2)
+                if (loaded_queue[i].matchStatus == QueueEntryModel.status.nextMatch)
                 {
-                    loaded_queue[i].status = 0;
+                    loaded_queue[i].matchStatus = QueueEntryModel.status.normalMatch;
                     queued_match = i;
                     break;
                 }
-                if (loaded_queue[i].status == 3)
+                if (loaded_queue[i].matchStatus == QueueEntryModel.status.currentNextMatch)
                 {
-                    loaded_queue[i].status = 1;
+                    loaded_queue[i].matchStatus = QueueEntryModel.status.currentMatch;
                     queued_match = i;
                     break;
                 }
             }
             //Set the status of the currently selected match to queued
-            if (loaded_queue[selected_index].status == 1)
-                loaded_queue[selected_index].status = 3;
+            if (loaded_queue[selected_index].matchStatus == QueueEntryModel.status.currentMatch)
+                loaded_queue[selected_index].matchStatus = QueueEntryModel.status.currentNextMatch;
             else
-                loaded_queue[selected_index].status = 2;
+                loaded_queue[selected_index].matchStatus = QueueEntryModel.status.nextMatch;
 
             //Write the updated rounds to the database
             if (queued_match != -1)
@@ -409,7 +409,7 @@ namespace Stream_Info_Handler
             //Shift all matches after the current match down 1
             for (int i = selected_index + 1; i < loaded_queue.Count(); i++)
             {
-                loaded_queue[i].number -= 1;
+                loaded_queue[i].positionInQueue -= 1;
                 database_tools.add_match(loaded_queue[i], false);
             }
 
@@ -439,7 +439,7 @@ namespace Stream_Info_Handler
                 int match_index = loaded_queue.Count - lvw_matches.SelectedIndices[0] - 1;
                 for (int ii = 1; ii <= numberOfPlayers; ii++)
                 {
-                    string playerBeingUpdated = loaded_queue[match_index].player[ii - 1];
+                    string playerBeingUpdated = loaded_queue[match_index].playerNames[ii - 1];
                     PlayerRecordModel playerRecord = new PlayerRecordModel();
                     if (PlayerDatabase.playerRecords.TryGetValue(playerBeingUpdated, out playerRecord))
                     {
@@ -586,9 +586,9 @@ namespace Stream_Info_Handler
                     for (int ii = 0; ii < 4; ii++)
                     {
                         //Update any instance of the player
-                        if (loaded_queue[i].player[ii] == playerBeingUpdated)
+                        if (loaded_queue[i].playerNames[ii] == playerBeingUpdated)
                         {
-                            loaded_queue[i].player[ii] = savePlayerForm.outputPlayer.id;
+                            loaded_queue[i].playerNames[ii] = savePlayerForm.outputPlayer.id;
                             updated_match = true;
                         }
                     }
@@ -782,7 +782,7 @@ namespace Stream_Info_Handler
 
         private async void btn_link_event_Click(object sender, EventArgs e)
         {
-            bool success = await Tournament.LinkTournament(txt_tournament_url.Text);
+            //bool success = await Tournament.LinkTournament(txt_tournament_url.Text);
             /*
             //The Challonge API key
             string APIKEY = "2HbljZB6H72nVTYdH7xqNwmG8cEFr8gNuE7NXeBZ";

@@ -5,6 +5,9 @@ using System.IO;
 using System.Windows.Forms;
 using CharacterLibrary;
 using Stream_Info_Handler.AppSettings;
+using SqlDatabaseLibrary.Models;
+using SqlDatabaseLibrary;
+using Stream_Info_Handler.StreamAssistant.DataManagement;
 
 namespace Stream_Info_Handler.StreamAssistant
 {
@@ -32,7 +35,7 @@ namespace Stream_Info_Handler.StreamAssistant
         /// <param name="queueBox">The ComboBox to add queues to</param>
         /// <param name="queues">The List to pull names from</param>
         /// <param name="selectedQueue"></param>
-        public static void UpdateQueues(ComboBox queueBox, List<database_tools.streamQueue> queues, int selectedQueue)
+        public static void UpdateQueues(ComboBox queueBox, List<StreamQueueModel> queues, int selectedQueue)
         {
             //Add Queues to the dropdown
             queueBox.BeginUpdate();
@@ -40,11 +43,11 @@ namespace Stream_Info_Handler.StreamAssistant
             queueBox.Items.Add("None");
             for (int i = 0; i < queues.Count; i++)
             {
-                queueBox.Items.Add(queues[i].name);
+                queueBox.Items.Add(queues[i].queueName);
             }
             queueBox.EndUpdate();
             if (selectedQueue != -1)
-                queueBox.Text = queues[selectedQueue].name;
+                queueBox.Text = queues[selectedQueue].queueName;
 
         }
 
@@ -120,7 +123,7 @@ namespace Stream_Info_Handler.StreamAssistant
             update_box.Items.Clear();                                            //Empty the item list
             for (int i = 0; i < global_values.roster.Count; i++)
             {
-                update_box.Items.Add(global_values.roster[i].unique_tag);
+                update_box.Items.Add(global_values.roster[i].uniqueTag);
             }
             update_box.EndUpdate();                                              //End
             update_box.Text = "";

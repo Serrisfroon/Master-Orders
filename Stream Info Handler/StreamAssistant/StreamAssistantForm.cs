@@ -1094,13 +1094,13 @@ namespace Stream_Info_Handler.StreamAssistant
             //Cycle through the queue to find the current match and the pushed match
             for (int i = 0; i < loaded_queue.Count(); i++)
             {
-                switch (loaded_queue[i].status)
+                switch (loaded_queue[i].matchStatus)
                 {
-                    case 1:
+                    case QueueEntryModel.status.currentMatch:
                         current_match = i;              //This is the current match
                         break;
-                    case 2:
-                    case 3:
+                    case QueueEntryModel.status.nextMatch:
+                    case QueueEntryModel.status.currentNextMatch:
                         next_match = i;                 //This match is being pushed to stream
                         break;
                     default:
@@ -1108,13 +1108,13 @@ namespace Stream_Info_Handler.StreamAssistant
                         break;
                 }
                 //Reset every match's status
-                loaded_queue[i].status = 0;
+                loaded_queue[i].matchStatus = 0;
             }
 
             if (next_match != -1)
             {
                 //If a match is being pushed to stream, mark it as the next match
-                loaded_queue[next_match].status = 1;
+                loaded_queue[next_match].matchStatus = QueueEntryModel.status.currentMatch;
                 new_match = next_match;
             }
             else
@@ -1123,7 +1123,7 @@ namespace Stream_Info_Handler.StreamAssistant
                 //Otherwise exit this function
                 if (current_match != -1)
                 {
-                    int current_match_number = loaded_queue[current_match].number;
+                    int current_match_number = loaded_queue[current_match].positionInQueue;
                     //Check if the match advancing to is outside the queue
                     if (current_match_number + advancement <= 0 || current_match_number + advancement > loaded_queue.Count())
                     {
@@ -1139,10 +1139,10 @@ namespace Stream_Info_Handler.StreamAssistant
                             new_match_number += outside_queue;
                         for (int i = 0; i < loaded_queue.Count(); i++)
                         {
-                            if (loaded_queue[i].number == new_match_number)
+                            if (loaded_queue[i].positionInQueue == new_match_number)
                             {
                                 new_match = i;
-                                loaded_queue[new_match].status = 1;
+                                loaded_queue[new_match].matchStatus = QueueEntryModel.status.currentMatch;
                             }
                         }
                     }
@@ -1151,11 +1151,11 @@ namespace Stream_Info_Handler.StreamAssistant
                 {
                     for (int i = 0; i < loaded_queue.Count(); i++)
                     {
-                        if (loaded_queue[i].number == 1)
+                        if (loaded_queue[i].positionInQueue == 1)
                         {
                             current_match = i;
                             new_match = i;
-                            loaded_queue[new_match].status = 1;
+                            loaded_queue[new_match].matchStatus = QueueEntryModel.status.currentMatch;
                         }
                     }
                 }
@@ -1191,14 +1191,14 @@ namespace Stream_Info_Handler.StreamAssistant
                         if ((ii < 2 && global_values.format == "Singles") ||
                             (ii > 1 && global_values.format == "Doubles"))
                         {
-                            playerBoxes[ii].tag.Text = PlayerDatabase.GetUniqueTagFromId(loaded_queue[new_match].player[i]);
+                            playerBoxes[ii].tag.Text = PlayerDatabase.GetUniqueTagFromId(loaded_queue[new_match].playerNames[i]);
                         }
                     }
                 }
             }
 
-            cbx_round.Text = loaded_queue[new_match].round;
-            cbx_team_round.Text = loaded_queue[new_match].round;
+            cbx_round.Text = loaded_queue[new_match].roundInBracket;
+            cbx_team_round.Text = loaded_queue[new_match].roundInBracket;
             return true;
         }
 
@@ -1243,9 +1243,9 @@ namespace Stream_Info_Handler.StreamAssistant
             {
                 for (int i = 1; i < StreamQueue.queueList.Count; i++)
                 {
-                    if (StreamQueue.queueList[i].name == cbx_queues.Text)
+                    if (StreamQueue.queueList[i].queueName == cbx_queues.Text)
                     {
-                        queuegame = StreamQueue.queueList[i].game;
+                        queuegame = StreamQueue.queueList[i].queueGame;
                         queueid = i;
                     }
                 }
@@ -1255,11 +1255,11 @@ namespace Stream_Info_Handler.StreamAssistant
                 //Compare the current queue's game to the new one. Update if there is a difference.
                 if (queueid != 0)
                 {
-                    if (StreamQueue.queueList[global_values.queue_id].game != queuegame)
+                    if (StreamQueue.queueList[global_values.queue_id].queueGame != queuegame)
                     {
                         if (database_tools.regame_queue(cbx_queues.Text, queuegame, queueid) == false)
                         {
-                            cbx_queues.SelectedIndex = cbx_queues.FindStringExact(StreamQueue.queueList[global_values.queue_id].name);
+                            cbx_queues.SelectedIndex = cbx_queues.FindStringExact(StreamQueue.queueList[global_values.queue_id].queueName);
                             return;
                         }
                     }

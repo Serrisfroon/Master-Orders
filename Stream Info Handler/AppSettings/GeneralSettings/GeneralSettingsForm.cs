@@ -1134,7 +1134,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                         int queueidd = -1;
                         for (int i = 0; i < StreamQueue.queueList.Count; i++)
                         {
-                            if (StreamQueue.queueList[i].name == cbx_queues.Text)
+                            if (StreamQueue.queueList[i].queueName == cbx_queues.Text)
                             {
                                 queueidd = i;
                             }
@@ -1156,7 +1156,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             int queueid = -1;
             for (int i = 0; i < StreamQueue.queueList.Count; i++)
             {
-                if (StreamQueue.queueList[i].name == cbx_queues.Text)
+                if (StreamQueue.queueList[i].queueName == cbx_queues.Text)
                 {
                     queueid = i;
                 }
@@ -1269,8 +1269,8 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             string queuename = "";
             for (int i = 0; i < StreamQueue.queueList.Count; i++)
             {
-                if (StreamQueue.queueList[i].name == cbx_queues.Text)
-                    queuename = StreamQueue.queueList[i].game;
+                if (StreamQueue.queueList[i].queueName == cbx_queues.Text)
+                    queuename = StreamQueue.queueList[i].queueGame;
             }
             cbx_queuegame.SelectedIndex = cbx_queuegame.FindStringExact(queuename);
         }
@@ -1320,7 +1320,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 cbx_queues.Items.Add("None");
                 for (int i = 0; i < StreamQueue.queueList.Count; i++)
                 {
-                    cbx_queues.Items.Add(StreamQueue.queueList[i].name);
+                    cbx_queues.Items.Add(StreamQueue.queueList[i].queueName);
                 }
                 cbx_queues.EndUpdate();
             }
@@ -1380,9 +1380,9 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             int queueid = -1;
             for (int i = 0; i < StreamQueue.queueList.Count; i++)
             {
-                if (StreamQueue.queueList[i].name == cbx_queues.Text)
+                if (StreamQueue.queueList[i].queueName == cbx_queues.Text)
                 {
-                    queuegame = StreamQueue.queueList[i].game;
+                    queuegame = StreamQueue.queueList[i].queueGame;
                     queueid = i;
                 }
             }

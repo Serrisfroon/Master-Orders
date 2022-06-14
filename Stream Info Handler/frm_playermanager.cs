@@ -115,9 +115,9 @@ namespace Stream_Info_Handler
                 add_item.SubItems.Add(player_roster[i].tag);
                 add_item.SubItems.Add(player_roster[i].sponsor);
                 add_item.SubItems.Add(player_roster[i].twitter);
-                add_item.SubItems.Add(player_roster[i].fullname);
+                add_item.SubItems.Add(player_roster[i].fullName);
                 add_item.SubItems.Add(player_roster[i].region);
-                add_item.SubItems.Add(player_roster[i].character[0]);
+                add_item.SubItems.Add(player_roster[i].characterName);
                 add_item.SubItems.Add(player_roster[i].misc);
                 lvw_players.Items.Add(add_item);
             }
@@ -205,16 +205,16 @@ namespace Stream_Info_Handler
             txt_tag.Text = view_player.tag;
             txt_twitter.Text = view_player.twitter;
             txt_elo.Text = view_player.elo.ToString();
-            txt_fullsponsor.Text = view_player.fullsponsor;
+            txt_fullsponsor.Text = view_player.fullSponsor;
             txt_sponsor.Text = view_player.sponsor;
             txt_misc.Text = view_player.misc;
-            txt_name.Text = view_player.fullname;
+            txt_name.Text = view_player.fullName;
             lbl_playerid.Text = "Player ID: " + view_player.id;
-            lbl_ownerid.Text = "Owner: " + database_tools.get_owner_name(view_player.ownerid);
-            if (view_player.character[0] != "")
+            lbl_ownerid.Text = "Owner: " + database_tools.get_owner_name(view_player.owningUserId);
+            if (view_player.characterName != "")
             {
-                characterName = view_player.character[0];
-                colorNumber = view_player.color[0];
+                characterName = view_player.characterName;
+                colorNumber = view_player.colorNumber;
                 btn_character.BackgroundImage = Image.FromFile(character_path + @"\" + characterName + @"\" + colorNumber + @"\stamp.png");
                 btn_character.Text = "";
             }
@@ -257,7 +257,7 @@ namespace Stream_Info_Handler
             if (enable == true)
             {
                 lbl_playerid.Text = "Player ID: " + view_player.id;
-                lbl_ownerid.Text = "Owner: " + database_tools.get_owner_name(view_player.ownerid);
+                lbl_ownerid.Text = "Owner: " + database_tools.get_owner_name(view_player.owningUserId);
             }   
             
             btn_cancel.Enabled = enable;
@@ -285,7 +285,7 @@ namespace Stream_Info_Handler
 
         private void Btn_removeplayer_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("Are you sure you want to delete the player '" + view_player.unique_tag + "' from the database?", "Delete Player", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if(MessageBox.Show("Are you sure you want to delete the player '" + view_player.uniqueTag + "' from the database?", "Delete Player", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 database_tools.remove_player(view_player);
                 update_players();
@@ -296,7 +296,7 @@ namespace Stream_Info_Handler
         {
             view_player = new PlayerRecordModel();
             view_player.id = "";
-            view_player.ownerid = global_values.user_id.ToString();
+            view_player.owningUserId = global_values.user_id.ToString();
             enable_boxes(true);
             lbl_playerid.Text = "No Player ID assigned";
             txt_elo.Text = PlayerRecordModel.defaultElo.ToString();
@@ -324,7 +324,7 @@ namespace Stream_Info_Handler
 
             PlayerRecordModel save_player = new PlayerRecordModel();
             string playerid = view_player.id;
-            string ownerid = view_player.ownerid;
+            string ownerid = view_player.owningUserId;
             bool new_player = false;
 
             //Generate a new playerid if this is a new player
@@ -340,26 +340,26 @@ namespace Stream_Info_Handler
             }
 
             save_player.id = playerid;
-            save_player.ownerid = ownerid;
+            save_player.owningUserId = ownerid;
 
             //Check if this is being saved as a copy
             if (ownerid == global_values.user_id.ToString())
-                save_player.iscopy = false;
+                save_player.duplicateRecord = false;
             else
-                save_player.iscopy = true;
+                save_player.duplicateRecord = true;
             save_player.tag = txt_tag.Text;
             save_player.twitter = txt_twitter.Text;
             save_player.region = cbx_region.Text;
             save_player.sponsor = txt_sponsor.Text;
-            save_player.fullname = txt_name.Text;
-            save_player.fullsponsor = txt_fullsponsor.Text;
+            save_player.fullName = txt_name.Text;
+            save_player.fullSponsor = txt_fullsponsor.Text;
             save_player.elo = Int32.Parse(txt_elo.Text);
             save_player.misc = txt_misc.Text;
             save_player.game = cbx_character_roster.Text;
-            save_player.wireless_controller = ckb_wireless.Checked;
+            save_player.usingWirelessController = ckb_wireless.Checked;
 
-            save_player.character[0] = characterName;
-            save_player.color[0] = colorNumber;           
+            save_player.characterName = characterName;
+            save_player.colorNumber = colorNumber;           
 
             database_tools.add_player(save_player, new_player);
             update_players();

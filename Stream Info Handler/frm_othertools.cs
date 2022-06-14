@@ -17,6 +17,7 @@ using Stream_Info_Handler.CharacterSelect;
 using CharacterLibrary;
 using Stream_Info_Handler.AppSettings;
 using SqlDatabaseLibrary.Models;
+using Stream_Info_Handler.StreamAssistant.DataManagement;
 
 namespace Stream_Info_Handler
 {
@@ -644,7 +645,7 @@ namespace Stream_Info_Handler
             foreach (PlayerRecordModel player in player_roster)
             {
                 if(player != null)
-                    cbx_tag1.Items.Add(player.unique_tag);
+                    cbx_tag1.Items.Add(player.uniqueTag);
             }
             cbx_tag1.EndUpdate();
             for (int ii = 0; ii < 4; ii++)
@@ -826,7 +827,7 @@ namespace Stream_Info_Handler
             if(player_data[player_index] != null)
             {
                 if(player_boxes[player_index].tag.Text != player_data[player_index].tag &&
-                    player_boxes[player_index].tag.Text != player_data[player_index].unique_tag)
+                    player_boxes[player_index].tag.Text != player_data[player_index].uniqueTag)
                 {
                     player_data[player_index] = new PlayerRecordModel();
                 }
@@ -852,7 +853,7 @@ namespace Stream_Info_Handler
             if (player_boxes[player_index].tag.SelectedIndex >= 0)
             {
                 int i = player_boxes[player_index].tag.SelectedIndex;
-                if (player_roster[i].unique_tag == player_boxes[player_index].tag.Text)
+                if (player_roster[i].uniqueTag == player_boxes[player_index].tag.Text)
                 {
                     //Store the player information
                     player_data[player_index] = player_roster[i];
@@ -868,7 +869,7 @@ namespace Stream_Info_Handler
                         }
                         else
                         {
-                            this.BeginInvoke((MethodInvoker)delegate { player_boxes[player_index].tag.Text = player_roster[i].unique_tag; });
+                            this.BeginInvoke((MethodInvoker)delegate { player_boxes[player_index].tag.Text = player_roster[i].uniqueTag; });
                             player_boxes[player_index].sponsor_image = "";
                             player_boxes[player_index].sponsor.BackgroundImage = null;
                             player_boxes[player_index].sponsor.Text = "Add Sponsor Logo";
@@ -877,7 +878,7 @@ namespace Stream_Info_Handler
                     else
                     {
                         //Update the text of this ComboBox to the display text of this player's tag
-                        this.BeginInvoke((MethodInvoker)delegate { player_boxes[player_index].tag.Text = player_roster[i].unique_tag; });
+                        this.BeginInvoke((MethodInvoker)delegate { player_boxes[player_index].tag.Text = player_roster[i].uniqueTag; });
                         player_boxes[player_index].sponsor_image = "";
                         player_boxes[player_index].sponsor.BackgroundImage = null;
                         player_boxes[player_index].sponsor.Text = "Add Sponsor Logo";
@@ -889,21 +890,21 @@ namespace Stream_Info_Handler
                     //Input the player's characters
                     for (int ii = 0; ii < 4; ii++)
                     {
-                        if (player_roster[i].character[ii] == "" || player_roster[i].character[ii] == null)
+                        if (player_roster[i].characterName == "" || player_roster[i].colorNumber == -1)
                         {
-                            player_boxes[player_index].character_image[ii] = "";
-                            player_boxes[player_index].characterButtons[ii].BackgroundImage = null;
-                            player_boxes[player_index].characterButtons[ii].Text = "Add Character";
+                            player_boxes[player_index].character_image[0] = "";
+                            player_boxes[player_index].characterButtons[0].BackgroundImage = null;
+                            player_boxes[player_index].characterButtons[0].Text = "Add Character";
                         }
                         else
                         {
-                            string character_image = character_path + @"\" + player_roster[i].character[ii] + @"\" + player_roster[i].color[ii] + @"\" + CharacterImageType + ".png";
+                            string character_image = character_path + @"\" + player_roster[i].characterName + @"\" + player_roster[i].colorNumber + @"\" + CharacterImageType + ".png";
                             if (File.Exists(character_image))
                             {
                                 player_boxes[player_index].character_image[ii] = character_image;
                                 player_boxes[player_index].characterButtons[ii].BackgroundImage = Image.FromFile(character_image);
                                 player_boxes[player_index].characterButtons[ii].Text = "";
-                                CharacterData newCharacter = new CharacterData(player_roster[i].character[ii], player_roster[i].color[ii]);
+                                CharacterData newCharacter = new CharacterData(player_roster[i].characterName, player_roster[i].colorNumber);
                                 player_boxes[player_index].playerCharacters[ii] = newCharacter;
 
                             }
@@ -1068,7 +1069,7 @@ namespace Stream_Info_Handler
         {
             int top8_number = enter_player;
             int character_number = enter_character;
-            player_data[top8_number].character[character_number] = "";
+            player_data[top8_number].characterName = "";
 
 
             player_boxes[top8_number].character_image[character_number] = "";

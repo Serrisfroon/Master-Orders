@@ -3,6 +3,7 @@ using Google.Apis.Util.Store;
 using Stream_Info_Handler.StreamAssistant;
 using System.Collections.Generic;
 using System.IO;
+using SqlDatabaseLibrary.Models;
 
 namespace Stream_Info_Handler
 {

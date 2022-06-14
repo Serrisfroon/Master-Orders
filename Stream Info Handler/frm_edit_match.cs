@@ -1,4 +1,5 @@
 ﻿using SqlDatabaseLibrary;
+using SqlDatabaseLibrary.Models;
 using Stream_Info_Handler.AppSettings;
 using System;
 using System.Data;
@@ -27,15 +28,15 @@ namespace Stream_Info_Handler
             this.TopMost = global_values.keepWindowsOnTop;
 
             match = edit_match;
-            cbx_round.Text = match.round;
+            cbx_round.Text = match.roundInBracket;
             cbx_player1.Items.AddRange(players.Cast<Object>().ToArray());
             cbx_player2.Items.AddRange(players.Cast<Object>().ToArray());
             cbx_player3.Items.AddRange(players.Cast<Object>().ToArray());
             cbx_player4.Items.AddRange(players.Cast<Object>().ToArray());
-            cbx_player1.SelectedIndex = cbx_player1.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.player[0]));
-            cbx_player2.SelectedIndex = cbx_player2.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.player[1]));
-            cbx_player3.SelectedIndex = cbx_player3.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.player[2]));
-            cbx_player4.SelectedIndex = cbx_player4.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.player[3]));
+            cbx_player1.SelectedIndex = cbx_player1.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.playerNames[0]));
+            cbx_player2.SelectedIndex = cbx_player2.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.playerNames[1]));
+            cbx_player3.SelectedIndex = cbx_player3.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.playerNames[2]));
+            cbx_player4.SelectedIndex = cbx_player4.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.playerNames[3]));
 
             if (global_values.format == "Singles")
             {
@@ -115,12 +116,12 @@ namespace Stream_Info_Handler
             }
 
             //Update the match info
-            match.player[0] = new_player[0];
-            match.player[1] = new_player[1];
-            match.player[2] = new_player[2];
-            match.player[3] = new_player[3];
+            match.playerNames[0] = new_player[0];
+            match.playerNames[1] = new_player[1];
+            match.playerNames[2] = new_player[2];
+            match.playerNames[3] = new_player[3];
 
-            match.round = new_round;
+            match.roundInBracket = new_round;
 
             //Add the new match to the queue
             database_tools.add_match(match, false);
