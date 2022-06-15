@@ -15,7 +15,7 @@ namespace Stream_Info_Handler.AppSettings
         {
             "Super Smash Bros Melee",
             "Super Smash Bros for Wii U",
-            "Super Smash Bros for Ultimate",
+            "Super Smash Bros Ultimate",
             "Project Plus",
             "Rivals of Aether"
         };

@@ -26,6 +26,7 @@ namespace Stream_Info_Handler.AppSettings
             if (checkGameName == "")
             {
                 errorMessages.Add($"{ loadGameName } and its directory did not load correctly. Directory: \n{ DirectoryManagement.characterRostersDirectory }");
+                GlobalSettings.selectedGame = "";
             }
             else
             {

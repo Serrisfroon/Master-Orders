@@ -320,6 +320,8 @@ namespace Stream_Info_Handler.AppSettings
             string rawDirectories = "";
             for (int i = 0; i < GlobalSettings.availableGames.Length; i++)
             {
+                // Fill out gameDirectiories with empty strings if not dictionary
+                // Otherwise do a tryfind to not error out
                 rawDirectories = rawDirectories + ";" + GlobalSettings.availableGames[i] + "," + DirectoryManagement.gameDirectories[GlobalSettings.availableGames[i]];
             }
             rawDirectories = rawDirectories.Remove(0, 1);   //Remove the starting semicolon

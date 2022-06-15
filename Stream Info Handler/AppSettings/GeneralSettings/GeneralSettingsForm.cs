@@ -47,8 +47,9 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             InitializeComponent();
 
             //Load stream queues from the database and add them to the combobox
-            LoadSettingsFormControls.InitializeImageScoreControls();
             LoadSettingsFormControls.settingsForm = this;
+
+            LoadSettingsFormControls.InitializeImageScoreControls();
             LoadSettingsFormControls.LoadStreamQueues(cbx_queues, StreamQueue.queueList);
 
             //Load the character rosters
