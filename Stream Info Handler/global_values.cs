@@ -18,7 +18,6 @@ namespace Stream_Info_Handler
         public static bool enableYoutubeFunctions;
         public static bool enableYoutubeThumbnails;
         public static bool copyVideoTitle;
-        public static List<PlayerRecordModel> roster;
         public static string reenable_upload = "";
         public static bool allow_upload = true;
         public static string current_youtube_data;

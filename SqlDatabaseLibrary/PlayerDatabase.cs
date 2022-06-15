@@ -14,20 +14,62 @@ namespace SqlDatabaseLibrary
         /// <summary>
         /// The master list of players used by different tools.
         /// </summary>
-        public static Dictionary<string, PlayerRecordModel> playerRecords { get; set; }
+        public static List<PlayerRecordModel> playerRecords { get; set; }
+
+        public enum SearchProperty
+        {
+            id,
+            tag,
+            uniqueTag
+        }
+
         /// <summary>
-        /// A companion list to the above for quick reference to each player's Id
+        /// Find a player record based off a string value
         /// </summary>
-        public static Dictionary<string, PlayerRecordModel> playerIds { get; set; }
+        /// <param name="inputString"></param>
+        /// <param name="searchProperty"></param>
+        /// <returns></returns>
+        public static PlayerRecordModel FindRecordFromString(string inputString, SearchProperty searchProperty)
+        {
+            if(playerRecords == null)
+            {
+                return null;
+            }
+            switch(searchProperty)
+            {
+                case SearchProperty.id:
+                    return playerRecords.Find(x => x.id == inputString);
+                case SearchProperty.tag:
+                    return playerRecords.Find(x => x.tag == inputString);
+                case SearchProperty.uniqueTag:
+                    return playerRecords.Find(x => x.uniqueTag == inputString);
+                default:
+                    return null;
+            }
+        }
+
+        /// <summary>
+        /// Returns if a record exists based off a string value
+        /// </summary>
+        /// <param name="inputString"></param>
+        /// <param name="searchProperty"></param>
+        /// <returns></returns>
+        public static bool RecordExistsFromString(string inputString, SearchProperty searchProperty)
+        {
+            PlayerRecordModel foundRecord = FindRecordFromString(inputString, searchProperty);
+            return foundRecord != null;
+        }
 
         public static string GetUniqueTagFromId(string inputId)
         {
-            bool playerFoundFromId = playerIds.TryGetValue(inputId, out PlayerRecordModel foundPlayerRecord);
+            PlayerRecordModel foundPlayerRecord = FindRecordFromString(inputId, SearchProperty.id);
+                //TryGetValue(inputId, out PlayerRecordModel foundPlayerRecord);
             //Set the tag of the player. Other fields will populate off of this
-            if (playerFoundFromId)
-                return foundPlayerRecord.uniqueTag;
-            else
+            if (foundPlayerRecord == null)
+            {
                 return inputId;
+            }
+            return foundPlayerRecord.uniqueTag;
         }
 
         /// <summary>
@@ -214,8 +256,7 @@ namespace SqlDatabaseLibrary
         public static void LoadPlayers(string gameName)
         {
             var dbCon = SqlDatabaseConnection.Instance();
-            Dictionary<string, PlayerRecordModel> loadedPlayers = new Dictionary<string, PlayerRecordModel>();
-            Dictionary<string, PlayerRecordModel> loadedPlayerIds = new Dictionary<string, PlayerRecordModel>();
+            List<PlayerRecordModel> loadedPlayers = new List<PlayerRecordModel>();
 
             if (dbCon.IsConnect())
             {
@@ -262,17 +303,16 @@ namespace SqlDatabaseLibrary
                     newPlayer.pronouns = reader.GetString(15);
 
                     //Check if this is a duplicate tag
-                    if(loadedPlayers.ContainsKey(newPlayer.tag))
+                    PlayerRecordModel foundRecord = FindRecordFromString(newPlayer.tag, SearchProperty.tag);
+                    if (foundRecord != null)
                     {
-                        //Add the player's name to the unqiue tag
+                        //Add the new player's name to the unqiue tag
                         newPlayer.uniqueTag = newPlayer.tag + "(" + newPlayer.fullName + ")";
-                        PlayerRecordModel replacePlayer = new PlayerRecordModel();
-                        replacePlayer = loadedPlayers[newPlayer.tag];
-                        loadedPlayers.Remove(newPlayer.tag);
 
-                        replacePlayer.uniqueTag = replacePlayer.tag + "(" + replacePlayer.fullName + ")";
-                        loadedPlayers.Add(replacePlayer.uniqueTag, replacePlayer);
-
+                        // Remove the found record from the list, update the unique tag, re-add it
+                        loadedPlayers.Remove(foundRecord);
+                        foundRecord.uniqueTag = foundRecord.tag + "(" + foundRecord.id + ")";
+                        loadedPlayers.Add(foundRecord);
                     }
                     else
                     {
@@ -280,15 +320,13 @@ namespace SqlDatabaseLibrary
                         newPlayer.uniqueTag = newPlayer.tag;
                     }
 
-                    loadedPlayers.Add(newPlayer.uniqueTag, newPlayer);
-                    loadedPlayerIds.Add(newPlayer.id, newPlayer);
+                    loadedPlayers.Add(newPlayer);
                 }
                 reader.Close();
                 dbCon.Close();
             }
 
             playerRecords = loadedPlayers;
-            playerIds = loadedPlayerIds;
         }
 
     }

@@ -362,7 +362,7 @@ namespace Stream_Info_Handler.AppSettings
             foreach (string game in splitGameDirectories)
             {
                 string[] splitGamesFromDirectories = game.Split(',');
-                if (Directory.Exists(splitGamesFromDirectories[1]))
+                if (Directory.Exists(splitGamesFromDirectories[1]) || splitGamesFromDirectories[1]=="")
                 {
                     outputRosterDirectories.Add(splitGamesFromDirectories[0], splitGamesFromDirectories[1]);
                 }

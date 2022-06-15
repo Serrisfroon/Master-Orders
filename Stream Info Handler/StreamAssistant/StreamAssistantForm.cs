@@ -37,7 +37,7 @@ namespace Stream_Info_Handler.StreamAssistant
         string uploadButtonText = "";
 
         private PlayerSettings[] playerBoxes;
-        private Button updateButton = null;
+        private Button updateButton;
 
         //Manages match advancing when the current match moves outside the queue
         int outside_queue = 0;
@@ -48,6 +48,8 @@ namespace Stream_Info_Handler.StreamAssistant
         public StreamAssistantForm()
         {
             InitializeComponent();
+
+            updateButton = btn_update;
 
             AddTabEvents();
 
@@ -521,7 +523,7 @@ namespace Stream_Info_Handler.StreamAssistant
             }
             else
             {
-                output_player = global_values.roster[playerBoxes[player_index].roster_number];
+                output_player = PlayerDatabase.playerRecords[playerBoxes[player_index].roster_number];
             }
             DataOutputCaller.update_xml(target, ref playerBoxes[player_index], output_player);
             if ((playerBoxes[player_index].player_number == 1 || playerBoxes[player_index].player_number == 2)&&playerBoxes[player_index].isPlayer == true)
@@ -638,7 +640,15 @@ namespace Stream_Info_Handler.StreamAssistant
             int originalColor = 1;
 
             //Check if a player in the roster has been selected from the combobox. 
-            playerBoxes[playerIndex].isPlayer = PlayerDatabase.playerRecords.TryGetValue(playerBoxes[playerIndex].tag.Text, out saveNewPlayerRecord);
+            saveNewPlayerRecord = PlayerDatabase.FindRecordFromString(playerBoxes[playerIndex].tag.Text, PlayerDatabase.SearchProperty.uniqueTag);
+            if (saveNewPlayerRecord != null)
+            {
+                playerBoxes[playerIndex].isPlayer = true;
+            }
+            else
+            {
+                playerBoxes[playerIndex].isPlayer = false;
+            }
 
             //Character check. Perform only for players.
             if (playerBoxes[playerIndex].isPlayer == true)

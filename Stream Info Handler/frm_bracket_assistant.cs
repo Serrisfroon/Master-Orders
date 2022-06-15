@@ -158,9 +158,9 @@ namespace Stream_Info_Handler
             {
                 cbx_player1.BeginUpdate();                                            //Begin
                 cbx_player1.Items.Clear();                                            //Empty the item list
-                for (int i = 0; i < global_values.roster.Count; i++)
+                foreach(PlayerRecordModel record in PlayerDatabase.playerRecords)
                 {
-                    cbx_player1.Items.Add(global_values.roster[i].uniqueTag);
+                    cbx_player1.Items.Add(record.uniqueTag);
                 }
                 cbx_player1.EndUpdate();                                              //End
                 object[] playerarray = cbx_player1.Items.Cast<Object>().ToArray();
@@ -232,7 +232,6 @@ namespace Stream_Info_Handler
             }
             //Store the new match info and clear the boxes
             string new_round = cbx_round.Text;
-            int[] player_index = { cbx_player1.SelectedIndex, cbx_player2.SelectedIndex, cbx_player3.SelectedIndex, cbx_player4.SelectedIndex };
             string[] player_name = { cbx_player1.Text, cbx_player2.Text, cbx_player3.Text, cbx_player4.Text };
             string[] new_player = { "", "", "", "" };
             cbx_round.Text = "";
@@ -243,11 +242,13 @@ namespace Stream_Info_Handler
 
             //Loop through and find the ID of each selected player
             for (int ii = 0; ii < numberOfPlayers; ii++)
-                if (player_index[ii] >= 0)
+            {
+                PlayerRecordModel foundRecord = PlayerDatabase.FindRecordFromString(player_name[ii], PlayerDatabase.SearchProperty.uniqueTag);
+                if (foundRecord != null)
                 {
-                    new_player[ii] = global_values.roster[player_index[ii]].id;
+                    new_player[ii] = foundRecord.id;
                 }
-
+            }
 
             //Check if each player exists
             for (int i = 0; i < numberOfPlayers; i++)
@@ -440,10 +441,10 @@ namespace Stream_Info_Handler
                 for (int ii = 1; ii <= numberOfPlayers; ii++)
                 {
                     string playerBeingUpdated = loaded_queue[match_index].playerNames[ii - 1];
-                    PlayerRecordModel playerRecord = new PlayerRecordModel();
-                    if (PlayerDatabase.playerRecords.TryGetValue(playerBeingUpdated, out playerRecord))
+                    PlayerRecordModel foundRecord = PlayerDatabase.FindRecordFromString(playerBeingUpdated, PlayerDatabase.SearchProperty.uniqueTag);
+                    if (foundRecord != null)
                     {
-                        update_info(ii, playerRecord);
+                        update_info(ii, foundRecord);
                     }
                 }
             }
@@ -560,9 +561,9 @@ namespace Stream_Info_Handler
         private void update_player(string playerBeingUpdated)
         {
             //Find the index of the player
-            PlayerRecordModel playerRecord = new PlayerRecordModel();
-            if (PlayerDatabase.playerRecords.TryGetValue(playerBeingUpdated, out playerRecord) == false)
-            { 
+            PlayerRecordModel playerRecord = PlayerDatabase.FindRecordFromString(playerBeingUpdated, PlayerDatabase.SearchProperty.uniqueTag);
+            if (playerRecord == null)
+            {
                 return;
             }
 
@@ -576,7 +577,7 @@ namespace Stream_Info_Handler
                 PlayerRecordModel newPlayerRecord = savePlayerForm.outputPlayer;
 
                 if (savePlayerForm.outputIsNewPlayer == false)
-                    PlayerDatabase.playerRecords[playerBeingUpdated] = newPlayerRecord;
+                    PlayerDatabase.playerRecords[PlayerDatabase.playerRecords.IndexOf(playerRecord)] = newPlayerRecord;
                 database_tools.add_player(savePlayerForm.outputPlayer, savePlayerForm.outputIsNewPlayer);
 
                 //Check all queued matches for the player
@@ -647,7 +648,7 @@ namespace Stream_Info_Handler
             for (int i = 0; i < numberOfPlayers; i++)
             {
                 if (checkPlayerNames[i] != "")
-                    update_info(i + 1, PlayerDatabase.playerRecords[checkPlayerNames[i]]);
+                    update_info(i + 1, PlayerDatabase.FindRecordFromString(checkPlayerNames[i], PlayerDatabase.SearchProperty.uniqueTag));
                 else
                     update_info(i + 1, emptyPlayerRecord);
             }
@@ -679,7 +680,7 @@ namespace Stream_Info_Handler
 
             public void get_id()
             {
-                id = global_values.roster.Find(x => x.tag == tag).id;
+               // id = global_values.roster.Find(x => x.tag == tag).id;
             }
         }
 

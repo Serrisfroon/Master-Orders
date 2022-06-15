@@ -20,7 +20,7 @@ namespace Stream_Info_Handler.AppSettings
         /// <summary>
         /// A dictionary that associates each game name with the directory where its character information is held
         /// </summary>
-        public static Dictionary<string, string> gameDirectories { get; set; }
+        public static Dictionary<string, string> gameDirectories { get; set; } 
         /// <summary>
         /// Returns the directory associated with the currently selected game
         /// </summary>

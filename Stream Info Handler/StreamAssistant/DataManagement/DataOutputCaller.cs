@@ -1,4 +1,5 @@
-﻿using SqlDatabaseLibrary.Models;
+﻿using SqlDatabaseLibrary;
+using SqlDatabaseLibrary.Models;
 using Stream_Info_Handler.AppSettings;
 using System.Drawing;
 using System.IO;
@@ -157,7 +158,7 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
                     }
                     File.Copy(Directory.GetCurrentDirectory() + @"\Resources\Graphics\left.png", DirectoryManagement.outputDirectory + replace_image);
                 }
-                string find_region = global_values.roster[playerBox.roster_number].region;
+                string find_region = PlayerDatabase.playerRecords[playerBox.roster_number].region;
 
                 if (find_region.Contains(" - "))
                 {
@@ -218,21 +219,16 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
         public static void updateTag(ref PlayerSettings playerBox, int newPlayerIndex)
         {
             //Check if this tag is included in the player index
-            //if (playerBox.roster_number != -1)
-            for(int i = 0; i < global_values.roster.Count; i++)
+
+            PlayerRecordModel foundRecord = PlayerDatabase.FindRecordFromString(playerBox.getTag(), PlayerDatabase.SearchProperty.uniqueTag);
+
+            if (foundRecord != null)
             {
-                if (global_values.roster[i].uniqueTag == playerBox.getTag())
-                {
-                    newPlayerIndex = i;
-                }
-            }
-            if (newPlayerIndex >= 0)
-            {
-                if (global_values.roster[newPlayerIndex].uniqueTag == playerBox.getTag())
+                if (foundRecord.uniqueTag == playerBox.getTag())
                 {
                     //Update the Twitter ComboBox with this player data's twitter
-                        playerBox.twitter.Text = global_values.roster[newPlayerIndex].twitter;
-                    playerBox.team.Text = global_values.roster[newPlayerIndex].sponsor;
+                        playerBox.twitter.Text = foundRecord.twitter;
+                    playerBox.team.Text = foundRecord.sponsor;
                     //Update the text of this ComboBox to the display text of this player's tag
                     updateSponsorImage(ref playerBox);
                     playerBox.roster_number = newPlayerIndex;
@@ -240,13 +236,13 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
                     if (playerBox.isPlayer == true)
                     {
                         Image updateCharacter = Image.FromFile(DirectoryManagement.GetGameDirectory() + @"\" +
-                                                                global_values.roster[newPlayerIndex].characterName + @"\" +
-                                                                global_values.roster[newPlayerIndex].colorNumber.ToString() + @"\stamp.png");
+                                                                foundRecord.characterName + @"\" +
+                                                                foundRecord.colorNumber.ToString() + @"\stamp.png");
 
                         playerBox.character.BackgroundImage = updateCharacter;
                         playerBox.character.Text = "";
-                        playerBox.characterName = global_values.roster[newPlayerIndex].characterName;
-                        playerBox.colorNumber = global_values.roster[newPlayerIndex].colorNumber;
+                        playerBox.characterName = foundRecord.characterName;
+                        playerBox.colorNumber = foundRecord.colorNumber;
                         playerBox.image_directory = DirectoryManagement.GetGameDirectory() + @"\" +
                         playerBox.characterName + @"\" + playerBox.colorNumber.ToString();
                     }

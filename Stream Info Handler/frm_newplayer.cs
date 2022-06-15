@@ -1,4 +1,5 @@
-﻿using Stream_Info_Handler.StreamAssistant;
+﻿using SqlDatabaseLibrary;
+using Stream_Info_Handler.StreamAssistant;
 using System;
 using System.Windows.Forms;
 
@@ -23,13 +24,10 @@ namespace Stream_Info_Handler
 
         private void btn_create_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i <= global_values.roster.Count; i++)
+            if(PlayerDatabase.RecordExistsFromString(txt_tag.Text, PlayerDatabase.SearchProperty.tag))
             {
-                if (global_values.roster[i].tag == txt_tag.Text)
-                {
-                    MessageBox.Show("A player with this tag already exists! Please enter a different tag.");
-                    return;
-                }
+                MessageBox.Show("A player with this tag already exists! Please enter a different tag.");
+                return;
             }
 
             StreamAssistantForm.save_name = txt_tag.Text;

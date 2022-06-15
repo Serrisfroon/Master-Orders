@@ -23,10 +23,13 @@ namespace Stream_Info_Handler.StreamAssistant
         public static void UpdateRounds(ComboBox roundBox)
         {
             string[] importedRounds = SettingsFile.LoadBracketRounds();
-            roundBox.Items.Clear();
-            roundBox.BeginUpdate();
-            roundBox.Items.AddRange(importedRounds);
-            roundBox.EndUpdate();
+            if (importedRounds != null)
+            {
+                roundBox.Items.Clear();
+                roundBox.BeginUpdate();
+                roundBox.Items.AddRange(importedRounds);
+                roundBox.EndUpdate();
+            }
         }
 
         /// <summary>
@@ -121,9 +124,9 @@ namespace Stream_Info_Handler.StreamAssistant
         {
             update_box.BeginUpdate();                                            //Begin
             update_box.Items.Clear();                                            //Empty the item list
-            for (int i = 0; i < global_values.roster.Count; i++)
+            foreach(PlayerRecordModel record in PlayerDatabase.playerRecords)
             {
-                update_box.Items.Add(global_values.roster[i].uniqueTag);
+                update_box.Items.Add(record.uniqueTag);
             }
             update_box.EndUpdate();                                              //End
             update_box.Text = "";

@@ -69,7 +69,6 @@ namespace Stream_Info_Handler
                 player_count = 4;
 
             string new_round = cbx_round.Text;
-            int[] player_index = { cbx_player1.SelectedIndex, cbx_player2.SelectedIndex, cbx_player3.SelectedIndex, cbx_player4.SelectedIndex };
             string[] player_name = { cbx_player1.Text, cbx_player2.Text, cbx_player3.Text, cbx_player4.Text };
             string[] new_player = { "", "", "", "" };
             cbx_round.Text = "";
@@ -80,10 +79,13 @@ namespace Stream_Info_Handler
 
             //Loop through and find the ID of each selected player
             for (int ii = 0; ii < player_count; ii++)
-                if (player_index[ii] >= 0)
+            {
+                PlayerRecordModel foundRecord = PlayerDatabase.FindRecordFromString(player_name[ii], PlayerDatabase.SearchProperty.uniqueTag);
+                if (foundRecord != null)
                 {
-                    new_player[ii] = global_values.roster[player_index[ii]].id;
+                    new_player[ii] = foundRecord.id;
                 }
+            }
 
             //Check if each player exists
             for (int i = 0; i < player_count; i++)
