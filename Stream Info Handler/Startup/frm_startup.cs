@@ -22,6 +22,8 @@ namespace Stream_Info_Handler
             InitializeComponent();
             this.CenterToScreen();
 
+            FormManagement.baseForm = this;
+
             YoutubeLibrary.YoutubeController.enableYoutubeFunctions = true;
 
             InitializeOtherToolsDropDown();

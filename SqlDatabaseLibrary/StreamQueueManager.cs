@@ -203,10 +203,7 @@ namespace SqlDatabaseLibrary
                     for (int ii = 0; ii < 12; ii++)
                     {
                         string readPlayerId = sqlReader.GetString(4 + ii);
-                        if (readPlayerId != "")
-                        {
-                            newQueueEntry.playerIds.Add(readPlayerId);
-                        }
+                        newQueueEntry.playerIds.Add(readPlayerId);
                     }
                     loadedStreamQueue.Add(newQueueEntry);
                 }

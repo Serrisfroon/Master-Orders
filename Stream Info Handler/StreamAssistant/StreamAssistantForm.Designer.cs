@@ -155,6 +155,18 @@
             this.ttp_tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
+            this.cbx_pronouns1 = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cbx_pronouns2 = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.cbx_commentator_pronouns1 = new System.Windows.Forms.ComboBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.cbx_commentator_pronouns2 = new System.Windows.Forms.ComboBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.cbx_team1_pronouns1 = new System.Windows.Forms.ComboBox();
+            this.cbx_team1_pronouns2 = new System.Windows.Forms.ComboBox();
+            this.cbx_team2_pronouns1 = new System.Windows.Forms.ComboBox();
+            this.cbx_team2_pronouns2 = new System.Windows.Forms.ComboBox();
             this.tab_main.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -463,6 +475,8 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.cbx_pronouns2);
+            this.groupBox5.Controls.Add(this.label18);
             this.groupBox5.Controls.Add(this.btn_character2);
             this.groupBox5.Controls.Add(this.label8);
             this.groupBox5.Controls.Add(this.txt_team2);
@@ -531,7 +545,7 @@
             // btn_save2
             // 
             this.btn_save2.Image = global::Stream_Info_Handler.Properties.Resources.save_button;
-            this.btn_save2.Location = new System.Drawing.Point(193, 106);
+            this.btn_save2.Location = new System.Drawing.Point(6, 22);
             this.btn_save2.Name = "btn_save2";
             this.btn_save2.Size = new System.Drawing.Size(32, 31);
             this.btn_save2.TabIndex = 44;
@@ -584,11 +598,11 @@
             // 
             this.lbl_alt2.AutoSize = true;
             this.lbl_alt2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_alt2.Location = new System.Drawing.Point(298, 87);
+            this.lbl_alt2.Location = new System.Drawing.Point(189, 113);
             this.lbl_alt2.Name = "lbl_alt2";
-            this.lbl_alt2.Size = new System.Drawing.Size(108, 16);
+            this.lbl_alt2.Size = new System.Drawing.Size(54, 16);
             this.lbl_alt2.TabIndex = 36;
-            this.lbl_alt2.Text = "Twitter Handle";
+            this.lbl_alt2.Text = "Twitter";
             // 
             // txt_twitter2
             // 
@@ -604,6 +618,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.cbx_pronouns1);
+            this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.btn_character1);
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.txt_team1);
@@ -671,7 +687,7 @@
             // btn_save1
             // 
             this.btn_save1.Image = global::Stream_Info_Handler.Properties.Resources.save_button;
-            this.btn_save1.Location = new System.Drawing.Point(185, 106);
+            this.btn_save1.Location = new System.Drawing.Point(372, 22);
             this.btn_save1.Name = "btn_save1";
             this.btn_save1.Size = new System.Drawing.Size(32, 31);
             this.btn_save1.TabIndex = 6;
@@ -713,18 +729,18 @@
             // 
             this.lbl_alt1.AutoSize = true;
             this.lbl_alt1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_alt1.Location = new System.Drawing.Point(3, 87);
+            this.lbl_alt1.Location = new System.Drawing.Point(3, 122);
             this.lbl_alt1.Name = "lbl_alt1";
-            this.lbl_alt1.Size = new System.Drawing.Size(108, 16);
+            this.lbl_alt1.Size = new System.Drawing.Size(54, 16);
             this.lbl_alt1.TabIndex = 5;
-            this.lbl_alt1.Text = "Twitter Handle";
+            this.lbl_alt1.Text = "Twitter";
             // 
             // txt_twitter1
             // 
             this.txt_twitter1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txt_twitter1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txt_twitter1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_twitter1.Location = new System.Drawing.Point(6, 110);
+            this.txt_twitter1.Location = new System.Drawing.Point(60, 119);
             this.txt_twitter1.Name = "txt_twitter1";
             this.txt_twitter1.Size = new System.Drawing.Size(157, 22);
             this.txt_twitter1.TabIndex = 2;
@@ -872,6 +888,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbx_team2_pronouns2);
+            this.groupBox1.Controls.Add(this.cbx_team2_pronouns1);
             this.groupBox1.Controls.Add(this.btn_team2_character2);
             this.groupBox1.Controls.Add(this.btn_team2_character1);
             this.groupBox1.Controls.Add(this.label12);
@@ -944,7 +962,7 @@
             this.txt_team2_team2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_team2_team2.Location = new System.Drawing.Point(63, 102);
             this.txt_team2_team2.Name = "txt_team2_team2";
-            this.txt_team2_team2.Size = new System.Drawing.Size(48, 21);
+            this.txt_team2_team2.Size = new System.Drawing.Size(61, 21);
             this.txt_team2_team2.TabIndex = 6;
             this.txt_team2_team2.TextChanged += new System.EventHandler(this.team_TextChanged);
             // 
@@ -978,10 +996,11 @@
             this.cbx_team2_name2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbx_team2_name2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbx_team2_name2.FormattingEnabled = true;
-            this.cbx_team2_name2.Location = new System.Drawing.Point(117, 102);
+            this.cbx_team2_name2.Location = new System.Drawing.Point(130, 102);
             this.cbx_team2_name2.Name = "cbx_team2_name2";
-            this.cbx_team2_name2.Size = new System.Drawing.Size(229, 23);
+            this.cbx_team2_name2.Size = new System.Drawing.Size(216, 23);
             this.cbx_team2_name2.TabIndex = 5;
+            this.cbx_team2_name2.TextChanged += new System.EventHandler(this.tag_TextChanged);
             // 
             // nud_team2_score
             // 
@@ -1024,7 +1043,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(101, 134);
+            this.label22.Location = new System.Drawing.Point(160, 134);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(47, 16);
             this.label22.TabIndex = 39;
@@ -1035,9 +1054,9 @@
             this.txt_team2_twitter1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txt_team2_twitter1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txt_team2_twitter1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_team2_twitter1.Location = new System.Drawing.Point(154, 60);
+            this.txt_team2_twitter1.Location = new System.Drawing.Point(213, 60);
             this.txt_team2_twitter1.Name = "txt_team2_twitter1";
-            this.txt_team2_twitter1.Size = new System.Drawing.Size(192, 21);
+            this.txt_team2_twitter1.Size = new System.Drawing.Size(133, 21);
             this.txt_team2_twitter1.TabIndex = 2;
             this.txt_team2_twitter1.TextChanged += new System.EventHandler(this.twitter_TextChanged);
             // 
@@ -1046,9 +1065,9 @@
             this.txt_team2_twitter2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txt_team2_twitter2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txt_team2_twitter2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_team2_twitter2.Location = new System.Drawing.Point(154, 131);
+            this.txt_team2_twitter2.Location = new System.Drawing.Point(213, 131);
             this.txt_team2_twitter2.Name = "txt_team2_twitter2";
-            this.txt_team2_twitter2.Size = new System.Drawing.Size(192, 21);
+            this.txt_team2_twitter2.Size = new System.Drawing.Size(133, 21);
             this.txt_team2_twitter2.TabIndex = 7;
             this.txt_team2_twitter2.TextChanged += new System.EventHandler(this.twitter_TextChanged);
             // 
@@ -1056,7 +1075,7 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(101, 63);
+            this.label25.Location = new System.Drawing.Point(160, 63);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(47, 16);
             this.label25.TabIndex = 32;
@@ -1072,9 +1091,12 @@
             this.cbx_team2_name1.Name = "cbx_team2_name1";
             this.cbx_team2_name1.Size = new System.Drawing.Size(216, 23);
             this.cbx_team2_name1.TabIndex = 0;
+            this.cbx_team2_name1.TextChanged += new System.EventHandler(this.tag_TextChanged);
             // 
             // groupBox11
             // 
+            this.groupBox11.Controls.Add(this.cbx_team1_pronouns2);
+            this.groupBox11.Controls.Add(this.cbx_team1_pronouns1);
             this.groupBox11.Controls.Add(this.btn_team1_character2);
             this.groupBox11.Controls.Add(this.btn_team1_character1);
             this.groupBox11.Controls.Add(this.label10);
@@ -1187,7 +1209,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(44, 140);
+            this.label21.Location = new System.Drawing.Point(103, 140);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(47, 16);
             this.label21.TabIndex = 25;
@@ -1198,9 +1220,9 @@
             this.txt_team1_twitter2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txt_team1_twitter2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txt_team1_twitter2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_team1_twitter2.Location = new System.Drawing.Point(97, 137);
+            this.txt_team1_twitter2.Location = new System.Drawing.Point(156, 137);
             this.txt_team1_twitter2.Name = "txt_team1_twitter2";
-            this.txt_team1_twitter2.Size = new System.Drawing.Size(190, 21);
+            this.txt_team1_twitter2.Size = new System.Drawing.Size(131, 21);
             this.txt_team1_twitter2.TabIndex = 7;
             this.txt_team1_twitter2.TextChanged += new System.EventHandler(this.twitter_TextChanged);
             // 
@@ -1261,7 +1283,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(44, 66);
+            this.label16.Location = new System.Drawing.Point(103, 66);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(47, 16);
             this.label16.TabIndex = 5;
@@ -1272,9 +1294,9 @@
             this.txt_team1_twitter1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txt_team1_twitter1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txt_team1_twitter1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_team1_twitter1.Location = new System.Drawing.Point(97, 64);
+            this.txt_team1_twitter1.Location = new System.Drawing.Point(156, 64);
             this.txt_team1_twitter1.Name = "txt_team1_twitter1";
-            this.txt_team1_twitter1.Size = new System.Drawing.Size(190, 21);
+            this.txt_team1_twitter1.Size = new System.Drawing.Size(131, 21);
             this.txt_team1_twitter1.TabIndex = 2;
             this.txt_team1_twitter1.TextChanged += new System.EventHandler(this.twitter_TextChanged);
             // 
@@ -1403,6 +1425,8 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.cbx_commentator_pronouns2);
+            this.groupBox7.Controls.Add(this.label23);
             this.groupBox7.Controls.Add(this.btn_commentator_save2);
             this.groupBox7.Controls.Add(this.label26);
             this.groupBox7.Controls.Add(this.txt_commentator_team2);
@@ -1472,7 +1496,7 @@
             // lbl_commentatoralt2
             // 
             this.lbl_commentatoralt2.AutoSize = true;
-            this.lbl_commentatoralt2.Location = new System.Drawing.Point(188, 104);
+            this.lbl_commentatoralt2.Location = new System.Drawing.Point(188, 146);
             this.lbl_commentatoralt2.Name = "lbl_commentatoralt2";
             this.lbl_commentatoralt2.Size = new System.Drawing.Size(176, 20);
             this.lbl_commentatoralt2.TabIndex = 50;
@@ -1482,7 +1506,7 @@
             // 
             this.txt_commentator_twitter2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txt_commentator_twitter2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txt_commentator_twitter2.Location = new System.Drawing.Point(97, 127);
+            this.txt_commentator_twitter2.Location = new System.Drawing.Point(97, 169);
             this.txt_commentator_twitter2.Name = "txt_commentator_twitter2";
             this.txt_commentator_twitter2.Size = new System.Drawing.Size(267, 26);
             this.txt_commentator_twitter2.TabIndex = 2;
@@ -1490,6 +1514,8 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.cbx_commentator_pronouns1);
+            this.groupBox6.Controls.Add(this.label19);
             this.groupBox6.Controls.Add(this.btn_commentator_save1);
             this.groupBox6.Controls.Add(this.label27);
             this.groupBox6.Controls.Add(this.txt_commentator_team1);
@@ -1550,7 +1576,7 @@
             // 
             this.txt_commentator_twitter1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txt_commentator_twitter1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txt_commentator_twitter1.Location = new System.Drawing.Point(99, 127);
+            this.txt_commentator_twitter1.Location = new System.Drawing.Point(99, 169);
             this.txt_commentator_twitter1.Name = "txt_commentator_twitter1";
             this.txt_commentator_twitter1.Size = new System.Drawing.Size(265, 26);
             this.txt_commentator_twitter1.TabIndex = 2;
@@ -1568,7 +1594,7 @@
             // lbl_commentatoralt1
             // 
             this.lbl_commentatoralt1.AutoSize = true;
-            this.lbl_commentatoralt1.Location = new System.Drawing.Point(102, 104);
+            this.lbl_commentatoralt1.Location = new System.Drawing.Point(102, 146);
             this.lbl_commentatoralt1.Name = "lbl_commentatoralt1";
             this.lbl_commentatoralt1.Size = new System.Drawing.Size(176, 20);
             this.lbl_commentatoralt1.TabIndex = 35;
@@ -1670,7 +1696,187 @@
             this.openFileDialog3.FileName = "openFileDialog3";
             this.openFileDialog3.Filter = "PNG Image Files|*.png";
             // 
-            // frm_main
+            // cbx_pronouns1
+            // 
+            this.cbx_pronouns1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbx_pronouns1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbx_pronouns1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbx_pronouns1.FormattingEnabled = true;
+            this.cbx_pronouns1.Items.AddRange(new object[] {
+            "He/Him",
+            "She/Her",
+            "They/Them",
+            "He/They",
+            "She/They"});
+            this.cbx_pronouns1.Location = new System.Drawing.Point(82, 82);
+            this.cbx_pronouns1.Name = "cbx_pronouns1";
+            this.cbx_pronouns1.Size = new System.Drawing.Size(135, 24);
+            this.cbx_pronouns1.TabIndex = 23;
+            this.cbx_pronouns1.TextChanged += new System.EventHandler(this.pronouns_TextChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(3, 87);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(73, 16);
+            this.label13.TabIndex = 24;
+            this.label13.Text = "Pronouns";
+            // 
+            // cbx_pronouns2
+            // 
+            this.cbx_pronouns2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbx_pronouns2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbx_pronouns2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbx_pronouns2.FormattingEnabled = true;
+            this.cbx_pronouns2.Items.AddRange(new object[] {
+            "He/Him",
+            "She/Her",
+            "They/Them",
+            "He/They",
+            "She/They"});
+            this.cbx_pronouns2.Location = new System.Drawing.Point(271, 78);
+            this.cbx_pronouns2.Name = "cbx_pronouns2";
+            this.cbx_pronouns2.Size = new System.Drawing.Size(135, 24);
+            this.cbx_pronouns2.TabIndex = 25;
+            this.cbx_pronouns2.TextChanged += new System.EventHandler(this.pronouns_TextChanged);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(192, 83);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(73, 16);
+            this.label18.TabIndex = 26;
+            this.label18.Text = "Pronouns";
+            // 
+            // cbx_commentator_pronouns1
+            // 
+            this.cbx_commentator_pronouns1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbx_commentator_pronouns1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbx_commentator_pronouns1.FormattingEnabled = true;
+            this.cbx_commentator_pronouns1.Items.AddRange(new object[] {
+            "He/Him",
+            "She/Her",
+            "They/Them",
+            "He/They",
+            "She/They"});
+            this.cbx_commentator_pronouns1.Location = new System.Drawing.Point(99, 115);
+            this.cbx_commentator_pronouns1.Name = "cbx_commentator_pronouns1";
+            this.cbx_commentator_pronouns1.Size = new System.Drawing.Size(265, 28);
+            this.cbx_commentator_pronouns1.TabIndex = 55;
+            this.cbx_commentator_pronouns1.TextChanged += new System.EventHandler(this.pronouns_TextChanged);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(100, 92);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(198, 20);
+            this.label19.TabIndex = 56;
+            this.label19.Text = "Commentator Pronouns";
+            // 
+            // cbx_commentator_pronouns2
+            // 
+            this.cbx_commentator_pronouns2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbx_commentator_pronouns2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbx_commentator_pronouns2.FormattingEnabled = true;
+            this.cbx_commentator_pronouns2.Items.AddRange(new object[] {
+            "He/Him",
+            "She/Her",
+            "They/Them",
+            "He/They",
+            "She/They"});
+            this.cbx_commentator_pronouns2.Location = new System.Drawing.Point(99, 115);
+            this.cbx_commentator_pronouns2.Name = "cbx_commentator_pronouns2";
+            this.cbx_commentator_pronouns2.Size = new System.Drawing.Size(265, 28);
+            this.cbx_commentator_pronouns2.TabIndex = 57;
+            this.cbx_commentator_pronouns2.TextChanged += new System.EventHandler(this.pronouns_TextChanged);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(166, 92);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(198, 20);
+            this.label23.TabIndex = 58;
+            this.label23.Text = "Commentator Pronouns";
+            // 
+            // cbx_team1_pronouns1
+            // 
+            this.cbx_team1_pronouns1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbx_team1_pronouns1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbx_team1_pronouns1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbx_team1_pronouns1.FormattingEnabled = true;
+            this.cbx_team1_pronouns1.Items.AddRange(new object[] {
+            "He/Him",
+            "She/Her",
+            "They/Them",
+            "He/They",
+            "She/They"});
+            this.cbx_team1_pronouns1.Location = new System.Drawing.Point(6, 62);
+            this.cbx_team1_pronouns1.Name = "cbx_team1_pronouns1";
+            this.cbx_team1_pronouns1.Size = new System.Drawing.Size(91, 23);
+            this.cbx_team1_pronouns1.TabIndex = 34;
+            this.cbx_team1_pronouns1.TextChanged += new System.EventHandler(this.pronouns_TextChanged);
+            // 
+            // cbx_team1_pronouns2
+            // 
+            this.cbx_team1_pronouns2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbx_team1_pronouns2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbx_team1_pronouns2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbx_team1_pronouns2.FormattingEnabled = true;
+            this.cbx_team1_pronouns2.Items.AddRange(new object[] {
+            "He/Him",
+            "She/Her",
+            "They/Them",
+            "He/They",
+            "She/They"});
+            this.cbx_team1_pronouns2.Location = new System.Drawing.Point(6, 137);
+            this.cbx_team1_pronouns2.Name = "cbx_team1_pronouns2";
+            this.cbx_team1_pronouns2.Size = new System.Drawing.Size(91, 23);
+            this.cbx_team1_pronouns2.TabIndex = 35;
+            this.cbx_team1_pronouns2.TextChanged += new System.EventHandler(this.pronouns_TextChanged);
+            // 
+            // cbx_team2_pronouns1
+            // 
+            this.cbx_team2_pronouns1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbx_team2_pronouns1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbx_team2_pronouns1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbx_team2_pronouns1.FormattingEnabled = true;
+            this.cbx_team2_pronouns1.Items.AddRange(new object[] {
+            "He/Him",
+            "She/Her",
+            "They/Them",
+            "He/They",
+            "She/They"});
+            this.cbx_team2_pronouns1.Location = new System.Drawing.Point(63, 59);
+            this.cbx_team2_pronouns1.Name = "cbx_team2_pronouns1";
+            this.cbx_team2_pronouns1.Size = new System.Drawing.Size(91, 23);
+            this.cbx_team2_pronouns1.TabIndex = 36;
+            this.cbx_team2_pronouns1.TextChanged += new System.EventHandler(this.pronouns_TextChanged);
+            // 
+            // cbx_team2_pronouns2
+            // 
+            this.cbx_team2_pronouns2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbx_team2_pronouns2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbx_team2_pronouns2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbx_team2_pronouns2.FormattingEnabled = true;
+            this.cbx_team2_pronouns2.Items.AddRange(new object[] {
+            "He/Him",
+            "She/Her",
+            "They/Them",
+            "He/They",
+            "She/They"});
+            this.cbx_team2_pronouns2.Location = new System.Drawing.Point(63, 130);
+            this.cbx_team2_pronouns2.Name = "cbx_team2_pronouns2";
+            this.cbx_team2_pronouns2.Size = new System.Drawing.Size(91, 23);
+            this.cbx_team2_pronouns2.TabIndex = 45;
+            this.cbx_team2_pronouns2.TextChanged += new System.EventHandler(this.pronouns_TextChanged);
+            // 
+            // StreamAssistantForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
@@ -1680,7 +1886,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "frm_main";
+            this.Name = "StreamAssistantForm";
             this.Text = "Master Orders";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frm_main_FormClosed);
             this.Shown += new System.EventHandler(this.frm_main_Shown);
@@ -1845,6 +2051,18 @@
         private System.Windows.Forms.Button btn_team1_character1;
         private System.Windows.Forms.Button btn_team2_character2;
         private System.Windows.Forms.Button btn_team2_character1;
+        private System.Windows.Forms.ComboBox cbx_pronouns2;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ComboBox cbx_pronouns1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox cbx_commentator_pronouns2;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.ComboBox cbx_commentator_pronouns1;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ComboBox cbx_team2_pronouns2;
+        private System.Windows.Forms.ComboBox cbx_team2_pronouns1;
+        private System.Windows.Forms.ComboBox cbx_team1_pronouns2;
+        private System.Windows.Forms.ComboBox cbx_team1_pronouns1;
     }
 }
 

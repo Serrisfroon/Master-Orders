@@ -229,6 +229,8 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
                     //Update the Twitter ComboBox with this player data's twitter
                         playerBox.twitter.Text = foundRecord.twitter;
                     playerBox.team.Text = foundRecord.sponsor;
+                    playerBox.pronouns.Text = foundRecord.pronouns;
+
                     //Update the text of this ComboBox to the display text of this player's tag
                     updateSponsorImage(ref playerBox);
                     playerBox.roster_number = newPlayerIndex;
@@ -309,6 +311,7 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
                     xml_element = "player-" + number.ToString();
                     xml.Root.Element(xml_element).Element("losers-side").ReplaceWith(new XElement("losers-side", playerBox.isLoser()));
                     xml.Root.Element(xml_element).Element("tag").ReplaceWith(new XElement("tag", get_output_name(ref playerBox)));
+                    xml.Root.Element(xml_element).Element("pronouns").ReplaceWith(new XElement("pronouns", update_player.pronouns));
                     xml.Root.Element(xml_element).Element("twitter").ReplaceWith(new XElement("twitter", update_player.twitter));
                     xml.Root.Element(xml_element).Element("base-tag").ReplaceWith(new XElement("base-tag", update_player.tag));
                     xml.Root.Element(xml_element).Element("full-name").ReplaceWith(new XElement("full-name", update_player.fullName));
@@ -322,6 +325,7 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
                 case "commentator":
                     xml_element = "commentator-" + number.ToString();
                     xml.Root.Element(xml_element).Element("tag").ReplaceWith(new XElement("tag", update_player.tag));
+                    xml.Root.Element(xml_element).Element("pronouns").ReplaceWith(new XElement("pronouns", update_player.twitter));
                     xml.Root.Element(xml_element).Element("sponsor-prefix").ReplaceWith(new XElement("sponsor-prefix", update_player.sponsor));
                     xml.Root.Element(xml_element).Element("twitter").ReplaceWith(new XElement("twitter", update_player.twitter));
                     break;

@@ -35,6 +35,7 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
             for (int i = 1; i <= 4; i++)
                 doc.Root.Add(new XElement("player-" + i.ToString(),
                      new XElement("tag", ""),
+                     new XElement("pronouns", ""),
                      new XElement("twitter", ""),
                      new XElement("character-icon", outputDirectory + @"\stockicon" + i.ToString() + ".png"),
                      new XElement("sponsor-image", outputDirectory + @"\sponsor" + i.ToString() + ".png"),
@@ -49,11 +50,13 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
                      ));
             doc.Root.Add(new XElement("commentator-1",
                  new XElement("tag", ""),
-                 new XElement("sponsor-prefix", ""),
+                      new XElement("pronouns", ""),
+                new XElement("sponsor-prefix", ""),
                  new XElement("twitter", "")
                  ));
             doc.Root.Add(new XElement("commentator-2",
                  new XElement("tag", ""),
+                     new XElement("pronouns", ""),
                  new XElement("sponsor-prefix", ""),
                  new XElement("twitter", "")
                  ));

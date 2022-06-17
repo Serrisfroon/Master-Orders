@@ -54,6 +54,8 @@
             this.cbx_fullsponsor = new System.Windows.Forms.ComboBox();
             this.btn_character = new System.Windows.Forms.Button();
             this.ckb_character = new System.Windows.Forms.CheckBox();
+            this.cbx_pronouns = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txt_tag
@@ -243,7 +245,7 @@
             // lbl_misc
             // 
             this.lbl_misc.AutoSize = true;
-            this.lbl_misc.Location = new System.Drawing.Point(108, 107);
+            this.lbl_misc.Location = new System.Drawing.Point(296, 106);
             this.lbl_misc.Name = "lbl_misc";
             this.lbl_misc.Size = new System.Drawing.Size(32, 13);
             this.lbl_misc.TabIndex = 26;
@@ -253,16 +255,16 @@
             // 
             this.txt_misc.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txt_misc.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txt_misc.Location = new System.Drawing.Point(146, 104);
+            this.txt_misc.Location = new System.Drawing.Point(334, 104);
             this.txt_misc.Name = "txt_misc";
-            this.txt_misc.Size = new System.Drawing.Size(414, 20);
+            this.txt_misc.Size = new System.Drawing.Size(226, 20);
             this.txt_misc.TabIndex = 24;
             // 
             // txt_elo
             // 
             this.txt_elo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txt_elo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txt_elo.Location = new System.Drawing.Point(44, 104);
+            this.txt_elo.Location = new System.Drawing.Point(231, 104);
             this.txt_elo.Name = "txt_elo";
             this.txt_elo.Size = new System.Drawing.Size(59, 20);
             this.txt_elo.TabIndex = 23;
@@ -270,7 +272,7 @@
             // lbl_elo
             // 
             this.lbl_elo.AutoSize = true;
-            this.lbl_elo.Location = new System.Drawing.Point(10, 107);
+            this.lbl_elo.Location = new System.Drawing.Point(197, 107);
             this.lbl_elo.Name = "lbl_elo";
             this.lbl_elo.Size = new System.Drawing.Size(28, 13);
             this.lbl_elo.TabIndex = 25;
@@ -351,11 +353,38 @@
             this.ckb_character.Text = "Update Character";
             this.ckb_character.UseVisualStyleBackColor = true;
             // 
-            // frm_save_player
+            // cbx_pronouns
+            // 
+            this.cbx_pronouns.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbx_pronouns.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbx_pronouns.FormattingEnabled = true;
+            this.cbx_pronouns.Items.AddRange(new object[] {
+            "He/Him",
+            "She/Her",
+            "They/Them",
+            "He/They",
+            "She/They"});
+            this.cbx_pronouns.Location = new System.Drawing.Point(70, 103);
+            this.cbx_pronouns.Name = "cbx_pronouns";
+            this.cbx_pronouns.Size = new System.Drawing.Size(121, 21);
+            this.cbx_pronouns.TabIndex = 34;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 107);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.TabIndex = 35;
+            this.label1.Text = "Pronouns";
+            // 
+            // SavePlayerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(687, 191);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cbx_pronouns);
             this.Controls.Add(this.ckb_character);
             this.Controls.Add(this.btn_character);
             this.Controls.Add(this.cbx_fullsponsor);
@@ -384,7 +413,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "frm_save_player";
+            this.Name = "SavePlayerForm";
             this.Text = "Save Player Information";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -418,5 +447,7 @@
         private System.Windows.Forms.ComboBox cbx_fullsponsor;
         private System.Windows.Forms.Button btn_character;
         private System.Windows.Forms.CheckBox ckb_character;
+        private System.Windows.Forms.ComboBox cbx_pronouns;
+        private System.Windows.Forms.Label label1;
     }
 }

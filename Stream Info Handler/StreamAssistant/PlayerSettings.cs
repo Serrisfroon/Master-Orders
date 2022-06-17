@@ -17,6 +17,7 @@ namespace Stream_Info_Handler.StreamAssistant
         public CheckBox loser;
         public TextBox team;
         public Button save;
+        public ComboBox pronouns;
         public string image_directory;
         public int player_number;
         public int color_size;
@@ -25,7 +26,7 @@ namespace Stream_Info_Handler.StreamAssistant
         public int colorNumber;
         public string characterName;
 
-        public PlayerSettings(int toindex, int tonumber, ComboBox totag, TextBox totwitter, Button tocharacter, Button toupdate, NumericUpDown toscore, CheckBox toloser, Button tosave, TextBox toteam, int colorsize)
+        public PlayerSettings(int toindex, int tonumber, ComboBox totag, TextBox totwitter, Button tocharacter, Button toupdate, NumericUpDown toscore, CheckBox toloser, Button tosave, TextBox toteam, ComboBox topronouns, int colorsize)
         {
             player_number = tonumber;
             tag = totag;
@@ -39,10 +40,11 @@ namespace Stream_Info_Handler.StreamAssistant
             image_directory = DirectoryManagement.GetGameDirectory() + @"\Random\1";
             color_size = colorsize;
             isPlayer = true;
+            pronouns = topronouns;
             setTags(toindex);
         }
 
-        public PlayerSettings(int toindex, bool player, int tonumber, ComboBox totag, TextBox totwitter, Button toupdate, TextBox toteam, Button tosave)
+        public PlayerSettings(int toindex, bool player, int tonumber, ComboBox totag, TextBox totwitter, Button toupdate, TextBox toteam, Button tosave, ComboBox topronouns)
         {
             isPlayer = player;
             tag = totag;
@@ -51,6 +53,8 @@ namespace Stream_Info_Handler.StreamAssistant
             update = toupdate;
             player_number = tonumber;
             save = tosave;
+            pronouns = topronouns;
+
             setTags(toindex);
         }
 
@@ -61,6 +65,7 @@ namespace Stream_Info_Handler.StreamAssistant
             team.Tag = (team.Tag == null) ? index : team.Tag;
             update.Tag = (update.Tag == null) ? index : update.Tag;
             save.Tag = (save.Tag == null) ? index : save.Tag;
+            pronouns.Tag = (pronouns.Tag == null) ? index : pronouns.Tag;
             if (isPlayer)
             {
                 character.Tag = (character.Tag == null) ? index : character.Tag;

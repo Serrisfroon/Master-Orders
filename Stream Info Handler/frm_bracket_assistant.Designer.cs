@@ -41,7 +41,7 @@
             "",
             ""}, -1);
             System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Region",
+            "Pronouns",
             "",
             "",
             "",

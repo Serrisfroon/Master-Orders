@@ -85,6 +85,7 @@ namespace SqlDatabaseLibrary
             {
                 List<MySqlParameter> playerParameters = new List<MySqlParameter>();
 
+                playerParameters.Add(new MySqlParameter("@id", newPlayerRecord.id));
                 playerParameters.Add(new MySqlParameter("@date", DateTime.Today.ToString("yyyy-MM-dd")));
                 playerParameters.Add(new MySqlParameter("@owningUserId", newPlayerRecord.owningUserId));
                 playerParameters.Add(new MySqlParameter("@duplicateRecord", newPlayerRecord.duplicateRecord));

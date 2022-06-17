@@ -11,7 +11,7 @@ namespace Stream_Info_Handler.SavePlayer
     {
         updatePlayerInformation updateProcesses;
         string gameDirectory = DirectoryManagement.GetGameDirectory();
-
+        string playerRecordId = "";
         public bool outputIsNewPlayer;
         public PlayerRecordModel outputPlayer;
 
@@ -35,6 +35,7 @@ namespace Stream_Info_Handler.SavePlayer
 
             //Update text fields with information coming from the player file
             txt_tag.Text = playerToSave.tag;
+            cbx_pronouns.Text = playerToSave.pronouns;
             cbx_region.Text = playerToSave.region;
             txt_sponsor.Text = playerToSave.sponsor;
             txt_twitter.Text = playerToSave.twitter;
@@ -63,6 +64,7 @@ namespace Stream_Info_Handler.SavePlayer
                 lbl_playerid.Text = "Player ID: " + playerToSave.id;
                 lbl_ownerid.Text = "Owner: " + PlayerDatabase.GetOwnerName(playerToSave.owningUserId); 
                 ckb_character.Enabled = true;
+                playerRecordId = playerToSave.id;
             }
             else
             {
@@ -144,12 +146,14 @@ namespace Stream_Info_Handler.SavePlayer
         {
             PlayerRecordModel savePlayer = new PlayerRecordModel();
 
+            savePlayer.id = playerRecordId;
             savePlayer.tag = txt_tag.Text;
             if (updateProcesses.needsUnique == true)
                 savePlayer.uniqueTag = txt_tag.Text + "(" + txt_name.Text + ")";
             else
                 savePlayer.uniqueTag = txt_tag.Text;
             savePlayer.twitter = txt_twitter.Text;
+            savePlayer.pronouns = cbx_pronouns.Text;
             savePlayer.region = cbx_region.Text;
             savePlayer.sponsor = txt_sponsor.Text;
             savePlayer.fullName = txt_name.Text;

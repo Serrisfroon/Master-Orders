@@ -19,12 +19,12 @@ using Stream_Info_Handler.AppSettings;
 using SqlDatabaseLibrary.Models;
 using Stream_Info_Handler.StreamAssistant.DataManagement;
 using SqlDatabaseLibrary;
+using Stream_Info_Handler.Startup;
 
 namespace Stream_Info_Handler
 {
     public partial class frm_othertools : Form
     {
-        public event closedform_event close_form;
         //Init settings file value
         string top8_settings;
 
@@ -1082,7 +1082,7 @@ namespace Stream_Info_Handler
         private void frm_generator_FormClosed(object sender, FormClosedEventArgs e)
         {
             global_values.tools_form = null;
-            close_form(2);
+            FormManagement.CloseForm(FormManagement.FormNames.Top8Generator);
         }
 
         private void cms_sponsor_Opening(object sender, CancelEventArgs e)

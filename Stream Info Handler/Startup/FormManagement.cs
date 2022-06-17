@@ -31,13 +31,19 @@ namespace Stream_Info_Handler.Startup
         }
 
         /// <summary>
+        /// The startup form.
+        /// </summary>
+        public static Form baseForm { get; set; }
+
+        /// <summary>
         /// Closes the form associated with a specific name. Accepted
         /// </summary>
         /// <param name="formName"></param>
         /// <returns></returns>
         public static bool CloseForm(FormNames formName)
         {
-            if(openForms.ContainsKey(formName))
+            baseForm.Visible = true;
+            if (openForms.ContainsKey(formName))
             {
                 openForms.Remove(formName);
                 return true;

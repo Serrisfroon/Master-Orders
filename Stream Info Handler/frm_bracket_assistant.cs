@@ -1,6 +1,7 @@
 ﻿using SqlDatabaseLibrary;
 using SqlDatabaseLibrary.Models;
 using Stream_Info_Handler.AppSettings;
+using Stream_Info_Handler.Startup;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,8 +14,6 @@ namespace Stream_Info_Handler
 {
     public partial class frm_bracket_assistant : Form
     {
-        public event closedform_event close_form;
-
         //AutoSeed
         ListViewItem draggedItem;
         List<tournament_player> seeded_players;
@@ -66,7 +65,6 @@ namespace Stream_Info_Handler
 
             reload_settings();
             init_refresh();
-            init_autoseed();
         }
         #region Queue Manager
 
@@ -202,7 +200,15 @@ namespace Stream_Info_Handler
                 add_item.SubItems.Add(loaded_queue[i].roundInBracket);
                 foreach (string queueplayer in loaded_queue[i].playerIds)
                 {
-                    add_item.SubItems.Add(queueplayer);
+                    PlayerRecordModel foundRecord = PlayerDatabase.FindRecordFromString(PlayerDatabase.playerRecords, queueplayer, PlayerDatabase.SearchProperty.id);
+                    if (foundRecord != null)
+                    {
+                        add_item.SubItems.Add(foundRecord.uniqueTag);
+                    }
+                    else
+                    {
+                        add_item.SubItems.Add(queueplayer);
+                    }
                 }
                 switch (loaded_queue[i].matchStatus)
                 {
@@ -429,7 +435,9 @@ namespace Stream_Info_Handler
         private void lvw_matches_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Verify that at least one match is in the queue
-            if (lvw_matches.SelectedIndices.Count > 0 && cbx_player1.Focused == false && cbx_player2.Focused == false &&
+
+            var test = lvw_matches.SelectedItems;
+            if (lvw_matches.SelectedItems.Count > 0 && cbx_player1.Focused == false && cbx_player2.Focused == false &&
                 cbx_player3.Focused == false && cbx_player4.Focused == false)
             {
                 //Enable all match editing buttons
@@ -446,7 +454,7 @@ namespace Stream_Info_Handler
                 for (int ii = 1; ii <= numberOfPlayers; ii++)
                 {
                     string playerBeingUpdated = loaded_queue[match_index].playerIds[ii - 1];
-                    PlayerRecordModel foundRecord = PlayerDatabase.FindRecordFromString(PlayerDatabase.playerRecords, playerBeingUpdated, PlayerDatabase.SearchProperty.uniqueTag);
+                    PlayerRecordModel foundRecord = PlayerDatabase.FindRecordFromString(PlayerDatabase.playerRecords, playerBeingUpdated, PlayerDatabase.SearchProperty.id);
                     if (foundRecord != null)
                     {
                         update_info(ii, foundRecord);
@@ -532,7 +540,7 @@ namespace Stream_Info_Handler
         private void frm_streamqueue_FormClosed(object sender, FormClosedEventArgs e)
         {
             global_values.bracket_assistant = null;
-            close_form(1);
+            FormManagement.CloseForm(FormManagement.FormNames.BracketAssistant);
         }
 
         private void btn_player1_Click(object sender, EventArgs e)
@@ -663,7 +671,7 @@ namespace Stream_Info_Handler
         {
             lvw_playerinfo.Items[0].SubItems[player_number].Text = newPlayerInfo.tag;
             lvw_playerinfo.Items[1].SubItems[player_number].Text = newPlayerInfo.twitter;
-            lvw_playerinfo.Items[2].SubItems[player_number].Text = newPlayerInfo.region;
+            lvw_playerinfo.Items[2].SubItems[player_number].Text = newPlayerInfo.pronouns;
             lvw_playerinfo.Items[3].SubItems[player_number].Text = newPlayerInfo.fullSponsor;
             lvw_playerinfo.Items[4].SubItems[player_number].Text = newPlayerInfo.characterName;
             selected_id[player_number - 1] = newPlayerInfo.id;
@@ -689,39 +697,6 @@ namespace Stream_Info_Handler
             }
         }
 
-        private void init_autoseed()
-        {
-            seeded_players = new List<tournament_player>();
-            //Load test players
-            txt_players.Text =
-                "Serris\n" +
-                "Frosty\n" +
-                "Bushi\n" +
-                "Ravenking\n" +
-                "IX\n" +
-                "Super\n" +
-                "Super Dan\n" +
-                "NickRoy\n" +
-                "Swanner\n" +
-                "Hydra\n" +
-                "Ethanfo\n" +
-                "Polaroid\n" +
-                "TAYNE\n" +
-                "testplayer69";
-            foreach(string textline in txt_players.Lines)
-            {
-                tournament_player add_player = new tournament_player(textline);
-                seeded_players.Add(add_player);
-                
-            }
-
-            //Read the players from website
-            //Prompt for any conflicting tags
-
-            //Sort based on Elo
-
-            build_seedlist();
-        }
 
         private void build_seedlist()
         {

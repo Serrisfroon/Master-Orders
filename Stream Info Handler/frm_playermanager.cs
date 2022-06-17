@@ -11,13 +11,12 @@ using SqlDatabaseLibrary;
 using CharacterLibrary;
 using SqlDatabaseLibrary.Models;
 using Stream_Info_Handler.AppSettings;
+using Stream_Info_Handler.Startup;
 
 namespace Stream_Info_Handler
 {
     public partial class frm_playermanager : Form
     {
-        public event closedform_event close_form;
-
         public static string secondary_text = "Add a Secondary";
 
         string character_directory;
@@ -83,7 +82,7 @@ namespace Stream_Info_Handler
         private void frm_playermanager_FormClosed(object sender, FormClosedEventArgs e)
         {
             global_values.playermanager_form = null;
-            close_form(3);
+            FormManagement.CloseForm(FormManagement.FormNames.PlayerManager);
         }
 
         private void cbx_character_roster_SelectedIndexChanged(object sender, EventArgs e)

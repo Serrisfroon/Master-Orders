@@ -25,6 +25,7 @@ using SqlDatabaseLibrary;
 using SqlDatabaseLibrary.Models;
 using Stream_Info_Handler.AppSettings;
 using Stream_Info_Handler.StreamAssistant.DataManagement;
+using Stream_Info_Handler.Startup;
 
 namespace Stream_Info_Handler.StreamAssistant
 {
@@ -32,7 +33,6 @@ namespace Stream_Info_Handler.StreamAssistant
     public partial class StreamAssistantForm : Form
     {
         //Create the event
-        public event closedform_event close_form;
         public static string save_name;
         string uploadButtonText = "";
 
@@ -218,6 +218,11 @@ namespace Stream_Info_Handler.StreamAssistant
         {
             int index = (int)((Control)sender).Tag;
             DataOutputCaller.update_information(ref playerBoxes[index], "sponsor-prefix", playerBoxes[index].getTeam());
+        }
+        private void pronouns_TextChanged(object sender, EventArgs e)
+        {
+            int index = (int)((Control)sender).Tag;
+            DataOutputCaller.update_information(ref playerBoxes[index], "pronouns", playerBoxes[index].pronouns.Text);
         }
 
         private void character_Click(object sender, EventArgs e)
@@ -440,7 +445,7 @@ namespace Stream_Info_Handler.StreamAssistant
 
         private void round_TextChanged(object sender, EventArgs e)
         {
-            if (cbx_round.Text == "Grand Finals")
+            if (((ComboBox)sender).Text == "Grand Finals")
             {
                 ckb_loser1.Enabled = true;
                 ckb_loser1.Visible = true;
@@ -661,7 +666,8 @@ namespace Stream_Info_Handler.StreamAssistant
             }
 
             //Set its tag, twitter, sponsor, and region to the enterred information
-            saveNewPlayerRecord.tag = playerBoxes[playerIndex].tag.Text; 
+            saveNewPlayerRecord.tag = playerBoxes[playerIndex].tag.Text;
+            saveNewPlayerRecord.pronouns = playerBoxes[playerIndex].pronouns.Text;
             saveNewPlayerRecord.sponsor = playerBoxes[playerIndex].team.Text;
             saveNewPlayerRecord.twitter = playerBoxes[playerIndex].twitter.Text;
             saveNewPlayerRecord.region = "";
@@ -769,6 +775,7 @@ namespace Stream_Info_Handler.StreamAssistant
             }
 
             List<ComboBox> tags = new List<ComboBox> { cbx_tag1, cbx_tag2, cbx_team1_name1, cbx_team1_name2, cbx_team2_name1, cbx_team2_name2 };
+            List<ComboBox> pronounsboxes = new List<ComboBox> { cbx_pronouns1, cbx_pronouns2, cbx_team1_pronouns1, cbx_team1_pronouns2, cbx_team2_pronouns1, cbx_team2_pronouns2 };
             List<TextBox> twitters = new List<TextBox> { txt_twitter1, txt_twitter2, txt_team1_twitter1, txt_team1_twitter2, txt_team2_twitter1, txt_team2_twitter2 };
             List<TextBox> teams = new List<TextBox> { txt_team1, txt_team2, txt_team1_team1, txt_team1_team2, txt_team2_team1, txt_team2_team2 };
             List<Button> characters = new List<Button> { btn_character1, btn_character2, btn_team1_character1, btn_team1_character2, btn_team2_character1, btn_team2_character2 };
@@ -777,6 +784,11 @@ namespace Stream_Info_Handler.StreamAssistant
             {
                 tag.Text = "";
                 tag.SelectedIndex = -1;
+            }
+            foreach (ComboBox pronounsbox in pronounsboxes)
+            {
+                pronounsbox.Text = "";
+                pronounsbox.SelectedIndex = -1;
             }
             foreach (TextBox twitter in twitters)
                 twitter.Text = "";
@@ -1215,7 +1227,7 @@ namespace Stream_Info_Handler.StreamAssistant
 
         private void frm_main_FormClosed(object sender, FormClosedEventArgs e)
         {
-            close_form(0);
+            FormManagement.CloseForm(FormManagement.FormNames.StreamAssistant);
         }
 
         private void switch_xml(string first_element, string second_element, XDocument xml_copy)
@@ -1564,14 +1576,14 @@ namespace Stream_Info_Handler.StreamAssistant
             PlayerSettings[] playerSettings = new PlayerSettings[8];
 
             //Set the player fields to the default values
-            playerSettings[0] = new PlayerSettings(0, 1, cbx_tag1, txt_twitter1, btn_character1, btn_update, nud_score1, ckb_loser1, btn_save1, txt_team1, 82);
-            playerSettings[1] = new PlayerSettings(1, 2, cbx_tag2, txt_twitter2, btn_character2, btn_update, nud_score2, ckb_loser2, btn_save2, txt_team2, 82);
-            playerSettings[2] = new PlayerSettings(2, 1, cbx_team1_name1, txt_team1_twitter1, btn_team1_character1, btn_team_update, nud_team1_score, ckb_team1_lose, btn_save1, txt_team1_team1, 40);
-            playerSettings[3] = new PlayerSettings(3, 2, cbx_team2_name1, txt_team2_twitter1, btn_team2_character1, btn_team_update, nud_team2_score, ckb_team2_lose, btn_save2, txt_team1_team2, 40);
-            playerSettings[4] = new PlayerSettings(4, 3, cbx_team1_name2, txt_team1_twitter2, btn_team1_character2, btn_team_update, nud_team1_score, ckb_team1_lose, btn_save1, txt_team2_team1, 40);
-            playerSettings[5] = new PlayerSettings(5, 4, cbx_team2_name2, txt_team2_twitter2, btn_team2_character2, btn_team_update, nud_team2_score, ckb_team2_lose, btn_save2, txt_team2_team2, 40);
-            playerSettings[6] = new PlayerSettings(6, false, 1, cbx_commentator_tag1, txt_commentator_twitter1, btn_update_commentators, txt_commentator_team1, btn_commentator_save1);
-            playerSettings[7] = new PlayerSettings(7, false, 2, cbx_commentator_tag2, txt_commentator_twitter2, btn_update_commentators, txt_commentator_team2, btn_commentator_save2);
+            playerSettings[0] = new PlayerSettings(0, 1, cbx_tag1, txt_twitter1, btn_character1, btn_update, nud_score1, ckb_loser1, btn_save1, txt_team1, cbx_pronouns1, 82);
+            playerSettings[1] = new PlayerSettings(1, 2, cbx_tag2, txt_twitter2, btn_character2, btn_update, nud_score2, ckb_loser2, btn_save2, txt_team2, cbx_pronouns2, 82);
+            playerSettings[2] = new PlayerSettings(2, 1, cbx_team1_name1, txt_team1_twitter1, btn_team1_character1, btn_team_update, nud_team1_score, ckb_team1_lose, btn_save1, txt_team1_team1, cbx_team1_pronouns1, 40);
+            playerSettings[3] = new PlayerSettings(3, 2, cbx_team2_name1, txt_team2_twitter1, btn_team2_character1, btn_team_update, nud_team2_score, ckb_team2_lose, btn_save2, txt_team2_team1, cbx_team2_pronouns1, 40);
+            playerSettings[4] = new PlayerSettings(4, 3, cbx_team1_name2, txt_team1_twitter2, btn_team1_character2, btn_team_update, nud_team1_score, ckb_team1_lose, btn_save1, txt_team1_team2, cbx_team1_pronouns2, 40);
+            playerSettings[5] = new PlayerSettings(5, 4, cbx_team2_name2, txt_team2_twitter2, btn_team2_character2, btn_team_update, nud_team2_score, ckb_team2_lose, btn_save2, txt_team2_team2, cbx_team2_pronouns2, 40);
+            playerSettings[6] = new PlayerSettings(6, false, 1, cbx_commentator_tag1, txt_commentator_twitter1, btn_update_commentators, txt_commentator_team1, btn_commentator_save1, cbx_commentator_pronouns1);
+            playerSettings[7] = new PlayerSettings(7, false, 2, cbx_commentator_tag2, txt_commentator_twitter2, btn_update_commentators, txt_commentator_team2, btn_commentator_save2, cbx_commentator_pronouns2);
 
             return playerSettings;
         }
