@@ -93,7 +93,7 @@ namespace Stream_Info_Handler.StreamAssistant
 
 
 
-            if (global_values.queue_id > -1)
+            if (StreamQueueManager.queueId > -1)
             {
                 btn_previous_match.Enabled = true;
                 btn_previous_match.Visible = true;
@@ -496,7 +496,10 @@ namespace Stream_Info_Handler.StreamAssistant
                 string output_name = DataOutputCaller.get_output_name(ref playerBoxes[player_index]);
                 System.IO.File.WriteAllText(DirectoryManagement.outputDirectory + @"\playertag" + number + ".txt", output_name);
                 System.IO.File.WriteAllText(DirectoryManagement.outputDirectory + @"\playertwitter" + number + ".txt", playerBoxes[player_index].twitter.Text);
-                System.IO.File.WriteAllText(DirectoryManagement.outputDirectory + @"\score" + number + ".txt", playerBoxes[player_index].score.Value.ToString());
+                if (playerBoxes[player_index].score != null)
+                {
+                    System.IO.File.WriteAllText(DirectoryManagement.outputDirectory + @"\score" + number + ".txt", playerBoxes[player_index].score.Value.ToString());
+                }
                 Image stock_icon = Image.FromFile(Directory.GetCurrentDirectory() + @"\Resources\Graphics\left.png");
 
                 if (playerBoxes[player_index].characterName != "")
@@ -640,14 +643,12 @@ namespace Stream_Info_Handler.StreamAssistant
             int originalColor = 1;
 
             //Check if a player in the roster has been selected from the combobox. 
-            saveNewPlayerRecord = PlayerDatabase.FindRecordFromString(playerBoxes[playerIndex].tag.Text, PlayerDatabase.SearchProperty.uniqueTag);
-            if (saveNewPlayerRecord != null)
+            saveNewPlayerRecord = PlayerDatabase.FindRecordFromString(PlayerDatabase.playerRecords, playerBoxes[playerIndex].tag.Text, PlayerDatabase.SearchProperty.uniqueTag);
+            if (saveNewPlayerRecord == null)
             {
-                playerBoxes[playerIndex].isPlayer = true;
-            }
-            else
-            {
-                playerBoxes[playerIndex].isPlayer = false;
+                saveNewPlayerRecord = new PlayerRecordModel();
+                saveNewPlayerRecord.characterName = originalCharacter;
+                saveNewPlayerRecord.colorNumber = originalColor;
             }
 
             //Character check. Perform only for players.
@@ -669,7 +670,7 @@ namespace Stream_Info_Handler.StreamAssistant
             var savePlayerForm = new SavePlayer.SavePlayerForm(saveNewPlayerRecord, originalCharacter, originalColor);
             if (savePlayerForm.ShowDialog() == DialogResult.OK)
             {
-                database_tools.add_player(savePlayerForm.outputPlayer, savePlayerForm.outputIsNewPlayer);
+                PlayerDatabase.AddPlayer(savePlayerForm.outputPlayer, savePlayerForm.outputIsNewPlayer);
                 PlayerDatabase.LoadPlayers(GlobalSettings.selectedGame);
 
                 for (int i = 0; i < 6; i++)
@@ -826,7 +827,7 @@ namespace Stream_Info_Handler.StreamAssistant
             cbx_commentator_tag2.Text = hold_name;
 
 
-            if (global_values.queue_id > -1)
+            if (StreamQueueManager.queueId > -1)
             {
                 if (load_queue(advancement) == false)
                 {
@@ -1095,7 +1096,7 @@ namespace Stream_Info_Handler.StreamAssistant
         private bool load_queue(int advancement)
         {
             //Load the queue from the database
-            List<QueueEntryModel> loaded_queue = database_tools.load_queue(global_values.queue_id, false);
+            List<QueueEntryModel> loaded_queue = StreamQueueManager.LoadStreamQueue(StreamQueueManager.queueId);
             if (loaded_queue.Count() == 0)
                 return false;
             int next_match = -1;
@@ -1183,9 +1184,9 @@ namespace Stream_Info_Handler.StreamAssistant
             //Update the previous current match and the new current match
             if (new_match != -1)
             {
-                database_tools.add_match(loaded_queue[new_match], false);
+                StreamQueueManager.AddEntryToQueue(loaded_queue[new_match], StreamQueueManager.queueId, false);
             }
-            database_tools.add_match(loaded_queue[current_match], false);
+            StreamQueueManager.AddEntryToQueue(loaded_queue[current_match], StreamQueueManager.queueId, false);
 
             //Assign each player's information
             //Cycle through each player in the match infomation
@@ -1201,7 +1202,7 @@ namespace Stream_Info_Handler.StreamAssistant
                         if ((ii < 2 && global_values.format == "Singles") ||
                             (ii > 1 && global_values.format == "Doubles"))
                         {
-                            playerBoxes[ii].tag.Text = PlayerDatabase.GetUniqueTagFromId(loaded_queue[new_match].playerNames[i]);
+                            playerBoxes[ii].tag.Text = PlayerDatabase.GetUniqueTagFromId(loaded_queue[new_match].playerIds[i]);
                         }
                     }
                 }
@@ -1251,11 +1252,11 @@ namespace Stream_Info_Handler.StreamAssistant
             }
             else
             {
-                for (int i = 1; i < StreamQueue.queueList.Count; i++)
+                for (int i = 1; i < StreamQueueManager.queueList.Count; i++)
                 {
-                    if (StreamQueue.queueList[i].queueName == cbx_queues.Text)
+                    if (StreamQueueManager.queueList[i].queueName == cbx_queues.Text)
                     {
-                        queuegame = StreamQueue.queueList[i].queueGame;
+                        queuegame = StreamQueueManager.queueList[i].queueGame;
                         queueid = i;
                     }
                 }
@@ -1265,21 +1266,21 @@ namespace Stream_Info_Handler.StreamAssistant
                 //Compare the current queue's game to the new one. Update if there is a difference.
                 if (queueid != 0)
                 {
-                    if (StreamQueue.queueList[global_values.queue_id].queueGame != queuegame)
+                    if (StreamQueueManager.queueList[StreamQueueManager.queueId].queueGame != queuegame)
                     {
-                        if (database_tools.regame_queue(cbx_queues.Text, queuegame, queueid) == false)
+                        if (StreamQueueManager.AdjustQueueSettings(queueid, queuegame, StreamQueueManager.queueAdjustmentTypes.adjustGame))
                         {
-                            cbx_queues.SelectedIndex = cbx_queues.FindStringExact(StreamQueue.queueList[global_values.queue_id].queueName);
+                            cbx_queues.SelectedIndex = cbx_queues.FindStringExact(StreamQueueManager.queueList[StreamQueueManager.queueId].queueName);
                             return;
                         }
                     }
                 }
 
                 //Update the queue ID and write it to settings
-                global_values.queue_id = queueid;
+                StreamQueueManager.queueId = queueid;
 
                 XDocument xml = XDocument.Load(SettingsFile.settingsFile);
-                xml.Root.Element("database").Element("queue-id").ReplaceWith(new XElement("queue-id", global_values.queue_id));
+                xml.Root.Element("database").Element("queue-id").ReplaceWith(new XElement("queue-id", StreamQueueManager.queueId));
                 xml.Save(SettingsFile.settingsFile);
 
 
@@ -1578,11 +1579,11 @@ namespace Stream_Info_Handler.StreamAssistant
         private void SetStartingSettings()
         {
             rdb_automatic.Checked = DataOutputCaller.automaticUpdates;
-            cbx_format.Text = global_values.format;
+            cbx_format.Text = GlobalSettings.bracketFormat;
             cbx_gamecount.SelectedIndex = 0;
 
             //Add Queues to the dropdown
-            StreamAssistantControlUpdates.UpdateQueues(cbx_queues, StreamQueue.queueList, global_values.queue_id);
+            StreamAssistantControlUpdates.UpdateQueues(cbx_queues, StreamQueueManager.queueList, StreamQueueManager.queueId);
 
             if (YoutubeController.enableYoutubeFunctions == true)
             {

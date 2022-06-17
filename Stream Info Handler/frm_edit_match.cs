@@ -33,10 +33,10 @@ namespace Stream_Info_Handler
             cbx_player2.Items.AddRange(players.Cast<Object>().ToArray());
             cbx_player3.Items.AddRange(players.Cast<Object>().ToArray());
             cbx_player4.Items.AddRange(players.Cast<Object>().ToArray());
-            cbx_player1.SelectedIndex = cbx_player1.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.playerNames[0]));
-            cbx_player2.SelectedIndex = cbx_player2.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.playerNames[1]));
-            cbx_player3.SelectedIndex = cbx_player3.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.playerNames[2]));
-            cbx_player4.SelectedIndex = cbx_player4.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.playerNames[3]));
+            cbx_player1.SelectedIndex = cbx_player1.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.playerIds[0]));
+            cbx_player2.SelectedIndex = cbx_player2.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.playerIds[1]));
+            cbx_player3.SelectedIndex = cbx_player3.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.playerIds[2]));
+            cbx_player4.SelectedIndex = cbx_player4.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.playerIds[3]));
 
             if (global_values.format == "Singles")
             {
@@ -80,7 +80,7 @@ namespace Stream_Info_Handler
             //Loop through and find the ID of each selected player
             for (int ii = 0; ii < player_count; ii++)
             {
-                PlayerRecordModel foundRecord = PlayerDatabase.FindRecordFromString(player_name[ii], PlayerDatabase.SearchProperty.uniqueTag);
+                PlayerRecordModel foundRecord = PlayerDatabase.FindRecordFromString(PlayerDatabase.playerRecords, player_name[ii], PlayerDatabase.SearchProperty.uniqueTag);
                 if (foundRecord != null)
                 {
                     new_player[ii] = foundRecord.id;
@@ -101,8 +101,8 @@ namespace Stream_Info_Handler
                         var PlayerRecordModel_box = new SavePlayer.SavePlayerForm(player_name[i]);
                         if (PlayerRecordModel_box.ShowDialog() == DialogResult.OK)
                         {
-                            //Add the new player to the database
-                            database_tools.add_player(PlayerRecordModel_box.outputPlayer, true);
+                            //Add the new player to the database                            
+                            PlayerDatabase.AddPlayer(PlayerRecordModel_box.outputPlayer, true);
                             new_player[i] = PlayerRecordModel_box.outputPlayer.id;
                         }
                         else
@@ -118,15 +118,15 @@ namespace Stream_Info_Handler
             }
 
             //Update the match info
-            match.playerNames[0] = new_player[0];
-            match.playerNames[1] = new_player[1];
-            match.playerNames[2] = new_player[2];
-            match.playerNames[3] = new_player[3];
+            match.playerIds[0] = new_player[0];
+            match.playerIds[1] = new_player[1];
+            match.playerIds[2] = new_player[2];
+            match.playerIds[3] = new_player[3];
 
             match.roundInBracket = new_round;
 
             //Add the new match to the queue
-            database_tools.add_match(match, false);
+            StreamQueueManager.AddEntryToQueue(match, StreamQueueManager.queueId, false);
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

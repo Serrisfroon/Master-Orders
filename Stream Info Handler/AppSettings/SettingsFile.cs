@@ -259,7 +259,7 @@ namespace Stream_Info_Handler.AppSettings
             bool confirmSettings = true;
 
             DirectoryManagement.gameDirectories = LoadRosterDirectories();
-            StreamQueue.ImportStreamQueues();
+            StreamQueueManager.ImportStreamQueues();
 
             switch (toolToLoad)
             {

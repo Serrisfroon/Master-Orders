@@ -10,7 +10,7 @@ namespace SqlDatabaseLibrary.Models
 
         public status matchStatus { get; set; }
         public string roundInBracket { get; set; }
-        public List<string> playerNames { get; set; }
+        public List<string> playerIds { get; set; } = new List<string>();
 
         /// <summary>
         /// normalMatch = Normal status. Not the current match.
@@ -31,7 +31,7 @@ namespace SqlDatabaseLibrary.Models
             positionInQueue = tonumber;
             matchStatus = tostatus;
             roundInBracket = toround;
-            playerNames = toNames;
+            playerIds = toNames;
         }
         public QueueEntryModel() 
         {

@@ -194,7 +194,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>3dtI4gRdf396Mluw55XF9mJdsj3LdEqN7jukl4hh/Wc=</dsig:DigestValue>
+        <dsig:DigestValue>XUymtgSASmrytjB6mKFK2qQ4yb5+1teCuBoujDrHhlw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -283,14 +283,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SqlDatabaseLibrary.dll" size="19968">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SqlDatabaseLibrary.dll" size="23552">
       <assemblyIdentity name="SqlDatabaseLibrary" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>xELHAyELIdRNvH9LNJGBq1V3ujM/3kGpVtTAqoBdLig=</dsig:DigestValue>
+        <dsig:DigestValue>zwkwzOZITH00kjmyGfloOpg0tCsomp/gPIleEJF76wg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

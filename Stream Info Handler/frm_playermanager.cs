@@ -105,20 +105,20 @@ namespace Stream_Info_Handler
             XDocument xml = XDocument.Load(SettingsFile.settingsFile);
             string CheckGameName = DirectoryManagement.VerifyGameDirectory(cbx_character_roster.Text, (string)xml.Root.Element("directories").Element("character-directory"));
 
-            player_roster = database_tools.load_players(CheckGameName, ref player_id);
+            PlayerDatabase.LoadPlayers(CheckGameName);
 
             lvw_players.BeginUpdate();
             lvw_players.Items.Clear();
-            for (int i = 0; i < player_roster.Count(); i++)
+            foreach(PlayerRecordModel playerRecord in PlayerDatabase.playerRecords)
             {
-                ListViewItem add_item = new ListViewItem(player_roster[i].elo.ToString());
-                add_item.SubItems.Add(player_roster[i].tag);
-                add_item.SubItems.Add(player_roster[i].sponsor);
-                add_item.SubItems.Add(player_roster[i].twitter);
-                add_item.SubItems.Add(player_roster[i].fullName);
-                add_item.SubItems.Add(player_roster[i].region);
-                add_item.SubItems.Add(player_roster[i].characterName);
-                add_item.SubItems.Add(player_roster[i].misc);
+                ListViewItem add_item = new ListViewItem(playerRecord.elo.ToString());
+                add_item.SubItems.Add(playerRecord.tag);
+                add_item.SubItems.Add(playerRecord.sponsor);
+                add_item.SubItems.Add(playerRecord.twitter);
+                add_item.SubItems.Add(playerRecord.fullName);
+                add_item.SubItems.Add(playerRecord.region);
+                add_item.SubItems.Add(playerRecord.characterName);
+                add_item.SubItems.Add(playerRecord.misc);
                 lvw_players.Items.Add(add_item);
             }
             lvw_players.EndUpdate();
@@ -210,7 +210,7 @@ namespace Stream_Info_Handler
             txt_misc.Text = view_player.misc;
             txt_name.Text = view_player.fullName;
             lbl_playerid.Text = "Player ID: " + view_player.id;
-            lbl_ownerid.Text = "Owner: " + database_tools.get_owner_name(view_player.owningUserId);
+            lbl_ownerid.Text = "Owner: " + PlayerDatabase.GetOwnerName(view_player.owningUserId);
             if (view_player.characterName != "")
             {
                 characterName = view_player.characterName;
@@ -257,7 +257,7 @@ namespace Stream_Info_Handler
             if (enable == true)
             {
                 lbl_playerid.Text = "Player ID: " + view_player.id;
-                lbl_ownerid.Text = "Owner: " + database_tools.get_owner_name(view_player.owningUserId);
+                lbl_ownerid.Text = "Owner: " + PlayerDatabase.GetOwnerName(view_player.owningUserId);
             }   
             
             btn_cancel.Enabled = enable;
@@ -287,7 +287,7 @@ namespace Stream_Info_Handler
         {
             if(MessageBox.Show("Are you sure you want to delete the player '" + view_player.uniqueTag + "' from the database?", "Delete Player", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                database_tools.remove_player(view_player);
+                PlayerDatabase.RemovePlayer(view_player);
                 update_players();
             }
         }
@@ -296,7 +296,7 @@ namespace Stream_Info_Handler
         {
             view_player = new PlayerRecordModel();
             view_player.id = "";
-            view_player.owningUserId = global_values.user_id.ToString();
+            view_player.owningUserId = UserSession.userId.ToString();
             enable_boxes(true);
             lbl_playerid.Text = "No Player ID assigned";
             txt_elo.Text = PlayerRecordModel.defaultElo.ToString();
@@ -323,27 +323,24 @@ namespace Stream_Info_Handler
 
 
             PlayerRecordModel save_player = new PlayerRecordModel();
-            string playerid = view_player.id;
             string ownerid = view_player.owningUserId;
             bool new_player = false;
 
             //Generate a new playerid if this is a new player
             if (btn_update.Text == "Create Player")
             {
-                playerid = database_tools.get_new_playerid();
                 new_player = true;
-                if (database_tools.player_exists(txt_tag.Text, txt_name.Text, cbx_character_roster.Text))
+                if (PlayerDatabase.PlayerExists(txt_tag.Text, txt_name.Text, cbx_character_roster.Text))
                 {
                     MessageBox.Show("A player already exists with this Tag and Name. Please change one of these fields and try again.");
                     return;
                 }
             }
 
-            save_player.id = playerid;
             save_player.owningUserId = ownerid;
 
             //Check if this is being saved as a copy
-            if (ownerid == global_values.user_id.ToString())
+            if (ownerid == UserSession.userId.ToString())
                 save_player.duplicateRecord = false;
             else
                 save_player.duplicateRecord = true;
@@ -359,9 +356,9 @@ namespace Stream_Info_Handler
             save_player.usingWirelessController = ckb_wireless.Checked;
 
             save_player.characterName = characterName;
-            save_player.colorNumber = colorNumber;           
+            save_player.colorNumber = colorNumber;
 
-            database_tools.add_player(save_player, new_player);
+            PlayerDatabase.AddPlayer(save_player, new_player);
             update_players();
             enable_boxes(false);
         }

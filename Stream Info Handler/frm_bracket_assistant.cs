@@ -56,11 +56,13 @@ namespace Stream_Info_Handler
             this.TopMost = global_values.keepWindowsOnTop;
 
             string[] importedRounds = SettingsFile.LoadBracketRounds();
-            cbx_round.Items.Clear();
-            cbx_round.BeginUpdate();
-            cbx_round.Items.AddRange(importedRounds);
-            cbx_round.EndUpdate();
-
+            if (importedRounds != null)
+            {
+                cbx_round.Items.Clear();
+                cbx_round.BeginUpdate();
+                cbx_round.Items.AddRange(importedRounds);
+                cbx_round.EndUpdate();
+            }
 
             reload_settings();
             init_refresh();
@@ -138,7 +140,7 @@ namespace Stream_Info_Handler
             int topItemIndex = 0;
             save_view(ref hold_index, ref topItemIndex);
 
-            loaded_queue = database_tools.load_queue(global_values.queue_id, is_monitor);
+            loaded_queue = StreamQueueManager.LoadStreamQueue(StreamQueueManager.queueId);
             QueueEntryModel[] order_queue = new QueueEntryModel[loaded_queue.Count];
             loaded_queue.CopyTo(order_queue);
             for (int i = 0; i < loaded_queue.Count; i++)
@@ -198,7 +200,7 @@ namespace Stream_Info_Handler
             {
                 ListViewItem add_item = new ListViewItem(loaded_queue[i].positionInQueue.ToString());
                 add_item.SubItems.Add(loaded_queue[i].roundInBracket);
-                foreach (string queueplayer in loaded_queue[i].playerNames)
+                foreach (string queueplayer in loaded_queue[i].playerIds)
                 {
                     add_item.SubItems.Add(queueplayer);
                 }
@@ -243,7 +245,7 @@ namespace Stream_Info_Handler
             //Loop through and find the ID of each selected player
             for (int ii = 0; ii < numberOfPlayers; ii++)
             {
-                PlayerRecordModel foundRecord = PlayerDatabase.FindRecordFromString(player_name[ii], PlayerDatabase.SearchProperty.uniqueTag);
+                PlayerRecordModel foundRecord = PlayerDatabase.FindRecordFromString(PlayerDatabase.playerRecords, player_name[ii], PlayerDatabase.SearchProperty.uniqueTag);
                 if (foundRecord != null)
                 {
                     new_player[ii] = foundRecord.id;
@@ -265,7 +267,7 @@ namespace Stream_Info_Handler
                         if (savePlayerForm.ShowDialog() == DialogResult.OK)
                         {
                             //Add the new player to the database
-                            database_tools.add_player(savePlayerForm.outputPlayer, true);
+                            PlayerDatabase.AddPlayer(savePlayerForm.outputPlayer, true);
                             new_player[i] = savePlayerForm.outputPlayer.id;
                         }
                         else
@@ -281,10 +283,10 @@ namespace Stream_Info_Handler
             }
 
             //Update the queue as a failsafe
-            loaded_queue = database_tools.load_queue(global_values.queue_id, false);
+            loaded_queue = StreamQueueManager.LoadStreamQueue(StreamQueueManager.queueId);
             //Add the new match to the queue
             QueueEntryModel new_match = new QueueEntryModel(loaded_queue.Count + 1, 0, new_round, new List<string>() { new_player[0], new_player[1], new_player[2], new_player[3] } );
-            database_tools.add_match(new_match, true);
+            StreamQueueManager.AddEntryToQueue(new_match, StreamQueueManager.queueId, true);
             //Reload the queue
             load_queue(0, false);
         }
@@ -312,8 +314,8 @@ namespace Stream_Info_Handler
             loaded_queue[selected_index].positionInQueue -= 1;
             loaded_queue[selected_index - 1].positionInQueue += 1;
             //Write the switched rounds to the database
-            database_tools.add_match(loaded_queue[selected_index], false);
-            database_tools.add_match(loaded_queue[selected_index - 1], false);
+            StreamQueueManager.AddEntryToQueue(loaded_queue[selected_index], StreamQueueManager.queueId, false);
+            StreamQueueManager.AddEntryToQueue(loaded_queue[selected_index - 1], StreamQueueManager.queueId, false);
             //Reload the queue
             load_queue(1, false);
         }
@@ -341,8 +343,8 @@ namespace Stream_Info_Handler
             loaded_queue[selected_index].positionInQueue += 1;
             loaded_queue[selected_index + 1].positionInQueue -= 1;
             //Write the switched rounds to the database
-            database_tools.add_match(loaded_queue[selected_index], false);
-            database_tools.add_match(loaded_queue[selected_index + 1], false);
+            StreamQueueManager.AddEntryToQueue(loaded_queue[selected_index], StreamQueueManager.queueId, false);
+            StreamQueueManager.AddEntryToQueue(loaded_queue[selected_index + 1], StreamQueueManager.queueId, false);
             //Reload the queue
             load_queue(-1, false);
 
@@ -380,8 +382,10 @@ namespace Stream_Info_Handler
 
             //Write the updated rounds to the database
             if (queued_match != -1)
-                database_tools.add_match(loaded_queue[queued_match], false);
-            database_tools.add_match(loaded_queue[selected_index], false);
+            {
+                StreamQueueManager.AddEntryToQueue(loaded_queue[queued_match], StreamQueueManager.queueId, false);
+            }
+            StreamQueueManager.AddEntryToQueue(loaded_queue[selected_index], StreamQueueManager.queueId, false);
 
             //Reload the queue
             load_queue(0, false);
@@ -411,11 +415,12 @@ namespace Stream_Info_Handler
             for (int i = selected_index + 1; i < loaded_queue.Count(); i++)
             {
                 loaded_queue[i].positionInQueue -= 1;
-                database_tools.add_match(loaded_queue[i], false);
+                StreamQueueManager.AddEntryToQueue(loaded_queue[i], StreamQueueManager.queueId, false);
             }
 
             //Remove the final match from the queue
-            database_tools.remove_match(loaded_queue.Count());
+            StreamQueueManager.RemoveEntryFromQueue(loaded_queue.Count(), StreamQueueManager.queueId);
+
 
             //Refresh the queue
             load_queue(0, false);
@@ -440,8 +445,8 @@ namespace Stream_Info_Handler
                 int match_index = loaded_queue.Count - lvw_matches.SelectedIndices[0] - 1;
                 for (int ii = 1; ii <= numberOfPlayers; ii++)
                 {
-                    string playerBeingUpdated = loaded_queue[match_index].playerNames[ii - 1];
-                    PlayerRecordModel foundRecord = PlayerDatabase.FindRecordFromString(playerBeingUpdated, PlayerDatabase.SearchProperty.uniqueTag);
+                    string playerBeingUpdated = loaded_queue[match_index].playerIds[ii - 1];
+                    PlayerRecordModel foundRecord = PlayerDatabase.FindRecordFromString(PlayerDatabase.playerRecords, playerBeingUpdated, PlayerDatabase.SearchProperty.uniqueTag);
                     if (foundRecord != null)
                     {
                         update_info(ii, foundRecord);
@@ -469,7 +474,7 @@ namespace Stream_Info_Handler
             //Loop through and remove all queue matches
             for (int i = 0; i < loaded_queue.Count(); i++)
             {
-                database_tools.remove_match(i + 1);
+                StreamQueueManager.RemoveEntryFromQueue(i + 1, StreamQueueManager.queueId);
             }
 
             loaded_queue.Clear();
@@ -561,7 +566,7 @@ namespace Stream_Info_Handler
         private void update_player(string playerBeingUpdated)
         {
             //Find the index of the player
-            PlayerRecordModel playerRecord = PlayerDatabase.FindRecordFromString(playerBeingUpdated, PlayerDatabase.SearchProperty.uniqueTag);
+            PlayerRecordModel playerRecord = PlayerDatabase.FindRecordFromString(PlayerDatabase.playerRecords, playerBeingUpdated, PlayerDatabase.SearchProperty.uniqueTag);
             if (playerRecord == null)
             {
                 return;
@@ -578,7 +583,7 @@ namespace Stream_Info_Handler
 
                 if (savePlayerForm.outputIsNewPlayer == false)
                     PlayerDatabase.playerRecords[PlayerDatabase.playerRecords.IndexOf(playerRecord)] = newPlayerRecord;
-                database_tools.add_player(savePlayerForm.outputPlayer, savePlayerForm.outputIsNewPlayer);
+                PlayerDatabase.AddPlayer(savePlayerForm.outputPlayer, savePlayerForm.outputIsNewPlayer);
 
                 //Check all queued matches for the player
                 for (int i = 0; i < loaded_queue.Count; i++)
@@ -587,15 +592,15 @@ namespace Stream_Info_Handler
                     for (int ii = 0; ii < 4; ii++)
                     {
                         //Update any instance of the player
-                        if (loaded_queue[i].playerNames[ii] == playerBeingUpdated)
+                        if (loaded_queue[i].playerIds[ii] == playerBeingUpdated)
                         {
-                            loaded_queue[i].playerNames[ii] = savePlayerForm.outputPlayer.id;
+                            loaded_queue[i].playerIds[ii] = savePlayerForm.outputPlayer.id;
                             updated_match = true;
                         }
                     }
                     //Update the match if it had the player
                     if (updated_match)
-                        database_tools.add_match(loaded_queue[i], false);
+                        StreamQueueManager.AddEntryToQueue(loaded_queue[i], StreamQueueManager.queueId, false);
                 }
 
                 //reload the queue
@@ -648,7 +653,7 @@ namespace Stream_Info_Handler
             for (int i = 0; i < numberOfPlayers; i++)
             {
                 if (checkPlayerNames[i] != "")
-                    update_info(i + 1, PlayerDatabase.FindRecordFromString(checkPlayerNames[i], PlayerDatabase.SearchProperty.uniqueTag));
+                    update_info(i + 1, PlayerDatabase.FindRecordFromString(PlayerDatabase.playerRecords, checkPlayerNames[i], PlayerDatabase.SearchProperty.uniqueTag));
                 else
                     update_info(i + 1, emptyPlayerRecord);
             }

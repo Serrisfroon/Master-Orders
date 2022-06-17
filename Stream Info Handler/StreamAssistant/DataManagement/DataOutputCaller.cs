@@ -220,7 +220,7 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
         {
             //Check if this tag is included in the player index
 
-            PlayerRecordModel foundRecord = PlayerDatabase.FindRecordFromString(playerBox.getTag(), PlayerDatabase.SearchProperty.uniqueTag);
+            PlayerRecordModel foundRecord = PlayerDatabase.FindRecordFromString(PlayerDatabase.playerRecords, playerBox.getTag(), PlayerDatabase.SearchProperty.uniqueTag);
 
             if (foundRecord != null)
             {

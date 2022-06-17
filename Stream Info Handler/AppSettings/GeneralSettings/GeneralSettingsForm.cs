@@ -50,7 +50,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             LoadSettingsFormControls.settingsForm = this;
 
             LoadSettingsFormControls.InitializeImageScoreControls();
-            LoadSettingsFormControls.LoadStreamQueues(cbx_queues, StreamQueue.queueList);
+            LoadSettingsFormControls.LoadStreamQueues(cbx_queues, StreamQueueManager.queueList);
 
             //Load the character rosters
             LoadSettingsFormControls.LoadGameTitles(cbx_characters, GlobalSettings.availableGames, "(Select a Game)");
@@ -1133,14 +1133,14 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                        == DialogResult.OK)
                     {
                         int queueidd = -1;
-                        for (int i = 0; i < StreamQueue.queueList.Count; i++)
+                        for (int i = 0; i < StreamQueueManager.queueList.Count; i++)
                         {
-                            if (StreamQueue.queueList[i].queueName == cbx_queues.Text)
+                            if (StreamQueueManager.queueList[i].queueName == cbx_queues.Text)
                             {
                                 queueidd = i;
                             }
                         }
-                        if (database_tools.regame_queue(cbx_queues.Text, cbx_characters.Text, queueidd) == false)
+                        if (StreamQueueManager.AdjustQueueSettings(queueidd, cbx_characters.Text, StreamQueueManager.queueAdjustmentTypes.adjustGame))
                             return false;
                     }
                     else
@@ -1155,9 +1155,9 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             }
 
             int queueid = -1;
-            for (int i = 0; i < StreamQueue.queueList.Count; i++)
+            for (int i = 0; i < StreamQueueManager.queueList.Count; i++)
             {
-                if (StreamQueue.queueList[i].queueName == cbx_queues.Text)
+                if (StreamQueueManager.queueList[i].queueName == cbx_queues.Text)
                 {
                     queueid = i;
                 }
@@ -1257,7 +1257,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 DataOutputCaller.automaticUpdates = rdb_automatic.Checked;
                 YoutubeController.playlistName = txt_playlist.Text;
                 YoutubeController.playlistId = playlist_id;
-                global_values.queue_id = queueid;
+                StreamQueueManager.queueId = queueid;
                 GlobalSettings.selectedGame = cbx_characters.Text;
             }
 
@@ -1268,10 +1268,10 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
         {
             btn_apply.Enabled = true;
             string queuename = "";
-            for (int i = 0; i < StreamQueue.queueList.Count; i++)
+            for (int i = 0; i < StreamQueueManager.queueList.Count; i++)
             {
-                if (StreamQueue.queueList[i].queueName == cbx_queues.Text)
-                    queuename = StreamQueue.queueList[i].queueGame;
+                if (StreamQueueManager.queueList[i].queueName == cbx_queues.Text)
+                    queuename = StreamQueueManager.queueList[i].queueGame;
             }
             cbx_queuegame.SelectedIndex = cbx_queuegame.FindStringExact(queuename);
         }
@@ -1319,9 +1319,9 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 cbx_queues.BeginUpdate();
                 cbx_queues.Items.Clear();                                            //Empty the item list
                 cbx_queues.Items.Add("None");
-                for (int i = 0; i < StreamQueue.queueList.Count; i++)
+                for (int i = 0; i < StreamQueueManager.queueList.Count; i++)
                 {
-                    cbx_queues.Items.Add(StreamQueue.queueList[i].queueName);
+                    cbx_queues.Items.Add(StreamQueueManager.queueList[i].queueName);
                 }
                 cbx_queues.EndUpdate();
             }
@@ -1348,8 +1348,6 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
             //Return fail if a new directory is not selected
             if (selection.ShowDialog() != DialogResult.OK)
                 return;
-            //Update the game directory
-            selected_directory = database_tools.pass_directory;
 
 
             //Verify the directory has correct character data
@@ -1363,8 +1361,7 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
                 //Return fail if a new directory is not selected
                 if (selectioncheck.ShowDialog() != DialogResult.OK)
                     return;
-                //Update the game directory
-                selected_directory = database_tools.pass_directory;
+
                 //Update the character list before checking again
                 characters = DirectoryManagement.GetCharactersFromDirectory(selected_directory);
             }
@@ -1379,18 +1376,18 @@ namespace Stream_Info_Handler.AppSettings.GeneralSettings
         {
             string queuegame = "";
             int queueid = -1;
-            for (int i = 0; i < StreamQueue.queueList.Count; i++)
+            for (int i = 0; i < StreamQueueManager.queueList.Count; i++)
             {
-                if (StreamQueue.queueList[i].queueName == cbx_queues.Text)
+                if (StreamQueueManager.queueList[i].queueName == cbx_queues.Text)
                 {
-                    queuegame = StreamQueue.queueList[i].queueGame;
+                    queuegame = StreamQueueManager.queueList[i].queueGame;
                     queueid = i;
                 }
             }
             //Only update the queue if this is a new game
             if (cbx_queuegame.Text != queuegame)
             {
-                if (database_tools.regame_queue(cbx_queues.Text, cbx_queuegame.Text, queueid) == false)
+                if (StreamQueueManager.AdjustQueueSettings(queueid, cbx_queuegame.Text, StreamQueueManager.queueAdjustmentTypes.adjustGame))
                     cbx_queuegame.SelectedIndex = cbx_queuegame.FindStringExact(queuegame);
             }
         }

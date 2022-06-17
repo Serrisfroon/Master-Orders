@@ -48,7 +48,7 @@ namespace Stream_Info_Handler.SavePlayer
             if(playerToSave.id != null && playerToSave.id != "")
             {
 
-                if (updateProcesses.ownerId != global_values.user_id.ToString())
+                if (updateProcesses.ownerId != UserSession.userId.ToString())
                 {
                     btn_save.Text = "Create Local Copy";
                 }
@@ -61,14 +61,14 @@ namespace Stream_Info_Handler.SavePlayer
                     btn_cancel.Left += 55;
                 }
                 lbl_playerid.Text = "Player ID: " + playerToSave.id;
-                lbl_ownerid.Text = "Owner: " + database_tools.get_owner_name(playerToSave.owningUserId);
+                lbl_ownerid.Text = "Owner: " + PlayerDatabase.GetOwnerName(playerToSave.owningUserId); 
                 ckb_character.Enabled = true;
             }
             else
             {
                 btn_save.Text = "Create New Player";
                 lbl_playerid.Text = "No Player ID assigned";
-                lbl_ownerid.Text = "Owner: " + database_tools.get_owner_name(global_values.user_id.ToString());
+                lbl_ownerid.Text = "Owner: " + PlayerDatabase.GetOwnerName(UserSession.userId.ToString());
             }
 
             //Assign the character image to the button
@@ -103,7 +103,7 @@ namespace Stream_Info_Handler.SavePlayer
             txt_elo.Text = PlayerRecordModel.defaultElo.ToString();
 
             lbl_playerid.Text = "No Player ID assigned";
-            lbl_ownerid.Text = "Owner: " + database_tools.get_owner_name(global_values.user_id.ToString());
+            lbl_ownerid.Text = "Owner: " + PlayerDatabase.GetOwnerName(UserSession.userId.ToString());
 
             btn_save.Text = "Create New Player";
 
@@ -132,7 +132,7 @@ namespace Stream_Info_Handler.SavePlayer
             }
 
             if (newPlayer == true)
-                if (database_tools.player_exists(txt_tag.Text, txt_name.Text, updateProcesses.playerGame))
+                if (PlayerDatabase.PlayerExists(txt_tag.Text, txt_name.Text, updateProcesses.playerGame))
                 {
                     MessageBox.Show("A player already exists with this Tag and Name. Please change one of these fields and try again.");
                     return false;

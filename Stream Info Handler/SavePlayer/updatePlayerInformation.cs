@@ -1,4 +1,5 @@
 ﻿using CharacterLibrary;
+using SqlDatabaseLibrary;
 using SqlDatabaseLibrary.Models;
 using Stream_Info_Handler.AppSettings;
 using Stream_Info_Handler.CharacterSelect;
@@ -31,8 +32,7 @@ namespace Stream_Info_Handler.SavePlayer
         {
             gamePath = toPath;
             isCopy = savePlayer.duplicateRecord;
-            if (savePlayer.uniqueTag != savePlayer.tag)
-                needsUnique = true;
+
 
 
             //Set playerid and ownerid
@@ -41,15 +41,15 @@ namespace Stream_Info_Handler.SavePlayer
                 playerId = savePlayer.id;
                 ownerId = savePlayer.owningUserId;
                 playerGame = savePlayer.game;
-                if (ownerId == global_values.user_id.ToString())
+                if (ownerId == UserSession.userId.ToString())
                 {
                     newPlayer = false;
                 }
             }
             else
             {
-                ownerId = global_values.user_id.ToString();
-                playerGame = DirectoryManagement.GetGameDirectory();
+                ownerId = UserSession.userId.ToString();
+                playerGame = GlobalSettings.selectedGame;
             }
 
             saveCharacter = savePlayer.characterName;
@@ -62,8 +62,8 @@ namespace Stream_Info_Handler.SavePlayer
         {
             gamePath = toPath;
             isCopy = false;
-            ownerId = global_values.user_id.ToString();
-            playerGame = DirectoryManagement.GetGameDirectory();
+            ownerId = UserSession.userId.ToString();
+            playerGame = GlobalSettings.selectedGame;
 
             saveCharacter = "Random";
             saveColor = 1;
@@ -97,13 +97,9 @@ namespace Stream_Info_Handler.SavePlayer
         public void savePlayer(PlayerRecordModel playerInfo, bool newPlayer, bool updateCharacter, SavePlayerForm parentForm)
         {
             PlayerRecordModel savePlayer = playerInfo;
-            //Generate a new playerid if this is a new player
-            if (newPlayer == true)
-                playerId = database_tools.get_new_playerid();
-            savePlayer.id = playerId;
             savePlayer.owningUserId = ownerId;
             //Check if this is being saved as a copy
-            if (ownerId == global_values.user_id.ToString())
+            if (ownerId == UserSession.userId.ToString())
                 savePlayer.duplicateRecord = false;
             else
                 savePlayer.duplicateRecord = true;

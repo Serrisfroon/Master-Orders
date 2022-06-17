@@ -18,6 +18,7 @@ using CharacterLibrary;
 using Stream_Info_Handler.AppSettings;
 using SqlDatabaseLibrary.Models;
 using Stream_Info_Handler.StreamAssistant.DataManagement;
+using SqlDatabaseLibrary;
 
 namespace Stream_Info_Handler
 {
@@ -638,7 +639,7 @@ namespace Stream_Info_Handler
             XDocument xml = XDocument.Load(SettingsFile.settingsFile);
             string selectedGameName = DirectoryManagement.VerifyGameDirectory(cbx_character_roster.Text, (string)xml.Root.Element("directories").Element("character-directory"));
 
-            player_roster = database_tools.load_players(selectedGameName, ref player_id);
+            PlayerDatabase.LoadPlayers(selectedGameName);
 
             cbx_tag1.BeginUpdate();
             cbx_tag1.Items.Clear();
@@ -783,7 +784,7 @@ namespace Stream_Info_Handler
             if (PlayerRecordModel_box.ShowDialog() == DialogResult.OK)
             {
 
-                database_tools.add_player(PlayerRecordModel_box.outputPlayer, PlayerRecordModel_box.outputIsNewPlayer);
+                PlayerDatabase.AddPlayer(PlayerRecordModel_box.outputPlayer, PlayerRecordModel_box.outputIsNewPlayer);
                 player_roster = database_tools.load_players(GlobalSettings.selectedGame,  ref player_id);
 
                 player_names = cbx_tag1.Items;

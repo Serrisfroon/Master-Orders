@@ -29,7 +29,7 @@ namespace SqlDatabaseLibrary
         /// <param name="inputString"></param>
         /// <param name="searchProperty"></param>
         /// <returns></returns>
-        public static PlayerRecordModel FindRecordFromString(string inputString, SearchProperty searchProperty)
+        public static PlayerRecordModel FindRecordFromString(List<PlayerRecordModel> records, string inputString, SearchProperty searchProperty)
         {
             if(playerRecords == null)
             {
@@ -38,11 +38,11 @@ namespace SqlDatabaseLibrary
             switch(searchProperty)
             {
                 case SearchProperty.id:
-                    return playerRecords.Find(x => x.id == inputString);
+                    return records.Find(x => x.id == inputString);
                 case SearchProperty.tag:
-                    return playerRecords.Find(x => x.tag == inputString);
+                    return records.Find(x => x.tag == inputString);
                 case SearchProperty.uniqueTag:
-                    return playerRecords.Find(x => x.uniqueTag == inputString);
+                    return records.Find(x => x.uniqueTag == inputString);
                 default:
                     return null;
             }
@@ -56,13 +56,13 @@ namespace SqlDatabaseLibrary
         /// <returns></returns>
         public static bool RecordExistsFromString(string inputString, SearchProperty searchProperty)
         {
-            PlayerRecordModel foundRecord = FindRecordFromString(inputString, searchProperty);
+            PlayerRecordModel foundRecord = FindRecordFromString(playerRecords, inputString, searchProperty);
             return foundRecord != null;
         }
 
         public static string GetUniqueTagFromId(string inputId)
         {
-            PlayerRecordModel foundPlayerRecord = FindRecordFromString(inputId, SearchProperty.id);
+            PlayerRecordModel foundPlayerRecord = FindRecordFromString(playerRecords, inputId, SearchProperty.id);
                 //TryGetValue(inputId, out PlayerRecordModel foundPlayerRecord);
             //Set the tag of the player. Other fields will populate off of this
             if (foundPlayerRecord == null)
@@ -81,11 +81,10 @@ namespace SqlDatabaseLibrary
         {
             //Adds a new player's information to the database set within the settings
             var dbCon = SqlDatabaseConnection.Instance();
-            if (dbCon.IsConnect())
+            if (dbCon.TryDatabaseConnection())
             {
                 List<MySqlParameter> playerParameters = new List<MySqlParameter>();
 
-                playerParameters.Add(new MySqlParameter("@id", newPlayerRecord.id));
                 playerParameters.Add(new MySqlParameter("@date", DateTime.Today.ToString("yyyy-MM-dd")));
                 playerParameters.Add(new MySqlParameter("@owningUserId", newPlayerRecord.owningUserId));
                 playerParameters.Add(new MySqlParameter("@duplicateRecord", newPlayerRecord.duplicateRecord));
@@ -106,9 +105,9 @@ namespace SqlDatabaseLibrary
 
                 if (createNewRecord == true)
                 {
-                    dbCon.Insert("INSERT INTO PLAYERS (ID, ACTIVE, CHANGEDATE, OWNERID, LOCALCOPY, GAME, TAG, ELO, CHARACTER1, COLOR1, WIRELESS, " +
-                        "TWITTER, REGION, SPONSORPREFIX, SPONSOR, FULLNAME, PRONOUNS MISC)" +
-                        "VALUES(@id, 1, @date, @owningUserId, @duplicateRecord, @game, @tag, @elo, @characterName, @colorNumber, @usingWirelessController, " +
+                    dbCon.Insert("INSERT INTO PLAYERS (ACTIVE, CHANGEDATE, OWNERID, LOCALCOPY, GAME, TAG, ELO, CHARACTER1, COLOR1, WIRELESS, " +
+                        "TWITTER, REGION, SPONSORPREFIX, SPONSOR, FULLNAME, PRONOUNS, MISC)" +
+                        "VALUES(1, @date, @owningUserId, @duplicateRecord, @game, @tag, @elo, @characterName, @colorNumber, @usingWirelessController, " +
                         "@twitter, @region, @sponsor, @fullSponsor, @fullName, @pronouns, @misc)", playerParameters);
                 }
                 else
@@ -130,7 +129,7 @@ namespace SqlDatabaseLibrary
         {
             //Marks a player as inactive based on their ID
             var dbCon = SqlDatabaseConnection.Instance();
-            if (dbCon.IsConnect())
+            if (dbCon.TryDatabaseConnection())
             {
                 List<MySqlParameter> playerParameters = new List<MySqlParameter>();
 
@@ -153,7 +152,7 @@ namespace SqlDatabaseLibrary
             int playerId = -1;
 
             //Select a connection
-            if (dbCon.IsConnect())
+            if (dbCon.TryDatabaseConnection())
             {
                 List<MySqlParameter> playerParameters = new List<MySqlParameter>();
 
@@ -186,7 +185,7 @@ namespace SqlDatabaseLibrary
             string ownerName = "";
 
             //Select a connection
-            if (dbCon.IsConnect())
+            if (dbCon.TryDatabaseConnection())
             {
                 List<MySqlParameter> playerParameters = new List<MySqlParameter>();
 
@@ -217,7 +216,7 @@ namespace SqlDatabaseLibrary
         {
             var dbCon = SqlDatabaseConnection.Instance();
 
-            if (dbCon.IsConnect())
+            if (dbCon.TryDatabaseConnection())
             {
                 List<MySqlParameter> playerParameters = new List<MySqlParameter>();
 
@@ -258,7 +257,7 @@ namespace SqlDatabaseLibrary
             var dbCon = SqlDatabaseConnection.Instance();
             List<PlayerRecordModel> loadedPlayers = new List<PlayerRecordModel>();
 
-            if (dbCon.IsConnect())
+            if (dbCon.TryDatabaseConnection())
             {
                 List<MySqlParameter> playerParameters = new List<MySqlParameter>();
 
@@ -303,7 +302,7 @@ namespace SqlDatabaseLibrary
                     newPlayer.pronouns = reader.GetString(15);
 
                     //Check if this is a duplicate tag
-                    PlayerRecordModel foundRecord = FindRecordFromString(newPlayer.tag, SearchProperty.tag);
+                    PlayerRecordModel foundRecord = FindRecordFromString(loadedPlayers, newPlayer.tag, SearchProperty.tag);
                     if (foundRecord != null)
                     {
                         //Add the new player's name to the unqiue tag

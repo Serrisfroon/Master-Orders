@@ -56,16 +56,16 @@ namespace Stream_Info_Handler.StreamAssistant
 
         private void setTags(int index)
         {
-            tag.Tag = index;
-            twitter.Tag = index;
-            team.Tag = index;
-            update.Tag = index;
-            save.Tag = index;
-            if(isPlayer)
+            tag.Tag = (tag.Tag == null) ? index : tag.Tag;
+            twitter.Tag = (twitter.Tag == null) ? index : twitter.Tag;
+            team.Tag = (team.Tag == null) ? index : team.Tag;
+            update.Tag = (update.Tag == null) ? index : update.Tag;
+            save.Tag = (save.Tag == null) ? index : save.Tag;
+            if (isPlayer)
             {
-                character.Tag = index;
-                loser.Tag = index;
-                score.Tag = index;
+                character.Tag = (character.Tag == null) ? index : character.Tag;
+                loser.Tag = (loser.Tag == null) ? index : loser.Tag;
+                score.Tag = (score.Tag == null) ? index : score.Tag;
             }
         }
 

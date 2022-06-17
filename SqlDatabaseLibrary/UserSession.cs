@@ -18,7 +18,7 @@ namespace SqlDatabaseLibrary
             try
             {
                 //Connect to the database. Fails if incorrect credentials
-                dbCon.IsConnect();
+                dbCon.TryDatabaseConnection();
 
                 List<MySqlParameter> playerparameters = new List<MySqlParameter>();
                 playerparameters.Add(new MySqlParameter("@user", dbCon.databaseUserName));

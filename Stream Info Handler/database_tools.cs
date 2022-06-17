@@ -15,19 +15,6 @@ namespace Stream_Info_Handler
     {
         static string master_db = "Mastercore";
 
-        private static string _pass_directory;
-        public static string pass_directory
-        {
-            get // this makes you to access value in form2
-            {
-                return _pass_directory;
-            }
-            set // this makes you to change value in form2
-            {
-                _pass_directory = value;
-            }
-        }
-
         public static void add_player(PlayerRecordModel new_player, bool new_entry)
         {
             //Adds a new player's information to the database set within the settings
@@ -104,7 +91,7 @@ namespace Stream_Info_Handler
             {
                 List<MySqlParameter> playerparams = new List<MySqlParameter>();
 
-                playerparams.Add(new MySqlParameter("@id", global_values.user_id));
+                playerparams.Add(new MySqlParameter("@id", UserSession.userId));
 
                 string query = "SELECT count(ID) FROM PLAYERS WHERE OWNERID=@id";
                 var cmd = new MySqlCommand(query, dbCon.Connection);
@@ -115,7 +102,7 @@ namespace Stream_Info_Handler
                 reader.Read();
                 int player_count = reader.GetInt32(0);
                 reader.Close();
-                player_id = (global_values.user_id * 1000000) + player_count;
+                player_id = (UserSession.userId * 1000000) + player_count;
                 dbCon.Close();
             }
             return player_id.ToString();
@@ -198,7 +185,7 @@ namespace Stream_Info_Handler
                 List<MySqlParameter> playerparams = new List<MySqlParameter>();
 
                 playerparams.Add(new MySqlParameter("@game", gamename));
-                playerparams.Add(new MySqlParameter("@ownerid", global_values.user_id));
+                playerparams.Add(new MySqlParameter("@ownerid", UserSession.userId));
 
 
                 //Find all active Non-copies
@@ -275,14 +262,14 @@ namespace Stream_Info_Handler
             {
                 List<MySqlParameter> playerparams = new List<MySqlParameter>();
 
-                playerparams.Add(new MySqlParameter("@queueid", global_values.queue_id));
+                playerparams.Add(new MySqlParameter("@queueid", StreamQueueManager.queueId));
                 playerparams.Add(new MySqlParameter("@number", new_match.positionInQueue));
                 playerparams.Add(new MySqlParameter("@status", new_match.matchStatus));
                 playerparams.Add(new MySqlParameter("@round", new_match.roundInBracket));
-                playerparams.Add(new MySqlParameter("@player1", new_match.playerNames[0]));
-                playerparams.Add(new MySqlParameter("@player2", new_match.playerNames[1]));
-                playerparams.Add(new MySqlParameter("@player3", new_match.playerNames[2]));
-                playerparams.Add(new MySqlParameter("@player4", new_match.playerNames[3]));
+                playerparams.Add(new MySqlParameter("@player1", new_match.playerIds[0]));
+                playerparams.Add(new MySqlParameter("@player2", new_match.playerIds[1]));
+                playerparams.Add(new MySqlParameter("@player3", new_match.playerIds[2]));
+                playerparams.Add(new MySqlParameter("@player4", new_match.playerIds[3]));
 
                 if (new_entry == true)
                 {
@@ -311,7 +298,7 @@ namespace Stream_Info_Handler
                 MySqlParameter add_player_param = new MySqlParameter("", "");
 
                 playerparams.Add(new MySqlParameter("@number", old_match));
-                playerparams.Add(new MySqlParameter("@queueid", global_values.queue_id));
+                playerparams.Add(new MySqlParameter("@queueid", StreamQueueManager.queueId));
 
                 dbCon.Insert("DELETE FROM QUEUE WHERE MATCHID=@number AND QUEUEID=@queueid", playerparams);
                 dbCon.Close();
@@ -345,10 +332,10 @@ namespace Stream_Info_Handler
                     new_match.positionInQueue = reader.GetInt32(0);
                     new_match.matchStatus = (QueueEntryModel.status)reader.GetInt32(1);
                     new_match.roundInBracket = reader.GetString(2);
-                    new_match.playerNames[0] = reader.GetString(3);
-                    new_match.playerNames[1] = reader.GetString(4);
-                    new_match.playerNames[2] = reader.GetString(5);
-                    new_match.playerNames[3] = reader.GetString(6);
+                    new_match.playerIds[0] = reader.GetString(3);
+                    new_match.playerIds[1] = reader.GetString(4);
+                    new_match.playerIds[2] = reader.GetString(5);
+                    new_match.playerIds[3] = reader.GetString(6);
                     loaded_queue.Add(new_match);
                 }
                 reader.Close();
@@ -400,7 +387,7 @@ namespace Stream_Info_Handler
 
                     dbCon.Close();
 
-                    StreamQueue.queueList[queueid].queueName = game_name;
+                    StreamQueueManager.queueList[queueid].queueName = game_name;
                     return true;
                 }
             }
@@ -445,7 +432,7 @@ namespace Stream_Info_Handler
                     MessageBox.Show(dbCon.DatabaseUserName + " is not currently an active Master Orders account. If you are the account owner, please contact Serris via twitter @serrisfroon");
                     return false;
                 }
-                global_values.user_id = userid;
+                UserSession.userId = userid;
 
                 return true;
             }

@@ -498,6 +498,36 @@ C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream I
 C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.AppSettings.AppSettingsForm.resources
 C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.StreamAssistant.StreamAssistantForm.resources
 C:\Users\serri\Google Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.AssemblyReference.cache
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.AssemblyReference.cache
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.exe.config
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.CharacterSelect.CharacterSelect.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.CharacterSelect.ColorSelect.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.ClipToTwitter.ClipToTwitterForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.ClipToTwitter.TwitterPinForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.ClipToTwitter.TwitterTwitchSettingsForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_edit_match.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_modern.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_othertools.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Startup.frm_login.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_newplayer.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.AppSettings.GeneralSettings.GeneralSettingsForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_startup.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_bracket_assistant.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.SavePlayer.SavePlayerForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.StreamAssistant.StreamAssistantForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_tables.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_playermanager.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_rename_queue.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_top8_character.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_template.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_uploading.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Properties.Resources.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_results.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Top8.Top8CharacterSettingsForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Top8.Top8GeneratorForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Top8.Top8TemplateSettingsForm.resources
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.GenerateResource.cache
+C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CoreCompileInputs.cache
 C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\KeepCalm-Medium.ttf
 C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\youtube_upload.json
 C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\bin\Debug\Resources\Graphics\blue.gif
@@ -689,36 +719,6 @@ C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.Cr
 C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.Logic.xml
 C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.Streams.xml
 C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\bin\Debug\Tweetinvi.WebLogic.xml
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.AssemblyReference.cache
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.exe.config
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.CharacterSelect.CharacterSelect.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.CharacterSelect.ColorSelect.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.ClipToTwitter.ClipToTwitterForm.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.ClipToTwitter.TwitterPinForm.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.ClipToTwitter.TwitterTwitchSettingsForm.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_edit_match.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_modern.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_othertools.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Startup.frm_login.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_newplayer.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.AppSettings.GeneralSettings.GeneralSettingsForm.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_startup.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_bracket_assistant.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.SavePlayer.SavePlayerForm.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.StreamAssistant.StreamAssistantForm.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_tables.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_playermanager.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_rename_queue.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_top8_character.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_template.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_uploading.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Properties.Resources.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.frm_results.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Top8.Top8CharacterSettingsForm.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Top8.Top8GeneratorForm.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream_Info_Handler.Top8.Top8TemplateSettingsForm.resources
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.GenerateResource.cache
-C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CoreCompileInputs.cache
 C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.exe.manifest
 C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Master Orders.application
 C:\Users\serri\My Drive\Master-Orders\Stream Info Handler\obj\Debug\Stream Info Handler.csproj.CopyComplete

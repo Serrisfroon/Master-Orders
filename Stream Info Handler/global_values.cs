@@ -56,7 +56,6 @@ namespace Stream_Info_Handler
         public static int user_id;
         public static int queue_id;
         //public static string[,] stream_queue;
-        public static List<database_tools.streamQueue> stream_queue;
 
     }
 }

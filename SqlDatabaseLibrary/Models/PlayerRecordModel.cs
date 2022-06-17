@@ -23,7 +23,7 @@ namespace SqlDatabaseLibrary.Models
         public string fullSponsor { get; set; }
         public string fullName { get; set; }
         public string misc { get; set; }
-        public string pronouns { get; set; }
+        public string pronouns { get; set; } = "";
 
         public PlayerRecordModel()
         {
