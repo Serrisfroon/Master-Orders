@@ -82,16 +82,16 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
                             System.IO.File.WriteAllText(DirectoryManagement.outputDirectory + @"\" + variable_name + ".txt", newname);
 
                             //If it's dubs and a player is being updated, do a team name update
-                            if (global_values.format == "Doubles" && playerBox.isPlayer == true)
+                            if (GlobalSettings.bracketFormat == "Doubles" && playerBox.isPlayer == true)
                             {
                                 if (playerBox.player_number == 1 || playerBox.player_number == 3)
                                 {
                                     //Pull both players' names from the text files
-                                    string name1 = File.ReadAllText(DirectoryManagement.outputDirectory + @"\playetag1.txt");
+                                    string name1 = File.ReadAllText(DirectoryManagement.outputDirectory + @"\playertag1.txt");
                                     //Remove the loser signifier from the first name if needed
                                     if (name1.Contains("[L]"))
                                         name1 = name1.Replace("[L]", "");
-                                    string name2 = File.ReadAllText(DirectoryManagement.outputDirectory + @"\playetag3.txt");
+                                    string name2 = File.ReadAllText(DirectoryManagement.outputDirectory + @"\playertag3.txt");
                                     string team_value = name1 + " + " + name2;
                                     //Write the name to the file
                                     System.IO.File.WriteAllText(DirectoryManagement.outputDirectory + @"\team_name1.txt", team_value);
@@ -99,11 +99,11 @@ namespace Stream_Info_Handler.StreamAssistant.DataManagement
                                 else
                                 {
                                     //Pull both players' names from the text files
-                                    string name1 = File.ReadAllText(DirectoryManagement.outputDirectory + @"\playetag2.txt");
+                                    string name1 = File.ReadAllText(DirectoryManagement.outputDirectory + @"\playertag2.txt");
                                     //Remove the loser signifier from the first name if needed
                                     if (name1.Contains("[L]"))
                                         name1 = name1.Replace("[L]", "");
-                                    string name2 = File.ReadAllText(DirectoryManagement.outputDirectory + @"\playetag4.txt");
+                                    string name2 = File.ReadAllText(DirectoryManagement.outputDirectory + @"\playertag4.txt");
                                     string team_value = name1 + " + " + name2;
                                     //Write the name to the file                                        
                                     System.IO.File.WriteAllText(DirectoryManagement.outputDirectory + @"\team_name2.txt", team_value);

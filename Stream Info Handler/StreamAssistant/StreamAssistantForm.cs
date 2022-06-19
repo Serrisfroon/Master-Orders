@@ -99,7 +99,7 @@ namespace Stream_Info_Handler.StreamAssistant
                 btn_previous_match.Visible = true;
                 btn_team_previous.Enabled = true;
                 btn_team_previous.Visible = true;
-                if (global_values.format == "Singles")
+                if (GlobalSettings.bracketFormat == "Singles")
                     tab_main.SelectedIndex = 1;
                 else
                     tab_main.SelectedIndex = 2;
@@ -714,7 +714,7 @@ namespace Stream_Info_Handler.StreamAssistant
             string output_name = DataOutputCaller.get_output_name(ref playerBoxes[player_index]);
             DataOutputCaller.update_xml("player", playerBoxes[player_index].player_number, "losers-side", playerBoxes[player_index].loser.Checked.ToString());
             System.IO.File.WriteAllText(DirectoryManagement.outputDirectory + @"\playertag" + playerBoxes[player_index].player_number.ToString() + ".txt", output_name);
-            if (global_values.format == "Doubles")
+            if (GlobalSettings.bracketFormat == "Doubles")
             {
                 if (playerBoxes[player_index].player_number == 1 || playerBoxes[player_index].player_number == 3)
                 {
@@ -815,7 +815,7 @@ namespace Stream_Info_Handler.StreamAssistant
             //Load the players
             PlayerDatabase.LoadPlayers(GlobalSettings.selectedGame);
 
-            if (global_values.format == "Singles")
+            if (GlobalSettings.bracketFormat == "Singles")
             {
                 StreamAssistantControlUpdates.update_names(ref cbx_tag1);
                 StreamAssistantControlUpdates.update_names(ref cbx_tag2);
@@ -848,8 +848,8 @@ namespace Stream_Info_Handler.StreamAssistant
                     {
                         if (playerBoxes[i].isPlayer == true)
                         {
-                            if ((i < 2 && global_values.format == "Singles") ||
-                                    (i > 1 && global_values.format == "Doubles"))
+                            if ((i < 2 && GlobalSettings.bracketFormat == "Singles") ||
+                                    (i > 1 && GlobalSettings.bracketFormat == "Doubles"))
                             {
                                 //control_updates.refreshCharacterBox(ref player_boxes[i].character, global_values.characters);
                             }
@@ -992,7 +992,7 @@ namespace Stream_Info_Handler.StreamAssistant
             switch (YoutubeController.enableVideoTitleShortening)
             {
                 case YoutubeController.VideoTitleOptions.doublesOnly:
-                    if (global_values.format == "Doubles")
+                    if (GlobalSettings.bracketFormat == "Doubles")
                     {
                         goto case YoutubeController.VideoTitleOptions.alwaysShorten;
                     }
@@ -1041,7 +1041,7 @@ namespace Stream_Info_Handler.StreamAssistant
         private string get_video_description()
         {
             string description = YoutubeController.videoDescription;
-            switch (global_values.format)
+            switch (GlobalSettings.bracketFormat)
             {
                 case "Singles":
                     description = description.Replace("*tournament*", txt_tournament.Text)
@@ -1211,8 +1211,8 @@ namespace Stream_Info_Handler.StreamAssistant
                     if (playerBoxes[ii].isPlayer == true &&
                         playerBoxes[ii].player_number == i + 1)
                     {
-                        if ((ii < 2 && global_values.format == "Singles") ||
-                            (ii > 1 && global_values.format == "Doubles"))
+                        if ((ii < 2 && GlobalSettings.bracketFormat == "Singles") ||
+                            (ii > 1 && GlobalSettings.bracketFormat == "Doubles"))
                         {
                             playerBoxes[ii].tag.Text = PlayerDatabase.GetUniqueTagFromId(loaded_queue[new_match].playerIds[i]);
                         }
@@ -1305,9 +1305,9 @@ namespace Stream_Info_Handler.StreamAssistant
 
         private void cbx_format_SelectedIndexChanged(object sender, EventArgs e)
         {
-            global_values.format = cbx_format.Text;
+            GlobalSettings.bracketFormat = cbx_format.Text;
 
-            switch (StreamAssistantControlUpdates.UpdateFormat(global_values.format, ref tab_main, ref tab_ingame_display, ref tab_doubles_display))
+            switch (StreamAssistantControlUpdates.UpdateFormat(GlobalSettings.bracketFormat, ref tab_main, ref tab_ingame_display, ref tab_doubles_display))
             {
                 case "Singles":
                     updateButton = btn_update;
@@ -1319,7 +1319,7 @@ namespace Stream_Info_Handler.StreamAssistant
 
 
             XDocument xml = XDocument.Load(SettingsFile.settingsFile);
-            xml.Root.Element("general").Element("format").ReplaceWith(new XElement("format", global_values.format));
+            xml.Root.Element("general").Element("format").ReplaceWith(new XElement("format", GlobalSettings.bracketFormat));
             xml.Save(SettingsFile.settingsFile);
         }
 
@@ -1617,7 +1617,7 @@ namespace Stream_Info_Handler.StreamAssistant
 
         private void ConfigureUpdateButton()
         {
-            switch (StreamAssistantControlUpdates.UpdateFormat(global_values.format, ref tab_main, ref tab_ingame_display, ref tab_doubles_display))
+            switch (StreamAssistantControlUpdates.UpdateFormat(GlobalSettings.bracketFormat, ref tab_main, ref tab_ingame_display, ref tab_doubles_display))
             {
                 case "Singles":
                     updateButton = btn_update;

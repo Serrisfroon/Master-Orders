@@ -70,7 +70,7 @@ namespace Stream_Info_Handler
 
         public void reload_settings()
         {
-            if (global_values.format == "Singles")
+            if (GlobalSettings.bracketFormat == "Singles")
             {
                 lbl_player1.Text = "Player 1";
                 lbl_player2.Text = "Player 2";
@@ -169,7 +169,7 @@ namespace Stream_Info_Handler
                 cbx_player2.Items.AddRange(playerarray);
                 cbx_player2.EndUpdate();                                              //End
 
-                if (global_values.format == "Doubles")
+                if (GlobalSettings.bracketFormat == "Doubles")
                 {
                     cbx_player3.BeginUpdate();                                            //Begin
                     cbx_player3.Items.Clear();
@@ -183,7 +183,7 @@ namespace Stream_Info_Handler
 
                 cbx_player1.SelectedIndex = cbx_player1.FindStringExact(hold_player_name[0]);
                 cbx_player2.SelectedIndex = cbx_player2.FindStringExact(hold_player_name[1]);
-                if (global_values.format == "Doubles")
+                if (GlobalSettings.bracketFormat == "Doubles")
                 {
                     cbx_player3.SelectedIndex = cbx_player3.FindStringExact(hold_player_name[2]);
                     cbx_player4.SelectedIndex = cbx_player4.FindStringExact(hold_player_name[3]);
@@ -233,7 +233,7 @@ namespace Stream_Info_Handler
         {
             //Verify that all needed match information is present
             if (cbx_round.Text == "" || cbx_player1.Text == "" || cbx_player2.Text == "" ||
-                (global_values.format == "Doubles" && (cbx_player3.Text == "" || cbx_player4.Text == "")))
+                (GlobalSettings.bracketFormat == "Doubles" && (cbx_player3.Text == "" || cbx_player4.Text == "")))
             {
                 System.Media.SystemSounds.Asterisk.Play();
                 return;
@@ -540,6 +540,8 @@ namespace Stream_Info_Handler
         private void frm_streamqueue_FormClosed(object sender, FormClosedEventArgs e)
         {
             global_values.bracket_assistant = null;
+            refresh_queue.Stop();
+            refresh_queue.Enabled = false;
             FormManagement.CloseForm(FormManagement.FormNames.BracketAssistant);
         }
 
@@ -574,7 +576,7 @@ namespace Stream_Info_Handler
         private void update_player(string playerBeingUpdated)
         {
             //Find the index of the player
-            PlayerRecordModel playerRecord = PlayerDatabase.FindRecordFromString(PlayerDatabase.playerRecords, playerBeingUpdated, PlayerDatabase.SearchProperty.uniqueTag);
+            PlayerRecordModel playerRecord = PlayerDatabase.FindRecordFromString(PlayerDatabase.playerRecords, playerBeingUpdated, PlayerDatabase.SearchProperty.id);
             if (playerRecord == null)
             {
                 return;
@@ -589,9 +591,11 @@ namespace Stream_Info_Handler
             {
                 PlayerRecordModel newPlayerRecord = savePlayerForm.outputPlayer;
 
-                if (savePlayerForm.outputIsNewPlayer == false)
-                    PlayerDatabase.playerRecords[PlayerDatabase.playerRecords.IndexOf(playerRecord)] = newPlayerRecord;
                 PlayerDatabase.AddPlayer(savePlayerForm.outputPlayer, savePlayerForm.outputIsNewPlayer);
+                if (savePlayerForm.outputIsNewPlayer == false)
+                {
+                    PlayerDatabase.LoadPlayers(GlobalSettings.selectedGame);
+                }
 
                 //Check all queued matches for the player
                 for (int i = 0; i < loaded_queue.Count; i++)
@@ -625,7 +629,7 @@ namespace Stream_Info_Handler
                     cbx_player2.Text = newPlayerRecord.uniqueTag;
                     update_info(2, newPlayerRecord);
                 }
-                if (global_values.format == "Doubles")
+                if (GlobalSettings.bracketFormat == "Doubles")
                 {
                     if (cbx_player3.Text == previousUniqueTag)
                     {

@@ -20,11 +20,13 @@ namespace Stream_Info_Handler
             InitializeComponent();
 
             string[] importedRounds = SettingsFile.LoadBracketRounds();
-            cbx_round.Items.Clear();
-            cbx_round.BeginUpdate();
-            cbx_round.Items.AddRange(importedRounds);
-            cbx_round.EndUpdate();
-
+            if (importedRounds != null)
+            {
+                cbx_round.Items.Clear();
+                cbx_round.BeginUpdate();
+                cbx_round.Items.AddRange(importedRounds);
+                cbx_round.EndUpdate();
+            }
             this.TopMost = global_values.keepWindowsOnTop;
 
             match = edit_match;
@@ -38,7 +40,7 @@ namespace Stream_Info_Handler
             cbx_player3.SelectedIndex = cbx_player3.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.playerIds[2]));
             cbx_player4.SelectedIndex = cbx_player4.FindStringExact(PlayerDatabase.GetUniqueTagFromId(match.playerIds[3]));
 
-            if (global_values.format == "Singles")
+            if (GlobalSettings.bracketFormat == "Singles")
             {
                 cbx_player3.Enabled = false;
                 cbx_player3.Visible = false;
@@ -57,7 +59,7 @@ namespace Stream_Info_Handler
         {
             //Verify that all needed match information is present
             if (cbx_round.Text == "" || cbx_player1.Text == "" || cbx_player2.Text == "" ||
-                (global_values.format == "Doubles" && (cbx_player3.Text == "" || cbx_player4.Text == "")))
+                (GlobalSettings.bracketFormat == "Doubles" && (cbx_player3.Text == "" || cbx_player4.Text == "")))
             {
                 System.Media.SystemSounds.Asterisk.Play();
                 return;
@@ -65,7 +67,7 @@ namespace Stream_Info_Handler
 
             //Set the player count
             int player_count = 2;
-            if (global_values.format == "Doubles")
+            if (GlobalSettings.bracketFormat == "Doubles")
                 player_count = 4;
 
             string new_round = cbx_round.Text;
